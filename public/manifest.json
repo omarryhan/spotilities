@@ -9,17 +9,17 @@
     "description": "Spotify utilities",
     "icons": [
         {
-          "src": "/icons/logo/192w/logo2manifest-small.png",
+          "src": "/icons/logo/192w/logo3manifest-small.png",
           "sizes": "192x192",
           "type": "image/png"
         },
         {
-          "src": "/icons/logo/256w/logo2manifest-medium.png",
+          "src": "/icons/logo/256w/logo3manifest-medium.png",
           "sizes": "256x256",
           "type": "image/png"
         },
         {
-          "src": "/icons/logo/512w/logo2manifest-big.png",
+          "src": "/icons/logo/512w/logo3manifest-big.png",
           "sizes": "512x512",
           "type": "image/png"
         }
