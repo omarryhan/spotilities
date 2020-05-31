@@ -1,6 +1,6 @@
 const BASE_API_LINK = 'https://spotify.com';
 
-const PRODUCTION_URL = 'https://spotilities';
+const PRODUCTION_URL = 'https://spotilities.netlify.app';
 
 const DEVELOPMENT_URL = 'http://localhost:3000';
 
