@@ -4,6 +4,8 @@ export default createGlobalStyle`
 * {
     box-sizing: border-box;
     font-display: swap;
+    background-color: ${(props): string => props.theme.colors.gray.dark};
+    color: white;
 }
 
 html {

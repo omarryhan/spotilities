@@ -4,8 +4,8 @@
     "scope": "/",
     "start_url": "/",
     "display": "fullscreen",
-    "background_color": "#1DB954",
-    "theme_color": "#1DB954",
+    "background_color": "#121212",
+    "theme_color": "#121212",
     "description": "Spotify utilities",
     "icons": [
         {

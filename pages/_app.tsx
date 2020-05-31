@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { ErrorInfo } from 'react';
 import Head from 'next/head';
-import App, { AppInitialProps, AppContext } from 'next/app';
+import App, { AppInitialProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Router from 'next/router';
@@ -9,7 +9,7 @@ import ReactGA from 'react-ga';
 
 import { wrapper } from '../redux';
 import GlobalStyles from '../components/GlobalStyles';
-import { styledComponentTheme } from '../configs/theme';
+import { styledComponentsTheme } from '../configs/theme';
 import { GA_TRACKING_ID, GA_CONFIGS } from '../configs/services';
 
 let isGAInitialized = false;
@@ -87,7 +87,7 @@ class MyApp extends App<AppInitialProps & CustomAppInitialProps, AppInitialState
     } = this.props;
 
     return (
-      <ThemeProvider theme={styledComponentTheme}>
+      <ThemeProvider theme={styledComponentsTheme}>
         <CssBaseline />
         <GlobalStyles />
         <Head>
