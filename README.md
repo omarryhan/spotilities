@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/omarryhan/spotilities/raw/master/public/icons/logo/512w/faviconmanifest-big.png" alt="Logo" title="Spotilities" height="200" width="200"/>
+  <img src="https://github.com/omarryhan/spotilities/raw/master/public/icons/logo/512w/faviconmanifest-big.png" alt="Logo" title="Spotilities" height="350" width="350"/>
   <p align="center">
     <a href="https://travis-ci.org/omarryhan/spotilities"><img alt="Build Status" src="https://travis-ci.org/omarryhan/spotilities.svg?branch=master"></a>
     <a href="https://github.com/omarryhan/spotilities"><img alt="Software License" src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square"></a>
