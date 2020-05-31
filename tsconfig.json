@@ -1,0 +1,38 @@
+{
+    "include": [
+      "**/*.ts",
+      "**/*.tsx",
+      "**/*.js",
+      "**/*.jsx"
+    ],
+    "exclude": [
+      "node_modules",
+      "dist",
+      ".next",
+      "out",
+      ".babelrc",
+      "bundles",
+      "coverage"  // "**/*.spec.ts", "**/*.test.ts", "**/*.spec.tsx", "**/*.test.tsx", "__tests__"
+    ],
+    "compilerOptions": {
+      "target": "esnext",
+      "module": "esnext",
+      "lib": [
+        "dom",
+        "dom.iterable",
+        "esnext"
+      ],
+      "strict": true,
+      "jsx": "preserve",
+      "forceConsistentCasingInFileNames": true,
+      "noEmit": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "moduleResolution": "node",
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "skipLibCheck": true,
+      "allowJs": true
+    }
+  }
+  
