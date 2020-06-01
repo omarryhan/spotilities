@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from './Styled';
-import { openAuthorizeWindow } from '../../redux/user/actions';
+import { openAuthorizeWindow } from '../../redux/utils';
 
 
 const onClickHanlder = async (): Promise<void> => {

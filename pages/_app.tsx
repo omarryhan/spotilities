@@ -12,6 +12,7 @@ import GlobalStyles from '../components/GlobalStyles';
 import { styledComponentsTheme } from '../configs/theme';
 import { GA_TRACKING_ID, GA_CONFIGS } from '../configs/services';
 
+
 let isGAInitialized = false;
 
 const initGA = (): void => {
@@ -31,10 +32,6 @@ const onPageView = (): void => {
     ReactGA.pageview(location);
   }
 };
-
-interface AppInitialState {
-  hasError: boolean;
-}
 
 interface Metric {
   id: string;
@@ -64,8 +61,8 @@ export function reportWebVitals({
 }
 
 
-class MyApp extends App<AppInitialProps & CustomAppInitialProps, AppInitialState> {
-  public componentDidMount(): void {
+class MyApp extends App<AppInitialProps & CustomAppInitialProps> {
+  public async componentDidMount(): Promise<void> {
     initGA();
     Router.events.on('routeChangeComplete', onPageView);
   }
@@ -102,5 +99,42 @@ class MyApp extends App<AppInitialProps & CustomAppInitialProps, AppInitialState
     );
   }
 }
+
+
+// TODO: Revert to class component
+// Only using a function component because I can't access Dispatch from
+// the classs component commented out above.
+// I tried using this.props.dispatch and this.props.pageProps.dispatch with no luck
+// Down sides of using this functional components is that you don't get a full
+// componentDidCatch method like above, but resort to a bad hack like I have below
+// const MyApp: NextPage<AppInitialProps & CustomAppInitialProps> = (
+//   { Component, pageProps, err },
+// ) => {
+//   React.useEffect(() => {
+//     initGA();
+//     Router.events.on('routeChangeComplete', onPageView);
+//   });
+//
+//   try {
+//     return (
+//       <ThemeProvider theme={styledComponentsTheme}>
+//         <CssBaseline />
+//         <GlobalStyles />
+//         <Head>
+//           <link rel="shortcut icon" href="/favicon.png" />
+//           <link rel="manifest" href="/manifest.json" />
+//         </Head>
+//         <Component
+//           {...pageProps}
+//           err={err}
+//         />
+//       </ThemeProvider>
+//     );
+//   } catch (error) {
+//     initGA();
+//     ReactGA.exception({ stack: error.stack });
+//     throw error;
+//   }
+// };
 
 export default wrapper.withRedux(MyApp);
