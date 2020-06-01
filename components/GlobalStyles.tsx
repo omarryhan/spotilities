@@ -1,11 +1,38 @@
 import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url('fonts/prox.eot');
+    src: url('fonts/prox.woff') format('woff'),
+         url('fonts/prox.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Proxima Thin';
+    src: url('fonts/proxthin.eot');
+    src: url('fonts/proxthin.woff') format('woff'),
+         url('fonts/proxthin.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Proxima Bold';
+    src: url('fonts/proxbold.eot');
+    src: url('fonts/proxbold.woff') format('woff'),
+         url('fonts/proxbold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 * {
     box-sizing: border-box;
     font-display: swap;
-    background-color: ${(props): string => props.theme.colors.gray.dark};
     color: white;
+    font-family: Proxima Nova, Georgia, sans-serif;
 }
 
 html {
@@ -17,9 +44,11 @@ html {
 body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: ${(props): string => props.theme.colors.gray.dark};
 }
 
 html, body {
     margin: 0;
     padding: 0;
-}`;
+}
+`;

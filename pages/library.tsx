@@ -12,11 +12,11 @@ import AppBody from '../components/AppBody';
 const Page: NextPage<{}> = () => (
   <>
     <AccessTokenLoader />
-    <TopNav title="Recommendations" />
+    <TopNav title="Library" />
     <AppBody>
-      Recommendations
+      Library
     </AppBody>
-    <BottomNav page="recommendations" />
+    <BottomNav page="library" />
   </>
 );
 

@@ -90,6 +90,11 @@ class MyApp extends App<AppInitialProps & CustomAppInitialProps> {
         <Head>
           <link rel="shortcut icon" href="/favicon.png" />
           <link rel="manifest" href="/manifest.json" />
+          <meta name="title" content="Spotilities | Utilities for Spotify" />
+          <meta name="description" content="Spotilities is awesome. Should probably explain more but I'm lazy. Come check it out!" />
+          <meta name="keywords" content="Spotify, Spotify Utilities, Spotify Tools" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         </Head>
         <Component
           {...pageProps}
@@ -123,6 +128,7 @@ class MyApp extends App<AppInitialProps & CustomAppInitialProps> {
 //         <Head>
 //           <link rel="shortcut icon" href="/favicon.png" />
 //           <link rel="manifest" href="/manifest.json" />
+//           <meta name="viewport" content="width=device-width, initial-scale=1" />
 //         </Head>
 //         <Component
 //           {...pageProps}

@@ -11,6 +11,8 @@ export const colors = {
     dark: 'rgba(18, 18, 18, 1)', // #121212
     primary: 'rgba(25, 20, 20, 1)',
     light: 'rgba(40, 40, 40, 1)',
+    lighter: 'rgba(50, 50, 50, 1)',
+    lightest: 'rgba(60, 60, 60, 1)',
   },
   green: {
     light: 'rgba(40, 108, 71, 1)',
@@ -18,11 +20,31 @@ export const colors = {
   },
   white: {
     primary: 'rgba(255, 255, 255, 1)',
+    lightest: 'rgba(255, 255, 255, 1)',
+    lighter: 'rgb(245, 245, 245, 1)',
+    light: 'rgb(235, 235, 235, 1)',
+    dark: 'rgb(225, 225, 225, 1)',
+    darker: 'rgb(215, 215, 215, 1)',
+    darkest: 'rgb(205, 205, 205, 1)',
   },
 };
 
-export const ZIndeces = {
+export const dimensions = {
+  contentSideMargin: {
+    mobile: '10px',
+    desktop: '20px',
+  },
+  headerHeight: {
+    mobile: '50px',
+    desktop: '80px',
+  },
+  bottomAppBarHeight: {
+    mobile: '50px',
+    desktop: '50px',
+  },
+};
 
+export const zIndeces = {
 };
 
 export const BREAKPOINTS = {
@@ -38,4 +60,6 @@ export const media = generateMedia(BREAKPOINTS);
 
 export const styledComponentsTheme: DefaultTheme = {
   colors,
+  dimensions,
+  zIndeces,
 };

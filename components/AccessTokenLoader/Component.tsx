@@ -10,7 +10,9 @@ import { sleep } from '../../utils';
   to the effect below will not be able to read the access token.
 */
 const Component: React.FC<{}> = () => {
-  const accessToken = useSelector<RootStateInterface>((state) => state.user.token.accessToken);
+  const accessToken = useSelector<RootStateInterface>(
+    (state) => state.user.token.accessToken,
+  );
   const errorMessage = useSelector<RootStateInterface>(
     (state) => state.user.tokenStatus.errorMessage,
   );
@@ -19,7 +21,7 @@ const Component: React.FC<{}> = () => {
     const effect = async (): Promise<void> => {
       // Just in case this effect infinetely loops.
       // To ensure we're not rate limited/blocked.
-      await sleep(1000);
+      await sleep(100);
 
       if (!accessToken && !errorMessage) {
         openAuthorizeWindow();
