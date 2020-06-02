@@ -29,17 +29,37 @@ export const LinksContainer = styled.div`
   height: 100%;
 `;
 
-export const LinkButton = styled(Button)<LinkButtonProps>`
-  width: 100%;
+export const LinkContainer = styled(Button)`
   height: 100%;
+  width: 100%;
+  padding: 5px 0;
+  border-radius: 0;
 
   & span {
     height: 100%;
+    display: block;
   }
+`;
+
+export const LinkTitle = styled.p<LinkButtonProps>`
+  height: 30%;
+  /* font-size: 0.6rem; */
+  text-transform: capitalize;
+  font-size: 10px;
+  margin: 0 0;
+  text-align: center;
+  /* font-weight: ${(props): string => (props.isLight ? 'bold' : 'regular')}; */
+  color: ${(props): string => (props.isLight ? props.theme.colors.white.light : props.theme.colors.white.evenDarkest)};
+`;
+
+export const LinkIcon = styled.div<LinkButtonProps>`
+  width: 100%;
+  height: 70%;
+  padding: 2px 0;
 
   & svg {
-    fill: ${(props): string => (props.isLight ? props.theme.colors.white.lighter : props.theme.colors.white.evenDarker)};
-    height: 75%;
+    fill: ${(props): string => (props.isLight ? props.theme.colors.white.light : props.theme.colors.white.evenDarkest)};
+    height: 100%;
   }
 `;
 

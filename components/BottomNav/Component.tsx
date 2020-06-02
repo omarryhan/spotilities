@@ -1,7 +1,7 @@
 import React from 'react';
 import Router, { useRouter } from 'next/router';
 import {
-  Nav, LinksContainer, LinkButton,
+  Nav, LinksContainer, LinkContainer, LinkIcon, LinkTitle,
 } from './Styled';
 import WandInactive from '../../public/icons/wand-inactive.svg';
 import WandActive from '../../public/icons/wand-active.svg';
@@ -25,42 +25,72 @@ const Component: React.FC<{page: string}> = ({ page }) => {
         {
           path === '/'
             ? (
-              <LinkButton type="button" onClick={(): void => handleLinkClick('/')} isLight>
-                <WandActive />
-              </LinkButton>
+              <LinkContainer type="button">
+                <LinkIcon onClick={(): void => handleLinkClick('/')} isLight>
+                  <WandActive />
+                </LinkIcon>
+                <LinkTitle isLight>
+                  Magic
+                </LinkTitle>
+              </LinkContainer>
             )
             : (
-              <LinkButton type="button" onClick={(): void => handleLinkClick('/')}>
-                <WandInactive />
-              </LinkButton>
+              <LinkContainer type="button">
+                <LinkIcon onClick={(): void => handleLinkClick('/')}>
+                  <WandInactive />
+                </LinkIcon>
+                <LinkTitle>
+                  Magic
+                </LinkTitle>
+              </LinkContainer>
             )
         }
 
         {
           path === '/top'
             ? (
-              <LinkButton type="button" onClick={(): void => handleLinkClick('/top')} isLight>
-                <FlameActive />
-              </LinkButton>
+              <LinkContainer type="button">
+                <LinkIcon onClick={(): void => handleLinkClick('/top')} isLight>
+                  <FlameActive />
+                </LinkIcon>
+                <LinkTitle isLight>
+                  Top
+                </LinkTitle>
+              </LinkContainer>
             )
             : (
-              <LinkButton type="button" onClick={(): void => handleLinkClick('/top')}>
-                <FlameInactive />
-              </LinkButton>
+              <LinkContainer type="button">
+                <LinkIcon onClick={(): void => handleLinkClick('/top')}>
+                  <FlameInactive />
+                </LinkIcon>
+                <LinkTitle>
+                  Top
+                </LinkTitle>
+              </LinkContainer>
             )
         }
 
         {
           path === '/library'
             ? (
-              <LinkButton type="button" onClick={(): void => handleLinkClick('/library')} isLight>
-                <LibraryActive />
-              </LinkButton>
+              <LinkContainer type="button">
+                <LinkIcon onClick={(): void => handleLinkClick('/library')} isLight>
+                  <LibraryActive />
+                </LinkIcon>
+                <LinkTitle isLight>
+                  Library
+                </LinkTitle>
+              </LinkContainer>
             )
             : (
-              <LinkButton type="button" onClick={(): void => handleLinkClick('/library')}>
-                <LibraryInactive />
-              </LinkButton>
+              <LinkContainer type="button">
+                <LinkIcon onClick={(): void => handleLinkClick('/library')}>
+                  <LibraryInactive />
+                </LinkIcon>
+                <LinkTitle>
+                  Library
+                </LinkTitle>
+              </LinkContainer>
             )
         }
       </LinksContainer>

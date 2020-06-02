@@ -27,6 +27,7 @@ export const colors = {
     darker: 'rgb(215, 215, 215, 1)',
     darkest: 'rgb(205, 205, 205, 1)',
     evenDarker: 'rgb(180, 180, 180, 1)',
+    evenDarkest: 'rgb(150, 150, 150, 1)',
   },
 };
 
@@ -40,8 +41,8 @@ export const dimensions = {
     desktop: '80px',
   },
   bottomAppBarHeight: {
-    mobile: '50px',
-    desktop: '50px',
+    mobile: '60px',
+    desktop: '60px',
   },
 };
 
