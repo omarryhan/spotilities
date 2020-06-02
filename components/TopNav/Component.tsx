@@ -8,7 +8,6 @@ import {
   Header,
   Nav,
   Title,
-  GreetingText,
   Name,
   NavItem,
 } from './Styled';
