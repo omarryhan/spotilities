@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootStateInterface } from '../../redux/reducer';
 import { fetchUserProfile } from '../../redux/profile/actions';
-import { DataInterface } from '../../redux/profile/types';
 
 import {
   Header,
@@ -16,7 +15,7 @@ import {
 const Component: React.FC<{title: string}> = ({ title }) => {
   const profile = useSelector<RootStateInterface>(
     (state) => state.profile.data,
-  ) as DataInterface;
+  ) as SpotifyApi.CurrentUsersProfileResponse;
   const isFetching = useSelector<RootStateInterface>(
     (state) => state.profile.status.isFetching,
   ) as boolean;

@@ -13,15 +13,17 @@ import { styledComponentsTheme } from '../configs/theme';
 import { GA_TRACKING_ID, GA_CONFIGS } from '../configs/services';
 
 
-let isGAInitialized = false;
-
 const initGA = (): void => {
   if (
     typeof window !== 'undefined'
-    && !isGAInitialized
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
+    && !window.isGAInitialized
   ) {
     ReactGA.initialize(GA_TRACKING_ID, GA_CONFIGS);
-    isGAInitialized = true;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
+    window.isGAInitialized = true;
   }
 };
 

@@ -38,6 +38,7 @@
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "spotify-web-api-js": "^1.4.0",
     "styled-components": "^5.1.0",
     "styled-media-query": "^2.1.2",
     "superagent": "^5.2.2"
@@ -85,7 +86,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn test # && yarn lint:fix",
+      "pre-commit": "yarn test && yarn lint # && yarn lint:fix",
       "pre-push": "yarn build && yarn export"
     }
   }

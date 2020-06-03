@@ -4,15 +4,15 @@ import { NextPage } from 'next';
 import { wrapper } from '../redux';
 
 import BottomNav from '../components/BottomNav';
-import TopNav from '../components/TopNav';
 import AccessTokenLoader from '../components/AccessTokenLoader';
 import AppBody from '../components/AppBody';
+import CurrentUserLoader from '../components/CurrentUserLoader';
 
 
 const Page: NextPage<{}> = () => (
   <>
     <AccessTokenLoader />
-    <TopNav title="Top" />
+    <CurrentUserLoader />
     <AppBody>
       Top
     </AppBody>

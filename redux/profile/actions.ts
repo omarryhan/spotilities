@@ -1,11 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { DataInterface } from './types';
-import { send } from '../utils';
-import { getUserProfile } from '../../configs/urls';
-import { ApiJsonResponse } from '../../types';
+import { checkIsAuthorized, spotifyApi } from '../utils';
 
 export const fetchUserProfile = createAsyncThunk<
-ApiJsonResponse,
+SpotifyApi.CurrentUsersProfileResponse,
 void,
 { state: any }
 >(
@@ -15,12 +12,8 @@ void,
     const { token } = state.user;
     const { accessToken, expiresAt } = token;
 
-    const response = await send<DataInterface>(
-      getUserProfile(),
-      accessToken,
-      expiresAt,
-    );
-
-    return response;
+    checkIsAuthorized(accessToken, expiresAt);
+    spotifyApi.setAccessToken(accessToken);
+    return await spotifyApi.getMe();
   },
 );

@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { InitialStateInterface, DataInterface } from './types';
+import { InitialStateInterface } from './types';
 import { fetchUserProfile } from './actions';
 
 export const InitialState: InitialStateInterface = {
@@ -17,12 +17,16 @@ export const InitialState: InitialStateInterface = {
     },
     followers: {
       href: '',
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
       total: '',
     },
     href: '',
     id: '',
     images: [],
     product: '',
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
     type: '',
     uri: '',
   },
@@ -41,7 +45,7 @@ export const reducer = createReducer<InitialStateInterface>(InitialState, (build
 
   builder.addCase(fetchUserProfile.fulfilled, (state, action) => ({
     ...state,
-    data: action.payload as DataInterface,
+    data: action.payload as SpotifyApi.CurrentUsersProfileResponse,
     status: {
       isFetching: false,
     },

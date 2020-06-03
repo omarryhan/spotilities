@@ -1,39 +1,37 @@
-import { Request } from 'superagent';
-import {
-  AUTHORIZE_LINK,
-  OAUTH2_REDIRECT_URI,
-} from '../configs/urls';
-import { SPOTIFY_CLIENT_ID, SPOTIFY_SCOPES_NEEDED } from '../configs/services';
-import { ApiJsonResponse, ApiErrorResponse } from '../types';
+import SpotifyApi from 'spotify-web-api-js';
+import { createAuthorizeLink } from '../configs/urls';
 
-export const createAuthorizeLink = (): string => {
-  const encodedRedirectURI = encodeURI(OAUTH2_REDIRECT_URI);
-  const scopes = encodeURI(SPOTIFY_SCOPES_NEEDED.join(' '));
-  return `${AUTHORIZE_LINK}?client_id=${SPOTIFY_CLIENT_ID}&response_type=token&redirect_uri=${encodedRedirectURI}&scope=${scopes}&show_dialog=false`;
-};
-
+export const spotifyApi = new SpotifyApi();
 
 export const openAuthorizeWindow = async (): Promise<void> => {
   window.location.href = createAuthorizeLink();
 };
 
-
-export const send = async <ExpectedResponse = void>(
-  request: Request, accessToken: string, expiresAt: number,
-): Promise<ExpectedResponse | ApiJsonResponse | ApiErrorResponse> => {
+export const checkIsAuthorized = (accessToken: string, expiresAt: number): void => {
   if (!accessToken || !expiresAt || (Date.now() >= expiresAt)) {
     openAuthorizeWindow();
     // Application closes
   }
+};
 
-  request.set('Authorization', `Bearer ${accessToken}`);
+interface Pagination {
+  next: string;
+  items: object[];
+}
 
-  let response;
-  try {
-    response = await request;
-  } catch (e) {
-    response = e.response;
+export const getAllPages = async <Response extends Pagination>(
+  request: Promise<Response>,
+): Promise<Response> => {
+  const firstResponse = await request;
+
+  let currentResponse = firstResponse;
+
+  while (currentResponse.next) {
+    currentResponse = await spotifyApi.getGeneric(
+      currentResponse.next,
+    ) as Response;
+    firstResponse.items = firstResponse.items.concat(currentResponse.items);
   }
 
-  return response?.body;
+  return firstResponse;
 };

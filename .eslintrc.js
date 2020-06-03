@@ -33,6 +33,7 @@ module.exports = {
       'import/prefer-default-export': 'off',
       'react/prop-types': 'off',  // Typescript types are enough for most cases
       'no-return-await': 'off',
-      'no-console': 'off'
+      'no-console': 'off',
+      'no-await-in-loop': 'off'
     }
 };

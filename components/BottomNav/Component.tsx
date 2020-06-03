@@ -25,8 +25,8 @@ const Component: React.FC<{page: string}> = ({ page }) => {
         {
           path === '/'
             ? (
-              <LinkContainer type="button">
-                <LinkIcon onClick={(): void => handleLinkClick('/')} isLight>
+              <LinkContainer type="button" onClick={(): void => handleLinkClick('/')}>
+                <LinkIcon isLight>
                   <WandActive />
                 </LinkIcon>
                 <LinkTitle isLight>
@@ -35,8 +35,8 @@ const Component: React.FC<{page: string}> = ({ page }) => {
               </LinkContainer>
             )
             : (
-              <LinkContainer type="button">
-                <LinkIcon onClick={(): void => handleLinkClick('/')}>
+              <LinkContainer type="button" onClick={(): void => handleLinkClick('/')}>
+                <LinkIcon>
                   <WandInactive />
                 </LinkIcon>
                 <LinkTitle>
@@ -47,10 +47,10 @@ const Component: React.FC<{page: string}> = ({ page }) => {
         }
 
         {
-          path === '/top'
+          path.startsWith('/top')
             ? (
-              <LinkContainer type="button">
-                <LinkIcon onClick={(): void => handleLinkClick('/top')} isLight>
+              <LinkContainer type="button" onClick={(): void => handleLinkClick('/top')}>
+                <LinkIcon isLight>
                   <FlameActive />
                 </LinkIcon>
                 <LinkTitle isLight>
@@ -59,8 +59,8 @@ const Component: React.FC<{page: string}> = ({ page }) => {
               </LinkContainer>
             )
             : (
-              <LinkContainer type="button">
-                <LinkIcon onClick={(): void => handleLinkClick('/top')}>
+              <LinkContainer type="button" onClick={(): void => handleLinkClick('/top')}>
+                <LinkIcon>
                   <FlameInactive />
                 </LinkIcon>
                 <LinkTitle>
@@ -71,10 +71,10 @@ const Component: React.FC<{page: string}> = ({ page }) => {
         }
 
         {
-          path === '/library'
+          path.startsWith('/library')
             ? (
-              <LinkContainer type="button">
-                <LinkIcon onClick={(): void => handleLinkClick('/library')} isLight>
+              <LinkContainer type="button" onClick={(): void => handleLinkClick('/library')}>
+                <LinkIcon isLight>
                   <LibraryActive />
                 </LinkIcon>
                 <LinkTitle isLight>
@@ -83,8 +83,8 @@ const Component: React.FC<{page: string}> = ({ page }) => {
               </LinkContainer>
             )
             : (
-              <LinkContainer type="button">
-                <LinkIcon onClick={(): void => handleLinkClick('/library')}>
+              <LinkContainer type="button" onClick={(): void => handleLinkClick('/library')}>
+                <LinkIcon>
                   <LibraryInactive />
                 </LinkIcon>
                 <LinkTitle>
