@@ -26,8 +26,8 @@ const Component: React.FC<{}> = () => {
     const effect = async (): Promise<void> => {
       if (accessToken) {
         await dispatch(fetchUserPlaylists());
-        await dispatch(fetchAllUserPlaylistsItems()); // very slow. TODO: optimize
-        await dispatch(fetchAllPlaylistsItemsAudioFeatures());
+        // await dispatch(fetchAllUserPlaylistsItems()); // very slow. TODO: optimize
+        // await dispatch(fetchAllPlaylistsItemsAudioFeatures());
       }
     };
     effect();

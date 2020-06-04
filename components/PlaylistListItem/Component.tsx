@@ -11,14 +11,15 @@ import {
   Img,
 } from './Styled';
 import { CombinedStateType } from '../../redux/types';
+import DanceabilityIcon from '../../public/icons/dance.svg';
+import EnergyIcon from '../../public/icons/flash.svg';
+import ValenceIcon from '../../public/icons/happy.svg';
+import PopularityIcon from '../../public/icons/trending.svg';
 
 interface Props {
   playlistId: string;
 }
 
-//  isFetchingPlaylistsItems || isFetchingPlaylistsFeatures
-//    ? 'fetching...'
-//    : 'fetched'
 
 const Component: React.FC<Props> = ({ playlistId }) => {
   const playlistName = useSelector<CombinedStateType, string>(
@@ -69,7 +70,9 @@ const Component: React.FC<Props> = ({ playlistId }) => {
         </TitleSection>
       </LeftSection>
       <RightSection>
-        {isFetchingPlaylistsItems.toString() + isFetchingPlaylistsFeatures.toString()}
+        {isFetchingPlaylistsItems || isFetchingPlaylistsFeatures
+          ? 'fetching...'
+          : 'fetched'}
       </RightSection>
     </OuterContainer>
   );

@@ -5,7 +5,7 @@ export const OuterContainer = styled.div<{notClickable?: boolean}>`
   display: flex;
   height: 80px;
   justify-content: space-between;
-  margin: 10px 0;
+  margin: 20px 0;
   cursor: ${(props): string => (!props.notClickable ? 'pointer' : 'default')};
 
   &:hover {
@@ -55,7 +55,7 @@ export const Name = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
 
-  padding-left: 5px;
+  padding-left: 10px;
   font-size: 1rem;
   font-family: "Proxima Bold", Georgia, sans-serif;
   color: ${(props): string => props.theme.colors.white.light};
@@ -63,7 +63,7 @@ export const Name = styled.p`
 
 export const NumberOfTracks = styled.p`
   margin: 0 0;
-  padding-left: 5px;
+  padding-left: 10px;
   font-size: 0.7rem;
   color: ${(props): string => props.theme.colors.white.evenDarker};
 `;

@@ -14,7 +14,7 @@ const getAllTracksFromPlaylistItems = (
   (playlistItem) => (playlistItem.track as SpotifyApi.TrackObjectFull),
 );
 
-export const deletePlaylistsItems = createAction<void>('playlistsItems/delete');
+export const deletePlaylistsItems = createAction<{isFetching: boolean}>('playlistsItems/delete');
 
 export const fetchUserPlaylistItems = createAsyncThunk<
 FetchUserPlaylistItemsPayload,
@@ -44,7 +44,7 @@ void,
     checkIsAuthorized(accessToken, expiresAt);
     spotifyApi.setAccessToken(accessToken);
 
-    dispatch(deletePlaylistsItems());
+    dispatch(deletePlaylistsItems({ isFetching: true }));
 
     const playlists = state.playlists.data;
 

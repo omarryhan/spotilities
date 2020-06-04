@@ -18,7 +18,6 @@ void,
     const userId = state.profile.data.id;
     spotifyApi.setAccessToken(accessToken);
 
-    dispatch(deletePlaylists());
     const fullResponse = await getAllPages<SpotifyApi.ListOfUsersPlaylistsResponse>(
       spotifyApi.getUserPlaylists(userId, { limit: 50 }),
     );

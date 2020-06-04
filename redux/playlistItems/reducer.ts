@@ -73,5 +73,9 @@ export const reducer = createReducer<InitialStateInterface>(InitialState, (build
 
   builder.addCase(deletePlaylistsItems, (state, action) => ({
     ...InitialState,
+    status: {
+      ...InitialState.status,
+      isFetching: action.payload.isFetching,
+    },
   }));
 });
