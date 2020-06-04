@@ -2,10 +2,11 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container } from './Styled';
 import PlaylistListItem from '../PlaylistListItem';
+import Skeleton from './Skeleton';
 import { CombinedStateType } from '../../redux/types';
 import { fetchUserPlaylists } from '../../redux/playlists/actions';
-// import { fetchAllUserPlaylistsItems } from '../../redux/playlistItems/actions';
-// import { fetchAllPlaylistsItemsAudioFeatures } from '../../redux/tracksAudioFeatures/actions';
+import { fetchAllUserPlaylistsItems } from '../../redux/playlistItems/actions';
+import { fetchAllPlaylistsItemsAudioFeatures } from '../../redux/tracksAudioFeatures/actions';
 import { AllPlaylists } from '../../redux/playlists/types';
 
 const Component: React.FC<{}> = () => {
@@ -25,8 +26,8 @@ const Component: React.FC<{}> = () => {
     const effect = async (): Promise<void> => {
       if (accessToken) {
         await dispatch(fetchUserPlaylists());
-        // await dispatch(fetchAllUserPlaylistsItems()); // very slow. TODO: optimize
-        // await dispatch(fetchAllPlaylistsItemsAudioFeatures());
+        await dispatch(fetchAllUserPlaylistsItems()); // very slow. TODO: optimize
+        await dispatch(fetchAllPlaylistsItemsAudioFeatures());
       }
     };
     effect();
@@ -40,8 +41,8 @@ const Component: React.FC<{}> = () => {
             ? Object.keys(playlists).map((playlistKey) => (
               <PlaylistListItem playlistId={playlists[playlistKey].id} />
             ))
-            : 'No playlists'
-          : 'Loading'
+            : <Skeleton />
+          : <Skeleton />
       }
     </Container>
   );

@@ -1,34 +1,44 @@
 import styled from 'styled-components';
 
-export const OuterContainer = styled.div`
+export const OuterContainer = styled.div<{notClickable?: boolean}>`
   width: 100%;
   display: flex;
   height: 80px;
   justify-content: space-between;
   margin: 10px 0;
+  cursor: ${(props): string => (!props.notClickable ? 'pointer' : 'default')};
+
+  &:hover {
+    background-color: ${(props): string => (!props.notClickable ? props.theme.colors.gray.lightest : 'inherit')};
+  }
 `;
 
 export const LeftSection = styled.div`
   height: 100%;
-  max-width: 100%;
+  max-width: 75%;
   display: flex;
 `;
 
 export const RightSection = styled.div`
   height: 100%;
+  max-width: 25%;
 `;
 
 export const ImageSection = styled.div`
   height: 100%;
 `;
 
-export const InfoSection = styled.div`
+export const TitleSection = styled.div`
   height: 100%;
+
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-`;
 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
 
 export const ActionSection = styled.div`
   height: 100%;
@@ -40,6 +50,11 @@ export const Img = styled.img`
 
 export const Name = styled.p`
   margin: 0 0;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
   padding-left: 5px;
   font-size: 1rem;
   font-family: "Proxima Bold", Georgia, sans-serif;
@@ -50,7 +65,7 @@ export const NumberOfTracks = styled.p`
   margin: 0 0;
   padding-left: 5px;
   font-size: 0.7rem;
-  color: ${(props): string => props.theme.colors.white.darkest};
+  color: ${(props): string => props.theme.colors.white.evenDarker};
 `;
 
 export const DetailsSection = styled.div`

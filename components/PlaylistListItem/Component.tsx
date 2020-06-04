@@ -3,14 +3,11 @@ import { useSelector } from 'react-redux';
 import {
   OuterContainer,
   ImageSection,
-  InfoSection,
+  TitleSection,
   Name,
-  DetailsSection,
-  DetailItem,
-  DetailItemIcon,
-  DetailItemTitle,
   LeftSection,
   NumberOfTracks,
+  RightSection,
   Img,
 } from './Styled';
 import { CombinedStateType } from '../../redux/types';
@@ -18,6 +15,10 @@ import { CombinedStateType } from '../../redux/types';
 interface Props {
   playlistId: string;
 }
+
+//  isFetchingPlaylistsItems || isFetchingPlaylistsFeatures
+//    ? 'fetching...'
+//    : 'fetched'
 
 const Component: React.FC<Props> = ({ playlistId }) => {
   const playlistName = useSelector<CombinedStateType, string>(
@@ -34,14 +35,27 @@ const Component: React.FC<Props> = ({ playlistId }) => {
     (state) => state.playlists.data[playlistId].tracks.total,
   );
 
+  const isFetchingPlaylistsItems = useSelector<CombinedStateType, boolean>(
+    (state) => state.playlistItems.status.isFetching,
+  );
+
+  const isFetchingPlaylistsFeatures = useSelector<CombinedStateType, boolean>(
+    (state) => state.tracksAudioFeatures.status.isFetching,
+  );
+
   return (
     <OuterContainer>
       <LeftSection>
         <ImageSection>
-          <Img src={playlistPhotos[0]} alt="Playlist cover" />
+          <Img
+            src={
+              playlistPhotos.length ? playlistPhotos[0] : playlistPhotos.length > 1 ? playlistPhotos[1] : ''
+            }
+            alt="Playlist cover"
+          />
         </ImageSection>
 
-        <InfoSection>
+        <TitleSection>
           <Name>
             {playlistName}
           </Name>
@@ -52,19 +66,11 @@ const Component: React.FC<Props> = ({ playlistId }) => {
             tracks
           </NumberOfTracks>
 
-          <DetailsSection>
-            <DetailItem>
-              <DetailItemTitle>
-                {' '}
-              </DetailItemTitle>
-
-              <DetailItemIcon>
-                {' '}
-              </DetailItemIcon>
-            </DetailItem>
-          </DetailsSection>
-        </InfoSection>
+        </TitleSection>
       </LeftSection>
+      <RightSection>
+        {isFetchingPlaylistsItems.toString() + isFetchingPlaylistsFeatures.toString()}
+      </RightSection>
     </OuterContainer>
   );
 };
