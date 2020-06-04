@@ -4,7 +4,7 @@ export interface PlaylistItem extends Partial<SpotifyApi.PlaylistTrackObject> {
 }
 
 export interface AllPlaylistItems {
-  // key is Track ID, not playlistItem ID because the API doesn't send us it.
+  // key is Track ID, not playlistItem ID because the API doesn't send it to us.
   [key: string]: PlaylistItem;
 }
 

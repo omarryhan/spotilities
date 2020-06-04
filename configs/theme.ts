@@ -58,10 +58,11 @@ export const BREAKPOINTS = {
   laptopLarge: '90em',
   desktop: '160em',
 };
-export const media = generateMedia(BREAKPOINTS);
 
 export const styledComponentsTheme: DefaultTheme = {
   colors,
   dimensions,
   zIndeces,
 };
+
+export const media = generateMedia<typeof BREAKPOINTS, DefaultTheme>(BREAKPOINTS);

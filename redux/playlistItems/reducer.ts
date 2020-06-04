@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { InitialStateInterface, PlaylistItem, AllPlaylistItems } from './types';
-import { fetchAllUserPlaylistsItems, fetchUserPlaylistItems } from './actions';
+import { fetchAllUserPlaylistsItems, fetchUserPlaylistItems, deletePlaylistsItems } from './actions';
 
 export const InitialState: InitialStateInterface = {
   data: {},
@@ -69,5 +69,9 @@ export const reducer = createReducer<InitialStateInterface>(InitialState, (build
 
   builder.addCase(fetchUserPlaylistItems.rejected, (state, action) => ({
     ...state,
+  }));
+
+  builder.addCase(deletePlaylistsItems, (state, action) => ({
+    ...InitialState,
   }));
 });

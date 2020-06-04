@@ -1,6 +1,6 @@
 export interface AllPlaylists {
   // key is playlist ID
-  [key: string]: SpotifyApi.PlaylistObjectFull;
+  [key: string]: SpotifyApi.PlaylistObjectSimplified;
 }
 
 export interface InitialStateInterface {

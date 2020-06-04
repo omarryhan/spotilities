@@ -1,7 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { InitialStateInterface } from './types';
-import { fetchUserPlaylists } from './actions';
-import { convertArrayToObject } from '../../utils';
+import { fetchUserPlaylists, deletePlaylists } from './actions';
 
 export const InitialState: InitialStateInterface = {
   data: {},
@@ -30,7 +29,10 @@ export const reducer = createReducer<InitialStateInterface>(InitialState, (build
 
   builder.addCase(fetchUserPlaylists.fulfilled, (state, action) => ({
     ...state,
-    data: convertArrayToObject(action.payload, 'id'),
+    data: Object.fromEntries(action.payload.map((playlist) => [
+      playlist.id,
+      playlist,
+    ])),
     status: {
       fetchedOnce: true,
       isFetching: false,
@@ -43,5 +45,9 @@ export const reducer = createReducer<InitialStateInterface>(InitialState, (build
       fetchedOnce: true,
       isFetching: false,
     },
+  }));
+
+  builder.addCase(deletePlaylists, (state, action) => ({
+    ...InitialState,
   }));
 });

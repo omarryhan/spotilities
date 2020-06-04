@@ -1,10 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { checkIsAuthorized, spotifyApi } from '../utils';
+import { CombinedStateType } from '../types';
 
 export const fetchUserProfile = createAsyncThunk<
 SpotifyApi.CurrentUsersProfileResponse,
 void,
-{ state: any }
+{ state: CombinedStateType }
 >(
   'profile/set',
   async (_, { getState }) => {

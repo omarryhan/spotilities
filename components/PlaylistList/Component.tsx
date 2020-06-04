@@ -1,14 +1,23 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { H1 } from './Styled';
-import { RootStateInterface } from '../../redux/reducer';
+import { Container } from './Styled';
+import PlaylistListItem from '../PlaylistListItem';
+import { CombinedStateType } from '../../redux/types';
 import { fetchUserPlaylists } from '../../redux/playlists/actions';
-import { fetchAllUserPlaylistsItems } from '../../redux/playlistItems/actions';
+// import { fetchAllUserPlaylistsItems } from '../../redux/playlistItems/actions';
+// import { fetchAllPlaylistsItemsAudioFeatures } from '../../redux/tracksAudioFeatures/actions';
+import { AllPlaylists } from '../../redux/playlists/types';
 
 const Component: React.FC<{}> = () => {
-  const accessToken = useSelector<RootStateInterface>(
+  const accessToken = useSelector<CombinedStateType, string>(
     (state) => state.user.token.accessToken,
-  ) as string | '';
+  );
+  const playlists = useSelector<CombinedStateType, AllPlaylists>(
+    (state) => state.playlists.data,
+  );
+  const isFetchingPlaylists = useSelector<CombinedStateType, boolean>(
+    (state) => state.playlists.status.isFetching,
+  );
 
   const dispatch = useDispatch();
 
@@ -16,17 +25,25 @@ const Component: React.FC<{}> = () => {
     const effect = async (): Promise<void> => {
       if (accessToken) {
         await dispatch(fetchUserPlaylists());
-        await dispatch(fetchAllUserPlaylistsItems());
-        // await dispatch(fetchAllPlaylistItemsAudioFeatures());
+        // await dispatch(fetchAllUserPlaylistsItems()); // very slow. TODO: optimize
+        // await dispatch(fetchAllPlaylistsItemsAudioFeatures());
       }
     };
     effect();
   }, [dispatch, accessToken]);
 
   return (
-    <H1>
-      Playlist list
-    </H1>
+    <Container>
+      {
+        !isFetchingPlaylists
+          ? Object.keys(playlists).length
+            ? Object.keys(playlists).map((playlistKey) => (
+              <PlaylistListItem playlistId={playlists[playlistKey].id} />
+            ))
+            : 'No playlists'
+          : 'Loading'
+      }
+    </Container>
   );
 };
 

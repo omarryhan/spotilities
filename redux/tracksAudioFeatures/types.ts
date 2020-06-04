@@ -1,3 +1,11 @@
+// Actions stuff
+
+export interface AudioFeaturesWithTrackIds {
+  [key: string]: SpotifyApi.AudioFeaturesObject;
+}
+
+// Reducer stuff
+
 export interface TrackFeatures {
   data: SpotifyApi.AudioFeaturesObject;
   status: {

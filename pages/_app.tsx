@@ -16,12 +16,10 @@ import { GA_TRACKING_ID, GA_CONFIGS } from '../configs/services';
 const initGA = (): void => {
   if (
     typeof window !== 'undefined'
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
     // @ts-ignore
     && !window.isGAInitialized
   ) {
     ReactGA.initialize(GA_TRACKING_ID, GA_CONFIGS);
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
     // @ts-ignore
     window.isGAInitialized = true;
   }

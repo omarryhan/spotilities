@@ -34,6 +34,8 @@ module.exports = {
       'react/prop-types': 'off',  // Typescript types are enough for most cases
       'no-return-await': 'off',
       'no-console': 'off',
-      'no-await-in-loop': 'off'
+      'no-await-in-loop': 'off',
+      'no-nested-ternary': 'off',
+      '@typescript-eslint/ban-ts-ignore': 'warn'
     }
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { openAuthorizeWindow } from '../../redux/utils';
-import { RootStateInterface } from '../../redux/reducer';
+import { CombinedStateType } from '../../redux/types';
 import { sleep } from '../../utils';
 
 /*
@@ -10,10 +10,10 @@ import { sleep } from '../../utils';
   to the effect below will not be able to read the access token.
 */
 const Component: React.FC<{}> = () => {
-  const accessToken = useSelector<RootStateInterface>(
+  const accessToken = useSelector<CombinedStateType, string>(
     (state) => state.user.token.accessToken,
   );
-  const errorMessage = useSelector<RootStateInterface>(
+  const errorMessage = useSelector<CombinedStateType, string>(
     (state) => state.user.tokenStatus.errorMessage,
   );
 

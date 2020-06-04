@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootStateInterface } from '../../redux/reducer';
+import { CombinedStateType } from '../../redux/types';
 import { fetchUserProfile } from '../../redux/profile/actions';
 
 import {
@@ -13,15 +13,15 @@ import {
 
 
 const Component: React.FC<{title: string}> = ({ title }) => {
-  const profile = useSelector<RootStateInterface>(
+  const profile = useSelector<CombinedStateType, SpotifyApi.CurrentUsersProfileResponse>(
     (state) => state.profile.data,
-  ) as SpotifyApi.CurrentUsersProfileResponse;
-  const isFetching = useSelector<RootStateInterface>(
+  );
+  const isFetching = useSelector<CombinedStateType, boolean>(
     (state) => state.profile.status.isFetching,
-  ) as boolean;
-  const accessToken = useSelector<RootStateInterface>(
+  );
+  const accessToken = useSelector<CombinedStateType, string>(
     (state) => state.user.token.accessToken,
-  ) as string | '';
+  );
 
   const dispatch = useDispatch();
 

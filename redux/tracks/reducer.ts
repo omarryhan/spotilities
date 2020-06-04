@@ -1,7 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { InitialStateInterface } from './types';
 import { setTracks } from './actions';
-import { convertArrayToObject } from '../../utils';
 
 export const InitialState: InitialStateInterface = {
   data: {},
@@ -16,7 +15,16 @@ export const reducer = createReducer<InitialStateInterface>(InitialState, (build
     ...state,
     data: {
       ...state.data,
-      ...convertArrayToObject(action.payload, 'id'),
+      ...Object.fromEntries(action.payload.map((track) => [
+        track.id,
+        {
+          data: track,
+          status: {
+            isFetching: false,
+            fetchedOnce: false,
+          },
+        },
+      ])),
     },
   }));
 });

@@ -1,7 +1,7 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, createAction } from '@reduxjs/toolkit';
 import { checkIsAuthorized, getAllPages, spotifyApi } from '../utils';
-import { AllPlaylists } from '../playlists/types';
 import { setTracks } from '../tracks/actions';
+import { CombinedStateType } from '../types';
 
 interface FetchUserPlaylistItemsPayload {
   playlistId: string;
@@ -14,10 +14,12 @@ const getAllTracksFromPlaylistItems = (
   (playlistItem) => (playlistItem.track as SpotifyApi.TrackObjectFull),
 );
 
+export const deletePlaylistsItems = createAction<void>('playlistsItems/delete');
+
 export const fetchUserPlaylistItems = createAsyncThunk<
 FetchUserPlaylistItemsPayload,
 string,
-{ state: any }
+{ state: CombinedStateType }
 >(
   'playlistItems/set',
   async (playlistId, { dispatch }) => {
@@ -32,7 +34,7 @@ string,
 export const fetchAllUserPlaylistsItems = createAsyncThunk<
 void,
 void,
-{ state: any }
+{ state: CombinedStateType }
 >(
   'allPlaylistsItems/set',
   async (_, { getState, dispatch }) => {
@@ -42,7 +44,9 @@ void,
     checkIsAuthorized(accessToken, expiresAt);
     spotifyApi.setAccessToken(accessToken);
 
-    const playlists = state.playlists.data as AllPlaylists;
+    dispatch(deletePlaylistsItems());
+
+    const playlists = state.playlists.data;
 
     const allPlaylistIds = Object.keys(playlists);
 

@@ -1,12 +1,12 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootStateInterface } from '../../redux/reducer';
+import { CombinedStateType } from '../../redux/types';
 import { fetchUserProfile } from '../../redux/profile/actions';
 
 const Component: React.FC<{}> = () => {
-  const accessToken = useSelector<RootStateInterface>(
+  const accessToken = useSelector<CombinedStateType, string>(
     (state) => state.user.token.accessToken,
-  ) as string | '';
+  );
 
   const dispatch = useDispatch();
 

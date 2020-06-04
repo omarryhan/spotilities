@@ -1,22 +1,16 @@
 import {
-  combineReducers, AnyAction, CombinedState, Reducer,
+  combineReducers, AnyAction, Reducer,
 } from 'redux';
 import { HYDRATE } from 'next-redux-wrapper';
 
 import { reducer as userReducer } from './user/reducer';
-import { InitialStateInterface as UserInitialStateInterface } from './user/types';
-
 import { reducer as profileReducer } from './profile/reducer';
-import { InitialStateInterface as ProfileInitialStateInterface } from './profile/types';
-
 import { reducer as playlistsReducer } from './playlists/reducer';
-import { InitialStateInterface as PlaylistsInitialStateInterface } from './playlists/types';
-
 import { reducer as playlistItemsReducer } from './playlistItems/reducer';
-import { InitialStateInterface as PlaylistItemsInitialStateInterface } from './playlistItems/types';
-
 import { reducer as tracksReducer } from './tracks/reducer';
-import { InitialStateInterface as TracksInitialStateInterface } from './tracks/types';
+import { reducer as tracksAudioFeaturesReducer } from './tracksAudioFeatures/reducer';
+
+import { CombinedStateType } from './types';
 
 const allReducers = {
   user: userReducer,
@@ -24,21 +18,14 @@ const allReducers = {
   playlists: playlistsReducer,
   playlistItems: playlistItemsReducer,
   tracks: tracksReducer,
+  tracksAudioFeatures: tracksAudioFeaturesReducer,
 };
-
-type CombinedStateAll = CombinedState<{
-  user: UserInitialStateInterface;
-  profile: ProfileInitialStateInterface;
-  playlists: PlaylistsInitialStateInterface;
-  playlistItems: PlaylistItemsInitialStateInterface;
-  tracks: TracksInitialStateInterface;
-}>;
 
 export const combinedReducer = combineReducers(allReducers);
 
 export const rootReducer: Reducer = (
-  state: CombinedStateAll, action: AnyAction,
-): CombinedStateAll => {
+  state: CombinedStateType, action: AnyAction,
+): CombinedStateType => {
   if (action.type === HYDRATE) {
     return {
       ...state,
@@ -47,6 +34,3 @@ export const rootReducer: Reducer = (
   }
   return combinedReducer(state, action);
 };
-
-export type RootStateInterface = ReturnType<typeof rootReducer>;
-// export type RootStateInterface = CombinedStateAll;

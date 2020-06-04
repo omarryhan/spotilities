@@ -15,23 +15,23 @@ export const checkIsAuthorized = (accessToken: string, expiresAt: number): void 
 };
 
 interface Pagination {
-  next: string;
+  next?: string;
   items: object[];
 }
 
 export const getAllPages = async <Response extends Pagination>(
   request: Promise<Response>,
 ): Promise<Response> => {
-  const firstResponse = await request;
+  const paginatedResponse = await request;
 
-  let currentResponse = firstResponse;
+  let currentResponse = paginatedResponse;
 
   while (currentResponse.next) {
     currentResponse = await spotifyApi.getGeneric(
       currentResponse.next,
     ) as Response;
-    firstResponse.items = firstResponse.items.concat(currentResponse.items);
+    paginatedResponse.items = paginatedResponse.items.concat(currentResponse.items);
   }
 
-  return firstResponse;
+  return paginatedResponse;
 };
