@@ -1,7 +1,7 @@
 import { SPOTIFY_CLIENT_ID, SPOTIFY_SCOPES_NEEDED } from './services';
 
 
-const BASE_API_LINK = 'https://api.spotify.com';
+// const BASE_API_LINK = 'https://api.spotify.com';
 
 const PRODUCTION_URL = 'https://spotilities.netlify.app';
 

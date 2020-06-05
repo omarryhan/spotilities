@@ -2,6 +2,7 @@ export function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function convertArrayToObject<T extends {[key: string]: any}>(
   array: T[], key: string,
 ): {[key: string]: T} {

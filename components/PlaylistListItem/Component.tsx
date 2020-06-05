@@ -62,7 +62,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
     };
 
     effect();
-  }, []);
+  }, [dispatch, playlistId]);
 
 
   return (
