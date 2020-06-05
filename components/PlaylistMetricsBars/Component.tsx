@@ -65,24 +65,28 @@ const getPopularityFromPlaylistTracks = (playlistTracks: AllTracks): number => {
 
 
 const Component: React.FC<{trackIds: string[]}> = ({ trackIds }) => {
-  const allTracks = useSelector<CombinedStateType, AllTracks>(
-    (state) => state.tracks.data,
+  const playlistsTracks = useSelector<CombinedStateType, AllTracks>(
+    (state) => {
+      const keys = Object.keys(state.tracks.data).filter(
+        (trackId) => trackIds.includes(trackId),
+      );
+      return Object.fromEntries(keys.map(
+        (id) => [id, state.tracks.data[id]],
+      ));
+    },
   );
-  const allAudioFeatures = useSelector<CombinedStateType, AllTracksFeatures>(
-    (state) => state.tracksAudioFeatures.data,
+
+  const playlistAudioFeatures = useSelector<CombinedStateType, AllTracksFeatures>(
+    (state) => {
+      const keys = Object.keys(state.tracksAudioFeatures.data).filter(
+        (trackId) => trackIds.includes(trackId),
+      );
+
+      return Object.fromEntries(keys.map((
+        (id) => [id, state.tracksAudioFeatures.data[id]]
+      )));
+    },
   );
-  const playlistsTracksIds = Object.keys(allTracks).filter(
-    (trackId) => trackIds.includes(trackId),
-  );
-  const playlistsTracks = Object.fromEntries(playlistsTracksIds.map(
-    (id) => [id, allTracks[id]],
-  ));
-  const playlistAudioFeaturesTrackIds = Object.keys(allAudioFeatures).filter(
-    (trackId) => trackIds.includes(trackId),
-  );
-  const playlistAudioFeatures = Object.fromEntries(playlistAudioFeaturesTrackIds.map((
-    (id) => [id, allAudioFeatures[id]]
-  )));
 
   return (
     <Container>
