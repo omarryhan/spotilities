@@ -57,12 +57,28 @@ const Component: React.FC<Props> = ({ playlistId }) => {
 
   React.useEffect(() => {
     const effect = async (): Promise<void> => {
-      await dispatch(fetchUserPlaylistItems({ playlistId }));
-      await dispatch(fetchPlaylistItemsAudioFeatures(playlistId));
+      // Normally, we should do it without the if clause below.
+      // But, because this call is very network & processing expensive
+      // we have to sacrifice the accuracy of the info shown on the playlist's
+      // cover. This info will only be fetched once.
+      if (
+        fetchedPlaylistsItemsOnce !== true
+        && (
+          isFetchingPlaylistsItems !== true || isFetchingPlaylistsTracksAudioFeatures !== true
+        )) {
+        await dispatch(fetchUserPlaylistItems({ playlistId }));
+        await dispatch(fetchPlaylistItemsAudioFeatures(playlistId));
+      }
     };
 
     effect();
-  }, [dispatch, playlistId]);
+  }, [
+    dispatch,
+    playlistId,
+    fetchedPlaylistsItemsOnce,
+    isFetchingPlaylistsItems,
+    isFetchingPlaylistsTracksAudioFeatures,
+  ]);
 
 
   return (
