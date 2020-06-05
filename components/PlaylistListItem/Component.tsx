@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import Router from 'next/router';
 import { fetchUserPlaylistItems } from '../../redux/playlistItems/actions';
 import { fetchPlaylistItemsAudioFeatures } from '../../redux/tracksAudioFeatures/actions';
 import { AllPlaylistItems } from '../../redux/playlistItems/types';
@@ -82,7 +83,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
 
 
   return (
-    <OuterContainer>
+    <OuterContainer onClick={(): ReturnType<typeof Router.push> => Router.push(`/playlists/${playlistId}`)}>
       <LeftSection>
         <ImageSection>
           <Img
