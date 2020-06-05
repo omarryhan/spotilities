@@ -30,6 +30,7 @@ export const InitialState: InitialStateInterface = {
   },
   status: {
     isFetching: false,
+    fetchedOnce: false,
   },
 };
 
@@ -38,6 +39,7 @@ export const reducer = createReducer<InitialStateInterface>(InitialState, (build
     ...state,
     status: {
       isFetching: true,
+      fetchedOnce: false,
     },
   }));
 
@@ -46,6 +48,7 @@ export const reducer = createReducer<InitialStateInterface>(InitialState, (build
     data: action.payload as SpotifyApi.CurrentUsersProfileResponse,
     status: {
       isFetching: false,
+      fetchedOnce: true,
     },
   }));
 
@@ -53,6 +56,7 @@ export const reducer = createReducer<InitialStateInterface>(InitialState, (build
     ...state,
     status: {
       isFetching: false,
+      fetchedOnce: false,
     },
   }));
 });

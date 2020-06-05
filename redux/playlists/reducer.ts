@@ -42,7 +42,7 @@ export const reducer = createReducer<InitialStateInterface>(InitialState, (build
   builder.addCase(fetchUserPlaylists.rejected, (state, action) => ({
     ...state,
     status: {
-      fetchedOnce: true,
+      ...state.status,
       isFetching: false,
     },
   }));

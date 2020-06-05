@@ -18,11 +18,19 @@ export const deletePlaylistsItems = createAction<{isFetching: boolean}>('playlis
 
 export const fetchUserPlaylistItems = createAsyncThunk<
 FetchUserPlaylistItemsPayload,
-string,
+// TODO: remove fetchPlaylistItemsAudioFeatures. Will call this action directly
+// from the component
+{ playlistId: string; dispatchSetAudioFeatures?: boolean },
 { state: CombinedStateType }
 >(
   'playlistItems/set',
-  async (playlistId, { dispatch }) => {
+  async ({ playlistId, dispatchSetAudioFeatures = false }, { dispatch, getState }) => {
+    const state = getState();
+    const { token } = state.user;
+    const { accessToken, expiresAt } = token;
+    checkIsAuthorized(accessToken, expiresAt);
+    spotifyApi.setAccessToken(accessToken);
+
     const fullResponse = await getAllPages<SpotifyApi.PlaylistTrackResponse>(
       spotifyApi.getPlaylistTracks(playlistId, { limit: 50 }),
     );
@@ -50,12 +58,8 @@ void,
 
     const allPlaylistIds = Object.keys(playlists);
 
-    // allPlaylistIds.map(async (playlistId) => {
-    //   await dispatch(fetchUserPlaylistItems(playlistId));
-    // });
-
     await Promise.all(
-      allPlaylistIds.map((playlistId) => dispatch(fetchUserPlaylistItems(playlistId))),
+      allPlaylistIds.map((playlistId) => dispatch(fetchUserPlaylistItems({ playlistId }))),
     );
   },
 );

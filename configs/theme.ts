@@ -13,6 +13,8 @@ export const colors = {
     light: 'rgba(40, 40, 40, 1)',
     lighter: 'rgba(50, 50, 50, 1)',
     lightest: 'rgba(60, 60, 60, 1)',
+    evenLighter: 'rgba(70, 70, 70, 1)',
+    evenLightest: 'rgba(80, 80, 80, 1)',
   },
   green: {
     light: 'rgba(40, 108, 71, 1)',
@@ -49,7 +51,7 @@ export const dimensions = {
 export const zIndeces = {
 };
 
-export const BREAKPOINTS = {
+export const breakpoints = {
   mobileSmall: '20em',
   mobileMedium: '23.438em',
   mobileLarge: '25.875em',
@@ -65,4 +67,4 @@ export const styledComponentsTheme: DefaultTheme = {
   zIndeces,
 };
 
-export const media = generateMedia<typeof BREAKPOINTS, DefaultTheme>(BREAKPOINTS);
+export const media = generateMedia<typeof breakpoints, DefaultTheme>(breakpoints);

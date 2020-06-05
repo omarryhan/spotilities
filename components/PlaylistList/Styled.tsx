@@ -4,8 +4,7 @@ import { media } from '../../configs/theme';
 
 export const Container = styled.div`
   width: 100%;
-  margin-top: 40px;
-  margin-bottom: calc(${(props): string => props.theme.dimensions.bottomAppBarHeight.desktop} + 10px);
+  margin-bottom: calc(${(props): string => props.theme.dimensions.bottomAppBarHeight.desktop} + 20px);
 
   ${media.lessThan('tablet')`
     padding: 0 ${(props): string => props.theme.dimensions.contentSideMargin.mobile};
@@ -18,7 +17,7 @@ export const Container = styled.div`
 
 export const PictureSkeleton = styled(Skeleton)`
     height: 100%;
-    width: 80px; /* TODO: find a way to force it to be equals to width */
+    width: 80px; /* TODO: find a way to force it to be equals to height */
     background-color: ${(props): string => props.theme.colors.gray.lightest};
 `;
 

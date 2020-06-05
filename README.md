@@ -11,14 +11,72 @@
 
 The goal of this app is to provide utilities and extra info that aren't included in Spotify's main app.
 
-Spotilities is statically rendered. It doesn't require a backend to operate.
-
-## Live version
+## Live version (Under construction)
 
 Visit: https://spotilities.netlify.app/
 
+## Features
+
+1. Generate recommendations based on:
+  - Tunable attributes:
+    - Acousticness 
+    - Danceability 
+    - Duration
+    - Energy 
+    - Instrumentalness 
+    - Key 
+    - Liveness 
+    - Loudness 
+    - Mode (i.e. major or minor)
+    - Popularity 
+    - Speechiness 
+    - Tempo 
+    - Time_signature 
+    - Valence
+  - Seed artists and tracks
+2. Your top tracks and artists of 1 month, 3 month and a year
+3. List your playlists and tracks with more info than Spotify provides e.g. 
+  - General musical attributes
+    - Playlist/track valence
+    - Playlist/track popularity
+    - Playlist/track energy
+    - Playlist/track danceability
+  - And for the musicians out there,
+    - Key and mode of the track
+    - Tempo of the track
+    - Time signature of the track
+
+## TODO:
+
+**Library:**
+
+- Add library (likes) and add it as the top playlist
+- Sort playlists by:
+  - valence
+  - popularity
+  - energy
+  - danceability
+
+**
+
+## Tools
+
+Spotilities is built using Next.js and it is a [static](https://nextjs.org/docs/advanced-features/static-html-export) website.
+
+More tools being used:
+  - Redux
+  - Redux toolkit
+  - Styled components
+  - Material UI (Sparingly)
+  - Typescript
+  - Testing with Jest, Sinon and React Test Renderer
+  - Eslint plugins:
+    - Airbnb base
+    - TODO: fill out the rest.
+
+
 ## Privacy
 
-I do not collect any personal information or any sort of access token whatsover, it's all on your browser and only your browser :).
+I do not collect any personal information or any sort of access whatsover. All the action is only on your browser.
 
-I added a Google Analytics plugin to see how users interact with the website, which pages you visit etc, what features you're using etc. The plugin doesn't collect any personal information either. I also opted out from sharing the information I collect with Google (Which is kind of a moot point given that the data is already stored on Google's servers).
+I added a Google Analytics plugin to see how users interact with the website, which pages you visit, what features you use etc. The GA plugin doesn't collect any personal information either. I also opted out from sharing the information I collect with Google (Which is kind of a moot point given that the data is already stored on Google's servers). So, i'd appreciate if you'd unblock any tracker blocker or adblocker for this website.

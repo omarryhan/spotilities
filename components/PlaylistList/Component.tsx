@@ -5,8 +5,6 @@ import PlaylistListItem from '../PlaylistListItem';
 import Skeleton from './Skeleton';
 import { CombinedStateType } from '../../redux/types';
 import { fetchUserPlaylists } from '../../redux/playlists/actions';
-import { fetchAllUserPlaylistsItems } from '../../redux/playlistItems/actions';
-import { fetchAllPlaylistsItemsAudioFeatures } from '../../redux/tracksAudioFeatures/actions';
 import { AllPlaylists } from '../../redux/playlists/types';
 
 const Component: React.FC<{}> = () => {
@@ -26,8 +24,6 @@ const Component: React.FC<{}> = () => {
     const effect = async (): Promise<void> => {
       if (accessToken) {
         await dispatch(fetchUserPlaylists());
-        // await dispatch(fetchAllUserPlaylistsItems()); // very slow. TODO: optimize
-        // await dispatch(fetchAllPlaylistsItemsAudioFeatures());
       }
     };
     effect();

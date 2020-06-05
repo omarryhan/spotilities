@@ -1,5 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchUserPlaylistItems } from '../../redux/playlistItems/actions';
+import { fetchPlaylistItemsAudioFeatures } from '../../redux/tracksAudioFeatures/actions';
+import { AllPlaylistItems } from '../../redux/playlistItems/types';
+import PlaylistMetricsBars from '../PlaylistMetricsBars';
+import PlaylistMetricsBarsSkeleton from '../PlaylistMetricsBars/Skeleton';
 import {
   OuterContainer,
   ImageSection,
@@ -11,15 +16,10 @@ import {
   Img,
 } from './Styled';
 import { CombinedStateType } from '../../redux/types';
-import DanceabilityIcon from '../../public/icons/dance.svg';
-import EnergyIcon from '../../public/icons/flash.svg';
-import ValenceIcon from '../../public/icons/happy.svg';
-import PopularityIcon from '../../public/icons/trending.svg';
 
 interface Props {
   playlistId: string;
 }
-
 
 const Component: React.FC<Props> = ({ playlistId }) => {
   const playlistName = useSelector<CombinedStateType, string>(
@@ -28,21 +28,42 @@ const Component: React.FC<Props> = ({ playlistId }) => {
   const playlistPhotos = useSelector<CombinedStateType, string[]>(
     (state) => state.playlists.data[playlistId].images.map((image) => image.url),
   );
-  // const playlistDescription = useSelector<CombinedStateType, string>(
-  //   // @ts-ignore description doesn't exist in the typings :/
-  //   (state) => state.playlists.data[playlistId].description,
-  // );
+
   const playlistTracksCount = useSelector<CombinedStateType, number>(
     (state) => state.playlists.data[playlistId].tracks.total,
   );
 
-  const isFetchingPlaylistsItems = useSelector<CombinedStateType, boolean>(
-    (state) => state.playlistItems.status.isFetching,
+  const playlistTracks = useSelector<CombinedStateType, AllPlaylistItems>(
+    (state) => state.playlistItems.data[playlistId]?.data,
   );
 
-  const isFetchingPlaylistsFeatures = useSelector<CombinedStateType, boolean>(
-    (state) => state.tracksAudioFeatures.status.isFetching,
-  );
+  const isFetchingPlaylistsItems = useSelector<CombinedStateType, boolean>(
+    (state) => state.playlistItems.data[playlistId]?.status?.isFetching,
+  ) as boolean | undefined;
+
+  const fetchedPlaylistsItemsOnce = useSelector<CombinedStateType, boolean>(
+    (state) => state.playlistItems.data[playlistId]?.status?.fetchedOnce,
+  ) as boolean | undefined;
+
+  const isFetchingPlaylistsTracksAudioFeatures = useSelector<CombinedStateType, boolean>(
+    (state) => state.tracksAudioFeatures.status.playlistsStatus[playlistId]?.isFetching,
+  ) as boolean | undefined;
+
+  const fetchedPLaylistsTracksAudioFeaturesOnce = useSelector<CombinedStateType, boolean>(
+    (state) => state.tracksAudioFeatures.status.playlistsStatus[playlistId]?.fetchedOnce,
+  ) as boolean | undefined;
+
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    const effect = async (): Promise<void> => {
+      await dispatch(fetchUserPlaylistItems({ playlistId }));
+      await dispatch(fetchPlaylistItemsAudioFeatures(playlistId));
+    };
+
+    effect();
+  }, []);
+
 
   return (
     <OuterContainer>
@@ -70,9 +91,15 @@ const Component: React.FC<Props> = ({ playlistId }) => {
         </TitleSection>
       </LeftSection>
       <RightSection>
-        {isFetchingPlaylistsItems || isFetchingPlaylistsFeatures
-          ? 'fetching...'
-          : 'fetched'}
+        {
+          isFetchingPlaylistsItems === false
+          && fetchedPlaylistsItemsOnce === true
+          && isFetchingPlaylistsTracksAudioFeatures === false
+          && fetchedPLaylistsTracksAudioFeaturesOnce === true
+          && Object.keys(playlistTracks || {}).length
+            ? <PlaylistMetricsBars trackIds={Object.keys(playlistTracks)} />
+            : <PlaylistMetricsBarsSkeleton />
+        }
       </RightSection>
     </OuterContainer>
   );

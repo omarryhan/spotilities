@@ -44,7 +44,7 @@ export const reducer = createReducer<InitialStateInterface>(InitialState, (build
   builder.addCase(fetchAllUserPlaylistsItems.rejected, (state, action) => ({
     ...state,
     status: {
-      fetchedOnce: true,
+      ...state.status,
       isFetching: false,
     },
   }));
@@ -52,6 +52,16 @@ export const reducer = createReducer<InitialStateInterface>(InitialState, (build
   // TODO: Find a way to set the isFetching status on this action.
   builder.addCase(fetchUserPlaylistItems.pending, (state, action) => ({
     ...state,
+    data: {
+      ...state.data,
+      [action.meta.arg.playlistId]: {
+        data: {},
+        status: {
+          isFetching: true,
+          fetchedOnce: false,
+        },
+      },
+    },
   }));
 
   builder.addCase(fetchUserPlaylistItems.fulfilled, (state, action) => ({
@@ -63,12 +73,26 @@ export const reducer = createReducer<InitialStateInterface>(InitialState, (build
         data: replaceTrackWithTrackId(
           action.payload.playlistItems,
         ),
+        status: {
+          isFetching: false,
+          fetchedOnce: true,
+        },
       },
     },
   }));
 
   builder.addCase(fetchUserPlaylistItems.rejected, (state, action) => ({
     ...state,
+    data: {
+      ...state.data,
+      [action.meta.arg.playlistId]: {
+        data: {},
+        status: {
+          isFetching: false,
+          fetchedOnce: false,
+        },
+      },
+    },
   }));
 
   builder.addCase(deletePlaylistsItems, (state, action) => ({
