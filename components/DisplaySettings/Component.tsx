@@ -1,5 +1,4 @@
 import React from 'react';
-import Switch from '@material-ui/core/Switch';
 import { getOrSetAndGetCurrentSettings, setSettings } from '../../utils';
 import {
   SettingsSection,
@@ -9,6 +8,7 @@ import {
   SettingTitle,
   SettingDescription,
   SettingRightSection,
+  StyledSwitch,
 } from '../Settings/Styled';
 
 const Component: React.FC<{}> = () => {
@@ -40,7 +40,7 @@ const Component: React.FC<{}> = () => {
       <SettingSection>
         <SettingLeftSection>
           <SettingTitle>
-            Display playlists attributes
+            Show playlists&apos; attributes in Library
           </SettingTitle>
           <SettingDescription>
             You might want to disable this if your playlists are huge
@@ -48,11 +48,32 @@ const Component: React.FC<{}> = () => {
         </SettingLeftSection>
 
         <SettingRightSection>
-          <Switch
+          <StyledSwitch
             checked={settings.showAllPlaylistsMetrics}
             onChange={(props): void => setWithUpdateLocalStorage(
               props.target.checked,
               'showAllPlaylistsMetrics',
+            )}
+          />
+        </SettingRightSection>
+      </SettingSection>
+
+      <SettingSection>
+        <SettingLeftSection>
+          <SettingTitle>
+            Show stats for musicians
+          </SettingTitle>
+          <SettingDescription>
+            Show tempo, key, mode and time signature
+          </SettingDescription>
+        </SettingLeftSection>
+
+        <SettingRightSection>
+          <StyledSwitch
+            checked={settings.showMusicianStats}
+            onChange={(props): void => setWithUpdateLocalStorage(
+              props.target.checked,
+              'showMusicianStats',
             )}
           />
         </SettingRightSection>

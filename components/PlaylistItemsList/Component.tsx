@@ -44,11 +44,17 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
     };
 
     effect();
+    // Disabling this because we actually want to read isFetchingPlaylists
+    // and isFetchingPlaylistsTracksAudioFeaturse once.
+    // The reason we're reading both properties:
+    // We don't want this component to fetch playlist tracks when it's already doing it
+    // This especially slow with large playlists
+    // The reason we only want to read them once is that if we don't do that,
+    // this effect will infinitely loop
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     dispatch,
     playlistId,
-    isFetchingPlaylistsItems,
-    isFetchingPlaylistsTracksAudioFeatures,
   ]);
 
 
@@ -57,7 +63,7 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
 
   return (
     <Container>
-      {playlistId}
+      {playlistName}
     </Container>
   );
 };

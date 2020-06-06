@@ -2,9 +2,6 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { generateMedia } from 'styled-media-query';
 import { DefaultTheme } from 'styled-components';
 
-export const materialUITheme = createMuiTheme({
-});
-
 export const colors = {
   gray: {
     darkest: 'rgba(4, 4, 4, 1)',
@@ -18,6 +15,7 @@ export const colors = {
   },
   green: {
     light: 'rgba(40, 108, 71, 1)',
+    lightest: 'rgba(0, 224, 37, 1)',
     primary: 'rgba(29, 185, 84, 1)', // #1DB954
   },
   white: {
@@ -68,5 +66,17 @@ export const styledComponentsTheme: DefaultTheme = {
   dimensions,
   zIndeces,
 };
+
+
+export const materialUITheme = createMuiTheme({
+  palette: {
+    primary: {
+      main: colors.green.primary,
+    },
+    secondary: {
+      main: styledComponentsTheme.colors.green.primary,
+    },
+  },
+});
 
 export const media = generateMedia<typeof breakpoints, DefaultTheme>(breakpoints);

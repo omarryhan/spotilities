@@ -2,7 +2,7 @@ import React from 'react';
 import { NextPage } from 'next';
 import { wrapper } from '../redux/index';
 import AppBody from '../components/AppBody';
-import PlaylistItems from '../components/PlaylistItems';
+import PlaylistItemsList from '../components/PlaylistItemsList';
 import TopNav from '../components/TopNav';
 import BottomNav from '../components/BottomNav';
 
@@ -20,9 +20,9 @@ const Page: NextPage<{}> = () => {
 
   return (
     <>
-      <TopNav showBackButton title={playlistId} />
+      <TopNav showBackButton title="Playlist" />
       <AppBody>
-        <PlaylistItems playlistId={playlistId} />
+        <PlaylistItemsList playlistId={playlistId} />
       </AppBody>
       <BottomNav />
     </>
