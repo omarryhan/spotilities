@@ -18,7 +18,7 @@ import PopularityIcon from '../../public/icons/trending.svg';
 import { AllTracks } from '../../redux/tracks/types';
 import { AllTracksFeatures } from '../../redux/tracksAudioFeatures/types';
 
-const getAudioFeaturesFromPlaylistTracks = (
+const getAudioFeaturesScoreFromPlaylistTracks = (
   tracksAudioFeatures: AllTracksFeatures,
   feature: 'valence' | 'energy' | 'danceability',
 ): number => {
@@ -43,7 +43,7 @@ const getAudioFeaturesFromPlaylistTracks = (
   return result * 100;
 };
 
-const getPopularityFromPlaylistTracks = (playlistTracks: AllTracks): number => {
+const getPopularityScoreFromPlaylistTracks = (playlistTracks: AllTracks): number => {
   const keys = Object.keys(playlistTracks);
 
   const numbers = keys.map((key) => {
@@ -94,7 +94,7 @@ const Component: React.FC<{trackIds: string[]}> = ({ trackIds }) => {
         <MetricWrapper>
           <MetricBarBackground>
 
-            <MetricBar percentageHeight={getAudioFeaturesFromPlaylistTracks(playlistAudioFeatures, 'energy')} />
+            <MetricBar percentageHeight={getAudioFeaturesScoreFromPlaylistTracks(playlistAudioFeatures, 'energy')} />
           </MetricBarBackground>
         </MetricWrapper>
         <IconWrapper>
@@ -104,7 +104,7 @@ const Component: React.FC<{trackIds: string[]}> = ({ trackIds }) => {
       <Metric>
         <MetricWrapper>
           <MetricBarBackground>
-            <MetricBar percentageHeight={getAudioFeaturesFromPlaylistTracks(playlistAudioFeatures, 'danceability')} />
+            <MetricBar percentageHeight={getAudioFeaturesScoreFromPlaylistTracks(playlistAudioFeatures, 'danceability')} />
           </MetricBarBackground>
         </MetricWrapper>
         <IconWrapper>
@@ -114,7 +114,7 @@ const Component: React.FC<{trackIds: string[]}> = ({ trackIds }) => {
       <Metric>
         <MetricWrapper>
           <MetricBarBackground>
-            <MetricBar percentageHeight={getAudioFeaturesFromPlaylistTracks(playlistAudioFeatures, 'valence')} />
+            <MetricBar percentageHeight={getAudioFeaturesScoreFromPlaylistTracks(playlistAudioFeatures, 'valence')} />
           </MetricBarBackground>
         </MetricWrapper>
         <IconWrapper>
@@ -124,7 +124,7 @@ const Component: React.FC<{trackIds: string[]}> = ({ trackIds }) => {
       <Metric>
         <MetricWrapper>
           <MetricBarBackground>
-            <MetricBar percentageHeight={getPopularityFromPlaylistTracks(playlistsTracks)} />
+            <MetricBar percentageHeight={getPopularityScoreFromPlaylistTracks(playlistsTracks)} />
           </MetricBarBackground>
         </MetricWrapper>
         <IconWrapper>

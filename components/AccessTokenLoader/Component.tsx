@@ -19,10 +19,6 @@ const Component: React.FC<{}> = () => {
 
   React.useEffect(() => {
     const effect = async (): Promise<void> => {
-      // Just in case this effect infinetely loops.
-      // To ensure we're not rate limited/blocked.
-      await sleep(100);
-
       if (!accessToken && !errorMessage) {
         openAuthorizeWindow();
       }

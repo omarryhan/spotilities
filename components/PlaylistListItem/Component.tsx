@@ -58,18 +58,20 @@ const Component: React.FC<Props> = ({ playlistId }) => {
 
   React.useEffect(() => {
     const effect = async (): Promise<void> => {
-      // Normally, we should do it without the if clause below.
-      // But, because this call is very network & processing expensive
+      // Normally, this effect should run regardless of the isFetching and fetchedOnce status.
+      // But, because this effect is very network & processing expensive
       // we have to sacrifice the accuracy of the info shown on the playlist's
-      // cover. This info will only be fetched once.
+      // cover. This info will only be fetched once per the app's time.
       if (
-        fetchedPlaylistsItemsOnce !== true
-        && (
-          isFetchingPlaylistsItems !== true || isFetchingPlaylistsTracksAudioFeatures !== true
+        fetchedPlaylistsItemsOnce === true
+        || (
+          isFetchingPlaylistsItems === true || isFetchingPlaylistsTracksAudioFeatures === true
         )) {
-        await dispatch(fetchUserPlaylistItems({ playlistId }));
-        await dispatch(fetchPlaylistItemsAudioFeatures(playlistId));
+        return;
       }
+
+      await dispatch(fetchUserPlaylistItems({ playlistId }));
+      await dispatch(fetchPlaylistItemsAudioFeatures(playlistId));
     };
 
     effect();
@@ -83,7 +85,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
 
 
   return (
-    <OuterContainer onClick={(): ReturnType<typeof Router.push> => Router.push(`/playlists/${playlistId}`)}>
+    <OuterContainer onClick={(): ReturnType<typeof Router.push> => Router.push('/playlists', `/playlists/${playlistId}`)}>
       <LeftSection>
         <ImageSection>
           <Img

@@ -5,7 +5,6 @@ export const Container = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  padding-right: 10px;
 `;
 
 export const Metric = styled.div`
