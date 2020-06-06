@@ -27,6 +27,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
   const playlistName = useSelector<CombinedStateType, string>(
     (state) => state.playlists.data[playlistId].name,
   );
+
   const playlistPhotos = useSelector<CombinedStateType, string[]>(
     (state) => state.playlists.data[playlistId].images.map((image) => image.url),
   );
@@ -38,6 +39,9 @@ const Component: React.FC<Props> = ({ playlistId }) => {
   const playlistTracks = useSelector<CombinedStateType, AllPlaylistItems>(
     (state) => state.playlistItems.data[playlistId]?.data,
   );
+
+  const playlistTracksCountFromTracks = typeof playlistTracks !== 'undefined'
+    ? Object.keys(playlistTracks).length : 0;
 
   const isFetchingPlaylistsItems = useSelector<CombinedStateType, boolean>(
     (state) => state.playlistItems.data[playlistId]?.status?.isFetching,
@@ -106,9 +110,11 @@ const Component: React.FC<Props> = ({ playlistId }) => {
           </Name>
 
           <NumberOfTracks>
-            {playlistTracksCount}
-            {' '}
-            tracks
+            {playlistTracksCount === -1
+              ? playlistTracksCountFromTracks === 0
+                ? 'Lotta tracks'
+                : `${playlistTracksCountFromTracks} tracks`
+              : `${playlistTracksCount} tracks`}
           </NumberOfTracks>
 
         </TitleSection>
