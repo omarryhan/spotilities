@@ -3,8 +3,8 @@ import { NextPage } from 'next';
 
 import { wrapper } from '../redux';
 
+import TopNav from '../components/TopNav';
 import BottomNav from '../components/BottomNav';
-import PageTitle from '../components/PageTitle';
 import AccessTokenLoader from '../components/AccessTokenLoader';
 import AppBody from '../components/AppBody';
 import PlaylistList from '../components/PlaylistList';
@@ -15,11 +15,11 @@ const Page: NextPage<{}> = () => (
   <>
     <AccessTokenLoader />
     <CurrentUserLoader />
+    <TopNav title="Library" showSettingsButton />
     <AppBody>
-      <PageTitle title="Playlists" />
       <PlaylistList />
     </AppBody>
-    <BottomNav page="library" />
+    <BottomNav />
   </>
 );
 

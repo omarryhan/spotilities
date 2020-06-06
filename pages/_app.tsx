@@ -55,9 +55,6 @@ export function reportWebVitals({
     label: id,
     nonInteraction: true,
   });
-  console.log({
-    id, name, startTime, value, label,
-  });
 }
 
 

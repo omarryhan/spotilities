@@ -39,8 +39,8 @@ export const dimensions = {
     desktop: '20px',
   },
   headerHeight: {
-    mobile: '60px',
-    desktop: '80px',
+    mobile: '35px',
+    desktop: '35px',
   },
   bottomAppBarHeight: {
     mobile: '60px',
@@ -49,6 +49,8 @@ export const dimensions = {
 };
 
 export const zIndeces = {
+  header: '10',
+  footer: '10',
 };
 
 export const breakpoints = {

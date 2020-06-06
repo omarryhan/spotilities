@@ -9,6 +9,8 @@ export const Nav = styled.nav`
   bottom: 0;
   width: 100%;
 
+  z-index: ${(props): string => props.theme.zIndeces.header};
+
   border-top: black;
 
   ${media.lessThan('tablet')`

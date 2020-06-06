@@ -1,5 +1,5 @@
 import React from 'react';
-import Router, { useRouter } from 'next/router';
+import Router from 'next/router';
 import {
   Nav, LinksContainer, LinkContainer, LinkIcon, LinkTitle,
 } from './Styled';
@@ -15,9 +15,16 @@ const handleLinkClick = (route: string): void => {
   Router.push(route);
 };
 
-const Component: React.FC<{page: string}> = ({ page }) => {
-  const router = useRouter();
-  const path = router.pathname;
+const Component: React.FC<{}> = () => {
+  let path = '/';
+
+  if (typeof window !== 'undefined') {
+    const splitPath = window.location.href.split('/');
+    // eslint-disable-next-line prefer-destructuring
+    path = splitPath[3] ? `/${splitPath[3]}` : '/';
+  }
+
+  console.log(path);
 
   return (
     <Nav>
@@ -71,7 +78,7 @@ const Component: React.FC<{page: string}> = ({ page }) => {
         }
 
         {
-          path.startsWith('/library')
+          path.startsWith('/library') || path.startsWith('/playlists')
             ? (
               <LinkContainer type="button" onClick={(): void => handleLinkClick('/library')}>
                 <LinkIcon isLight>

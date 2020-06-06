@@ -17,6 +17,7 @@ import {
   Img,
 } from './Styled';
 import { CombinedStateType } from '../../redux/types';
+import { getOrSetAndGetCurrentSettings } from '../../utils';
 
 interface Props {
   playlistId: string;
@@ -56,6 +57,8 @@ const Component: React.FC<Props> = ({ playlistId }) => {
 
   const dispatch = useDispatch();
 
+  const { showAllPlaylistsMetrics } = getOrSetAndGetCurrentSettings();
+
   React.useEffect(() => {
     const effect = async (): Promise<void> => {
       // Normally, this effect should run regardless of the isFetching and fetchedOnce status.
@@ -66,7 +69,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
         fetchedPlaylistsItemsOnce === true
         || (
           isFetchingPlaylistsItems === true || isFetchingPlaylistsTracksAudioFeatures === true
-        )) {
+        ) || !showAllPlaylistsMetrics) {
         return;
       }
 
@@ -81,12 +84,13 @@ const Component: React.FC<Props> = ({ playlistId }) => {
     fetchedPlaylistsItemsOnce,
     isFetchingPlaylistsItems,
     isFetchingPlaylistsTracksAudioFeatures,
+    showAllPlaylistsMetrics,
   ]);
 
 
   return (
     <OuterContainer onClick={(): ReturnType<typeof Router.push> => Router.push('/playlists', `/playlists/${playlistId}`)}>
-      <LeftSection>
+      <LeftSection fullWidth={!showAllPlaylistsMetrics}>
         <ImageSection>
           <Img
             src={
@@ -109,17 +113,22 @@ const Component: React.FC<Props> = ({ playlistId }) => {
 
         </TitleSection>
       </LeftSection>
-      <RightSection>
-        {
-          isFetchingPlaylistsItems === false
-          && fetchedPlaylistsItemsOnce === true
-          && isFetchingPlaylistsTracksAudioFeatures === false
-          && fetchedPLaylistsTracksAudioFeaturesOnce === true
-          && Object.keys(playlistTracks || {}).length
-            ? <PlaylistMetricsBars trackIds={Object.keys(playlistTracks)} />
-            : <PlaylistMetricsBarsSkeleton />
-        }
-      </RightSection>
+      {
+        isFetchingPlaylistsItems === false
+        && fetchedPlaylistsItemsOnce === true
+        && isFetchingPlaylistsTracksAudioFeatures === false
+        && fetchedPLaylistsTracksAudioFeaturesOnce === true
+        && Object.keys(playlistTracks || {}).length
+        && showAllPlaylistsMetrics
+          ? (
+            <RightSection>
+              <PlaylistMetricsBars trackIds={Object.keys(playlistTracks)} />
+            </RightSection>
+          )
+          : showAllPlaylistsMetrics
+            ? <RightSection><PlaylistMetricsBarsSkeleton /></RightSection>
+            : null
+      }
     </OuterContainer>
   );
 };

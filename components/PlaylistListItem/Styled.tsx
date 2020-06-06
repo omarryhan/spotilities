@@ -13,9 +13,9 @@ export const OuterContainer = styled.div<{notClickable?: boolean}>`
   }
 `;
 
-export const LeftSection = styled.div`
+export const LeftSection = styled.div<{fullWidth?: boolean}>`
   height: 100%;
-  max-width: 70%;
+  max-width: ${(props): string => (props.fullWidth ? '100%' : '70%')};
   display: flex;
 `;
 

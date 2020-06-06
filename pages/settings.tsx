@@ -1,22 +1,23 @@
 import React from 'react';
 import { NextPage } from 'next';
-
-import { wrapper } from '../redux';
-
+import { wrapper } from '../redux/index';
+import TopNav from '../components/TopNav';
 import BottomNav from '../components/BottomNav';
 import AccessTokenLoader from '../components/AccessTokenLoader';
 import AppBody from '../components/AppBody';
 import CurrentUserLoader from '../components/CurrentUserLoader';
-import TopNav from '../components/TopNav';
-
+import Settings from '../components/Settings';
+import DisplaySettings from '../components/DisplaySettings';
 
 const Page: NextPage<{}> = () => (
   <>
     <AccessTokenLoader />
     <CurrentUserLoader />
-    <TopNav title="Recommendations" showSettingsButton />
+    <TopNav title="Settings" showBackButton />
     <AppBody>
-      Recommendations
+      <Settings>
+        <DisplaySettings />
+      </Settings>
     </AppBody>
     <BottomNav />
   </>
