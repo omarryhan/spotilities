@@ -51,7 +51,7 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
     (state) => state.tracksAudioFeatures.status.playlistsStatus[playlistId]?.isFetching,
   ) as boolean | undefined;
 
-  const backupPhotoURL = '';
+  const backupPhotoURL = ''; // TODO
 
   const getColor = (colors: string[]): void => {
     console.log(colors);
@@ -66,7 +66,7 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
             <FirstSlide>
               <PlaylistCoverPhotoWrapper>
                 <ColorExtractor getColors={getColor}>
-                  <PlaylistCoverPhoto src={playlistPhotos ? playlistPhotos[0] : backupPhotoURL} alt={`${playlistName} playlist cover`} />
+                  <img src={playlistPhotos ? playlistPhotos[0] : backupPhotoURL} alt={`${playlistName} playlist cover`} />
                 </ColorExtractor>
               </PlaylistCoverPhotoWrapper>
 
@@ -79,7 +79,7 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
           <Slide bgColor={bgColor}>
             <SecondSlide>
               <PlaylistCoverPhotoWrapper>
-                <PlaylistCoverPhoto src={playlistPhotos ? playlistPhotos[0] : backupPhotoURL} alt={`${playlistName} playlist cover photo`} />
+                <img src={playlistPhotos ? playlistPhotos[0] : backupPhotoURL} alt={`${playlistName} playlist cover`} />
               </PlaylistCoverPhotoWrapper>
 
               <PlaylistTitle>
