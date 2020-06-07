@@ -32,7 +32,13 @@ const Page: NextPage<{}> = () => {
       }));
     }
 
-    Router.push('/');
+    const authRedirect = window.localStorage.getItem('authRedirect')?.split('/');
+    authRedirect?.shift();
+    authRedirect?.shift();
+    authRedirect?.shift();
+    const route = authRedirect?.join();
+    const routeWithStartingSlash = route ? `/${route}` : '/';
+    Router.push(routeWithStartingSlash);
   });
   return (
     null

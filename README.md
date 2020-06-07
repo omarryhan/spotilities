@@ -13,7 +13,9 @@ The goal of this app is to provide utilities and extra info that aren't included
 
 ## Live version (Under construction)
 
-Visit: https://spotilities.netlify.app/
+https://spotilities.netlify.app/
+
+**Tip:** For optimal experience, open it on your phone and open your browser's menu and click on "Add to homescreen".
 
 ## Features
 
@@ -46,19 +48,6 @@ Visit: https://spotilities.netlify.app/
     - Tempo of the track
     - Time signature of the track
 
-## TODO:
-
-**Library:**
-
-- Add library (likes) and add it as the top playlist
-- Sort playlists by:
-  - valence
-  - popularity
-  - energy
-  - danceability
-
-**
-
 ## Tools
 
 Spotilities is built using Next.js and it is a [static](https://nextjs.org/docs/advanced-features/static-html-export) website.
@@ -74,9 +63,24 @@ More tools being used:
     - Airbnb base
     - TODO: fill out the rest.
 
+## Development
+
+After cloning:
+
+Install the dependencies:
+
+```sh
+yarn
+```
+
+Run development server:
+
+```sh
+yarn dev
+```
 
 ## Privacy
 
 I do not collect any personal information or any sort of access whatsover. All the action is only on your browser.
 
-I added a Google Analytics plugin to see how users interact with the website, which pages you visit, what features you use etc. The GA plugin doesn't collect any personal information either. I also opted out from sharing the information I collect with Google (Which is kind of a moot point given that the data is already stored on Google's servers). So, i'd appreciate if you'd unblock any tracker blocker or adblocker for this website.
+I added a Google Analytics plugin to see how users interact with the website, which pages users visit, what features users use etc. The GA plugin doesn't collect any personal information either. I also opted out from sharing the information I collect with Google (Which is kind of a moot point given that the data is already stored on Google's servers). I'd appreciate if you'd stop any tracker-blocker or adblocker (no ads) for this website.

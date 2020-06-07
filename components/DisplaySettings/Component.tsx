@@ -17,8 +17,6 @@ const Component: React.FC<{}> = () => {
     settings,
   );
 
-  console.log(settings.showAllPlaylistsMetrics);
-
   const setWithUpdateLocalStorage = (val: any, property: string): void => {
     setSettings({
       ...settingsState,

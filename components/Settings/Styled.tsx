@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import Switch from '@material-ui/core/Switch';
 import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import { media, styledComponentsTheme } from '../../configs/theme';
+
 
 export const Container = styled.div`
   ${media.lessThan('tablet')`
@@ -17,6 +19,7 @@ export const Container = styled.div`
 
 export const SettingsSection = styled.div`
   width: 100%;
+  margin-bottom: 60px;
 `;
 
 export const SectionTitle = styled.h2`
@@ -66,7 +69,24 @@ export const StyledSwitch = withStyles({
   },
   checked: {
     '& $thumb': {
-      backgroundColor: styledComponentsTheme.colors.white.dark, // thumb turned on
+      backgroundColor: styledComponentsTheme.colors.green.primary, // thumb turned on
     },
   },
 })(Switch);
+
+export const StyledLogoutButton = styled(Button)`
+  background-color: ${(props): string => props.theme.colors.white.dark};
+  padding-top: 0;
+  padding-bottom: 0;
+
+  &:hover {
+    background-color: #fff;
+  }
+  
+  & span {
+    color: ${(props): string => props.theme.colors.gray.light};
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+`;

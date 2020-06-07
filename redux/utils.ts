@@ -4,6 +4,7 @@ import { createAuthorizeLink } from '../configs/urls';
 export const spotifyApi = new SpotifyApi();
 
 export const openAuthorizeWindow = async (): Promise<void> => {
+  window.localStorage.setItem('authRedirect', window.location.href);
   window.location.href = createAuthorizeLink();
 };
 

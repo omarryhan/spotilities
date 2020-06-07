@@ -8,6 +8,7 @@ import AppBody from '../components/AppBody';
 import CurrentUserLoader from '../components/CurrentUserLoader';
 import Settings from '../components/Settings';
 import DisplaySettings from '../components/DisplaySettings';
+import AccountSettings from '../components/AccountSettings';
 
 const Page: NextPage<{}> = () => (
   <>
@@ -17,6 +18,7 @@ const Page: NextPage<{}> = () => (
     <AppBody>
       <Settings>
         <DisplaySettings />
+        <AccountSettings />
       </Settings>
     </AppBody>
     <BottomNav />

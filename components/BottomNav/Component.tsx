@@ -24,8 +24,6 @@ const Component: React.FC<{}> = () => {
     path = splitPath[3] ? `/${splitPath[3]}` : '/';
   }
 
-  console.log(path);
-
   return (
     <Nav>
       <LinksContainer>

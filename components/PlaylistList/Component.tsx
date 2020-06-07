@@ -17,17 +17,20 @@ const Component: React.FC<{}> = () => {
   const isFetchingPlaylists = useSelector<CombinedStateType, boolean>(
     (state) => state.playlists.status.isFetching,
   );
+  const userId = useSelector<CombinedStateType, string>(
+    (state) => state.profile.data.id,
+  );
 
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     const effect = async (): Promise<void> => {
-      if (accessToken) {
-        await dispatch(fetchUserPlaylists());
+      if (accessToken && userId) {
+        await dispatch(fetchUserPlaylists(userId));
       }
     };
     effect();
-  }, [dispatch, accessToken]);
+  }, [dispatch, accessToken, userId]);
 
   return (
     <Container>

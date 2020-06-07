@@ -36,16 +36,15 @@ const userLibraryPlaylist = {
 
 export const fetchUserPlaylists = createAsyncThunk<
 SpotifyApi.PlaylistObjectSimplified[],
-void,
+string,
 { state: CombinedStateType }
 >(
   'playlists/set',
-  async (_, { getState, dispatch }) => {
+  async (userId, { getState, dispatch }) => {
     const state = getState();
     const { token } = state.user;
     const { accessToken, expiresAt } = token;
     checkIsAuthorized(accessToken, expiresAt);
-    const userId = state.profile.data.id;
     spotifyApi.setAccessToken(accessToken);
 
     const fullResponse = await getAllPages<SpotifyApi.ListOfUsersPlaylistsResponse>(

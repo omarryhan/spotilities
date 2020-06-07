@@ -1,10 +1,17 @@
 import React from 'react';
 import { NextPage } from 'next';
+
+import { useSelector, useDispatch } from 'react-redux';
 import { wrapper } from '../redux/index';
 import AppBody from '../components/AppBody';
 import PlaylistItemsList from '../components/PlaylistItemsList';
 import TopNav from '../components/TopNav';
 import BottomNav from '../components/BottomNav';
+import PlaylistItemsCoverSection from '../components/PlaylistItemsCoverSection';
+
+import { CombinedStateType } from '../redux/types';
+import { fetchUserPlaylistItems } from '../redux/playlistItems/actions';
+import { fetchPlaylistItemsAudioFeatures } from '../redux/tracksAudioFeatures/actions';
 
 // This page should only be accessed dynamically on the browser
 // Calling /playlists/your_playlist_id from the browser will return a 404
@@ -18,10 +25,49 @@ const Page: NextPage<{}> = () => {
     playlistId = window.location.href.split('/')[4];
   }
 
+  const playlistName = useSelector<CombinedStateType, string>(
+    (state) => state.playlists.data[playlistId]?.name,
+  );
+
+  const isFetchingPlaylistsItems = useSelector<CombinedStateType, boolean>(
+    (state) => state.playlistItems.data[playlistId]?.status?.isFetching,
+  ) as boolean | undefined;
+
+  const isFetchingPlaylistsTracksAudioFeatures = useSelector<CombinedStateType, boolean>(
+    (state) => state.tracksAudioFeatures.status.playlistsStatus[playlistId]?.isFetching,
+  ) as boolean | undefined;
+
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    const effect = async (): Promise<void> => {
+      if (!playlistId || isFetchingPlaylistsItems || isFetchingPlaylistsTracksAudioFeatures) {
+        return;
+      }
+
+      await dispatch(fetchUserPlaylistItems({ playlistId }));
+      await dispatch(fetchPlaylistItemsAudioFeatures(playlistId));
+    };
+
+    effect();
+    // Disabling this because we actually want to read isFetchingPlaylists
+    // and isFetchingPlaylistsTracksAudioFeaturse once.
+    // The reason we're reading both properties:
+    // We don't want this component to fetch playlist tracks when it's already doing it
+    // This especially slow with large playlists
+    // The reason we only want to read them once is that if we don't do that,
+    // this effect will infinitely loop
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    dispatch,
+    playlistId,
+  ]);
+
   return (
     <>
-      <TopNav showBackButton title="Playlist" />
+      <TopNav showBackButton title={playlistName} />
       <AppBody>
+        <PlaylistItemsCoverSection playlistId={playlistId} />
         <PlaylistItemsList playlistId={playlistId} />
       </AppBody>
       <BottomNav />
