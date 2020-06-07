@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { media } from '../../configs/theme';
 
 export const Container = styled.div`
   width: 100%;
@@ -48,19 +49,30 @@ export const PlaylistCoverPhotoWrapper = styled.div`
   justify-content: center;
   align-items: flex-end;
   margin: 0 auto;
-  height: 120px;
-  width: 100px;
-`;
-
-export const PlaylistCoverPhoto = styled.img`
-  width: 100%;
+  height: 200px;
+  width: 160px;
 `;
 
 export const PlaylistTitle = styled.h2`
   text-align: center;
   color: #fff;
   margin: 0 0;
-  padding: 20px 20px;
+  padding-right: 30px;
+  font-size: 1.5rem;
+
+  ${media.lessThan('tablet')`
+    padding-left: ${(props): string => props.theme.dimensions.contentSideMargin.mobile};
+    padding-right: ${(props): string => props.theme.dimensions.contentSideMargin.mobile};
+  `};
+
+  ${media.greaterThan('tablet')`
+    padding-left: ${(props): string => props.theme.dimensions.contentSideMargin.desktop};
+    padding-right: ${(props): string => props.theme.dimensions.contentSideMargin.desktop};
+  `};
+
+  padding-top: 30px;
+  padding-bottom: 40px;
+
 `;
 
 export const SliderDots = styled.div`

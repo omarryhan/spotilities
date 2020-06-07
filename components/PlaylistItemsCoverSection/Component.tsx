@@ -13,7 +13,6 @@ import {
   FirstSlide,
   SecondSlide,
   PlaylistCoverPhotoWrapper,
-  PlaylistCoverPhoto,
   PlaylistTitle,
   SliderDot,
   SliderDots,
@@ -26,7 +25,7 @@ const SliderDotsSection: React.FC<{}> = () => (
 );
 
 const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
-  const [bgColor, setBgColor] = React.useState(styledComponentsTheme.colors.green.primary);
+  const [bgColor, setBgColor] = React.useState(styledComponentsTheme.colors.gray.dark);
 
   const playlistName = useSelector<CombinedStateType, string>(
     (state) => state.playlists.data[playlistId]?.name,
@@ -66,7 +65,9 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
             <FirstSlide>
               <PlaylistCoverPhotoWrapper>
                 <ColorExtractor getColors={getColor}>
-                  <img src={playlistPhotos ? playlistPhotos[0] : backupPhotoURL} alt={`${playlistName} playlist cover`} />
+                  { /* ColorExtractor only accepts images, that's why
+                  we're not using a styled component */ }
+                  <img style={{ width: '100%' }} src={playlistPhotos ? playlistPhotos[0] : backupPhotoURL} alt={`${playlistName} playlist cover`} />
                 </ColorExtractor>
               </PlaylistCoverPhotoWrapper>
 
@@ -79,7 +80,7 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
           <Slide bgColor={bgColor}>
             <SecondSlide>
               <PlaylistCoverPhotoWrapper>
-                <img src={playlistPhotos ? playlistPhotos[0] : backupPhotoURL} alt={`${playlistName} playlist cover`} />
+                <img style={{ width: '100%' }} src={playlistPhotos ? playlistPhotos[0] : backupPhotoURL} alt={`${playlistName} playlist cover`} />
               </PlaylistCoverPhotoWrapper>
 
               <PlaylistTitle>
