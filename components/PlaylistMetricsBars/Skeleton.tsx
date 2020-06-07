@@ -1,11 +1,13 @@
 import React from 'react';
 import {
   MetricBarSkeleton,
-  MetricWrapper,
   Container,
+} from './Styled';
+import {
+  MetricWrapper,
   Metric,
   IconWrapper,
-} from './Styled';
+} from '../PlaylistMetricBar/Styled';
 import DanceabilityIcon from '../../public/icons/dance.svg';
 import EnergyIcon from '../../public/icons/flash.svg';
 import ValenceIcon from '../../public/icons/happy.svg';

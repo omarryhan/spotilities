@@ -5,24 +5,27 @@ import { useSelector } from 'react-redux';
 import { styledComponentsTheme } from '../../configs/theme';
 import { CombinedStateType } from '../../redux/types';
 import { AllPlaylistItems } from '../../redux/playlistItems/types';
+import { AllTracks } from '../../redux/tracks/types';
+import { AllTracksFeatures } from '../../redux/tracksAudioFeatures/types';
 import {
   Container,
   Slider,
   Slides,
   Slide,
-  FirstSlide,
-  SecondSlide,
   PlaylistCoverPhotoWrapper,
   PlaylistTitle,
-  SliderDot,
-  SliderDots,
+  MetricsContainer,
 } from './Styled';
 
-const SliderDotsSection: React.FC<{}> = () => (
-  <SliderDots>
-    <SliderDot />
-  </SliderDots>
-);
+import PlaylistCoverMetricBar from '../PlaylistCoverMetricBar';
+import {
+  getPopularityScoreFromPlaylistTracks,
+  getAudioFeaturesScoreFromPlaylistTracks,
+} from '../PlaylistMetricBar/helpers';
+import {
+  AvailableMetrics,
+  AvailableFeatures,
+} from '../PlaylistMetricBar/types';
 
 const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
   const [bgColor, setBgColor] = React.useState(styledComponentsTheme.colors.gray.dark);
@@ -39,18 +42,46 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
   );
 
   const playlistTracks = useSelector<CombinedStateType, AllPlaylistItems>(
-    (state) => state.playlistItems.data[playlistId]?.data,
+    (state) => state.playlistItems.data[playlistId]?.data || {},
+  );
+
+  const playlistTrackIds = Object.keys(playlistTracks);
+
+  const playlistsTracks = useSelector<CombinedStateType, AllTracks>(
+    (state) => {
+      const keys = Object.keys(state.tracks.data).filter(
+        (trackId) => playlistTrackIds.includes(trackId),
+      );
+      return Object.fromEntries(keys.map(
+        (id) => [id, state.tracks.data[id]],
+      ));
+    },
+  );
+
+  const playlistAudioFeatures = useSelector<CombinedStateType, AllTracksFeatures>(
+    (state) => {
+      const keys = Object.keys(state.tracksAudioFeatures.data).filter(
+        (trackId) => playlistTrackIds.includes(trackId),
+      );
+
+      return Object.fromEntries(keys.map((
+        (id) => [id, state.tracksAudioFeatures.data[id]]
+      )));
+    },
   );
 
   const isFetchingPlaylistsItems = useSelector<CombinedStateType, boolean>(
     (state) => state.playlistItems.data[playlistId]?.status?.isFetching,
-  ) as boolean | undefined;
+  ) as boolean | undefined || false;
 
   const isFetchingPlaylistsTracksAudioFeatures = useSelector<CombinedStateType, boolean>(
     (state) => state.tracksAudioFeatures.status.playlistsStatus[playlistId]?.isFetching,
-  ) as boolean | undefined;
+  ) as boolean | undefined || false;
 
-  const backupPhotoURL = ''; // TODO
+  console.log(isFetchingPlaylistsItems);
+  console.log(isFetchingPlaylistsTracksAudioFeatures);
+
+  const backupPhotoURL = '';
 
   const getColor = (colors: string[]): void => {
     console.log(colors);
@@ -62,31 +93,46 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
       <Slider>
         <Slides bgColor={bgColor}>
           <Slide bgColor={bgColor}>
-            <FirstSlide>
-              <PlaylistCoverPhotoWrapper>
-                <ColorExtractor getColors={getColor}>
-                  { /* ColorExtractor only accepts images, that's why
+            <PlaylistCoverPhotoWrapper>
+              <ColorExtractor getColors={getColor}>
+                { /* ColorExtractor only accepts images, that's why
                   we're not using a styled component */ }
-                  <img style={{ width: '100%' }} src={playlistPhotos ? playlistPhotos[0] : backupPhotoURL} alt={`${playlistName} playlist cover`} />
-                </ColorExtractor>
-              </PlaylistCoverPhotoWrapper>
+                <img style={{ width: '100%' }} src={playlistPhotos ? playlistPhotos[0] : backupPhotoURL} alt={`${playlistName} playlist cover`} />
+              </ColorExtractor>
+            </PlaylistCoverPhotoWrapper>
 
-              <PlaylistTitle>
-                {playlistName}
-              </PlaylistTitle>
-            </FirstSlide>
+            <PlaylistTitle>
+              {playlistName}
+            </PlaylistTitle>
           </Slide>
 
           <Slide bgColor={bgColor}>
-            <SecondSlide>
-              <PlaylistCoverPhotoWrapper>
-                <img style={{ width: '100%' }} src={playlistPhotos ? playlistPhotos[0] : backupPhotoURL} alt={`${playlistName} playlist cover`} />
-              </PlaylistCoverPhotoWrapper>
-
-              <PlaylistTitle>
-                {playlistName}
-              </PlaylistTitle>
-            </SecondSlide>
+            <MetricsContainer>
+              {
+                ([
+                  'energy',
+                  'danceability',
+                  'valence',
+                  'popularity',
+                  'acousticness',
+                  'instrumentalness',
+                  'liveness',
+                  // 'loudness',
+                  'speechiness',
+                  // 'tempo',
+                ] as AvailableMetrics[]).map((name) => (
+                  <PlaylistCoverMetricBar
+                    name={name}
+                    percentage={name === 'popularity'
+                      ? getPopularityScoreFromPlaylistTracks(playlistsTracks)
+                      : getAudioFeaturesScoreFromPlaylistTracks(
+                        playlistAudioFeatures, name as AvailableFeatures,
+                      )}
+                    isLoading={isFetchingPlaylistsTracksAudioFeatures || isFetchingPlaylistsItems}
+                  />
+                ))
+              }
+            </MetricsContainer>
           </Slide>
         </Slides>
       </Slider>

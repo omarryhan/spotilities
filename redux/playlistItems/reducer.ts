@@ -49,7 +49,6 @@ export const reducer = createReducer<InitialStateInterface>(InitialState, (build
     },
   }));
 
-  // TODO: Find a way to set the isFetching status on this action.
   builder.addCase(fetchUserPlaylistItems.pending, (state, action) => ({
     ...state,
     data: {

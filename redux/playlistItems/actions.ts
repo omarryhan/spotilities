@@ -41,8 +41,6 @@ export const fetchUserLibraryAsPlaylist = async (): Promise<SpotifyApi.PlaylistT
 
 export const fetchUserPlaylistItems = createAsyncThunk<
 FetchUserPlaylistItemsPayload,
-// TODO: remove fetchPlaylistItemsAudioFeatures. Will call this action directly
-// from the component
 { playlistId: string; dispatchSetAudioFeatures?: boolean },
 { state: CombinedStateType }
 >(
