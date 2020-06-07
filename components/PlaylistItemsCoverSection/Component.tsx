@@ -31,7 +31,7 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
   const playlistName = useSelector<CombinedStateType, string>(
     (state) => state.playlists.data[playlistId]?.name,
   );
-  const playlistPhotos = useSelector<CombinedStateType, string[]>(
+  const playlistPhotos = useSelector<CombinedStateType, string[] | undefined>(
     (state) => state.playlists.data[playlistId]?.images.map((image) => image.url),
   );
 
@@ -66,7 +66,7 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
             <FirstSlide>
               <PlaylistCoverPhotoWrapper>
                 <ColorExtractor getColors={getColor}>
-                  <img src={playlistPhotos[0] || backupPhotoURL} alt={`${playlistName} playlist cover`} />
+                  <PlaylistCoverPhoto src={playlistPhotos ? playlistPhotos[0] : backupPhotoURL} alt={`${playlistName} playlist cover`} />
                 </ColorExtractor>
               </PlaylistCoverPhotoWrapper>
 
@@ -79,7 +79,7 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
           <Slide bgColor={bgColor}>
             <SecondSlide>
               <PlaylistCoverPhotoWrapper>
-                <PlaylistCoverPhoto src={playlistPhotos[0] || backupPhotoURL} alt={`${playlistName} playlist cover photo`} />
+                <PlaylistCoverPhoto src={playlistPhotos ? playlistPhotos[0] : backupPhotoURL} alt={`${playlistName} playlist cover photo`} />
               </PlaylistCoverPhotoWrapper>
 
               <PlaylistTitle>
