@@ -41,7 +41,7 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
   );
 
   const playlistLength = useSelector<CombinedStateType, number>(
-    (state) => state.playlists.data[playlistId].tracks.total,
+    (state) => state.playlists.data[playlistId]?.tracks.total,
   );
 
   const playlistPhotos = useSelector<CombinedStateType, string[] | undefined>(
