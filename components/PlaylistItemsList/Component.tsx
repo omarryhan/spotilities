@@ -7,17 +7,6 @@ import TrackStripe from '../TrackStripe';
 
 
 const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
-  const playlistName = useSelector<CombinedStateType, string>(
-    (state) => state.playlists.data[playlistId]?.name,
-  );
-  const playlistPhotos = useSelector<CombinedStateType, string[]>(
-    (state) => state.playlists.data[playlistId]?.images.map((image) => image.url),
-  );
-
-  const playlistTracksCount = useSelector<CombinedStateType, number>(
-    (state) => state.playlists.data[playlistId]?.tracks.total,
-  );
-
   const playlistTracks = useSelector<CombinedStateType, AllPlaylistItems>(
     (state) => state.playlistItems.data[playlistId]?.data,
   );
@@ -28,7 +17,7 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
     <Container>
       {
         playlistTrackIds.map((trackId) => (
-          <TrackStripe trackId={trackId} />
+          <TrackStripe trackId={trackId} playlistId={playlistId} />
         ))
       }
     </Container>

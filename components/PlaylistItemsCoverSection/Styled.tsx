@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { media } from '../../configs/theme';
 
 
@@ -75,10 +76,7 @@ export const MetricsContainer = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-
-  padding-top: 20px;
-  padding-bottom: 60px;
+  justify-content: center;
 
   ${media.lessThan('tablet')`
     padding-left: ${(props): string => props.theme.dimensions.contentSideMargin.mobile};
@@ -97,9 +95,45 @@ export const DescriptionWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  ${media.lessThan('tablet')`
+    padding-left: ${(props): string => props.theme.dimensions.contentSideMargin.mobile};
+    padding-right: ${(props): string => props.theme.dimensions.contentSideMargin.mobile};
+  `};
+
+  ${media.greaterThan('tablet')`
+    padding-left: ${(props): string => props.theme.dimensions.contentSideMargin.desktop};
+    padding-right: ${(props): string => props.theme.dimensions.contentSideMargin.desktop};
+  `};
 `;
 
 export const DescriptionText = styled.p`
   font-size: 0.8rem;
   text-align: center;
+`;
+
+export const MetricsSpinnerContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
+export const MetricsSpinnerLoadingText = styled.p`
+  font-size: 10px;
+  margin: 0 0;
+`;
+
+export const StyledCircularProgress = styled(CircularProgress)`
+  /*width: 20px;
+  height: 20px; doesn't work*/
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & svg {
+    width: 15px;
+    height: 15px;
+  }
 `;

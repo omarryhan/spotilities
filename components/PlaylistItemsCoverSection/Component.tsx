@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { styledComponentsTheme } from '../../configs/theme';
 import { CombinedStateType } from '../../redux/types';
 import { AllPlaylistItems } from '../../redux/playlistItems/types';
+import { UserLibraryPlaylistId } from '../../redux/playlistItems/actions';
 import { AllTracks } from '../../redux/tracks/types';
 import { AllTracksFeatures } from '../../redux/tracksAudioFeatures/types';
 import {
@@ -17,6 +18,9 @@ import {
   MetricsContainer,
   DescriptionWrapper,
   DescriptionText,
+  StyledCircularProgress,
+  MetricsSpinnerContainer,
+  MetricsSpinnerLoadingText,
 } from './Styled';
 
 import PlaylistCoverMetricBar from '../PlaylistCoverMetricBar';
@@ -35,13 +39,18 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
   const playlistName = useSelector<CombinedStateType, string>(
     (state) => state.playlists.data[playlistId]?.name,
   );
+
+  const playlistLength = useSelector<CombinedStateType, number>(
+    (state) => state.playlists.data[playlistId].tracks.total,
+  );
+
   const playlistPhotos = useSelector<CombinedStateType, string[] | undefined>(
     (state) => state.playlists.data[playlistId]?.images.map((image) => image.url),
   );
 
   const playlistDescription = useSelector<CombinedStateType, string | undefined>(
     // @ts-ignore
-    (state) => state.playlists.data[playlistId]?.description!,
+    (state) => state.playlists.data[playlistId]?.description,
   );
 
   const playlistTracks = useSelector<CombinedStateType, AllPlaylistItems>(
@@ -77,9 +86,9 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
     (state) => state.playlistItems.data[playlistId]?.status?.isFetching,
   ) as boolean | undefined;
 
-  console.log(isFetchingPlaylistsItems);
-
   const backupPhotoURL = '';
+
+  const percentageTracksLoaded = Object.keys(playlistTracks).length / playlistLength * 100;
 
   const getColor = (colors: string[]): void => {
     setBgColor(colors[5]);
@@ -128,6 +137,20 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
                     isLoading={isFetchingPlaylistsItems || false}
                   />
                 ))
+              }
+              {
+                (
+                  playlistId === UserLibraryPlaylistId
+                  || percentageTracksLoaded === 100
+                  || !isFetchingPlaylistsItems
+                )
+                  ? null
+                  : (
+                    <MetricsSpinnerContainer>
+                      <MetricsSpinnerLoadingText>Loading...</MetricsSpinnerLoadingText>
+                      <StyledCircularProgress variant="static" value={percentageTracksLoaded} />
+                    </MetricsSpinnerContainer>
+                  )
               }
             </MetricsContainer>
           </Slide>

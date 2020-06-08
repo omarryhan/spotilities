@@ -5,18 +5,31 @@ import { CombinedStateType } from '../types';
 import { spotifyApi } from '../utils';
 import { UserLibraryPlaylistId } from '../playlistItems/actions';
 
+const flashPlaybackError = (e: any) => {
+  alert('Please make sure you have a song already playing. This is a limitation of Spotify.');
+  console.error(e);
+};
+
+
+export const playTrackInPlaylist = createAsyncThunk<
+void,
+{ trackId: string; playlistId: string },
+{ state: CombinedStateType }
+>('play/trackInPlaylist',
+  async ({ trackId, playlistId }, { getState }) => {
+    try {
+      await spotifyApi.play({ uris: [`spotify:track:${trackId}`] });
+    } catch (e) {
+      flashPlaybackError(e);
+    }
+  });
+
 export const shufflePlayPlaylist = createAsyncThunk<
 void,
 string,
 { state: CombinedStateType }
 >('shufflePlay/playlist',
   async (playlistId, { getState }) => {
-    const flashPlaybackError = (e: any) => {
-      alert('Please make sure you have a song already playing. This is a limitation of Spotify.');
-      console.error(e);
-    };
-
-
     if (playlistId === UserLibraryPlaylistId) {
       const state = getState();
       const playlistTracks = state.playlistItems.data[playlistId]?.data;
