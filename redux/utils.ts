@@ -22,12 +22,12 @@ interface Pagination {
 
 export const getAllPages = async <Response extends Pagination>(
   request: Promise<Response>,
-  callbackAfterEachPage?: (response: Response) => void,
+  callbackAfterEachPage?: (response: Response) => Promise<void>,
 ): Promise<Response> => {
   // fetch for the first time and dispatch
   const paginatedResponse = await request;
   if (callbackAfterEachPage) {
-    callbackAfterEachPage(paginatedResponse);
+    await callbackAfterEachPage(paginatedResponse);
   }
 
   // if next property is available iterate
@@ -37,7 +37,7 @@ export const getAllPages = async <Response extends Pagination>(
       currentResponse.next,
     ) as Response;
     if (callbackAfterEachPage) {
-      callbackAfterEachPage(currentResponse);
+      await callbackAfterEachPage(currentResponse);
     }
     paginatedResponse.items = paginatedResponse.items.concat(currentResponse.items);
   }

@@ -39,10 +39,6 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
     (state) => state.playlists.data[playlistId]?.images.map((image) => image.url),
   );
 
-  const playlistTracksCount = useSelector<CombinedStateType, number>(
-    (state) => state.playlists.data[playlistId]?.tracks.total,
-  );
-
   const playlistDescription = useSelector<CombinedStateType, string | undefined>(
     // @ts-ignore
     (state) => state.playlists.data[playlistId]?.description!,
@@ -79,11 +75,9 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
 
   const isFetchingPlaylistsItems = useSelector<CombinedStateType, boolean>(
     (state) => state.playlistItems.data[playlistId]?.status?.isFetching,
-  ) as boolean | undefined || false;
+  ) as boolean | undefined;
 
-  const isFetchingPlaylistsTracksAudioFeatures = useSelector<CombinedStateType, boolean>(
-    (state) => state.tracksAudioFeatures.status.playlistsStatus[playlistId]?.isFetching,
-  ) as boolean | undefined || false;
+  console.log(isFetchingPlaylistsItems);
 
   const backupPhotoURL = '';
 
@@ -131,7 +125,7 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
                       : getAudioFeaturesScoreFromPlaylistTracks(
                         playlistAudioFeatures, name as AvailableFeatures,
                       )}
-                    isLoading={isFetchingPlaylistsTracksAudioFeatures || isFetchingPlaylistsItems}
+                    isLoading={isFetchingPlaylistsItems || false}
                   />
                 ))
               }

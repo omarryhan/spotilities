@@ -10,6 +10,7 @@ export const ButtonContainer = styled.div`
 
 export const Button = styled.button`
   /* Remove all styles */
+  position: sticky;
   background: none;
   border: none;
   padding: 0;
@@ -25,7 +26,7 @@ export const Button = styled.button`
   border-radius: 25px;
   font-weight: bold;
 
-  &:focus {
+  &:active {
     /* Should be the same as the default */
     background-color: ${(props): string => props.theme.colors.green.primary};
     color: ${(props): string => props.theme.colors.white.light};

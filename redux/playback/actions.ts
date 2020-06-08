@@ -12,7 +12,7 @@ string,
 >('shufflePlay/playlist',
   async (playlistId, { getState }) => {
     const flashPlaybackError = (e: any) => {
-      alert('Please make sure you have a song already playing. This is a Spotify limitation.');
+      alert('Please make sure you have a song already playing. This is a limitation of Spotify.');
       console.error(e);
     };
 

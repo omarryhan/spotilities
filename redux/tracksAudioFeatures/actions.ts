@@ -12,23 +12,20 @@ const fetchAudioFeatures = async (
 SpotifyApi.MultipleAudioFeaturesResponse
 > => await spotifyApi.getAudioFeaturesForTracks(trackIds);
 
-export const fetchPlaylistItemsAudioFeatures = createAsyncThunk<
+export const fetchTracksAudioFeatures = createAsyncThunk<
 void,
-string,
+string[],
 { state: CombinedStateType }
 >(
-  'tracksAudioFeatures/playlistItems/set',
-  async (playlistId, { getState, dispatch }) => {
+  'tracksAudioFeatures/tracks/set',
+  async (trackIds, { getState, dispatch }) => {
     const state = getState();
     const { token } = state.user;
     const { accessToken, expiresAt } = token;
     checkIsAuthorized(accessToken, expiresAt);
     spotifyApi.setAccessToken(accessToken);
 
-    const allPlaylistItems = state.playlistItems.data[playlistId].data;
-    const allTrackIds = Object.keys(allPlaylistItems);
-
-    const trackIdChunks = chunk(allTrackIds, 100);
+    const trackIdChunks = chunk(trackIds, 100);
 
     const allAudioFeatures = await Promise.all(
       trackIdChunks.map(async (trackIdChunk) => {
@@ -50,6 +47,26 @@ string,
     });
 
     dispatch(setTracksAudioFeatures(falttenedAllAudioFeatures));
+  },
+);
+
+export const fetchPlaylistItemsAudioFeatures = createAsyncThunk<
+void,
+string,
+{ state: CombinedStateType }
+>(
+  'tracksAudioFeatures/playlistItems/set',
+  async (playlistId, { getState, dispatch }) => {
+    const state = getState();
+    const { token } = state.user;
+    const { accessToken, expiresAt } = token;
+    checkIsAuthorized(accessToken, expiresAt);
+    spotifyApi.setAccessToken(accessToken);
+
+    const allPlaylistItems = state.playlistItems.data[playlistId].data;
+    const allTrackIds = Object.keys(allPlaylistItems);
+
+    await dispatch(fetchTracksAudioFeatures(allTrackIds));
   },
 );
 

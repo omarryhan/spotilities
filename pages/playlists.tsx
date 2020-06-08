@@ -12,7 +12,6 @@ import PlayShufflePlaylistButton from '../components/PlayShufflePlaylistButton';
 
 import { CombinedStateType } from '../redux/types';
 import { fetchUserPlaylistItems } from '../redux/playlistItems/actions';
-import { fetchPlaylistItemsAudioFeatures } from '../redux/tracksAudioFeatures/actions';
 
 // This page should only be accessed dynamically on the browser
 // Calling /playlists/your_playlist_id from the browser will return a 404
@@ -34,20 +33,15 @@ const Page: NextPage<{}> = () => {
     (state) => state.playlistItems.data[playlistId]?.status?.isFetching,
   ) as boolean | undefined;
 
-  const isFetchingPlaylistsTracksAudioFeatures = useSelector<CombinedStateType, boolean>(
-    (state) => state.tracksAudioFeatures.status.playlistsStatus[playlistId]?.isFetching,
-  ) as boolean | undefined;
-
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     const effect = async (): Promise<void> => {
-      if (!playlistId || isFetchingPlaylistsItems || isFetchingPlaylistsTracksAudioFeatures) {
+      if (!playlistId || isFetchingPlaylistsItems) {
         return;
       }
 
-      await dispatch(fetchUserPlaylistItems({ playlistId }));
-      await dispatch(fetchPlaylistItemsAudioFeatures(playlistId));
+      await dispatch(fetchUserPlaylistItems({ playlistId, dispatchSetAudioFeatures: true }));
     };
 
     effect();
@@ -62,6 +56,7 @@ const Page: NextPage<{}> = () => {
   }, [
     dispatch,
     playlistId,
+    // isFetchingPlaylistsItems,
   ]);
 
   return (
