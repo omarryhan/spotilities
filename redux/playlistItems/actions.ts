@@ -14,7 +14,7 @@ const getAllTracksFromPlaylistItems = (
   (playlistItem) => (playlistItem.track as SpotifyApi.TrackObjectFull),
 );
 
-const UserLibraryPlaylistId = 'userLibrary';
+export const UserLibraryPlaylistId = 'userLibrary';
 
 export const deletePlaylistsItems = createAction<{isFetching: boolean}>('playlistsItems/delete');
 

@@ -90,3 +90,16 @@ export const MetricsContainer = styled.div`
     padding-right: ${(props): string => props.theme.dimensions.contentSideMargin.desktop};
   `};
 `;
+
+export const DescriptionWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const DescriptionText = styled.p`
+  font-size: 0.8rem;
+  text-align: center;
+`;

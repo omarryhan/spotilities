@@ -20,4 +20,6 @@ export const SPOTIFY_SCOPES_NEEDED = [
   'user-top-read',
   'user-read-recently-played',
   'user-follow-read',
+  'user-read-playback-state',
+  'user-modify-playback-state',
 ];

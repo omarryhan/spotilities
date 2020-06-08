@@ -15,6 +15,8 @@ import {
   PlaylistCoverPhotoWrapper,
   PlaylistTitle,
   MetricsContainer,
+  DescriptionWrapper,
+  DescriptionText,
 } from './Styled';
 
 import PlaylistCoverMetricBar from '../PlaylistCoverMetricBar';
@@ -39,6 +41,11 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
 
   const playlistTracksCount = useSelector<CombinedStateType, number>(
     (state) => state.playlists.data[playlistId]?.tracks.total,
+  );
+
+  const playlistDescription = useSelector<CombinedStateType, string | undefined>(
+    // @ts-ignore
+    (state) => state.playlists.data[playlistId]?.description!,
   );
 
   const playlistTracks = useSelector<CombinedStateType, AllPlaylistItems>(
@@ -130,6 +137,20 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
               }
             </MetricsContainer>
           </Slide>
+
+          {
+            !playlistDescription
+              ? null
+              : (
+                <Slide bgColor={bgColor}>
+                  <DescriptionWrapper>
+                    <DescriptionText>
+                      {playlistDescription}
+                    </DescriptionText>
+                  </DescriptionWrapper>
+                </Slide>
+              )
+          }
         </Slides>
       </Slider>
     </Container>

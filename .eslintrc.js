@@ -37,6 +37,7 @@ module.exports = {
       'no-await-in-loop': 'off',
       'no-nested-ternary': 'off',
       '@typescript-eslint/ban-ts-ignore': 'warn',
-      'no-else-return': 'off'
+      'no-else-return': 'off',
+      'no-alert': 'off'
     }
 };

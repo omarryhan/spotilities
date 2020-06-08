@@ -18,6 +18,7 @@ export const Name = styled.p`
   font-size: 0.8rem;
   margin: 0 0;
   color: ${(props): string => props.theme.colors.white.light};
+  text-transform: capitalize;
 `;
 
 export const IconWrapper = styled.div`

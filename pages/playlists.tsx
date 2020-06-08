@@ -8,6 +8,7 @@ import PlaylistItemsList from '../components/PlaylistItemsList';
 import TopNav from '../components/TopNav';
 import BottomNav from '../components/BottomNav';
 import PlaylistItemsCoverSection from '../components/PlaylistItemsCoverSection';
+import PlayShufflePlaylistButton from '../components/PlayShufflePlaylistButton';
 
 import { CombinedStateType } from '../redux/types';
 import { fetchUserPlaylistItems } from '../redux/playlistItems/actions';
@@ -68,6 +69,7 @@ const Page: NextPage<{}> = () => {
       <TopNav showBackButton title={playlistName} />
       <AppBody>
         <PlaylistItemsCoverSection playlistId={playlistId} />
+        <PlayShufflePlaylistButton playlistId={playlistId} />
         <PlaylistItemsList playlistId={playlistId} />
       </AppBody>
       <BottomNav />
