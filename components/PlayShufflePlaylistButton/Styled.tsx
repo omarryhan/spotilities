@@ -25,6 +25,15 @@ export const Button = styled.button`
   border-radius: 25px;
   font-weight: bold;
 
+  &:focus {
+    /* Should be the same as the default */
+    background-color: ${(props): string => props.theme.colors.green.primary};
+    color: ${(props): string => props.theme.colors.white.light};
+    font-size: 20px;
+    width: 175px;
+    height: 50px;
+  }
+
   &:hover {
     background-color: ${(props): string => props.theme.colors.green.lightest};
     color: ${(props): string => props.theme.colors.white.lightest};
