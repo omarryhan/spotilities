@@ -79,6 +79,11 @@ Run development server:
 yarn dev
 ```
 
+**Note:**
+
+Development requires Node version 12+
+
+
 ## Privacy
 
 I do not collect any personal information or any sort of access whatsover. All the action is only on your browser.

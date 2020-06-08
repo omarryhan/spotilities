@@ -1,4 +1,4 @@
 export const defaultSettings = {
-  showAllPlaylistsMetrics: true,
+  showAllPlaylistsMetrics: false,
   showMusicianStats: true,
 };

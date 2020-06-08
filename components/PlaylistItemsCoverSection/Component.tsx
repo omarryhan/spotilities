@@ -78,13 +78,9 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
     (state) => state.tracksAudioFeatures.status.playlistsStatus[playlistId]?.isFetching,
   ) as boolean | undefined || false;
 
-  console.log(isFetchingPlaylistsItems);
-  console.log(isFetchingPlaylistsTracksAudioFeatures);
-
   const backupPhotoURL = '';
 
   const getColor = (colors: string[]): void => {
-    console.log(colors);
     setBgColor(colors[5]);
   };
 

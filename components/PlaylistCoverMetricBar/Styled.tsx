@@ -23,9 +23,11 @@ export const Name = styled.p`
 export const IconWrapper = styled.div`
   padding: 3px 3px;
   width: 25px;
+  display: flex;
+  align-items: center;
 
   & svg {
-    fill: ${(props): string => props.theme.colors.white.darkest};
+    fill: ${(props): string => props.theme.colors.white.light};
     width: 100%;
   }
 `;

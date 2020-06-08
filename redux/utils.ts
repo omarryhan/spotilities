@@ -22,15 +22,23 @@ interface Pagination {
 
 export const getAllPages = async <Response extends Pagination>(
   request: Promise<Response>,
+  callbackAfterEachPage?: (response: Response) => void,
 ): Promise<Response> => {
+  // fetch for the first time and dispatch
   const paginatedResponse = await request;
+  if (callbackAfterEachPage) {
+    callbackAfterEachPage(paginatedResponse);
+  }
 
+  // if next property is available iterate
   let currentResponse = paginatedResponse;
-
   while (currentResponse.next) {
     currentResponse = await spotifyApi.getGeneric(
       currentResponse.next,
     ) as Response;
+    if (callbackAfterEachPage) {
+      callbackAfterEachPage(currentResponse);
+    }
     paginatedResponse.items = paginatedResponse.items.concat(currentResponse.items);
   }
 

@@ -1,6 +1,11 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { InitialStateInterface, PlaylistItem, AllPlaylistItems } from './types';
-import { fetchAllUserPlaylistsItems, fetchUserPlaylistItems, deletePlaylistsItems } from './actions';
+import {
+  fetchAllUserPlaylistsItems,
+  fetchUserPlaylistItems,
+  deletePlaylistsItems,
+  setPlaylistItems,
+} from './actions';
 
 export const InitialState: InitialStateInterface = {
   data: {},
@@ -69,13 +74,23 @@ export const reducer = createReducer<InitialStateInterface>(InitialState, (build
       ...state.data,
       [action.payload.playlistId]: {
         ...state.data[action.payload.playlistId],
-        data: replaceTrackWithTrackId(
-          action.payload.playlistItems,
-        ),
         status: {
           isFetching: false,
           fetchedOnce: true,
         },
+      },
+    },
+  }));
+
+  builder.addCase(setPlaylistItems, (state, action) => ({
+    ...state,
+    data: {
+      ...state.data,
+      [action.payload.playlistId]: {
+        ...state.data[action.payload.playlistId],
+        data: replaceTrackWithTrackId(
+          action.payload.playlistItems,
+        ),
       },
     },
   }));
