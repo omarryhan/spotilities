@@ -5,7 +5,7 @@ import { CombinedStateType } from '../types';
 import { spotifyApi } from '../utils';
 import { UserLibraryPlaylistId } from '../playlistItems/actions';
 
-const flashPlaybackError = (e: any) => {
+const flashPlaybackError = (e: Error): void => {
   alert('Please make sure you have a song already playing. This is a limitation of Spotify.');
   console.error(e);
 };
@@ -18,7 +18,10 @@ void,
 >('play/trackInPlaylist',
   async ({ trackId, playlistId }, { getState }) => {
     try {
-      await spotifyApi.play({ uris: [`spotify:track:${trackId}`] });
+      await spotifyApi.play({
+        context_uri: `spotify:playlist:${playlistId}`,
+        offset: { uri: `spotify:track:${trackId}` },
+      });
     } catch (e) {
       flashPlaybackError(e);
     }
@@ -30,15 +33,15 @@ string,
 { state: CombinedStateType }
 >('shufflePlay/playlist',
   async (playlistId, { getState }) => {
-    if (playlistId === UserLibraryPlaylistId) {
-      const state = getState();
-      const playlistTracks = state.playlistItems.data[playlistId]?.data;
+    const state = getState();
+    const playlistTracks = state.playlistItems.data[playlistId]?.data;
+    const trackIds = Object.keys(playlistTracks);
+    const shuffledTrackIds = shuffle(trackIds);
 
+    if (playlistId === UserLibraryPlaylistId) {
       if (playlistTracks && Object.keys(playlistTracks).length) {
-        const trackIds = Object.keys(playlistTracks);
-        const shuffledTrackIds = shuffle(trackIds);
-        const first100Tracks = chunk(shuffledTrackIds, 100)[0];
-        const trackUris = first100Tracks.map((trackId): string => `spotify:track:${trackId}`);
+        const firstChunkOfTracks = chunk(shuffledTrackIds, 500)[0];
+        const trackUris = firstChunkOfTracks.map((trackId): string => `spotify:track:${trackId}`);
         try {
           await spotifyApi.play({
             uris: trackUris,
@@ -47,18 +50,20 @@ string,
           flashPlaybackError(e);
         }
       }
-
-      return undefined;
+    } else {
+      try {
+        await spotifyApi.play({
+          context_uri: `spotify:playlist:${playlistId}`,
+          offset: {
+            uri: `spotify:track:${shuffledTrackIds[0]}`,
+          },
+        });
+      } catch (e) {
+        flashPlaybackError(e);
+      }
+      await spotifyApi.setShuffle(true);
+      await spotifyApi.skipToNext();
     }
 
-    try {
-      await spotifyApi.play({
-        context_uri: `spotify:playlist:${playlistId}`,
-      });
-    } catch (e) {
-      flashPlaybackError(e);
-    }
-    await spotifyApi.setShuffle(true);
-    await spotifyApi.skipToNext();
     return undefined;
   });
