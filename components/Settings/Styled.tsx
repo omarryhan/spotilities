@@ -32,7 +32,7 @@ export const SectionTitle = styled.h2`
 export const SettingSection = styled.div`
   width: 100%;
   display: flex;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   justify-content: space-between;
 `;
 
@@ -48,6 +48,7 @@ export const SettingTitle = styled.h3`
 
 export const SettingDescription = styled.p`
   margin: 0 0;
+  margin-top: 3px;
   color: ${(props): string => props.theme.colors.white.darkest};
   font-size: 0.75rem;
 `;

@@ -39,10 +39,12 @@ const Component: React.FC<{}> = () => {
       <SettingSection>
         <SettingLeftSection>
           <SettingTitle>
-            Show playlists&apos; attributes in Library
+            Show playlists&apos; metrics in Library
           </SettingTitle>
           <SettingDescription>
-            You might want to disable this if your playlists are huge
+            Show energy, danceability, valence and popularity respectively.
+            <br />
+            Disable it for optimal performance.
           </SettingDescription>
         </SettingLeftSection>
 
@@ -52,6 +54,27 @@ const Component: React.FC<{}> = () => {
             onChange={(props): void => setWithUpdateLocalStorage(
               props.target.checked,
               'showAllPlaylistsMetrics',
+            )}
+          />
+        </SettingRightSection>
+      </SettingSection>
+
+      <SettingSection>
+        <SettingLeftSection>
+          <SettingTitle>
+            Show track metrics in playlists
+          </SettingTitle>
+          <SettingDescription>
+            Show energy, danceability, valence and popularity respectively
+          </SettingDescription>
+        </SettingLeftSection>
+
+        <SettingRightSection>
+          <StyledSwitch
+            checked={settings.showTrackMetrics}
+            onChange={(props): void => setWithUpdateLocalStorage(
+              props.target.checked,
+              'showTrackMetrics',
             )}
           />
         </SettingRightSection>
@@ -73,27 +96,6 @@ const Component: React.FC<{}> = () => {
             onChange={(props): void => setWithUpdateLocalStorage(
               props.target.checked,
               'showMusicianStats',
-            )}
-          />
-        </SettingRightSection>
-      </SettingSection>
-
-      <SettingSection>
-        <SettingLeftSection>
-          <SettingTitle>
-            Show track metrics
-          </SettingTitle>
-          <SettingDescription>
-            Show energy, danceability, valence and popularity respectively
-          </SettingDescription>
-        </SettingLeftSection>
-
-        <SettingRightSection>
-          <StyledSwitch
-            checked={settings.showTrackMetrics}
-            onChange={(props): void => setWithUpdateLocalStorage(
-              props.target.checked,
-              'showTrackMetrics',
             )}
           />
         </SettingRightSection>
