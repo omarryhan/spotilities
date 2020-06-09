@@ -78,10 +78,9 @@ export const ArtistAndAlbumName = styled.p`
 export const MoreText = styled.div`
   padding-left: 10px;
   padding-top: 10px;
-  max-height: 12px;
 
   & p {
-    color: ${(props): string => props.theme.colors.white.evenDarker};
+    color: ${(props): string => props.theme.colors.white.evenDarkest};
 
     white-space: nowrap;
     overflow: hidden;

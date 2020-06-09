@@ -102,7 +102,7 @@ const Component: React.FC<{trackId: string; playlistId: string}> = ({ trackId, p
         onClick={(): void => { dispatch(playTrackInPlaylist({ trackId, playlistId })); }}
         longLength={showStatsForMusicians}
       >
-        <LeftSection fullWidth>
+        <LeftSection fullWidth={!showTrackMetrics}>
           <ImageSection
             longLength={showStatsForMusicians}
           >

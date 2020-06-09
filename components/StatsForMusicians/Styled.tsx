@@ -6,7 +6,7 @@ export const Container = styled.div`
 `;
 
 export const Text = styled.p`
-  font-size: 9px;
+  font-size: 11px;
   margin: 0 0;
 `;
 

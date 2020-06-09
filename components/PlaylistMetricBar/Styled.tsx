@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Metric = styled.div`
   width: 20px;
-  margin-left: 5px;
+  margin-left: 3px;
 `;
 
 export const IconWrapper = styled.div`

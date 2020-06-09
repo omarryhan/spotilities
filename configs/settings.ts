@@ -1,5 +1,5 @@
 export const defaultSettings = {
   showAllPlaylistsMetrics: false,
-  showMusicianStats: true,
-  showTrackMetrics: false,
+  showMusicianStats: false,
+  showTrackMetrics: true,
 };
