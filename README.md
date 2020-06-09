@@ -70,13 +70,13 @@ After cloning:
 Install the dependencies:
 
 ```sh
-yarn
+npm install
 ```
 
 Run development server:
 
 ```sh
-yarn dev
+npm run dev
 ```
 
 **Note:**

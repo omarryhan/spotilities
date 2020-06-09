@@ -17,7 +17,7 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
     <Container>
       {
         playlistTrackIds.map((trackId) => (
-          <TrackStripe trackId={trackId} playlistId={playlistId} />
+          <TrackStripe trackId={trackId} playlistId={playlistId} key={trackId} />
         ))
       }
     </Container>

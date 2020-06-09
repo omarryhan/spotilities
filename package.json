@@ -5,13 +5,13 @@
   "private": false,
   "scripts": {
     "dev": "next dev",
-    "dev:static": "yarn build && yarn export && yarn start:static",
+    "dev:static": "npm run build && npm run export && npm run start:static",
     "build": "next build",
     "export": "next export",
     "build:analyze": "ANALYZE=true next build",
     "start": "next start",
     "start:static": "http-server ./out",
-    "prod": "yarn start",
+    "prod": "npm run start",
     "lint": "echo \" \n\nlinting all JS and TS files.\n\n\" && eslint ./**/*.{js,jsx,tsx,ts,css} && echo \"\n\nLinting styled components.\n\n\" && stylelint ./**/*.{js,jsx,tsx,ts}",
     "lint:fix": "echo \" \n\nlinting all JS and TS files.\n\n\" && eslint ./**/*.{js,jsx,tsx,ts,css} --fix; echo \"\n\nLinting styled components.\n\n\" && stylelint ./**/*.{js,jsx,tsx,ts} --fix",
     "tsc": "tsc .",
@@ -36,6 +36,7 @@
     "react-color-extractor": "^1.1.2",
     "react-dom": "16.13.1",
     "react-ga": "^2.7.0",
+    "react-lazyload": "^2.6.7",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
@@ -54,6 +55,7 @@
     "@types/node": "^13.11.1",
     "@types/react": "^16.9.35",
     "@types/react-dom": "^16.9.8",
+    "@types/react-lazyload": "^2.6.0",
     "@types/react-redux": "^7.1.7",
     "@types/react-test-renderer": "^16.9.2",
     "@types/redux": "^3.6.0",
@@ -88,8 +90,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn test && yarn lint # && yarn lint:fix",
-      "pre-push": "yarn build && yarn export"
+      "pre-commit": "npm run test && npm run lint # && npm run lint:fix",
+      "pre-push": "npm run build && npm run export"
     }
   }
 }

@@ -12,6 +12,7 @@ module.exports = withPWA(withBundleAnalyzer(withSourceMaps({
   poweredByHeader: false,
   pwa: {
     dest: 'public',
+    disable: process.env.NODE_ENV !== 'production',
   },
   webpack: (config) => {
     config.module.rules.push({

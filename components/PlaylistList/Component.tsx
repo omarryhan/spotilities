@@ -38,7 +38,10 @@ const Component: React.FC<{}> = () => {
         !isFetchingPlaylists
           ? Object.keys(playlists).length
             ? Object.keys(playlists).map((playlistKey) => (
-              <PlaylistListItem playlistId={playlists[playlistKey].id} />
+              <PlaylistListItem
+                playlistId={playlists[playlistKey].id}
+                key={playlists[playlistKey].id}
+              />
             ))
             : <Skeleton />
           : <Skeleton />

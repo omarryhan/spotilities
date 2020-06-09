@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import LazyLoad from 'react-lazyload';
 import { CombinedStateType } from '../../redux/types';
 import {
   Container,
@@ -39,28 +40,30 @@ const Component: React.FC<{trackId: string; playlistId: string}> = ({ trackId, p
   );
 
   return (
-    <Container
-      onClick={(): void => { dispatch(playTrackInPlaylist({ trackId, playlistId })); }}
-    >
-      <LeftSection fullWidth>
-        <ImageSection>
-          <Img
-            src={trackImage}
-            alt="Track album cover"
-          />
-        </ImageSection>
+    <LazyLoad once={false}>
+      <Container
+        onClick={(): void => { dispatch(playTrackInPlaylist({ trackId, playlistId })); }}
+      >
+        <LeftSection fullWidth>
+          <ImageSection>
+            <Img
+              src={trackImage}
+              alt="Track album cover"
+            />
+          </ImageSection>
 
-        <TitleSection>
-          <Name>
-            {trackName}
-          </Name>
+          <TitleSection>
+            <Name>
+              {trackName}
+            </Name>
 
-          <ArtistAndAlbumName>
-            {`${artistName} . ${albumName} ${albumYear ? `. ${albumYear.substring(0, 4)}` : ''}`}
-          </ArtistAndAlbumName>
-        </TitleSection>
-      </LeftSection>
-    </Container>
+            <ArtistAndAlbumName>
+              {`${artistName} . ${albumName} ${albumYear ? `. ${albumYear.substring(0, 4)}` : ''}`}
+            </ArtistAndAlbumName>
+          </TitleSection>
+        </LeftSection>
+      </Container>
+    </LazyLoad>
   );
 };
 

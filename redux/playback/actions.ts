@@ -6,7 +6,8 @@ import { spotifyApi } from '../utils';
 import { UserLibraryPlaylistId } from '../playlistItems/actions';
 
 const flashPlaybackError = (e: Error): void => {
-  alert('Please make sure you have a song already playing. This is a limitation of Spotify.');
+  // @ts-ignore
+  alert('Playback error', 'Please make sure you have a song already playing. This is a limitation of Spotify.');
   console.error(e);
 };
 

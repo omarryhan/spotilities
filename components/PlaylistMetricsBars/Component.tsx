@@ -49,6 +49,7 @@ const Component: React.FC<{trackIds: string[]}> = ({ trackIds }) => {
         ] as AvailableMetrics[]).map((name) => (
           <PlaylistMetricBar
             name={name}
+            key={name}
             percentageHeight={name === 'popularity'
               ? getPopularityScoreFromPlaylistTracks(playlistsTracks)
               : getAudioFeaturesScoreFromPlaylistTracks(

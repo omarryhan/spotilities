@@ -90,7 +90,7 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
 
   const percentageTracksLoaded = Object.keys(playlistTracks).length / playlistLength * 100;
 
-  const getColor = (colors: string[]): void => {
+  const setColor = (colors: string[]): void => {
     setBgColor(colors[5]);
   };
 
@@ -100,7 +100,7 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
         <Slides bgColor={bgColor}>
           <Slide bgColor={bgColor}>
             <PlaylistCoverPhotoWrapper>
-              <ColorExtractor getColors={getColor}>
+              <ColorExtractor getColors={setColor}>
                 { /* ColorExtractor only accepts images, that's why
                   we're not using a styled component */ }
                 <img style={{ width: '100%' }} src={playlistPhotos ? playlistPhotos[0] : backupPhotoURL} alt={`${playlistName} playlist cover`} />
@@ -129,6 +129,7 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
                 ] as AvailableMetrics[]).map((name) => (
                   <PlaylistCoverMetricBar
                     name={name}
+                    key={name}
                     percentage={name === 'popularity'
                       ? getPopularityScoreFromPlaylistTracks(playlistsTracks)
                       : getAudioFeaturesScoreFromPlaylistTracks(
