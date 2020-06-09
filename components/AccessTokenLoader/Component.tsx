@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { openAuthorizeWindow } from '../../redux/utils';
 import { CombinedStateType } from '../../redux/types';
-import { sleep } from '../../utils';
 
 /*
   VERY IMPORTANT: Mounting this in _app.ts will cause the

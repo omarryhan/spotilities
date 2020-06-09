@@ -1,5 +1,4 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { BottomNavigationAction } from '@material-ui/core';
 import { InitialStateInterface, PlaylistItem, AllPlaylistItems } from './types';
 import {
   fetchUserPlaylistItems,

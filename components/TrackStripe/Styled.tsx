@@ -1,12 +1,14 @@
 import styled from 'styled-components';
-import { media } from '../../configs/theme';
 
-export const Container = styled.div<{notClickable?: boolean}>`
+const longLength = '85px';
+const shortLength = '65px';
+
+export const Container = styled.div<{notClickable?: boolean; longLength?: boolean}>`
   width: 100%;
   display: flex;
-  height: 65px;
   justify-content: space-between;
-  padding: 5px 0;
+  height: ${(props): string => (props.longLength ? longLength : shortLength)};
+  margin-bottom: 15px;
   cursor: ${(props): string => (!props.notClickable ? 'pointer' : 'default')};
 
   &:hover {
@@ -23,11 +25,19 @@ export const LeftSection = styled.div<{fullWidth?: boolean}>`
 export const RightSection = styled.div`
   height: 100%;
   max-width: 30%;
+  display: flex;
+  justify-content: flex-end;
 `;
 
-export const ImageSection = styled.div`
+export const ImageSection = styled.div<{longLength?: boolean}>`
+  height: 100%;
+  width: ${(props): string => (props.longLength ? longLength : shortLength)};
+`;
+
+export const Img = styled.img`
   height: 100%;
 `;
+
 export const TitleSection = styled.div`
   height: 100%;
 
@@ -38,10 +48,6 @@ export const TitleSection = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-`;
-
-export const Img = styled.img`
-  height: 100%;
 `;
 
 export const Name = styled.p`
@@ -61,5 +67,25 @@ export const ArtistAndAlbumName = styled.p`
   font-size: 12px;
   margin: 0 0;
   padding-left: 10px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
   color: ${(props): string => props.theme.colors.white.evenDarker};
+`;
+
+export const MoreText = styled.div`
+  padding-left: 10px;
+  padding-top: 10px;
+  max-height: 12px;
+
+  & p {
+    color: ${(props): string => props.theme.colors.white.evenDarker};
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
 `;

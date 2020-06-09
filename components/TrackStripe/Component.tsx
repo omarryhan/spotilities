@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import LazyLoad from 'react-lazyload';
 import { CombinedStateType } from '../../redux/types';
+import { getOrSetAndGetCurrentSettings } from '../../utils';
 import {
   Container,
   ImageSection,
@@ -11,9 +12,28 @@ import {
   ArtistAndAlbumName,
   RightSection,
   Img,
+  MoreText,
 } from './Styled';
 import { playTrackInPlaylist } from '../../redux/playback/actions';
+import StatsForMusicians from '../StatsForMusicians';
+import PlaylistMetricBar from '../PlaylistMetricBar';
+import {
+  AvailableMetrics,
+} from '../PlaylistMetricBar/types';
 
+const featuresAvailable = [
+  'energy',
+  'danceability',
+  'valence',
+  'popularity',
+] as AvailableMetrics[];
+
+interface FeaturesMap {
+  energy: number;
+  danceability: number;
+  valence: number;
+  popularity: number;
+}
 
 const Component: React.FC<{trackId: string; playlistId: string}> = ({ trackId, playlistId }) => {
   const dispatch = useDispatch();
@@ -39,13 +59,53 @@ const Component: React.FC<{trackId: string; playlistId: string}> = ({ trackId, p
     (state) => state.tracks.data[trackId]?.data?.album.images[0]?.url,
   );
 
+  const popularity = useSelector<CombinedStateType, number | undefined>(
+    (state) => state.tracks.data[trackId]?.data?.popularity,
+  );
+
+
+  const danceability = useSelector<CombinedStateType, number | undefined>(
+    (state) => state.tracksAudioFeatures.data[trackId]?.data?.danceability,
+  );
+
+
+  const energy = useSelector<CombinedStateType, number | undefined>(
+    (state) => state.tracksAudioFeatures.data[trackId]?.data.energy,
+  );
+
+
+  const valence = useSelector<CombinedStateType, number | undefined>(
+    (state) => state.tracksAudioFeatures.data[trackId]?.data.valence,
+  );
+
+  const percentagePopularity = popularity || 0;
+  const percentageDanceability = danceability ? danceability * 100 : 0;
+  const percentageEnergy = energy ? energy * 100 : 0;
+  const percentageValence = valence ? valence * 100 : 0;
+
+  const featuresMap: FeaturesMap = {
+    valence: percentageValence,
+    energy: percentageEnergy,
+    danceability: percentageDanceability,
+    popularity: percentagePopularity,
+  };
+
+  console.log(featuresMap);
+
+  const showStatsForMusicians = getOrSetAndGetCurrentSettings().showMusicianStats;
+
+  const { showTrackMetrics } = getOrSetAndGetCurrentSettings();
+
   return (
-    <LazyLoad once={false}>
+    <LazyLoad>
       <Container
         onClick={(): void => { dispatch(playTrackInPlaylist({ trackId, playlistId })); }}
+        longLength={showStatsForMusicians}
       >
         <LeftSection fullWidth>
-          <ImageSection>
+          <ImageSection
+            longLength={showStatsForMusicians}
+          >
             <Img
               src={trackImage}
               alt="Track album cover"
@@ -60,8 +120,35 @@ const Component: React.FC<{trackId: string; playlistId: string}> = ({ trackId, p
             <ArtistAndAlbumName>
               {`${artistName} . ${albumName} ${albumYear ? `. ${albumYear.substring(0, 4)}` : ''}`}
             </ArtistAndAlbumName>
+
+            {
+              !showStatsForMusicians
+                ? null
+                : (
+                  <MoreText>
+                    <StatsForMusicians trackId={trackId} />
+                  </MoreText>
+                )
+            }
           </TitleSection>
         </LeftSection>
+        {
+          !showTrackMetrics
+            ? null
+            : (
+              <RightSection>
+                {
+                  (featuresAvailable).map((feature) => (
+                    <PlaylistMetricBar
+                      name={feature}
+                      key={feature[0]}
+                      percentageHeight={featuresMap[feature as 'danceability' | 'energy' | 'valence' | 'popularity']}
+                    />
+                  ))
+                }
+              </RightSection>
+            )
+        }
       </Container>
     </LazyLoad>
   );

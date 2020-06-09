@@ -21,6 +21,7 @@ export const LeftSection = styled.div<{fullWidth?: boolean}>`
 
 export const RightSection = styled.div`
   height: 100%;
+  width: 80px;
   max-width: 30%;
 `;
 

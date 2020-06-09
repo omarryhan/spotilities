@@ -13,8 +13,6 @@ import GuitarIcon from '../../public/icons/guitar.svg';
 import NoiseIcon from '../../public/icons/noise.svg';
 import MicrophoneIcon from '../../public/icons/microphone.svg';
 import VideoCameraIcon from '../../public/icons/video-camera.svg';
-import SpeakerIcon from '../../public/icons/speaker.svg';
-import DrumsIcon from '../../public/icons/drums.svg';
 import MetronomeIcon from '../../public/icons/tempo.svg';
 
 

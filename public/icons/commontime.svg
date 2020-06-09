@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg2"
+   x="0"
+   y="0"
+   width="20"
+   height="25"
+   version="1.0"
+   sodipodi:version="0.32"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="Commontime.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+  <metadata
+     id="metadata2624">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs2622">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 30 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="20 : 30 : 1"
+       inkscape:persp3d-origin="10 : 20 : 1"
+       id="perspective2626" />
+  </defs>
+  <sodipodi:namedview
+     inkscape:window-height="844"
+     inkscape:window-width="1440"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     guidetolerance="10.0"
+     gridtolerance="10.0"
+     objecttolerance="10.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     showgrid="false"
+     inkscape:zoom="10.633333"
+     inkscape:cx="-7.115988"
+     inkscape:cy="26.238244"
+     inkscape:window-x="0"
+     inkscape:window-y="32"
+     inkscape:current-layer="svg2"
+     inkscape:window-maximized="0" />
+  <path
+     d="m 10.950914,1.5589222 h 0.602739 c 1.124336,0.00967 2.167534,0.256948 3.129614,0.741838 0.962052,0.484906 1.773436,1.149462 2.434146,1.993676 -0.113992,-0.00192 -0.222176,-0.00965 -0.32455,-0.023182 -0.10241,-0.01351 -0.210594,-0.021238 -0.324552,-0.023182 -1.051914,0.038646 -1.86909,0.413432 -2.451528,1.124346 -0.582472,0.710928 -0.87805,1.526178 -0.886724,2.445738 0.06953,1.260538 0.4984,2.158854 1.286612,2.6949438 0.788186,0.53609 1.518426,0.796894 2.190734,0.782402 v 0 c 0.85966,-0.02608 1.586036,-0.356424 2.179134,-0.991042 0.593066,-0.6346198 0.902162,-1.4170218 0.927298,-2.3472098 -3.08e-4,-0.910692 -0.303678,-1.948456 -0.910126,-3.1133 -0.60648,-1.164838 -1.514312,-2.18543 -2.723496,-3.061792 -1.209206,-0.876332 -2.718068,-1.337116 -4.526562,-1.382346 h -0.602739 l -1.7154913,0.139092 c -3.3276331,0.604682 -5.7134811,2.01494 -7.1575492,4.230776 -1.44405818,2.215844 -2.1491881,4.808404 -2.11538011,7.7776698 -0.030916,2.969266 0.68001193,5.561816 2.13277211,7.777668 1.4527521,2.215836 3.8328061,3.626094 7.1401572,4.230776 l 1.7154913,0.139094 c 0.11494,0.0019 0.221186,0.0096 0.318761,0.02318 0.09755,0.01351 0.192206,0.02124 0.283978,0.02318 2.06064,-0.08243 3.71431,-0.710938 4.961024,-1.885494 1.24667,-1.174582 2.148208,-2.40067 2.704606,-3.678266 0.556348,-1.277606 0.82939,-2.112172 0.819104,-2.503688 -0.0077,-0.165182 -0.07343,-0.298476 -0.19705,-0.399896 -0.123662,-0.101428 -0.258892,-0.153592 -0.405688,-0.156484 -0.118836,-9.72e-4 -0.228946,0.03574 -0.33035,0.11012 -0.101444,0.07437 -0.176784,0.192212 -0.226032,0.353532 -0.458832,1.93475 -1.326236,3.57103 -2.602212,4.908852 -1.27601,1.337804 -2.850472,2.035206 -4.723402,2.092204 -0.09177,-0.0019 -0.18643,-0.0097 -0.283978,-0.02318 -0.09757,-0.01353 -0.203831,-0.02126 -1.176502,-0.185458 C 7.9372044,22.682846 7.1142276,21.699528 6.7665036,20.26126 6.4187616,18.822992 6.2680776,17.039884 6.3144496,14.91194 v -2.364592 -2.3646 c -0.046372,-2.1279438 0.104312,-3.9110458 0.452054,-5.3493218 0.347732,-1.438262 1.1707008,-2.421576 2.4689191,-2.949948"
+     id="text2383"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:57.24105072px;font-family:feta20;-inkscape-font-specification:feta20;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     sodipodi:nodetypes="ccscssscsccscsscccscsccscsssssscscscscccsc"
+     inkscape:connector-curvature="0" />
+</svg>

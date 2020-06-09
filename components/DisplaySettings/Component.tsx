@@ -17,6 +17,7 @@ const Component: React.FC<{}> = () => {
     settings,
   );
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const setWithUpdateLocalStorage = (val: any, property: string): void => {
     setSettings({
       ...settingsState,
@@ -72,6 +73,27 @@ const Component: React.FC<{}> = () => {
             onChange={(props): void => setWithUpdateLocalStorage(
               props.target.checked,
               'showMusicianStats',
+            )}
+          />
+        </SettingRightSection>
+      </SettingSection>
+
+      <SettingSection>
+        <SettingLeftSection>
+          <SettingTitle>
+            Show track metrics
+          </SettingTitle>
+          <SettingDescription>
+            Show energy, danceability, valence and popularity respectively
+          </SettingDescription>
+        </SettingLeftSection>
+
+        <SettingRightSection>
+          <StyledSwitch
+            checked={settings.showTrackMetrics}
+            onChange={(props): void => setWithUpdateLocalStorage(
+              props.target.checked,
+              'showTrackMetrics',
             )}
           />
         </SettingRightSection>

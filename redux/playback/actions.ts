@@ -6,8 +6,7 @@ import { spotifyApi } from '../utils';
 import { UserLibraryPlaylistId } from '../playlistItems/actions';
 
 const flashPlaybackError = (e: Error): void => {
-  // @ts-ignore
-  alert('Playback error', 'Please make sure you have a song already playing. This is a limitation of Spotify.');
+  alert('Please make sure you have a song already playing. This is a limitation of Spotify.');
   console.error(e);
 };
 
@@ -18,13 +17,23 @@ void,
 { state: CombinedStateType }
 >('play/trackInPlaylist',
   async ({ trackId, playlistId }, { getState }) => {
-    try {
-      await spotifyApi.play({
-        context_uri: `spotify:playlist:${playlistId}`,
-        offset: { uri: `spotify:track:${trackId}` },
-      });
-    } catch (e) {
-      flashPlaybackError(e);
+    if (playlistId === UserLibraryPlaylistId) {
+      try {
+        await spotifyApi.play({
+          uris: [`spotify:track:${trackId}`],
+        });
+      } catch (e) {
+        flashPlaybackError(e);
+      }
+    } else {
+      try {
+        await spotifyApi.play({
+          context_uri: `spotify:playlist:${playlistId}`,
+          offset: { uri: `spotify:track:${trackId}` },
+        });
+      } catch (e) {
+        flashPlaybackError(e);
+      }
     }
   });
 

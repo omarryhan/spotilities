@@ -11,7 +11,7 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
       <Button
         type="button"
         onClick={
-          (): any => dispatch(shufflePlayPlaylist(playlistId))
+          (): ReturnType<typeof dispatch> => dispatch(shufflePlayPlaylist(playlistId))
         }
       >
         Shuffle Play
