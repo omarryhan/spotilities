@@ -15,9 +15,8 @@ const Component: React.FC<Props> = ({ children, maxTracks, startingTracks }) => 
 
   const scrollHandler = (): void => {
     const reachedEnd = (
-      (document.documentElement.scrollHeight
-        - document.documentElement.scrollTop
-      ) === window.innerHeight
+      (window.innerHeight + window.scrollY
+      ) >= document.body.offsetHeight
     );
     if (reachedEnd) {
       setNReachedBottom(nReachedBottom + 1);
