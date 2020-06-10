@@ -7,7 +7,7 @@ import {
 } from './Styled';
 
 
-const Component: React.FC<> = () => (
+const Component: React.FC<{}> = () => (
   <Container notClickable>
     <LeftSection>
       <PictureSkeleton variant="rect" />
