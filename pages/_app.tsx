@@ -46,6 +46,9 @@ interface CustomAppInitialProps {
   err: Error;
 }
 
+// Next.JS handles this
+// that's why it's not called here
+// https://nextjs.org/docs/advanced-features/measuring-performance#web-vitals
 export function reportWebVitals({
   id, name, startTime, value, label,
 }: Metric): void {

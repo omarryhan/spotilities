@@ -39,6 +39,10 @@ export const NavItem = styled.div<{left?: boolean; right?: boolean}>`
   justify-content: ${(props): string => (props.left ? 'flex-start' : props.right ? 'flex-end' : 'center')};
   align-items: center;
   min-width: 30px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const Title = styled.h1`
@@ -46,6 +50,10 @@ export const Title = styled.h1`
   font-size: 18px;
   font-weight: normal;
   color: ${(props): string => props.theme.colors.white.dark};
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const GreetingText = styled.p`

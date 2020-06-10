@@ -1,9 +1,19 @@
 import styled from 'styled-components';
+import Skeleton from '@material-ui/lab/Skeleton';
 
 const longLength = '85px';
 const shortLength = '65px';
 
-export const Container = styled.div<{notClickable?: boolean; longLength?: boolean}>`
+export const Container = styled.button<{notClickable?: boolean; longLength?: boolean}>`
+  /* Remove all styles */
+  background: none;
+  color: inherit;
+  border: none;
+  font: inherit;
+  outline: inherit;
+  text-align: left;
+  padding: 0 0;
+
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -18,20 +28,20 @@ export const Container = styled.div<{notClickable?: boolean; longLength?: boolea
 
 export const LeftSection = styled.div<{fullWidth?: boolean}>`
   height: 100%;
-  max-width: ${(props): string => (props.fullWidth ? '100%' : '70%')};
+  max-width: ${(props): string => (props.fullWidth ? '100%' : '75%')};
   display: flex;
 `;
 
 export const RightSection = styled.div`
   height: 100%;
-  max-width: 30%;
+  max-width: 25%;
   display: flex;
   justify-content: flex-end;
 `;
 
 export const ImageSection = styled.div<{longLength?: boolean}>`
   height: 100%;
-  width: ${(props): string => (props.longLength ? longLength : shortLength)};
+  min-width: ${(props): string => (props.longLength ? longLength : shortLength)};
 `;
 
 export const Img = styled.img`
@@ -64,7 +74,7 @@ export const Name = styled.p`
 `;
 
 export const ArtistAndAlbumName = styled.p`
-  font-size: 12px;
+  font-size: 14px;
   margin: 0 0;
   padding-left: 10px;
 
@@ -86,5 +96,17 @@ export const MoreText = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
   }
+`;
 
+export const PictureSkeleton = styled(Skeleton)`
+    height: 100%;
+    width: 65px; /* TODO: find a way to force it to be equals to height */
+    background-color: ${(props): string => props.theme.colors.gray.lightest};
+`;
+
+export const BodySkeleton = styled(Skeleton)`
+    width: 100px;
+    margin-left: 10px;
+    height: 25px;
+    background-color: ${(props): string => props.theme.colors.gray.lightest};
 `;

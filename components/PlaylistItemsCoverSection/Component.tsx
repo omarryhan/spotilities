@@ -112,6 +112,20 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
             </PlaylistTitle>
           </Slide>
 
+          {
+            !playlistDescription
+              ? null
+              : (
+                <Slide bgColor={bgColor}>
+                  <DescriptionWrapper>
+                    <DescriptionText>
+                      {playlistDescription}
+                    </DescriptionText>
+                  </DescriptionWrapper>
+                </Slide>
+              )
+          }
+
           <Slide bgColor={bgColor}>
             <MetricsContainer>
               {
@@ -155,20 +169,6 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
               }
             </MetricsContainer>
           </Slide>
-
-          {
-            !playlistDescription
-              ? null
-              : (
-                <Slide bgColor={bgColor}>
-                  <DescriptionWrapper>
-                    <DescriptionText>
-                      {playlistDescription}
-                    </DescriptionText>
-                  </DescriptionWrapper>
-                </Slide>
-              )
-          }
         </Slides>
       </Slider>
     </Container>

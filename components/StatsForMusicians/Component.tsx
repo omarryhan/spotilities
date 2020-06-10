@@ -69,8 +69,8 @@ const Component: React.FC<{trackId: string}> = ({ trackId }) => {
   return (
     <Container>
       <Text>
-        {keySignature ? `${keySignature} - ` : ''}
         {`${tempo && Math.floor(tempo)} bpm`}
+        {keySignature ? ` - ${keySignature}` : ''}
       </Text>
     </Container>
   );

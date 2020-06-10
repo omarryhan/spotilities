@@ -1,6 +1,15 @@
 import styled from 'styled-components';
 
-export const OuterContainer = styled.div<{notClickable?: boolean}>`
+export const OuterContainer = styled.button<{notClickable?: boolean}>`
+  /* Remove all styles */
+  background: none;
+  color: inherit;
+  border: none;
+  font: inherit;
+  outline: inherit;
+  text-align: left;
+
+
   width: 100%;
   display: flex;
   height: 100px;
@@ -27,6 +36,7 @@ export const RightSection = styled.div`
 
 export const ImageSection = styled.div`
   height: 100%;
+  min-width: 80px;
 `;
 
 export const TitleSection = styled.div`

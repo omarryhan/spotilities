@@ -93,7 +93,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
 
 
   return (
-    <OuterContainer onClick={(): ReturnType<typeof Router.push> => Router.push('/playlists', `/playlists/${playlistId}`)}>
+    <OuterContainer onClick={(): ReturnType<typeof Router.push> => Router.push('/playlists', `/playlists/${playlistId}`)} type="button">
       <LeftSection fullWidth={!showAllPlaylistsMetrics}>
         <ImageSection>
           <Img

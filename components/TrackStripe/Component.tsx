@@ -70,12 +70,12 @@ const Component: React.FC<{trackId: string; playlistId: string}> = ({ trackId, p
 
 
   const energy = useSelector<CombinedStateType, number | undefined>(
-    (state) => state.tracksAudioFeatures.data[trackId]?.data.energy,
+    (state) => state.tracksAudioFeatures.data[trackId]?.data?.energy,
   );
 
 
   const valence = useSelector<CombinedStateType, number | undefined>(
-    (state) => state.tracksAudioFeatures.data[trackId]?.data.valence,
+    (state) => state.tracksAudioFeatures.data[trackId]?.data?.valence,
   );
 
   const percentagePopularity = popularity || 0;
@@ -90,8 +90,6 @@ const Component: React.FC<{trackId: string; playlistId: string}> = ({ trackId, p
     popularity: percentagePopularity,
   };
 
-  console.log(featuresMap);
-
   const showStatsForMusicians = getOrSetAndGetCurrentSettings().showMusicianStats;
 
   const { showTrackMetrics } = getOrSetAndGetCurrentSettings();
@@ -101,6 +99,7 @@ const Component: React.FC<{trackId: string; playlistId: string}> = ({ trackId, p
       <Container
         onClick={(): void => { dispatch(playTrackInPlaylist({ trackId, playlistId })); }}
         longLength={showStatsForMusicians}
+        type="button"
       >
         <LeftSection fullWidth={!showTrackMetrics}>
           <ImageSection
