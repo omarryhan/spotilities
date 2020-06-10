@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import LazyLoad from 'react-lazyload';
 import { CombinedStateType } from '../../redux/types';
 import { getOrSetAndGetCurrentSettings } from '../../utils';
 import {
@@ -95,61 +94,59 @@ const Component: React.FC<{trackId: string; playlistId: string}> = ({ trackId, p
   const { showTrackMetrics } = getOrSetAndGetCurrentSettings();
 
   return (
-    <LazyLoad>
-      <Container
-        onClick={(): void => { dispatch(playTrackInPlaylist({ trackId, playlistId })); }}
-        longLength={showStatsForMusicians}
-        type="button"
-      >
-        <LeftSection fullWidth={!showTrackMetrics}>
-          <ImageSection
-            longLength={showStatsForMusicians}
-          >
-            <Img
-              src={trackImage}
-              alt="Track album cover"
-            />
-          </ImageSection>
+    <Container
+      onClick={(): void => { dispatch(playTrackInPlaylist({ trackId, playlistId })); }}
+      longLength={showStatsForMusicians}
+      type="button"
+    >
+      <LeftSection fullWidth={!showTrackMetrics}>
+        <ImageSection
+          longLength={showStatsForMusicians}
+        >
+          <Img
+            src={trackImage}
+            alt="Track album cover"
+          />
+        </ImageSection>
 
-          <TitleSection>
-            <Name>
-              {trackName}
-            </Name>
+        <TitleSection>
+          <Name>
+            {trackName}
+          </Name>
 
-            <ArtistAndAlbumName>
-              {`${artistName} . ${albumName} ${albumYear ? `. ${albumYear.substring(0, 4)}` : ''}`}
-            </ArtistAndAlbumName>
+          <ArtistAndAlbumName>
+            {`${artistName} . ${albumName} ${albumYear ? `. ${albumYear.substring(0, 4)}` : ''}`}
+          </ArtistAndAlbumName>
 
-            {
-              !showStatsForMusicians
-                ? null
-                : (
-                  <MoreText>
-                    <StatsForMusicians trackId={trackId} />
-                  </MoreText>
-                )
-            }
-          </TitleSection>
-        </LeftSection>
-        {
-          !showTrackMetrics
-            ? null
-            : (
-              <RightSection>
-                {
-                  (featuresAvailable).map((feature) => (
-                    <PlaylistMetricBar
-                      name={feature}
-                      key={feature[0]}
-                      percentageHeight={featuresMap[feature as 'danceability' | 'energy' | 'valence' | 'popularity']}
-                    />
-                  ))
-                }
-              </RightSection>
-            )
-        }
-      </Container>
-    </LazyLoad>
+          {
+            !showStatsForMusicians
+              ? null
+              : (
+                <MoreText>
+                  <StatsForMusicians trackId={trackId} />
+                </MoreText>
+              )
+          }
+        </TitleSection>
+      </LeftSection>
+      {
+        !showTrackMetrics
+          ? null
+          : (
+            <RightSection>
+              {
+                (featuresAvailable).map((feature) => (
+                  <PlaylistMetricBar
+                    name={feature}
+                    key={feature[0]}
+                    percentageHeight={featuresMap[feature as 'danceability' | 'energy' | 'valence' | 'popularity']}
+                  />
+                ))
+              }
+            </RightSection>
+          )
+      }
+    </Container>
   );
 };
 
