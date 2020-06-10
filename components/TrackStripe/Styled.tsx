@@ -21,7 +21,7 @@ export const Container = styled.button<{notClickable?: boolean; longLength?: boo
   margin-bottom: 15px;
   cursor: ${(props): string => (!props.notClickable ? 'pointer' : 'default')};
 
-  &:hover {
+  &:active {
     background-color: ${(props): string => (!props.notClickable ? props.theme.colors.gray.lightest : 'inherit')};
   }
 `;
@@ -61,7 +61,7 @@ export const TitleSection = styled.div`
 `;
 
 export const Name = styled.p`
-  font-size: 16px;
+  font-size: 18px;
   margin: 0 0;
 
   white-space: nowrap;
@@ -74,7 +74,7 @@ export const Name = styled.p`
 `;
 
 export const ArtistAndAlbumName = styled.p`
-  font-size: 14px;
+  font-size: 13px;
   margin: 0 0;
   padding-left: 10px;
 

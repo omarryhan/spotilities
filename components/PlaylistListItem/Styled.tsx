@@ -17,7 +17,7 @@ export const OuterContainer = styled.button<{notClickable?: boolean}>`
   padding: 10px 0;
   cursor: ${(props): string => (!props.notClickable ? 'pointer' : 'default')};
 
-  &:hover {
+  &:active {
     background-color: ${(props): string => (!props.notClickable ? props.theme.colors.gray.lightest : 'inherit')};
   }
 `;
