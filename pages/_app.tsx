@@ -75,7 +75,11 @@ class MyApp extends App<AppInitialProps & CustomAppInitialProps> {
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
     initGA();
-    ReactGA.exception({ stack: error.stack, componentStack: errorInfo.componentStack });
+    ReactGA.exception({
+      stack: error.stack,
+      componentStack: errorInfo.componentStack,
+      isDevEnv: process.env.NODE_ENV === 'development',
+    });
     super.componentDidCatch(error, errorInfo);
   }
 

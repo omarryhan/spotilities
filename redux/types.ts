@@ -6,7 +6,8 @@ import { InitialStateInterface as PlaylistsInitialStateInterface } from './playl
 import { InitialStateInterface as PlaylistItemsInitialStateInterface } from './playlistItems/types';
 import { InitialStateInterface as TracksInitialStateInterface } from './tracks/types';
 import { InitialStateInterface as TracksAudioFeaturesInitialStateInterface } from './tracksAudioFeatures/types';
-
+import { InitialStateInterface as ArtistsInitialStateInterface } from './artists/types';
+import { InitialStateInterface as TopInitialStateInterface } from './top/types';
 
 export type CombinedStateType = CombinedState<{
   user: UserInitialStateInterface;
@@ -15,4 +16,6 @@ export type CombinedStateType = CombinedState<{
   playlistItems: PlaylistItemsInitialStateInterface;
   tracks: TracksInitialStateInterface;
   tracksAudioFeatures: TracksAudioFeaturesInitialStateInterface;
+  artists: ArtistsInitialStateInterface;
+  top: TopInitialStateInterface;
 }>;

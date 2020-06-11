@@ -8,13 +8,18 @@ const Component: React.FC<{}> = () => {
     (state) => state.user.token.accessToken,
   );
 
+  // don't fetch user if their ID exists
+  const userId = useSelector<CombinedStateType, string | undefined>(
+    (state) => state.profile.data.id,
+  );
+
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    if (accessToken) {
+    if (accessToken && !userId) {
       dispatch(fetchUserProfile());
     }
-  }, [dispatch, accessToken]);
+  }, [dispatch, accessToken, userId]);
 
   return (
     null

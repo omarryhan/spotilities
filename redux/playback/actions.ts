@@ -10,23 +10,40 @@ const flashPlaybackError = (e: Error): void => {
   console.error(e);
 };
 
+export const playTrackURIS = createAsyncThunk<
+void,
+{ trackId: string; trackURIs: string[] },
+{ state: CombinedStateType }
+>('play/trackURIs',
+  async ({ trackId, trackURIs }) => {
+    const trackIdIndex = trackURIs.indexOf(trackId);
+    const trackIdsToEnqueue = trackURIs.slice(trackIdIndex, 500);
+    const restOfTheTracks = trackURIs.slice(0, trackIdIndex);
+    const reorderedList = [...trackIdsToEnqueue, ...restOfTheTracks].slice(0, 500);
+    try {
+      await spotifyApi.play({
+        uris: reorderedList.map((trackURI) => `spotify:track:${trackURI}`),
+      });
+    } catch (e) {
+      flashPlaybackError(e);
+    }
+  });
 
 export const playTrackInPlaylist = createAsyncThunk<
 void,
 { trackId: string; playlistId: string },
 { state: CombinedStateType }
 >('play/trackInPlaylist',
-  async ({ trackId, playlistId }, { getState }) => {
+  async ({ trackId, playlistId }, { getState, dispatch }) => {
     if (playlistId === UserLibraryPlaylistId) {
-      try {
-        await spotifyApi.play({
-          uris: [`spotify:track:${trackId}`],
-        });
-      } catch (e) {
-        flashPlaybackError(e);
-      }
+      // Workaround because there's no context for "Saved tracks"
+      const state = getState();
+      const playlistTracks = state.playlistItems.data[playlistId].data;
+      const trackIds = Object.keys(playlistTracks);
+      await dispatch(playTrackURIS({ trackId, trackURIs: trackIds }));
     } else {
       try {
+        await spotifyApi.setShuffle(false);
         await spotifyApi.play({
           context_uri: `spotify:playlist:${playlistId}`,
           offset: { uri: `spotify:track:${trackId}` },

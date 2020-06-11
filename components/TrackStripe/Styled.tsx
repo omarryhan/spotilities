@@ -4,7 +4,10 @@ import Skeleton from '@material-ui/lab/Skeleton';
 const longLength = '85px';
 const shortLength = '65px';
 
-export const Container = styled.button<{notClickable?: boolean; longLength?: boolean}>`
+export const Container = styled.button<{
+  notClickable?: boolean;
+  longLength?: boolean;
+}>`
   /* Remove all styles */
   background: none;
   color: inherit;

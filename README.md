@@ -15,7 +15,11 @@ The goal of this app is to provide utilities and extra info that aren't included
 
 https://spotilities.netlify.app/
 
-**Tip:** For optimal experience, open the website on your phone. Then, open your browser's menu and click on "Add to homescreen". Voila, now it's an app on your phone.
+**Tip:**
+
+For optimal experience, use the website from your phone.
+
+Open your browser's menu and click on "Add to homescreen". Et voila, now it's an app on your phone.
 
 ## Features
 

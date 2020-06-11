@@ -54,7 +54,7 @@ const Component: React.FC<{}> = () => {
         {
           path.startsWith('/top')
             ? (
-              <LinkContainer type="button" onClick={(): void => handleLinkClick('/top')}>
+              <LinkContainer type="button" onClick={(): void => handleLinkClick('/top/tracks/oneMonth')}>
                 <LinkIcon isLight>
                   <FlameActive />
                 </LinkIcon>
@@ -64,7 +64,7 @@ const Component: React.FC<{}> = () => {
               </LinkContainer>
             )
             : (
-              <LinkContainer type="button" onClick={(): void => handleLinkClick('/top')}>
+              <LinkContainer type="button" onClick={(): void => handleLinkClick('/top/tracks/oneMonth')}>
                 <LinkIcon>
                   <FlameInactive />
                 </LinkIcon>

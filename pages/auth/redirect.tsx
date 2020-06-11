@@ -36,7 +36,7 @@ const Page: NextPage<{}> = () => {
     authRedirect?.shift();
     authRedirect?.shift();
     authRedirect?.shift();
-    const route = authRedirect?.join();
+    const route = authRedirect?.join('/');
     const routeWithStartingSlash = route ? `/${route}` : '/';
     Router.push(routeWithStartingSlash);
   });

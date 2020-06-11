@@ -14,8 +14,8 @@ export const colors = {
     evenLightest: 'rgba(80, 80, 80, 1)',
   },
   green: {
-    light: 'rgba(40, 108, 71, 1)',
-    lightest: 'rgba(0, 224, 37, 1)',
+    dark: 'rgba(40, 108, 71, 1)',
+    light: 'rgba(0, 224, 37, 1)',
     primary: 'rgba(29, 185, 84, 1)', // #1DB954
   },
   white: {
@@ -28,6 +28,15 @@ export const colors = {
     darkest: 'rgb(205, 205, 205, 1)',
     evenDarker: 'rgb(180, 180, 180, 1)',
     evenDarkest: 'rgb(150, 150, 150, 1)',
+  },
+  gold: {
+    primary: '#FFD700',
+  },
+  silver: {
+    primary: '#CD7F32',
+  },
+  bronze: {
+    primary: '#C0C0C0',
   },
 };
 
@@ -43,6 +52,10 @@ export const dimensions = {
   bottomAppBarHeight: {
     mobile: '60px',
     desktop: '60px',
+  },
+  topNavbar: {
+    mobile: '50px',
+    desktop: '50px',
   },
 };
 

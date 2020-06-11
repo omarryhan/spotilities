@@ -34,7 +34,21 @@ interface FeaturesMap {
   popularity: number;
 }
 
-const Component: React.FC<{trackId: string; playlistId: string}> = ({ trackId, playlistId }) => {
+interface Props {
+  trackId: string;
+  playlistId?: string;
+  onClickHandler?: (
+    trackId: string,
+    playlistId?: string,
+    inThisListOfTracks?: string[],
+  ) => any;
+}
+
+const Component: React.FC<Props> = ({
+  trackId,
+  playlistId,
+  onClickHandler,
+}) => {
   const dispatch = useDispatch();
 
   const trackName = useSelector<CombinedStateType, string | undefined>(
@@ -95,7 +109,11 @@ const Component: React.FC<{trackId: string; playlistId: string}> = ({ trackId, p
 
   return (
     <Container
-      onClick={(): void => { dispatch(playTrackInPlaylist({ trackId, playlistId })); }}
+      onClick={(): void => {
+        onClickHandler
+          ? onClickHandler(trackId, playlistId)
+          : dispatch(playTrackInPlaylist({ trackId, playlistId: playlistId as string }));
+      }}
       longLength={showStatsForMusicians}
       type="button"
     >

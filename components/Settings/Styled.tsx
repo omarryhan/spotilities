@@ -80,7 +80,7 @@ export const StyledLogoutButton = styled(Button)`
   padding-top: 0;
   padding-bottom: 0;
 
-  &:hover {
+  &:active {
     background-color: #fff;
   }
   

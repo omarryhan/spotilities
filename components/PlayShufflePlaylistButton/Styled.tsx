@@ -26,11 +26,11 @@ export const Button = styled.button`
   border-radius: 25px;
   font-weight: bold;
 
-  /*&:hover {
-    background-color: ${(props): string => props.theme.colors.green.lightest};
+  &:active {
+    background-color: ${(props): string => props.theme.colors.green.light};
     color: ${(props): string => props.theme.colors.white.lightest};
     font-size: 20px;
     width: 180px;
     height: 52.5px;
-  }*/
+  }
 `;

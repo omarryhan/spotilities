@@ -28,7 +28,7 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
                 <>
                   {
                     (allPlaylistTrackIds.slice(0, nToRender).map((trackId) => (
-                      <TrackStripe trackId={trackId} playlistId={playlistId} key={trackId} />
+                      <TrackStripe key={trackId} trackId={trackId} playlistId={playlistId} />
                     )))
                   }
                 </>
