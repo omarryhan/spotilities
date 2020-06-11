@@ -1,5 +1,4 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import { generateMedia } from 'styled-media-query';
 import { DefaultTheme } from 'styled-components';
 
 export const colors = {
@@ -42,20 +41,16 @@ export const colors = {
 
 export const dimensions = {
   contentSideMargin: {
-    mobile: '10px',
-    desktop: '20px',
+    all: '10px',
   },
   headerHeight: {
-    mobile: '35px',
-    desktop: '35px',
+    all: '35px',
   },
   bottomAppBarHeight: {
-    mobile: '60px',
-    desktop: '60px',
+    all: '60px',
   },
   topResourceNavbar: {
-    mobile: '50px',
-    desktop: '50px',
+    all: '50px',
   },
 };
 
@@ -91,5 +86,3 @@ export const materialUITheme = createMuiTheme({
     },
   },
 });
-
-export const media = generateMedia<typeof breakpoints, DefaultTheme>(breakpoints);

@@ -9,8 +9,10 @@ export const ButtonContainer = styled.div`
 `;
 
 export const Button = styled.button`
-  /* Remove all styles */
+  /* stylelint-disable-next-line plugin/no-unsupported-browser-features */ /* vendor prefixed*/
   position: sticky;
+
+  /* Remove all styles */
   background: none;
   border: none;
   padding: 0;

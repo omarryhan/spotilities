@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Button, ButtonContainer } from './Styled';
-import { shufflePlayPlaylist } from '../../redux/playback/actions';
+import { playPlaylist } from '../../redux/playback/actions';
 
 
 const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
@@ -11,7 +11,7 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
       <Button
         type="button"
         onClick={
-          (): ReturnType<typeof dispatch> => dispatch(shufflePlayPlaylist(playlistId))
+          (): ReturnType<typeof dispatch> => dispatch(playPlaylist({ playlistId }))
         }
       >
         Shuffle Play

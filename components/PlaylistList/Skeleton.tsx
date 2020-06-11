@@ -1,5 +1,5 @@
 import React from 'react';
-import { PictureSkeleton, BodySkeleton } from './Styled';
+import { PictureSkeleton, BodySkeleton, BodySkeletonWrapper } from './Styled';
 import { OuterContainer, LeftSection } from '../PlaylistListItem/Styled';
 
 
@@ -10,12 +10,9 @@ const Component: React.FC<{}> = () => (
         <OuterContainer key={`${String(i)}-Skeleton`} notClickable>
           <LeftSection>
             <PictureSkeleton variant="rect" />
-            <div style={{
-              display: 'flex', flexDirection: 'column', justifyContent: 'center',
-            }}
-            >
+            <BodySkeletonWrapper>
               <BodySkeleton variant="text" />
-            </div>
+            </BodySkeletonWrapper>
           </LeftSection>
         </OuterContainer>
       ))

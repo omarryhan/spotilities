@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { media } from '../../configs/theme';
 
 export const Header = styled.header`
   position: fixed;
@@ -8,14 +7,8 @@ export const Header = styled.header`
   width: 100%;
 
   z-index: ${(props): string => props.theme.zIndeces.header};
+  height: ${(props): string => props.theme.dimensions.headerHeight.all};
 
-  ${media.lessThan('tablet')`
-    height: ${(props): string => props.theme.dimensions.headerHeight.mobile};
-  `}
-
-  ${media.greaterThan('tablet')`
-    height: ${(props): string => props.theme.dimensions.headerHeight.desktop};
-  `}
 
   background-color: ${(props): string => props.theme.colors.gray.light}
 `;
@@ -24,14 +17,7 @@ export const Nav = styled.nav`
   height: 100%;
   display: flex;
   justify-content: space-between;
-
-  ${media.lessThan('tablet')`
-    padding: 5px ${(props): string => props.theme.dimensions.contentSideMargin.mobile};
-  `}
-
-  ${media.greaterThan('tablet')`
-    padding: 5px ${(props): string => props.theme.dimensions.contentSideMargin.desktop};
-  `}
+  padding: 5px ${(props): string => props.theme.dimensions.contentSideMargin.all};
 `;
 
 export const NavItem = styled.div<{left?: boolean; right?: boolean}>`

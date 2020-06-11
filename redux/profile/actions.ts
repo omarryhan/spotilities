@@ -13,7 +13,8 @@ void,
     const { token } = state.user;
     const { accessToken, expiresAt } = token;
 
-    checkIsAuthorized(accessToken, expiresAt);
+    const { errorMessage } = state.user.tokenStatus;
+    checkIsAuthorized(accessToken, expiresAt, errorMessage);
     spotifyApi.setAccessToken(accessToken);
     return await spotifyApi.getMe();
   },

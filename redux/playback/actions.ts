@@ -1,26 +1,42 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import chunk from 'lodash.chunk';
 import shuffle from 'lodash.shuffle';
 import { CombinedStateType } from '../types';
 import { spotifyApi } from '../utils';
 import { UserLibraryPlaylistId } from '../playlistItems/actions';
 
-const flashPlaybackError = (e: Error): void => {
-  alert('Please make sure you have a song already playing. This is a limitation of Spotify.');
-  console.error(e);
+const flashPlaybackError = (e: XMLHttpRequest | Error): void => {
+  if (e instanceof XMLHttpRequest) {
+    const errorMessage = e.response && JSON.parse(e.response)?.error?.message as undefined | string;
+    if (errorMessage && errorMessage.includes('active device')) {
+      alert('Please make sure you have a song already playing in your main Spotify app. This is a limitation of Spotify.');
+      window.location.href = 'spotify:';
+    } else if (errorMessage) {
+      alert(errorMessage);
+    } else {
+      alert('Sorry something went wrong, please try again');
+    }
+  } else {
+    alert(e.message || 'Sorry something went wrong');
+  }
 };
 
 export const playTrackURIS = createAsyncThunk<
 void,
-{ trackId: string; trackURIs: string[] },
+{
+  trackId: string;
+  trackURIs: string[];
+  shufflePlay?: boolean;
+},
 { state: CombinedStateType }
 >('play/trackURIs',
-  async ({ trackId, trackURIs }) => {
-    const trackIdIndex = trackURIs.indexOf(trackId);
-    const trackIdsToEnqueue = trackURIs.slice(trackIdIndex, 500);
-    const restOfTheTracks = trackURIs.slice(0, trackIdIndex);
+  async ({ trackId, trackURIs, shufflePlay = false }) => {
+    const shuffledTrackUris = shufflePlay ? shuffle(trackURIs) : trackURIs;
+    const trackIdIndex = shuffledTrackUris.indexOf(trackId);
+    const trackIdsToEnqueue = shuffledTrackUris.slice(trackIdIndex, 500);
+    const restOfTheTracks = shuffledTrackUris.slice(0, trackIdIndex);
     const reorderedList = [...trackIdsToEnqueue, ...restOfTheTracks].slice(0, 500);
     try {
+      await spotifyApi.setShuffle(shufflePlay);
       await spotifyApi.play({
         uris: reorderedList.map((trackURI) => `spotify:track:${trackURI}`),
       });
@@ -29,67 +45,69 @@ void,
     }
   });
 
+export const playTrackInPlaylistContext = async ({
+  trackId,
+  playlistId,
+  shufflePlay = false,
+}: {
+  trackId: string;
+  playlistId: string;
+  shufflePlay?: boolean;
+}): Promise<void> => {
+  try {
+    if (shufflePlay) {
+      await spotifyApi.setShuffle(true);
+    }
+    await spotifyApi.play({
+      context_uri: `spotify:playlist:${playlistId}`,
+      offset: {
+        uri: `spotify:track:${trackId}`,
+      },
+    });
+  } catch (e) {
+    flashPlaybackError(e);
+  }
+};
+
 export const playTrackInPlaylist = createAsyncThunk<
 void,
-{ trackId: string; playlistId: string },
+{ trackId: string; playlistId: string; shufflePlay?: boolean },
 { state: CombinedStateType }
 >('play/trackInPlaylist',
-  async ({ trackId, playlistId }, { getState, dispatch }) => {
+  async ({ trackId, playlistId, shufflePlay = false }, { getState, dispatch }) => {
     if (playlistId === UserLibraryPlaylistId) {
+      const trackIds = Object.keys(getState().playlistItems.data[playlistId].data);
       // Workaround because there's no context for "Saved tracks"
-      const state = getState();
-      const playlistTracks = state.playlistItems.data[playlistId].data;
-      const trackIds = Object.keys(playlistTracks);
       await dispatch(playTrackURIS({ trackId, trackURIs: trackIds }));
     } else {
-      try {
-        await spotifyApi.setShuffle(false);
-        await spotifyApi.play({
-          context_uri: `spotify:playlist:${playlistId}`,
-          offset: { uri: `spotify:track:${trackId}` },
-        });
-      } catch (e) {
-        flashPlaybackError(e);
-      }
+      await playTrackInPlaylistContext({
+        trackId,
+        playlistId,
+        shufflePlay,
+      });
     }
   });
 
-export const shufflePlayPlaylist = createAsyncThunk<
+export const playPlaylist = createAsyncThunk<
 void,
-string,
+{ playlistId: string; shufflePlay?: boolean},
 { state: CombinedStateType }
 >('shufflePlay/playlist',
-  async (playlistId, { getState }) => {
-    const state = getState();
-    const playlistTracks = state.playlistItems.data[playlistId]?.data;
-    const trackIds = Object.keys(playlistTracks);
-    const shuffledTrackIds = shuffle(trackIds);
+  async ({ playlistId, shufflePlay = true }, { getState, dispatch }) => {
+    const trackIds = Object.keys(getState().playlistItems.data[playlistId]?.data);
 
     if (playlistId === UserLibraryPlaylistId) {
-      if (playlistTracks && Object.keys(playlistTracks).length) {
-        const firstChunkOfTracks = chunk(shuffledTrackIds, 500)[0];
-        const trackUris = firstChunkOfTracks.map((trackId): string => `spotify:track:${trackId}`);
-        try {
-          await spotifyApi.play({
-            uris: trackUris,
-          });
-        } catch (e) {
-          flashPlaybackError(e);
-        }
-      }
+      await dispatch(playTrackURIS({
+        trackId: trackIds[0],
+        trackURIs: trackIds,
+        shufflePlay,
+      }));
     } else {
-      try {
-        await spotifyApi.play({
-          context_uri: `spotify:playlist:${playlistId}`,
-          offset: {
-            uri: `spotify:track:${shuffledTrackIds[0]}`,
-          },
-        });
-      } catch (e) {
-        flashPlaybackError(e);
-      }
-      await spotifyApi.setShuffle(true);
-      await spotifyApi.skipToNext();
+      await playTrackInPlaylistContext({
+        trackId: trackIds[0],
+        playlistId,
+        shufflePlay,
+      });
     }
 
     return undefined;

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
-import { media } from '../../configs/theme';
 import { LinkButtonProps } from './types';
 
 export const Nav = styled.nav`
@@ -10,14 +9,7 @@ export const Nav = styled.nav`
   width: 100%;
 
   z-index: ${(props): string => props.theme.zIndeces.header};
-
-  ${media.lessThan('tablet')`
-    height: ${(props): string => props.theme.dimensions.bottomAppBarHeight.mobile};
-  `}
-
-  ${media.greaterThan('tablet')`
-    height: ${(props): string => props.theme.dimensions.bottomAppBarHeight.desktop};
-  `}
+  height: ${(props): string => props.theme.dimensions.bottomAppBarHeight.all};
 
   background-color: ${(props): string => props.theme.colors.gray.light};
 `;

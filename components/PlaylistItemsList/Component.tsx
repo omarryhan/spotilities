@@ -15,6 +15,10 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
   );
   const allPlaylistTrackIds = !playlistTracks ? [] : Object.keys(playlistTracks);
 
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Container>
       {

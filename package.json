@@ -3,6 +3,18 @@
   "version": "0.1.0",
   "license": "MIT",
   "private": false,
+  "browserslist": [
+    "last 2 Chrome versions",
+    "last 2 Edge versions",
+    "last 4 Firefox versions",
+    "last 3 Safari versions",
+    "last 2 FirefoxAndroid versions",
+    "last 3 iOS versions",
+    "last 2 Samsung versions",
+    "maintained node versions",
+    "not IE 11",
+    "maintained node versions"
+  ],
   "scripts": {
     "dev": "next dev",
     "dev:static": "npm run build && npm run export && npm run start:static",
@@ -12,8 +24,11 @@
     "start": "next start",
     "start:static": "http-server ./out",
     "prod": "npm run start",
-    "lint": "echo \" \n\nlinting all JS and TS files.\n\n\" && eslint ./**/*.{js,jsx,tsx,ts,css} && echo \"\n\nLinting styled components.\n\n\" && stylelint ./**/*.{js,jsx,tsx,ts}",
-    "lint:fix": "echo \" \n\nlinting all JS and TS files.\n\n\" && eslint ./**/*.{js,jsx,tsx,ts,css} --fix; echo \"\n\nLinting styled components.\n\n\" && stylelint ./**/*.{js,jsx,tsx,ts} --fix",
+    "lint": "echo \" \n\nlinting all JS and TS files.\n\n\" && npm run lint:ts; echo \"\n\nLinting styled components.\n\n\" && npm run lint:css",
+    "lint:fix": "echo \" \n\nlinting all JS and TS files.\n\n\" && npm run lint:ts:fix ; echo \"\n\nLinting styled components.\n\n\" && npm run lint:css",
+    "lint:ts": "eslint ./**/*.{js,jsx,tsx,ts,css}",
+    "lint:ts:fix": "eslint ./**/*.{js,jsx,tsx,ts,css} --fix",
+    "lint:css": "stylelint ./**/*.{js,jsx,tsx,ts}",
     "tsc": "tsc .",
     "test": "jest",
     "test:init": "jest --init",
@@ -40,8 +55,7 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "spotify-web-api-js": "^1.4.0",
-    "styled-components": "^5.1.0",
-    "styled-media-query": "^2.1.2"
+    "styled-components": "^5.1.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^5.4.0",
@@ -81,14 +95,14 @@
     "stylelint": "^13.5.0",
     "stylelint-config-recommended": "^3.0.0",
     "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-no-unsupported-browser-features": "^4.0.0",
     "stylelint-processor-styled-components": "^1.10.0",
     "ts-jest": "^26.0.0",
     "typescript": "^3.9"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run test && npm run lint # && npm run lint:fix",
-      "pre-push": "npm run build && npm run export"
+      "pre-commit": "npm run test && npm run lint && npm run build && npm run export # && npm run lint:fix"
     }
   }
 }

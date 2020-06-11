@@ -1,18 +1,11 @@
 import styled from 'styled-components';
 import Switch from '@material-ui/core/Switch';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import { media, styledComponentsTheme } from '../../configs/theme';
+import { styledComponentsTheme } from '../../configs/theme';
 
 
 export const Container = styled.div`
-  ${media.lessThan('tablet')`
-    padding: 10px ${(props): string => props.theme.dimensions.contentSideMargin.mobile} calc(${(props): string => props.theme.dimensions.bottomAppBarHeight.mobile} + 10px) ${(props): string => props.theme.dimensions.contentSideMargin.mobile};
-  `};
-
-  ${media.greaterThan('tablet')`
-    padding: 10px ${(props): string => props.theme.dimensions.contentSideMargin.desktop} calc(${(props): string => props.theme.dimensions.bottomAppBarHeight.desktop} + 10px) ${(props): string => props.theme.dimensions.contentSideMargin.desktop};
-  `};
+  padding: 10px ${(props): string => props.theme.dimensions.contentSideMargin.all} calc(${(props): string => props.theme.dimensions.bottomAppBarHeight.all} + 10px) ${(props): string => props.theme.dimensions.contentSideMargin.all};
 
   width: 100%;
 `;
@@ -75,19 +68,27 @@ export const StyledSwitch = withStyles({
   },
 })(Switch);
 
-export const StyledLogoutButton = styled(Button)`
+export const StyledLogoutButton = styled.button`
+  border: none;
+  outline: inherit;
+  
+  width: 100px;
+  height: 35px;
+  cursor: pointer;
+
   background-color: ${(props): string => props.theme.colors.white.dark};
   padding-top: 0;
   padding-bottom: 0;
+  
+  color: ${(props): string => props.theme.colors.gray.light};
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-transform: capitalize;
+  border-radius: 5px;
+  text-align: center;
 
   &:active {
     background-color: #fff;
   }
-  
-  & span {
-    color: ${(props): string => props.theme.colors.gray.light};
-    font-size: 0.9rem;
-    font-weight: bold;
-    text-transform: capitalize;
-  }
+
 `;

@@ -12,7 +12,8 @@ const Page: NextPage<{}> = () => {
     const hash = window.location.hash.substr(1);
     const params = new URLSearchParams(hash);
 
-    const error = params.get('error');
+    const searchParams = new URLSearchParams(window.location.search);
+    const error = searchParams.get('error');
     if (error && typeof error === 'string') {
       dispatch(setTokenErrorMessage(error));
     } else {
@@ -26,6 +27,7 @@ const Page: NextPage<{}> = () => {
       const date = new Date();
       const nowDate = date.setSeconds(date.getSeconds() + expiresIn - 60);
 
+      dispatch(setTokenErrorMessage(''));
       dispatch(setAccessToken({
         accessToken,
         expiresAt: nowDate,

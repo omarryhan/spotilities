@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { media } from '../../configs/theme';
 
 
 export const Container = styled.div`
@@ -37,6 +36,8 @@ export const Slide = styled.div<{bgColor: string}>`
   position: relative;
 
   background: rgba(18,18,18,1);
+
+  /* stylelint-disable-next-line plugin/no-unsupported-browser-features */ /* vendor prefixed*/
   background: linear-gradient(0deg, ${(props): string => props.theme.colors.gray.dark} 0%, ${(props): string => props.bgColor} 100%);
 `;
 
@@ -56,16 +57,7 @@ export const PlaylistTitle = styled.h2`
   margin: 0 0;
   max-height: 125px;
   font-size: 1.5rem;
-
-  ${media.lessThan('tablet')`
-    padding-left: ${(props): string => props.theme.dimensions.contentSideMargin.mobile};
-    padding-right: ${(props): string => props.theme.dimensions.contentSideMargin.mobile};
-  `};
-
-  ${media.greaterThan('tablet')`
-    padding-left: ${(props): string => props.theme.dimensions.contentSideMargin.desktop};
-    padding-right: ${(props): string => props.theme.dimensions.contentSideMargin.desktop};
-  `};
+  padding-left: ${(props): string => props.theme.dimensions.contentSideMargin.all};
 
   padding-top: 30px;
   padding-bottom: 40px;
@@ -77,16 +69,8 @@ export const MetricsContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-  ${media.lessThan('tablet')`
-    padding-left: ${(props): string => props.theme.dimensions.contentSideMargin.mobile};
-    padding-right: ${(props): string => props.theme.dimensions.contentSideMargin.mobile};
-  `};
-
-  ${media.greaterThan('tablet')`
-    padding-left: ${(props): string => props.theme.dimensions.contentSideMargin.desktop};
-    padding-right: ${(props): string => props.theme.dimensions.contentSideMargin.desktop};
-  `};
+  padding-left: ${(props): string => props.theme.dimensions.contentSideMargin.all};
+  padding-right: ${(props): string => props.theme.dimensions.contentSideMargin.all};
 `;
 
 export const DescriptionWrapper = styled.div`
@@ -95,16 +79,8 @@ export const DescriptionWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  ${media.lessThan('tablet')`
-    padding-left: ${(props): string => props.theme.dimensions.contentSideMargin.mobile};
-    padding-right: ${(props): string => props.theme.dimensions.contentSideMargin.mobile};
-  `};
-
-  ${media.greaterThan('tablet')`
-    padding-left: ${(props): string => props.theme.dimensions.contentSideMargin.desktop};
-    padding-right: ${(props): string => props.theme.dimensions.contentSideMargin.desktop};
-  `};
+  padding-left: ${(props): string => props.theme.dimensions.contentSideMargin.all};
+  padding-right: ${(props): string => props.theme.dimensions.contentSideMargin.all};
 `;
 
 export const DescriptionText = styled.p`

@@ -8,8 +8,8 @@ export const openAuthorizeWindow = async (): Promise<void> => {
   window.location.href = createAuthorizeLink();
 };
 
-export const checkIsAuthorized = (accessToken: string, expiresAt: number): void => {
-  if (!accessToken || !expiresAt || (Date.now() >= expiresAt)) {
+export const checkIsAuthorized = (accessToken: string, expiresAt: number, error?: string): void => {
+  if ((!accessToken || !expiresAt || (Date.now() >= expiresAt)) && !error) {
     openAuthorizeWindow();
     // Application closes
   }

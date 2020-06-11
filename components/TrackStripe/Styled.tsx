@@ -107,6 +107,13 @@ export const PictureSkeleton = styled(Skeleton)`
     background-color: ${(props): string => props.theme.colors.gray.lightest};
 `;
 
+export const BodySkeletonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+`;
+
+
 export const BodySkeleton = styled(Skeleton)`
     width: 100px;
     margin-left: 10px;

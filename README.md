@@ -83,6 +83,11 @@ Run development server:
 npm run dev
 ```
 
+It is also recommended to use VScode and install:
+
+1. Eslint VScode plugin
+2. Stylelint VScode plugin
+
 **Note:**
 
 Development requires Node version 12+

@@ -1,27 +1,24 @@
 import styled from 'styled-components';
 import Skeleton from '@material-ui/lab/Skeleton';
-import { media } from '../../configs/theme';
 
 export const Container = styled.div`
   width: 100%;
-  margin-bottom: calc(${(props): string => props.theme.dimensions.bottomAppBarHeight.desktop} + 10px);
+  margin-bottom: calc(${(props): string => props.theme.dimensions.bottomAppBarHeight.all} + 10px);
   padding-top: 10px;
-
-  ${media.lessThan('tablet')`
-    padding-left: ${(props): string => props.theme.dimensions.contentSideMargin.mobile};
-    padding-right: ${(props): string => props.theme.dimensions.contentSideMargin.mobile};
-  `};
-
-  ${media.greaterThan('tablet')`
-    padding-left: ${(props): string => props.theme.dimensions.contentSideMargin.desktop};
-    padding-right: ${(props): string => props.theme.dimensions.contentSideMargin.desktop};
-  `};
+  padding-left: ${(props): string => props.theme.dimensions.contentSideMargin.all};
+  padding-right: ${(props): string => props.theme.dimensions.contentSideMargin.all};
 `;
 
 export const PictureSkeleton = styled(Skeleton)`
     height: 100%;
     width: 80px; /* TODO: find a way to force it to be equals to height */
     background-color: ${(props): string => props.theme.colors.gray.lightest};
+`;
+
+export const BodySkeletonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 `;
 
 export const BodySkeleton = styled(Skeleton)`

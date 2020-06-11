@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
-import { media } from '../../configs/theme';
 import { LinkButtonProps } from './types';
 
 export const Nav = styled.nav`
@@ -8,16 +7,8 @@ export const Nav = styled.nav`
   left: 0;
   width: 100%;
   z-index: ${(props): string => props.theme.zIndeces.header};
-
-  ${media.lessThan('tablet')`
-    height: ${(props): string => props.theme.dimensions.topResourceNavbar.mobile};
-    bottom: ${(props): string => props.theme.dimensions.bottomAppBarHeight.mobile}};
-  `}
-
-  ${media.greaterThan('tablet')`
-    height: ${(props): string => props.theme.dimensions.topResourceNavbar.desktop};
-    bottom: ${(props): string => props.theme.dimensions.bottomAppBarHeight.desktop}};
-  `}
+  height: ${(props): string => props.theme.dimensions.topResourceNavbar.all};
+  bottom: ${(props): string => props.theme.dimensions.bottomAppBarHeight.all};
 
   border-bottom: 0.5px solid ${(props): string => props.theme.colors.gray.dark};
 
@@ -44,5 +35,5 @@ export const LinkTitle = styled.p<LinkButtonProps>`
   margin: 0 0;
   text-align: center;
   /* font-weight: ${(props): string => (props.isLight ? 'bold' : 'regular')}; */
-  color: ${(props): string => (props.isLight ? props.theme.colors.white.light : props.theme.colors.white.evenDarkest)};
+  color: ${(props): string => (props.isLight ? props.theme.colors.white.lightest : props.theme.colors.white.evenDarkest)};
 `;

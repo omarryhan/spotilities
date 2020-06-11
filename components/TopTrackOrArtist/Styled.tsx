@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { media } from '../../configs/theme';
 
 export const Nav = styled.nav`
+  /* stylelint-disable-next-line plugin/no-unsupported-browser-features */ /* vendor prefixed*/
   position: sticky;
 
   display: flex;
@@ -13,18 +13,10 @@ export const Nav = styled.nav`
   z-index: ${(props): string => props.theme.zIndeces.header};
 
   background-color: ${(props): string => props.theme.colors.gray.dark};
+  top: ${(props): string => props.theme.dimensions.headerHeight.all};
+  padding-left: ${(props): string => props.theme.dimensions.contentSideMargin.all};
+  padding-right: ${(props): string => props.theme.dimensions.contentSideMargin.all};
 
-  ${media.lessThan('tablet')`
-    top: ${(props): string => props.theme.dimensions.headerHeight.mobile};
-    padding-left: ${(props): string => props.theme.dimensions.contentSideMargin.mobile};
-    padding-right: ${(props): string => props.theme.dimensions.contentSideMargin.mobile};
-  `};
-
-  ${media.greaterThan('tablet')`
-    top: ${(props): string => props.theme.dimensions.headerHeight.desktop};
-    padding-left: ${(props): string => props.theme.dimensions.contentSideMargin.desktop};
-    padding-right: ${(props): string => props.theme.dimensions.contentSideMargin.desktop};
-  `};
 `;
 
 export const StyledLink = styled.a<{isActive?: boolean}>`

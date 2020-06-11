@@ -4,6 +4,7 @@ import {
   LeftSection,
   PictureSkeleton,
   BodySkeleton,
+  BodySkeletonWrapper,
 } from './Styled';
 
 
@@ -11,12 +12,9 @@ const Component: React.FC<{}> = () => (
   <Container notClickable>
     <LeftSection>
       <PictureSkeleton variant="rect" />
-      <div style={{
-        display: 'flex', flexDirection: 'column', justifyContent: 'center',
-      }}
-      >
+      <BodySkeletonWrapper>
         <BodySkeleton variant="text" />
-      </div>
+      </BodySkeletonWrapper>
     </LeftSection>
   </Container>
 );

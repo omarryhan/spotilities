@@ -48,7 +48,8 @@ void,
     const state = getState();
     const { token } = state.user;
     const { accessToken, expiresAt } = token;
-    checkIsAuthorized(accessToken, expiresAt);
+    const { errorMessage } = state.user.tokenStatus;
+    checkIsAuthorized(accessToken, expiresAt, errorMessage);
     spotifyApi.setAccessToken(accessToken);
 
     await getAllPages<SpotifyApi.UsersSavedTracksResponse>(
@@ -84,7 +85,8 @@ export const fetchUserPlaylistItems = createAsyncThunk<
     const state = getState();
     const { token } = state.user;
     const { accessToken, expiresAt } = token;
-    checkIsAuthorized(accessToken, expiresAt);
+    const { errorMessage } = state.user.tokenStatus;
+    checkIsAuthorized(accessToken, expiresAt, errorMessage);
     spotifyApi.setAccessToken(accessToken);
 
     const dispatchCallback = async (eachPage: SpotifyApi.PlaylistTrackResponse): Promise<void> => {

@@ -22,7 +22,8 @@ string[],
     const state = getState();
     const { token } = state.user;
     const { accessToken, expiresAt } = token;
-    checkIsAuthorized(accessToken, expiresAt);
+    const { errorMessage } = state.user.tokenStatus;
+    checkIsAuthorized(accessToken, expiresAt, errorMessage);
     spotifyApi.setAccessToken(accessToken);
 
     const trackIdChunks = chunk(trackIds, 100);
@@ -60,7 +61,8 @@ string,
     const state = getState();
     const { token } = state.user;
     const { accessToken, expiresAt } = token;
-    checkIsAuthorized(accessToken, expiresAt);
+    const { errorMessage } = state.user.tokenStatus;
+    checkIsAuthorized(accessToken, expiresAt, errorMessage);
     spotifyApi.setAccessToken(accessToken);
 
     const allPlaylistItems = state.playlistItems.data[playlistId].data;
@@ -80,7 +82,8 @@ void,
     const state = getState();
     const { token } = state.user;
     const { accessToken, expiresAt } = token;
-    checkIsAuthorized(accessToken, expiresAt);
+    const { errorMessage } = state.user.tokenStatus;
+    checkIsAuthorized(accessToken, expiresAt, errorMessage);
     spotifyApi.setAccessToken(accessToken);
 
     const allPlaylistIds = Object.keys(state.playlistItems.data);

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Skeleton from '@material-ui/lab/Skeleton';
 
-const height = '65px';
+const height = '105px';
 
 export const Container = styled.button`
   /* Remove all styles */
@@ -26,7 +26,7 @@ export const Container = styled.button`
 
 export const ImageSection = styled.div`
   height: 100%;
-  width: 65px;
+  width: ${height};
   overflow: hidden;
   text-align: center;
 `;
@@ -62,7 +62,7 @@ export const Name = styled.p`
 
 export const PictureSkeleton = styled(Skeleton)`
   height: 100%;
-  width: 65px; /* TODO: find a way to force it to be equals to height */
+  width: ${height}; /* TODO: find a way to force it to be equals to height */
   background-color: ${(props): string => props.theme.colors.gray.lightest};
 `;
 

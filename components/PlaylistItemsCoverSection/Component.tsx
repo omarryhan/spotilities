@@ -101,7 +101,7 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
           <Slide bgColor={bgColor}>
             <PlaylistCoverPhotoWrapper>
               <ColorExtractor getColors={setColor}>
-                { /* ColorExtractor only accepts images, that's why
+                { /* ColorExtractor only accepts <img>, that's why
                   we're not using a styled component */ }
                 <img style={{ width: '100%' }} src={playlistPhotos ? playlistPhotos[0] : backupPhotoURL} alt={`${playlistName} playlist cover`} />
               </ColorExtractor>
