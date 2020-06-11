@@ -18,7 +18,7 @@ const Page: NextPage<{}> = () => (
   <>
     <AccessTokenLoader />
     <CurrentUserLoader />
-    <TopNav title="Top tracks of all time" showSettingsButton />
+    <TopNav title="Top" showSettingsButton />
     <AppBody>
       <TopTrackOrArtist currentType="tracks" currentDuration="allTime" />
       <TopTracksList currentType="tracks" currentDuration="allTime" />
