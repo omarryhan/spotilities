@@ -22,12 +22,6 @@ module.exports = withPWA(withBundleAnalyzer(withSourceMaps({
       },
       use: ['@svgr/webpack'],
     });
-
-    config.module.rules.push({
-      test: /\.css$/,
-      use: ['style-loader', 'css-loader', 'postcss-loader'],
-    });
-
     return config;
   },
 })));
