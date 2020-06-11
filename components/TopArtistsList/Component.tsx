@@ -1,15 +1,15 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { CombinedStateType } from '../../redux/types';
+import { AvailableDurations, AvailableResourceTypes } from '../../redux/top/types';
+import { fetchTopItems } from '../../redux/top/actions';
+import ArtistStripe from '../ArtistStripe';
+import LazyLoadOnScroll from '../LazyLoadOnScroll';
+import Skeleton from '../TrackStripe/Skeleton';
+
 import {
   Container,
 } from './Styled';
-import { AvailableDurations, AvailableResourceTypes } from '../../redux/top/types';
-import { playTrackURIS } from '../../redux/playback/actions';
-import { fetchTopItems } from '../../redux/top/actions';
-import TrackStripe from '../TrackStripe';
-import LazyLoadOnScroll from '../LazyLoadOnScroll';
-import Skeleton from '../TrackStripe/Skeleton';
 
 interface Props {
   currentType: AvailableResourceTypes;
@@ -19,13 +19,13 @@ interface Props {
 const Component: React.FC<Props> = ({ currentDuration }) => {
   const dispatch = useDispatch();
 
-  const topTrackIds = useSelector<CombinedStateType, string[] | []>(
-    (state) => state.top.tracks[currentDuration].data,
+  const topArtistIds = useSelector<CombinedStateType, string[] | []>(
+    (state) => state.top.artists[currentDuration].data,
   );
 
   React.useEffect(() => {
     dispatch(fetchTopItems({
-      resourceType: 'tracks',
+      resourceType: 'artists',
       duration: currentDuration,
     }));
   }, [currentDuration, dispatch]);
@@ -33,32 +33,19 @@ const Component: React.FC<Props> = ({ currentDuration }) => {
   return (
     <Container>
       {
-        topTrackIds.length
+        topArtistIds.length
           ? (
             <LazyLoadOnScroll
-              maxItems={topTrackIds.length}
+              maxItems={topArtistIds.length}
               startingItems={15}
             >
               { ({ nToRender }): ReturnType<React.FC<{}>> => (
                 <>
                   {
-                    (topTrackIds.slice(0, nToRender).map((trackId, index) => (
-                      <TrackStripe
-                        trackId={trackId}
-                        key={trackId}
-                        // backgroundColor={  // this is fugly
-                        //   index === 0
-                        //     ? styledComponentsTheme.colors.gold.primary
-                        //     : index === 1
-                        //       ? styledComponentsTheme.colors.silver.primary
-                        //       : index === 2
-                        //         ? styledComponentsTheme.colors.bronze.primary
-                        //         : undefined
-                        // }
-                        onClickHandler={(): ReturnType<typeof dispatch> => dispatch(playTrackURIS({
-                          trackId,
-                          trackURIs: topTrackIds,
-                        }))}
+                    (topArtistIds.slice(0, nToRender).map((artistId, index) => (
+                      <ArtistStripe
+                        artistId={artistId}
+                        key={artistId}
                       />
                     )))
                   }

@@ -13,6 +13,9 @@ const durationsApiMapping = {
   allTime: 'long_term',
 };
 
+/*
+  Doesn't paginate beyond 50 items
+*/
 export const fetchTopItems = createAsyncThunk<
 {
   resourceType: AvailableResourceTypes;

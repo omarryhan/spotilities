@@ -53,9 +53,9 @@ export const dimensions = {
     mobile: '60px',
     desktop: '60px',
   },
-  topNavbar: {
-    mobile: '50px',
-    desktop: '50px',
+  topResourceNavbar: {
+    mobile: '40px',
+    desktop: '40px',
   },
 };
 

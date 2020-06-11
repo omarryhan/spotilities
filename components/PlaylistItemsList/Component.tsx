@@ -21,8 +21,8 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
         allPlaylistTrackIds.length
           ? (
             <LazyLoadOnScroll
-              maxTracks={allPlaylistTrackIds.length}
-              startingTracks={15}
+              maxItems={allPlaylistTrackIds.length}
+              startingItems={15}
             >
               { ({ nToRender }): ReturnType<React.FC<{}>> => (
                 <>

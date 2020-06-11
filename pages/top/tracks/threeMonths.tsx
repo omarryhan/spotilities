@@ -10,8 +10,8 @@ import AppBody from '../../../components/AppBody';
 import CurrentUserLoader from '../../../components/CurrentUserLoader';
 
 import TopTracksList from '../../../components/TopTracksList';
-import TopFirstNavbar from '../../../components/TopFirstNavbar';
-import TopSecondNavbar from '../../../components/TopSecondNavbar';
+import TopResourceNavbar from '../../../components/TopResourceNavbar';
+import TopTrackOrArtist from '../../../components/TopTrackOrArtist';
 
 
 const Page: NextPage<{}> = () => (
@@ -20,9 +20,9 @@ const Page: NextPage<{}> = () => (
     <CurrentUserLoader />
     <TopNav title="Top tracks in the past 3 months" showSettingsButton />
     <AppBody>
+      <TopTrackOrArtist currentType="tracks" currentDuration="threeMonths" />
       <TopTracksList currentType="tracks" currentDuration="threeMonths" />
-      <TopSecondNavbar currentType="tracks" currentDuration="threeMonths" />
-      <TopFirstNavbar currentType="tracks" currentDuration="threeMonths" />
+      <TopResourceNavbar currentType="tracks" currentDuration="threeMonths" />
     </AppBody>
     <BottomNav />
   </>

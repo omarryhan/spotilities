@@ -9,7 +9,7 @@ import AccessTokenLoader from '../../../components/AccessTokenLoader';
 import AppBody from '../../../components/AppBody';
 import CurrentUserLoader from '../../../components/CurrentUserLoader';
 
-import TopTracksList from '../../../components/TopTracksList';
+import TopArtistsList from '../../../components/TopArtistsList';
 import TopResourceNavbar from '../../../components/TopResourceNavbar';
 import TopTrackOrArtist from '../../../components/TopTrackOrArtist';
 
@@ -18,11 +18,11 @@ const Page: NextPage<{}> = () => (
   <>
     <AccessTokenLoader />
     <CurrentUserLoader />
-    <TopNav title="Top tracks of all time" showSettingsButton />
+    <TopNav title="Top artists in the past 3 months" showSettingsButton />
     <AppBody>
-      <TopTrackOrArtist currentType="tracks" currentDuration="allTime" />
-      <TopTracksList currentType="tracks" currentDuration="allTime" />
-      <TopResourceNavbar currentType="tracks" currentDuration="allTime" />
+      <TopTrackOrArtist currentType="artists" currentDuration="threeMonths" />
+      <TopArtistsList currentType="artists" currentDuration="threeMonths" />
+      <TopResourceNavbar currentType="artists" currentDuration="threeMonths" />
     </AppBody>
     <BottomNav />
   </>

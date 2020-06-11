@@ -2,7 +2,7 @@ import React from 'react';
 import Router from 'next/router';
 import {
   Nav, LinkContainer, LinkTitle, LinksContainer,
-} from '../TopSecondNavbar/Styled';
+} from './Styled';
 import { AvailableDurations, AvailableResourceTypes } from '../../redux/top/types';
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
 }
 
 const Component: React.FC<Props> = ({ currentType, currentDuration }) => (
-  <Nav second>
+  <Nav>
     <LinksContainer>
       <LinkContainer
         type="button"

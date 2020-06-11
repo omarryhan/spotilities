@@ -3,20 +3,20 @@ import Button from '@material-ui/core/Button';
 import { media } from '../../configs/theme';
 import { LinkButtonProps } from './types';
 
-export const Nav = styled.nav<{second?: boolean}>`
+export const Nav = styled.nav`
   position: fixed;
   left: 0;
   width: 100%;
   z-index: ${(props): string => props.theme.zIndeces.header};
 
-  ${media.lessThan<{second?: boolean}>('tablet')`
-    height: ${(props): string => props.theme.dimensions.topNavbar.mobile};
-    bottom: calc(${(props): string => props.theme.dimensions.bottomAppBarHeight.mobile} + ${(props): string => (props.second ? props.theme.dimensions.topNavbar.mobile : '0px')});
+  ${media.lessThan('tablet')`
+    height: ${(props): string => props.theme.dimensions.topResourceNavbar.mobile};
+    bottom: ${(props): string => props.theme.dimensions.bottomAppBarHeight.mobile}};
   `}
 
-  ${media.greaterThan<{second?: boolean}>('tablet')`
-    height: ${(props): string => props.theme.dimensions.topNavbar.desktop};
-    bottom: calc(${(props): string => props.theme.dimensions.bottomAppBarHeight.desktop} + ${(props): string => (props.second ? props.theme.dimensions.topNavbar.desktop : '0px')});
+  ${media.greaterThan('tablet')`
+    height: ${(props): string => props.theme.dimensions.topResourceNavbar.desktop};
+    bottom: ${(props): string => props.theme.dimensions.bottomAppBarHeight.desktop}};
   `}
 
   border-bottom: 0.5px solid ${(props): string => props.theme.colors.gray.dark};
@@ -41,7 +41,7 @@ export const LinkContainer = styled(Button)`
 
 export const LinkTitle = styled.p<LinkButtonProps>`
   text-transform: capitalize;
-  font-size: 16px;
+  font-size: 14px;
   margin: 0 0;
   text-align: center;
   /* font-weight: ${(props): string => (props.isLight ? 'bold' : 'regular')}; */

@@ -6,17 +6,19 @@ interface ChildElementProps {
 
 interface Props {
   children: (arg0: ChildElementProps) => ReturnType<React.FC<{}>>;
-  maxTracks: number;
-  startingTracks: number;
+  maxItems: number;
+  startingItems: number;
 }
 
-const Component: React.FC<Props> = ({ children, maxTracks, startingTracks }) => {
+const Component: React.FC<Props> = ({ children, maxItems, startingItems }) => {
   const [nReachedBottom, setNReachedBottom] = React.useState(1);
 
   const scrollHandler = (): void => {
+    console.log(document.body.offsetHeight);
     const reachedEnd = (
       (window.innerHeight + window.scrollY
-      ) >= document.body.offsetHeight
+      // adding 200 so that it renders the next page a bit before the user reaches the end
+      ) >= document.body.offsetHeight - 200
     );
     if (reachedEnd) {
       setNReachedBottom(nReachedBottom + 1);
@@ -34,7 +36,7 @@ const Component: React.FC<Props> = ({ children, maxTracks, startingTracks }) => 
     }
   });
 
-  return children({ nToRender: nReachedBottom * startingTracks });
+  return children({ nToRender: nReachedBottom * startingItems });
 };
 
 export default Component;
