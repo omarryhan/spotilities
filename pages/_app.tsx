@@ -7,8 +7,9 @@ import { ThemeProvider as MaterialThemeProvider } from '@material-ui/core/styles
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Router from 'next/router';
 import ReactGA from 'react-ga';
+import { Provider } from 'react-redux';
+import { store } from '../redux';
 
-import { wrapper } from '../redux';
 import GlobalStyles from '../components/GlobalStyles';
 import { styledComponentsTheme, materialUITheme } from '../configs/theme';
 import { GA_TRACKING_ID, GA_CONFIGS } from '../configs/services';
@@ -89,25 +90,27 @@ class MyApp extends App<AppInitialProps & CustomAppInitialProps> {
     } = this.props;
 
     return (
-      <MaterialThemeProvider theme={materialUITheme}>
-        <StyledThemeProvider theme={styledComponentsTheme}>
-          <CssBaseline />
-          <GlobalStyles />
-          <Head>
-            <link rel="shortcut icon" href="/favicon.png" />
-            <link rel="manifest" href="/manifest.json" />
-            <meta name="title" content="Spotilities | Utilities for Spotify" />
-            <meta name="description" content="Spotilities is awesome. Should probably explain more but I'm lazy. Come check it out!" />
-            <meta name="keywords" content="Spotify, Spotify Utilities, Spotify Tools" />
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-          </Head>
-          <Component
-            {...pageProps}
-            err={err}
-          />
-        </StyledThemeProvider>
-      </MaterialThemeProvider>
+      <Provider store={store}>
+        <MaterialThemeProvider theme={materialUITheme}>
+          <StyledThemeProvider theme={styledComponentsTheme}>
+            <CssBaseline />
+            <GlobalStyles />
+            <Head>
+              <link rel="shortcut icon" href="/favicon.png" />
+              <link rel="manifest" href="/manifest.json" />
+              <meta name="title" content="Spotilities | Utilities for Spotify" />
+              <meta name="description" content="Spotilities is awesome. Should probably explain more but I'm lazy. Come check it out!" />
+              <meta name="keywords" content="Spotify, Spotify Utilities, Spotify Tools" />
+              <meta name="viewport" content="width=device-width, initial-scale=1" />
+              <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+            </Head>
+            <Component
+              {...pageProps}
+              err={err}
+            />
+          </StyledThemeProvider>
+        </MaterialThemeProvider>
+      </Provider>
     );
   }
 }
@@ -150,4 +153,4 @@ class MyApp extends App<AppInitialProps & CustomAppInitialProps> {
 //   }
 // };
 
-export default wrapper.withRedux(MyApp);
+export default MyApp;

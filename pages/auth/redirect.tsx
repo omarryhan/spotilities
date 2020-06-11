@@ -4,7 +4,6 @@ import { NextPage } from 'next';
 import { useDispatch } from 'react-redux';
 
 import { setAccessToken, setTokenErrorMessage } from '../../redux/user/actions';
-import { wrapper } from '../../redux';
 
 const Page: NextPage<{}> = () => {
   const dispatch = useDispatch();
@@ -48,4 +47,4 @@ const Page: NextPage<{}> = () => {
 };
 
 
-export default wrapper.withRedux(Page);
+export default Page;

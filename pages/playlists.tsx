@@ -2,7 +2,6 @@ import React from 'react';
 import { NextPage } from 'next';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { wrapper } from '../redux/index';
 import AppBody from '../components/AppBody';
 import PlaylistItemsList from '../components/PlaylistItemsList';
 import TopNav from '../components/TopNav';
@@ -72,4 +71,4 @@ const Page: NextPage<{}> = () => {
   );
 };
 
-export default wrapper.withRedux(Page);
+export default Page;

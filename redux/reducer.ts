@@ -1,7 +1,6 @@
 import {
-  combineReducers, AnyAction, Reducer,
+  combineReducers,
 } from 'redux';
-import { HYDRATE } from 'next-redux-wrapper';
 
 import { reducer as userReducer } from './user/reducer';
 import { reducer as profileReducer } from './profile/reducer';
@@ -11,8 +10,6 @@ import { reducer as tracksReducer } from './tracks/reducer';
 import { reducer as tracksAudioFeaturesReducer } from './tracksAudioFeatures/reducer';
 import { reducer as artistsReducer } from './artists/reducer';
 import { reducer as topReducer } from './top/reducer';
-
-import { CombinedStateType } from './types';
 
 const allReducers = {
   user: userReducer,
@@ -26,15 +23,3 @@ const allReducers = {
 };
 
 export const combinedReducer = combineReducers(allReducers);
-
-export const rootReducer: Reducer = (
-  state: CombinedStateType, action: AnyAction,
-): CombinedStateType => {
-  if (action.type === HYDRATE) {
-    return {
-      ...state,
-      ...action.payload,
-    };
-  }
-  return combinedReducer(state, action);
-};

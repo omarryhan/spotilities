@@ -16,8 +16,8 @@ const Component: React.FC<Props> = ({ children, maxItems, startingItems }) => {
   const scrollHandler = (): void => {
     const reachedEnd = (
       (window.innerHeight + window.scrollY
-      // adding 200 so that it renders the next page a bit before the user reaches the end
-      ) >= document.body.offsetHeight - 200
+      // adding 400 so that it renders the next page a bit before the user reaches the end
+      ) >= document.body.offsetHeight - 400
     );
     if (reachedEnd) {
       setNReachedBottom(nReachedBottom + 1);

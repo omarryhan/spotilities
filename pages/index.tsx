@@ -1,8 +1,6 @@
 import React from 'react';
 import { NextPage } from 'next';
 
-import { wrapper } from '../redux';
-
 import BottomNav from '../components/BottomNav';
 import AccessTokenLoader from '../components/AccessTokenLoader';
 import AppBody from '../components/AppBody';
@@ -22,4 +20,4 @@ const Page: NextPage<{}> = () => (
   </>
 );
 
-export default wrapper.withRedux(Page);
+export default Page;
