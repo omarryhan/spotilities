@@ -6,8 +6,10 @@ export const Nav = styled.nav`
 
   display: flex;
   width: 100%;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+
+  z-index: ${(props): string => props.theme.zIndeces.header};
 
   background-color: ${(props): string => props.theme.colors.gray.dark};
 
@@ -25,8 +27,8 @@ export const Nav = styled.nav`
 `;
 
 export const StyledLink = styled.a<{isActive?: boolean}>`
-  font-size: 20px;
-  margin-right: 20px;
+  font-size: 22px;
+  margin-right: 22px;
   font-weight: bold;
 
   border-bottom: ${(props): string => (props.isActive ? `0.1rem solid ${props.theme.colors.green.primary}` : `0 solid ${props.theme.colors.white.evenDarkest}`)};
