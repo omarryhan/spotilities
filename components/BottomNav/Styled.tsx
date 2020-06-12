@@ -27,7 +27,7 @@ export const LinkContainer = styled(Button)`
   padding: 5px 0;
   border-radius: 0;
 
-  & span {
+  & > span {
     height: 100%;
     display: block;
   }
@@ -49,7 +49,7 @@ export const LinkIcon = styled.div<LinkButtonProps>`
   height: 70%;
   padding: 2px 0;
 
-  & svg {
+  & > svg {
     fill: ${(props): string => (props.isLight ? props.theme.colors.white.light : props.theme.colors.white.evenDarkest)};
     height: 100%;
   }

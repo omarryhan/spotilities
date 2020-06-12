@@ -30,6 +30,10 @@ const Component: React.FC<Props> = ({ currentDuration }) => {
     }));
   }, [currentDuration, dispatch]);
 
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Container>
       {

@@ -27,7 +27,7 @@ export const IconWrapper = styled.div`
   display: flex;
   align-items: center;
 
-  & svg {
+  & > svg {
     fill: ${(props): string => props.theme.colors.white.light};
     width: 100%;
   }
@@ -36,7 +36,7 @@ export const IconWrapper = styled.div`
 export const MetricWrapper = styled.div`
   min-width: 55%;
 
-  & span {
+  & > span {
     height: 5px;
     border-radius: 5px;
     display: block;
@@ -48,7 +48,7 @@ export const MetricBarBackground = styled.span`
   background-color: ${(props): string => props.theme.colors.gray.light};
   width: 100%;
 
-  & span {
+  & > span {
     height: 5px;
     border-radius: 5px;
     display: block;

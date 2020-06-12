@@ -6,6 +6,7 @@ import Document, {
 } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
+
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
     const sheet = new ServerStyleSheet();
@@ -22,12 +23,19 @@ export default class MyDocument extends Document {
 
   render() {
     return (
-      <html lang="en">
+      <html
+        lang="en"
+      >
         <Head>
           {/* @ts-ignore */}
           {this.props.styleTags}
         </Head>
-        <body>
+        <body
+          // for some reasone the backgroundColor isn't being applied from GlobalStyles
+          style={{
+            backgroundColor: 'rgba(18, 18, 18, 1)',
+          }}
+        >
           <Main />
           <NextScript />
         </body>

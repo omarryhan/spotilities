@@ -8,3 +8,9 @@ declare module 'styled-components' {
     zIndeces: typeof zIndeces;
   }
 }
+
+declare module 'react' {
+  interface Attributes {
+    css?: CSSProp;
+  }
+}

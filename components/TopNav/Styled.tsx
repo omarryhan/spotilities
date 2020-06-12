@@ -71,7 +71,7 @@ export const SettingsButtonWapper = styled.button`
 
   width: 20px;
 
-  & svg {
+  & > svg {
     width: 100%;
     fill: ${(props): string => props.theme.colors.white.dark};
   }
@@ -95,7 +95,7 @@ export const BackButtonWrapper = styled.button`
 
   padding-right: 5px;
 
-  & svg {
+  & > svg {
     width: 100%;
     fill: ${(props): string => props.theme.colors.white.dark};
   }

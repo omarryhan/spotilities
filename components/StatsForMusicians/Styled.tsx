@@ -16,7 +16,7 @@ export const IconWrapper = styled.div`
   height: 12px;
   text-align: left;
 
-  & svg {
+  & > svg {
     height: 100%;
     fill: ${(props): string => props.theme.colors.white.darkest};
   }

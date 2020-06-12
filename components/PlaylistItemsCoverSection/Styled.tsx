@@ -108,7 +108,7 @@ export const StyledCircularProgress = styled(CircularProgress)`
   justify-content: center;
   align-items: center;
 
-  & svg {
+  & > svg {
     width: 15px;
     height: 15px;
   }

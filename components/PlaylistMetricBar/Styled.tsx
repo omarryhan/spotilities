@@ -11,7 +11,7 @@ export const IconWrapper = styled.div`
   padding: 3px 0 0 0;
   position: relative;
 
-  & svg {
+  & > svg {
     fill: ${(props): string => props.theme.colors.white.dark};
     width: 100%;
     position: absolute;
@@ -25,7 +25,7 @@ export const MetricWrapper = styled.div`
   margin: 0 auto;
   padding: 5px 0;
 
-  & span {
+  & > span {
     width: 5px;
     border-radius: 5px;
     display: block;
@@ -37,7 +37,7 @@ export const MetricBarBackground = styled.span`
   background-color: ${(props): string => props.theme.colors.gray.light};
   height: 100%;
 
-  & span {
+  & > span {
     width: 5px;
     border-radius: 5px;
     display: block;

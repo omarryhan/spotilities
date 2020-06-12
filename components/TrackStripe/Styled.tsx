@@ -92,7 +92,7 @@ export const MoreText = styled.div`
   padding-left: 10px;
   padding-top: 10px;
 
-  & p {
+  & > p {
     color: ${(props): string => props.theme.colors.white.evenDarkest};
 
     white-space: nowrap;
