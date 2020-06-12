@@ -12,14 +12,14 @@ const TopInitialState: TopType = {
 
 export const InitialState: InitialStateInterface = {
   tracks: {
-    oneMonth: TopInitialState,
-    threeMonths: TopInitialState,
-    allTime: TopInitialState,
+    onemonth: TopInitialState,
+    threemonths: TopInitialState,
+    alltime: TopInitialState,
   },
   artists: {
-    oneMonth: TopInitialState,
-    threeMonths: TopInitialState,
-    allTime: TopInitialState,
+    onemonth: TopInitialState,
+    threemonths: TopInitialState,
+    alltime: TopInitialState,
   },
 };
 

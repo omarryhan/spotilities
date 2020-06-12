@@ -1,5 +1,5 @@
 export type AvailableResourceTypes = 'tracks' | 'artists';
-export type AvailableDurations = 'oneMonth' | 'threeMonths' | 'allTime';
+export type AvailableDurations = 'onemonth' | 'threemonths' | 'alltime';
 
 export interface TopType {
   data: string[]; // track or artist IDS

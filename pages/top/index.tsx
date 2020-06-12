@@ -4,7 +4,7 @@ import Router from 'next/router';
 
 const Page: NextPage<{}> = () => {
   React.useEffect(() => {
-    Router.push('/top/tracks/oneMonth');
+    Router.push('/top/tracks/onemonth');
   }, []);
 
   return null;

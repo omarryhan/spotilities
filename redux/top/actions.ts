@@ -8,9 +8,9 @@ import { CombinedStateType } from '../types';
 
 
 const durationsApiMapping = {
-  oneMonth: 'short_term',
-  threeMonths: 'medium_term',
-  allTime: 'long_term',
+  onemonth: 'short_term',
+  threemonths: 'medium_term',
+  alltime: 'long_term',
 };
 
 /*

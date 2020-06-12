@@ -15,10 +15,10 @@ const Component: React.FC<Props> = ({ currentType, currentDuration }) => (
     <LinksContainer>
       <LinkContainer
         type="button"
-        onClick={(): Promise<boolean> => Router.push(`/top/${currentType}/oneMonth`)}
+        onClick={(): Promise<boolean> => Router.push(`/top/${currentType}/onemonth`)}
       >
         <LinkTitle
-          isLight={currentDuration === 'oneMonth'}
+          isLight={currentDuration === 'onemonth'}
         >
           1 Month
         </LinkTitle>
@@ -26,10 +26,10 @@ const Component: React.FC<Props> = ({ currentType, currentDuration }) => (
 
       <LinkContainer
         type="button"
-        onClick={(): Promise<boolean> => Router.push(`/top/${currentType}/threeMonths`)}
+        onClick={(): Promise<boolean> => Router.push(`/top/${currentType}/threemonths`)}
       >
         <LinkTitle
-          isLight={currentDuration === 'threeMonths'}
+          isLight={currentDuration === 'threemonths'}
         >
           3 Months
         </LinkTitle>
@@ -37,10 +37,10 @@ const Component: React.FC<Props> = ({ currentType, currentDuration }) => (
 
       <LinkContainer
         type="button"
-        onClick={(): Promise<boolean> => Router.push(`/top/${currentType}/allTime`)}
+        onClick={(): Promise<boolean> => Router.push(`/top/${currentType}/alltime`)}
       >
         <LinkTitle
-          isLight={currentDuration === 'allTime'}
+          isLight={currentDuration === 'alltime'}
         >
           All Time
         </LinkTitle>

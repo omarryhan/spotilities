@@ -34,12 +34,11 @@ const Page: NextPage<{}> = () => {
     }
 
     const authRedirect = window.localStorage.getItem('authRedirect')?.split('/');
-    authRedirect?.shift();
-    authRedirect?.shift();
-    authRedirect?.shift();
+    authRedirect?.shift(); // removes http (or https)
+    authRedirect?.shift(); // removes empty string
+    authRedirect?.shift(); // removes main domain (localhost:3000) or spotitlities.netlify.app
     const route = authRedirect?.join('/');
-    const routeWithStartingSlash = route ? `/${route}` : '/';
-    Router.push(routeWithStartingSlash);
+    Router.push(route ? `/${route}` : '/');
   });
   return (
     null
