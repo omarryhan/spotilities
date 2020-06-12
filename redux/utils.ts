@@ -1,14 +1,17 @@
 import SpotifyApi from 'spotify-web-api-js';
-import { createAuthorizeLink } from '../configs/urls';
+import { createAuthorizeLink, getCurrentBaseUrl } from '../configs/urls';
 
 export const spotifyApi = new SpotifyApi();
 
+
 export const openAuthorizeWindow = async (): Promise<void> => {
-  window.localStorage.setItem('authRedirect', window.location.href);
+  const currentHref = window.location.href;
+  const hrefToSave = currentHref.includes('/playlists/') ? `${getCurrentBaseUrl()}/library` : currentHref;
+  window.localStorage.setItem('authRedirect', hrefToSave);
   window.location.href = createAuthorizeLink();
 };
 
-export const checkIsAuthorized = (accessToken: string, expiresAt: number, error?: string): void => {
+export const checkIsAuthorized = (accessToken: string, expiresAt: number, error: string): void => {
   if ((!accessToken || !expiresAt || (Date.now() >= expiresAt)) && !error) {
     openAuthorizeWindow();
     // Application closes
