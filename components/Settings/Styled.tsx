@@ -30,6 +30,7 @@ export const SettingSection = styled.div`
 
 export const SettingLeftSection = styled.div`
   max-width: 80%;
+  padding-right: 20px;
 `;
 
 export const SettingTitle = styled.h3`

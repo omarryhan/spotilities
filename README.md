@@ -98,3 +98,5 @@ Development requires Node version 12+
 I do not collect any personal information or any sort of access whatsover. All the action is only on your browser.
 
 I added a Google Analytics plugin to see how users interact with the website, which pages users visit, what features users use etc. The GA plugin doesn't collect any personal information either. I also opted out from sharing the information I collect with Google (Which is kind of a moot point given that the data is already stored on Google's servers). I'd appreciate if you'd stop any tracker-blocker or adblocker (no ads) for this website.
+
+

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const OuterContainer = styled.button<{notClickable?: boolean}>`
+export const Button = styled.button<{notClickable?: boolean}>`
   /* Remove all styles */
   background: none;
   color: inherit;
@@ -11,15 +11,22 @@ export const OuterContainer = styled.button<{notClickable?: boolean}>`
 
 
   width: 100%;
-  display: flex;
   height: 100px;
-  justify-content: space-between;
+
+  display: block;
   padding: 10px 0;
   cursor: ${(props): string => (!props.notClickable ? 'pointer' : 'default')};
 
   &:active {
     background-color: ${(props): string => (!props.notClickable ? props.theme.colors.gray.lightest : 'inherit')};
   }
+`;
+
+export const Container = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const LeftSection = styled.div<{fullWidth?: boolean}>`

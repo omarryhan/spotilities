@@ -4,6 +4,7 @@ import { CombinedStateType } from '../../redux/types';
 import { getOrSetAndGetCurrentSettings } from '../../utils';
 import {
   Container,
+  Button,
   ImageSection,
   TitleSection,
   Name,
@@ -105,7 +106,7 @@ const Component: React.FC<Props> = ({
   const { showTrackMetrics } = getOrSetAndGetCurrentSettings();
 
   return (
-    <Container
+    <Button
       onClick={(): void => {
         onClickHandler
           ? onClickHandler(trackId, playlistId)
@@ -114,54 +115,56 @@ const Component: React.FC<Props> = ({
       longLength={showStatsForMusicians}
       type="button"
     >
-      <LeftSection fullWidth={!showTrackMetrics}>
-        <ImageSection
-          longLength={showStatsForMusicians}
-        >
-          <Img
-            src={trackImage}
-            alt="Track album cover"
-          />
-        </ImageSection>
+      <Container>
+        <LeftSection fullWidth={!showTrackMetrics}>
+          <ImageSection
+            longLength={showStatsForMusicians}
+          >
+            <Img
+              src={trackImage}
+              alt="Track album cover"
+            />
+          </ImageSection>
 
-        <TitleSection>
-          <Name>
-            {trackName}
-          </Name>
+          <TitleSection>
+            <Name>
+              {trackName}
+            </Name>
 
-          <ArtistAndAlbumName>
-            {`${artistName} . ${albumName} ${albumYear ? `. ${albumYear.substring(0, 4)}` : ''}`}
-          </ArtistAndAlbumName>
+            <ArtistAndAlbumName>
+              {`${artistName} . ${albumName} ${albumYear ? `. ${albumYear.substring(0, 4)}` : ''}`}
+            </ArtistAndAlbumName>
 
-          {
-            !showStatsForMusicians
-              ? null
-              : (
-                <MoreText>
-                  <StatsForMusicians trackId={trackId} />
-                </MoreText>
-              )
-          }
-        </TitleSection>
-      </LeftSection>
-      {
-        !showTrackMetrics
-          ? null
-          : (
-            <RightSection>
-              {
-                (featuresAvailable).map((feature) => (
-                  <PlaylistMetricBar
-                    name={feature}
-                    key={feature[0]}
-                    percentageHeight={featuresMap[feature as 'danceability' | 'energy' | 'valence' | 'popularity']}
-                  />
-                ))
-              }
-            </RightSection>
-          )
-      }
-    </Container>
+            {
+              !showStatsForMusicians
+                ? null
+                : (
+                  <MoreText>
+                    <StatsForMusicians trackId={trackId} />
+                  </MoreText>
+                )
+            }
+          </TitleSection>
+        </LeftSection>
+        {
+          !showTrackMetrics
+            ? null
+            : (
+              <RightSection>
+                {
+                  (featuresAvailable).map((feature) => (
+                    <PlaylistMetricBar
+                      name={feature}
+                      key={feature[0]}
+                      percentageHeight={featuresMap[feature as 'danceability' | 'energy' | 'valence' | 'popularity']}
+                    />
+                  ))
+                }
+              </RightSection>
+            )
+        }
+      </Container>
+    </Button>
   );
 };
 

@@ -26,6 +26,7 @@ export const LinkContainer = styled(Button)`
   width: 100%;
   padding: 5px 0;
   border-radius: 0;
+  display: block;
 
   & > span {
     height: 100%;

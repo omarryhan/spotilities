@@ -4,10 +4,12 @@ import Skeleton from '@material-ui/lab/Skeleton';
 const longLength = '85px';
 const shortLength = '65px';
 
-export const Container = styled.button<{
+interface ButtonProps {
   notClickable?: boolean;
   longLength?: boolean;
-}>`
+}
+
+export const Button = styled.button<ButtonProps>`
   /* Remove all styles */
   background: none;
   color: inherit;
@@ -16,17 +18,25 @@ export const Container = styled.button<{
   outline: inherit;
   text-align: left;
   padding: 0 0;
+  display: block;
 
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  height: ${(props): string => (props.longLength ? longLength : shortLength)};
   margin-bottom: 15px;
+  height: ${(props): string => (props.longLength ? longLength : shortLength)};
+
   cursor: ${(props): string => (!props.notClickable ? 'pointer' : 'default')};
 
   &:active {
     background-color: ${(props): string => (!props.notClickable ? props.theme.colors.gray.lightest : 'inherit')};
   }
+`;
+
+export const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  
 `;
 
 export const LeftSection = styled.div<{fullWidth?: boolean}>`

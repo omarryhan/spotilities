@@ -3,7 +3,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 
 const height = '105px';
 
-export const Container = styled.button`
+export const Button = styled.button`
   /* Remove all styles */
   background: none;
   color: inherit;
@@ -12,16 +12,22 @@ export const Container = styled.button`
   outline: inherit;
   text-align: left;
   padding: 0 0;
+  display: block;
 
   width: 100%;
-  display: flex;
   height: ${height};
-  margin-bottom: 15px;
   cursor: pointer;
+  margin-bottom: 15px;
 
   &:active {
     background-color: ${(props): string => props.theme.colors.gray.lightest};
   }
+`;
+
+export const Container = styled.div`
+  height: 100%;
+
+  display: flex;
 `;
 
 export const ImageSection = styled.div`

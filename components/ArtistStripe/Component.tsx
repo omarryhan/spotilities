@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { CombinedStateType } from '../../redux/types';
 import {
   Container,
+  Button,
   ImageSection,
   TitleSection,
   Name,
@@ -29,25 +30,28 @@ const Component: React.FC<Props> = ({
   );
 
   return (
-    <Container
+    <Button
       onClick={(): void => {
         window.location.href = artistURI;
       }}
       type="button"
     >
-      <ImageSection>
-        <Img
-          src={artistImage}
-          alt="Image of the artist"
-        />
-      </ImageSection>
+      <Container>
 
-      <TitleSection>
-        <Name>
-          {artistName}
-        </Name>
-      </TitleSection>
-    </Container>
+        <ImageSection>
+          <Img
+            src={artistImage}
+            alt="Image of the artist"
+          />
+        </ImageSection>
+
+        <TitleSection>
+          <Name>
+            {artistName}
+          </Name>
+        </TitleSection>
+      </Container>
+    </Button>
   );
 };
 

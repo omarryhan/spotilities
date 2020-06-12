@@ -7,7 +7,8 @@ import { AllPlaylistItems } from '../../redux/playlistItems/types';
 import PlaylistMetricsBars from '../PlaylistMetricsBars';
 import PlaylistMetricsBarsSkeleton from '../PlaylistMetricsBars/Skeleton';
 import {
-  OuterContainer,
+  Container,
+  Button,
   ImageSection,
   TitleSection,
   Name,
@@ -92,49 +93,51 @@ const Component: React.FC<Props> = ({ playlistId }) => {
   ]);
 
   return (
-    <OuterContainer onClick={(): ReturnType<typeof Router.push> => Router.push('/playlists', `/playlists/${playlistId}`)} type="button">
-      <LeftSection fullWidth={!showAllPlaylistsMetrics}>
-        <ImageSection>
-          <Img
-            src={
-              playlistPhotos.length ? playlistPhotos[0] : playlistPhotos.length > 1 ? playlistPhotos[1] : ''
-            }
-            alt="Playlist cover"
-          />
-        </ImageSection>
+    <Button onClick={(): ReturnType<typeof Router.push> => Router.push('/playlists', `/playlists/${playlistId}`)} type="button">
+      <Container>
+        <LeftSection fullWidth={!showAllPlaylistsMetrics}>
+          <ImageSection>
+            <Img
+              src={
+                playlistPhotos.length ? playlistPhotos[0] : playlistPhotos.length > 1 ? playlistPhotos[1] : ''
+              }
+              alt="Playlist cover"
+            />
+          </ImageSection>
 
-        <TitleSection>
-          <Name>
-            {playlistName}
-          </Name>
+          <TitleSection>
+            <Name>
+              {playlistName}
+            </Name>
 
-          <NumberOfTracks>
-            {playlistTracksCount === -1
-              ? playlistTracksCountFromTracks === 0
-                ? 'Lotta tracks'
-                : `${playlistTracksCountFromTracks} tracks`
-              : `${playlistTracksCount} tracks`}
-          </NumberOfTracks>
+            <NumberOfTracks>
+              {playlistTracksCount === -1
+                ? playlistTracksCountFromTracks === 0
+                  ? 'Lotta tracks'
+                  : `${playlistTracksCountFromTracks} tracks`
+                : `${playlistTracksCount} tracks`}
+            </NumberOfTracks>
 
-        </TitleSection>
-      </LeftSection>
-      {
-        isFetchingPlaylistsItems === false
+          </TitleSection>
+        </LeftSection>
+        {
+          isFetchingPlaylistsItems === false
         && fetchedPlaylistsItemsOnce === true
         && isFetchingPlaylistsTracksAudioFeatures === false
         && fetchedPLaylistsTracksAudioFeaturesOnce === true
         && Object.keys(playlistTracks || {}).length
         && showAllPlaylistsMetrics
-          ? (
-            <RightSection>
-              <PlaylistMetricsBars trackIds={Object.keys(playlistTracks)} />
-            </RightSection>
-          )
-          : showAllPlaylistsMetrics
-            ? <RightSection><PlaylistMetricsBarsSkeleton /></RightSection>
-            : null
-      }
-    </OuterContainer>
+            ? (
+              <RightSection>
+                <PlaylistMetricsBars trackIds={Object.keys(playlistTracks)} />
+              </RightSection>
+            )
+            : showAllPlaylistsMetrics
+              ? <RightSection><PlaylistMetricsBarsSkeleton /></RightSection>
+              : null
+        }
+      </Container>
+    </Button>
   );
 };
 

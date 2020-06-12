@@ -1,4 +1,21 @@
 {
-    "presets": ["next/babel"],
-    "plugins": [["styled-components", { "ssr": true }]]
+    "presets": [
+        [
+            "next/babel",
+            {
+                "preset-env": {
+                    "targets": {
+                        "browsers": [
+                            "> 0.25%, not dead",
+                            "not op_mini all",
+                            "not ie > 0"
+                        ]
+                    }
+                }
+            }
+        ]
+    ],
+    "plugins": [
+        ["styled-components", { "ssr": true }]
+    ]
 }
