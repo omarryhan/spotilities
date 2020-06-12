@@ -24,8 +24,6 @@ module.exports = {
     '!src/**/*.d.ts',
     '!**/node_modules/**',
   ],
-  globalSetup: '<rootDir>/globalTestSetup.ts',
-  globalTeardown: '<rootDir>/globalTestTeardown.ts',
   setupFilesAfterEnv: ['<rootDir>/setupTests.ts'],
   coverageDirectory: 'coverage',
   testEnvironment: 'node',
