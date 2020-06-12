@@ -1,7 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React from 'react';
-import Document, { DocumentContext } from 'next/document';
+import Document, {
+  DocumentContext, Head, Main, NextScript,
+} from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
 export default class MyDocument extends Document {
@@ -10,22 +12,26 @@ export default class MyDocument extends Document {
     const originalRenderPage = ctx.renderPage;
 
     try {
-      ctx.renderPage = () => originalRenderPage({
-        enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
-      });
-
-      const initialProps = await Document.getInitialProps(ctx);
-      return {
-        ...initialProps,
-        styles: (
-          <>
-            {initialProps.styles}
-            {sheet.getStyleElement()}
-          </>
-        ),
-      };
+      const page = originalRenderPage((App) => (props) => sheet.collectStyles(<App {...props} />));
+      const styleTags = sheet.getStyleElement();
+      return { ...page, styleTags };
     } finally {
       sheet.seal();
     }
+  }
+
+  render() {
+    return (
+      <html lang="en">
+        <Head>
+          {/* @ts-ignore */}
+          {this.props.styleTags}
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </html>
+    );
   }
 }
