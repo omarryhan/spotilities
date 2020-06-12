@@ -10,7 +10,6 @@ import FlameActive from '../../public/icons/flame-active.svg';
 import LibraryInactive from '../../public/icons/library-inactive.svg';
 import LibraryActive from '../../public/icons/library-active.svg';
 
-
 const handleLinkClick = (route: string): void => {
   Router.push(route);
 };

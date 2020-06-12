@@ -3,7 +3,6 @@ import { createAuthorizeLink, getCurrentBaseUrl } from '../configs/urls';
 
 export const spotifyApi = new SpotifyApi();
 
-
 export const openAuthorizeWindow = async (): Promise<void> => {
   const currentHref = window.location.href;
   const hrefToSave = currentHref.includes('/playlists/') ? `${getCurrentBaseUrl()}/library` : currentHref;

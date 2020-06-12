@@ -13,7 +13,6 @@ export const InitialState: InitialStateInterface = {
   },
 };
 
-
 export const reducer = createReducer<InitialStateInterface>(InitialState, (builder) => {
   builder.addCase(setAccessToken, (state, action) => ({
     ...state,

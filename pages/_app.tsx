@@ -14,7 +14,6 @@ import GlobalStyles from '../components/GlobalStyles';
 import { styledComponentsTheme, materialUITheme } from '../configs/theme';
 import { GA_TRACKING_ID, GA_CONFIGS } from '../configs/services';
 
-
 const initGA = (): void => {
   if (
     typeof window !== 'undefined'
@@ -61,7 +60,6 @@ export function reportWebVitals({
     nonInteraction: true,
   });
 }
-
 
 class MyApp extends App<AppInitialProps & CustomAppInitialProps> {
   public async componentDidMount(): Promise<void> {
@@ -114,7 +112,6 @@ class MyApp extends App<AppInitialProps & CustomAppInitialProps> {
     );
   }
 }
-
 
 // TODO: Revert to class component
 // Only using a function component because I can't access Dispatch from

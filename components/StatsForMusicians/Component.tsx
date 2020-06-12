@@ -8,7 +8,6 @@ import {
 } from './Styled';
 // import ClefIcon from '../../public/icons/clef.svg';
 
-
 const modeMapping = [
   'Minor',
   'Major',

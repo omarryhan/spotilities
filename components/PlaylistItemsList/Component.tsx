@@ -8,7 +8,6 @@ import { Container } from './Styled';
 import TrackStripe from '../TrackStripe';
 import Skeleton from '../TrackStripe/Skeleton';
 
-
 const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
   const playlistTracks = useSelector<CombinedStateType, AllPlaylistItems>(
     (state) => state.playlistItems.data[playlistId]?.data,

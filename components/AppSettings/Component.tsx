@@ -5,7 +5,6 @@ import {
   Version,
 } from './Styled';
 
-
 const Component: React.FC<{}> = () => (
   <Container>
     <Version>

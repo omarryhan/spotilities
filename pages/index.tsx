@@ -7,7 +7,6 @@ import AppBody from '../components/AppBody';
 import CurrentUserLoader from '../components/CurrentUserLoader';
 import TopNav from '../components/TopNav';
 
-
 const Page: NextPage<{}> = () => (
   <>
     <AccessTokenLoader />

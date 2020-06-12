@@ -5,7 +5,6 @@ export const Container = styled.div`
   text-align: center;
 `;
 
-
 export const Version = styled.p`
   margin: 0 0;
   color: ${(props): string => props.theme.colors.white.evenDarkest};

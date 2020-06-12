@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import Skeleton from '@material-ui/lab/Skeleton';
 
-
 export const Metric = styled.div`
   width: 100%;
   margin-bottom: 2px;

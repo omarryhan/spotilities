@@ -3,7 +3,6 @@ import Router from 'next/router';
 import SettingsIcon from '../../public/icons/settings.svg';
 import BackButton from '../../public/icons/back-arrow.svg';
 
-
 import {
   Header,
   Nav,
@@ -12,7 +11,6 @@ import {
   SettingsButtonWapper,
   BackButtonWrapper,
 } from './Styled';
-
 
 const Component: React.FC<
 {title?: string; showBackButton?: boolean; showSettingsButton?: boolean}

@@ -76,16 +76,13 @@ const Component: React.FC<Props> = ({
     (state) => state.tracks.data[trackId]?.data?.popularity,
   );
 
-
   const danceability = useSelector<CombinedStateType, number | undefined>(
     (state) => state.tracksAudioFeatures.data[trackId]?.data?.danceability,
   );
 
-
   const energy = useSelector<CombinedStateType, number | undefined>(
     (state) => state.tracksAudioFeatures.data[trackId]?.data?.energy,
   );
-
 
   const valence = useSelector<CombinedStateType, number | undefined>(
     (state) => state.tracksAudioFeatures.data[trackId]?.data?.valence,

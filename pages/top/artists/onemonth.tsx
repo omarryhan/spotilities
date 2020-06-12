@@ -11,7 +11,6 @@ import TopArtistsList from '../../../components/TopArtistsList';
 import TopResourceNavbar from '../../../components/TopResourceNavbar';
 import TopTrackOrArtist from '../../../components/TopTrackOrArtist';
 
-
 const Page: NextPage<{}> = () => (
   <>
     <AccessTokenLoader />

@@ -7,7 +7,6 @@ import {
   BodySkeletonWrapper,
 } from './Styled';
 
-
 const Component: React.FC<{}> = () => (
   <Container notClickable>
     <LeftSection>
@@ -18,6 +17,5 @@ const Component: React.FC<{}> = () => (
     </LeftSection>
   </Container>
 );
-
 
 export default Component;

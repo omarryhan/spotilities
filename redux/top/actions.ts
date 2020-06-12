@@ -6,7 +6,6 @@ import { fetchTracksAudioFeatures } from '../tracksAudioFeatures/actions';
 import { AvailableDurations, AvailableResourceTypes } from './types';
 import { CombinedStateType } from '../types';
 
-
 const durationsApiMapping = {
   onemonth: 'short_term',
   threemonths: 'medium_term',

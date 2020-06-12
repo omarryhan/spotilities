@@ -3,7 +3,6 @@ import Switch from '@material-ui/core/Switch';
 import { withStyles } from '@material-ui/core/styles';
 import { styledComponentsTheme } from '../../configs/theme';
 
-
 export const Container = styled.div`
   padding: 10px ${(props): string => props.theme.dimensions.contentSideMargin.all} calc(${(props): string => props.theme.dimensions.bottomAppBarHeight.all} + 10px) ${(props): string => props.theme.dimensions.contentSideMargin.all};
 

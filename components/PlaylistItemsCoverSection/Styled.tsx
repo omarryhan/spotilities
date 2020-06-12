@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-
 export const Container = styled.div`
   width: 100%;
 `;
@@ -40,7 +39,6 @@ export const Slide = styled.div<{bgColor: string}>`
   /* stylelint-disable-next-line plugin/no-unsupported-browser-features */ /* vendor prefixed*/
   background: linear-gradient(0deg, ${(props): string => props.theme.colors.gray.dark} 0%, ${(props): string => props.bgColor} 100%);
 `;
-
 
 export const PlaylistCoverPhotoWrapper = styled.div`
   display: flex;

@@ -28,7 +28,6 @@ const Component: React.FC<Props> = ({
     (state) => state.artists.data[artistId]?.data?.uri,
   );
 
-
   return (
     <Container
       onClick={(): void => {

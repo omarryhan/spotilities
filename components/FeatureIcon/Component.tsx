@@ -4,7 +4,6 @@ import {
   AvailableMetrics,
 } from '../PlaylistMetricBar/types';
 
-
 import DanceabilityIcon from '../../public/icons/dance.svg';
 import EnergyIcon from '../../public/icons/flash.svg';
 import ValenceIcon from '../../public/icons/happy.svg';
@@ -14,7 +13,6 @@ import NoiseIcon from '../../public/icons/noise.svg';
 import MicrophoneIcon from '../../public/icons/microphone.svg';
 import VideoCameraIcon from '../../public/icons/video-camera.svg';
 import MetronomeIcon from '../../public/icons/tempo.svg';
-
 
 const Component: React.FC<{name: AvailableMetrics}> = ({ name }) => {
   if (name === 'popularity') {

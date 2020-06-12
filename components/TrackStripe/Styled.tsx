@@ -113,7 +113,6 @@ export const BodySkeletonWrapper = styled.div`
   flex-direction: column;
 `;
 
-
 export const BodySkeleton = styled(Skeleton)`
     width: 100px;
     margin-left: 10px;

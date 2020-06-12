@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { Button, ButtonContainer } from './Styled';
 import { playPlaylist } from '../../redux/playback/actions';
 
-
 const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
   const dispatch = useDispatch();
   return (

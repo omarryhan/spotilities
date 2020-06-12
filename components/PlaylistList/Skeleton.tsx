@@ -2,7 +2,6 @@ import React from 'react';
 import { PictureSkeleton, BodySkeleton, BodySkeletonWrapper } from './Styled';
 import { OuterContainer, LeftSection } from '../PlaylistListItem/Styled';
 
-
 const Component: React.FC<{}> = () => (
   <>
     {

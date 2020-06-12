@@ -75,7 +75,6 @@ export const styledComponentsTheme: DefaultTheme = {
   zIndeces,
 };
 
-
 export const materialUITheme = createMuiTheme({
   palette: {
     primary: {
