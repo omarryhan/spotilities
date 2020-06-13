@@ -96,6 +96,15 @@ class MyApp extends App<AppInitialProps & CustomAppInitialProps> {
             <Head>
               <link rel="shortcut icon" href="/favicon.png" />
               <link rel="manifest" href="/manifest.json" />
+              <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+              <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+              <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+              <link rel="apple-touch-startup-image" href="" />
+              <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#282828" />
+              <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+              <meta name="apple-mobile-webapp-title" content="Spotilities" />
+              <meta name="apple-mobile-web-app-capable" content="yes" />
+              <meta name="msapplication-TileColor" content="#282828" />
               <meta name="title" content="Spotilities | Utilities for Spotify" />
               <meta name="description" content="Spotilities is awesome. Should probably explain more but I'm lazy. Come check it out!" />
               <meta name="keywords" content="Spotify, Spotify Utilities, Spotify Tools" />
