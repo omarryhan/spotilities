@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import LazyLoadOnScroll from '../LazyLoadOnScroll';
+import WithScrollLazyLoad from '../WithScrollLazyLoad';
 import { CombinedStateType } from '../../redux/types';
 import { AllPlaylistItems } from '../../redux/playlistItems/types';
 import { Container } from './Styled';
@@ -23,7 +23,7 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
       {
         allPlaylistTrackIds.length
           ? (
-            <LazyLoadOnScroll
+            <WithScrollLazyLoad
               maxItems={allPlaylistTrackIds.length}
               startingItems={15}
             >
@@ -36,7 +36,7 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
                   }
                 </>
               )}
-            </LazyLoadOnScroll>
+            </WithScrollLazyLoad>
           )
           : (
             Array(8).fill('_').map((_, i) => (

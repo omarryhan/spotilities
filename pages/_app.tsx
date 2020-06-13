@@ -9,6 +9,8 @@ import Router from 'next/router';
 import ReactGA from 'react-ga';
 import { Provider } from 'react-redux';
 import { store } from '../redux';
+import 'react-awesome-button/dist/styles.css';
+import '../components/RecommendButton/react-awesome-button.css';
 
 import GlobalStyles from '../components/GlobalStyles';
 import { styledComponentsTheme, materialUITheme } from '../configs/theme';
@@ -87,6 +89,7 @@ class MyApp extends App<AppInitialProps & CustomAppInitialProps> {
       Component, pageProps, err,
     } = this.props;
 
+    // https://blog.expo.io/enabling-ios-splash-screens-for-progressive-web-apps-34f06f096e5c
     return (
       <Provider store={store}>
         <MaterialThemeProvider theme={materialUITheme}>
@@ -104,6 +107,8 @@ class MyApp extends App<AppInitialProps & CustomAppInitialProps> {
               <meta name="apple-mobile-web-app-status-bar-style" content="black" />
               <meta name="apple-mobile-webapp-title" content="Spotilities" />
               <meta name="apple-mobile-web-app-capable" content="yes" />
+              <meta name="apple-touch-fullscreen" content="yes" />
+              <meta name="mobile-web-app-capable" content="yes" />
               <meta name="msapplication-TileColor" content="#282828" />
               <meta name="title" content="Spotilities | Utilities for Spotify" />
               <meta name="description" content="Spotilities is awesome. Should probably explain more but I'm lazy. Come check it out!" />

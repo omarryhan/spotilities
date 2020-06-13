@@ -6,6 +6,9 @@ import AccessTokenLoader from '../components/AccessTokenLoader';
 import AppBody from '../components/AppBody';
 import CurrentUserLoader from '../components/CurrentUserLoader';
 import TopNav from '../components/TopNav';
+import RecommendButton from '../components/RecommendButton';
+import MetricSliderSection from '../components/MetricsSliderSection';
+import SeedTracksSection from '../components/SeedTracksSection';
 
 const Page: NextPage<{}> = () => (
   <>
@@ -13,7 +16,9 @@ const Page: NextPage<{}> = () => (
     <CurrentUserLoader />
     <TopNav title="Recommendations" showSettingsButton />
     <AppBody>
-      Recommendations
+      <MetricSliderSection />
+      <SeedTracksSection />
+      <RecommendButton />
     </AppBody>
     <BottomNav />
   </>

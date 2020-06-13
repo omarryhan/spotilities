@@ -60,12 +60,10 @@ More tools being used:
   - Redux
   - Redux toolkit
   - Styled components
+  - react-awesome-button
   - Material UI (Sparingly)
   - Typescript
   - Testing with Jest, Sinon and React Test Renderer
-  - Eslint plugins:
-    - Airbnb base
-    - TODO: fill out the rest.
 
 ## Development
 

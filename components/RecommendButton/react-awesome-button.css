@@ -1,0 +1,36 @@
+.aws-btn {
+  --button-default-height: 125px;
+  width: 125px;
+  max-width: 125px;
+  --button-default-font-size: 25px;
+  --button-default-border-radius: 50%;
+  /* --button-horizontal-padding: 100px; */
+  --button-raise-level: 9px;
+  --button-hover-pressure: 2.5;
+  --transform-speed: 0.25s;
+  /*--button-primary-color: #1DB954;*/
+  --button-primary-color: radial-gradient(circle at center,#1DB954, #186A3B 100%);
+  --button-primary-color-dark: #155b33;
+  --button-primary-color-light: #ABEBC6;
+  /*--button-primary-color-hover: #239B56;*/
+  --button-primary-color-hover: radial-gradient(circle at center, #1bab4d, #165d35 100%);
+  /*--button-primary-color-active: #186A3B;*/
+  --button-primary-color-active: radial-gradient(circle at center, #1aa94c, #145632 100%);
+}
+
+.aws-btn > span > span > span {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.aws-btn > span > span > span > svg {
+  width: 75px;
+  height: 75px;
+}
+
+.aws-btn > span > span > span > svg > path {
+  fill: rgba(30, 30, 30, 1) !important;
+}

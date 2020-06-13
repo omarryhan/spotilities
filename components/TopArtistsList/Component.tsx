@@ -4,7 +4,7 @@ import { CombinedStateType } from '../../redux/types';
 import { AvailableDurations, AvailableResourceTypes } from '../../redux/top/types';
 import { fetchTopItems } from '../../redux/top/actions';
 import ArtistStripe from '../ArtistStripe';
-import LazyLoadOnScroll from '../LazyLoadOnScroll';
+import WithScrollLazyLoad from '../WithScrollLazyLoad';
 import Skeleton from '../TrackStripe/Skeleton';
 
 import {
@@ -39,7 +39,7 @@ const Component: React.FC<Props> = ({ currentDuration }) => {
       {
         topArtistIds.length
           ? (
-            <LazyLoadOnScroll
+            <WithScrollLazyLoad
               maxItems={topArtistIds.length}
               startingItems={15}
             >
@@ -55,7 +55,7 @@ const Component: React.FC<Props> = ({ currentDuration }) => {
                   }
                 </>
               )}
-            </LazyLoadOnScroll>
+            </WithScrollLazyLoad>
           )
           : (
             Array(8).fill('_').map((_, i) => (

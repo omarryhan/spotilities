@@ -8,7 +8,7 @@ import { AvailableDurations, AvailableResourceTypes } from '../../redux/top/type
 import { playTrackURIS } from '../../redux/playback/actions';
 import { fetchTopItems } from '../../redux/top/actions';
 import TrackStripe from '../TrackStripe';
-import LazyLoadOnScroll from '../LazyLoadOnScroll';
+import WithScrollLazyLoad from '../WithScrollLazyLoad';
 import Skeleton from '../TrackStripe/Skeleton';
 
 interface Props {
@@ -39,7 +39,7 @@ const Component: React.FC<Props> = ({ currentDuration }) => {
       {
         topTrackIds.length
           ? (
-            <LazyLoadOnScroll
+            <WithScrollLazyLoad
               maxItems={topTrackIds.length}
               startingItems={15}
             >
@@ -68,7 +68,7 @@ const Component: React.FC<Props> = ({ currentDuration }) => {
                   }
                 </>
               )}
-            </LazyLoadOnScroll>
+            </WithScrollLazyLoad>
           )
           : (
             Array(8).fill('_').map((_, i) => (

@@ -77,11 +77,9 @@ const Component: React.FC<Props> = ({ playlistId }) => {
         ) || !showAllPlaylistsMetrics) {
         return;
       }
-
       await dispatch(fetchUserPlaylistItems({ playlistId }));
       await dispatch(fetchPlaylistItemsAudioFeatures(playlistId));
     };
-
     effect();
   }, [
     dispatch,

@@ -48,7 +48,7 @@ const getKeySignature = (key: number | undefined, mode: number | undefined): nul
 
 const Component: React.FC<{trackId: string}> = ({ trackId }) => {
   const tempo = useSelector<CombinedStateType, number | undefined>(
-    (state) => state.tracksAudioFeatures.data[trackId]?.data.tempo,
+    (state) => state.tracksAudioFeatures.data[trackId]?.data?.tempo,
   );
 
   // const timeSignature = useSelector<CombinedStateType, number | undefined>(
@@ -56,11 +56,11 @@ const Component: React.FC<{trackId: string}> = ({ trackId }) => {
   // );
 
   const mode = useSelector<CombinedStateType, number | undefined>(
-    (state) => state.tracksAudioFeatures.data[trackId]?.data.mode,
+    (state) => state.tracksAudioFeatures.data[trackId]?.data?.mode,
   );
 
   const key = useSelector<CombinedStateType, number | undefined>(
-    (state) => state.tracksAudioFeatures.data[trackId]?.data.key,
+    (state) => state.tracksAudioFeatures.data[trackId]?.data?.key,
   );
 
   const keySignature = getKeySignature(key, mode);

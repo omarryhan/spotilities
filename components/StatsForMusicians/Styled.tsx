@@ -8,6 +8,7 @@ export const Container = styled.div`
 export const Text = styled.p`
   font-size: 11px;
   margin: 0 0;
+  color: ${(props): string => props.theme.colors.white.darkest};
 `;
 
 export const IconWrapper = styled.div`

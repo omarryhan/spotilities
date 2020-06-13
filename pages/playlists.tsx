@@ -53,9 +53,9 @@ const Page: NextPage<{}> = () => {
     // this effect will infinitely loop
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
+    // isFetchingPlaylistsItems,
     dispatch,
     playlistId,
-    // isFetchingPlaylistsItems,
   ]);
 
   return (
