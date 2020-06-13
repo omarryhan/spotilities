@@ -16,7 +16,7 @@ const Page: NextPage<{}> = () => (
     <CurrentUserLoader />
     <TopNav title="Recommendations" showSettingsButton />
     <AppBody>
-      <MetricSliderSection />
+      <div style={{ height: '5vh' }} />
       <SeedTracksSection />
       <RecommendButton />
     </AppBody>
