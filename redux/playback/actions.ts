@@ -8,7 +8,7 @@ const flashPlaybackError = (e: XMLHttpRequest | Error): void => {
   if (e instanceof XMLHttpRequest) {
     const errorMessage = e.response && JSON.parse(e.response)?.error?.message as undefined | string;
     if (errorMessage && errorMessage.includes('active device')) {
-      alert('Please make sure you have a song already playing in your main Spotify app. This is a limitation of Spotify.');
+      alert('Playback Failed.\nPlease make sure you have a song already playing in your main Spotify app.\nThis is a limitation of Spotify.');
       window.location.href = 'spotify:';
     } else if (errorMessage) {
       alert(errorMessage);

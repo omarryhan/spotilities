@@ -1,14 +1,28 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  height: 125px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding-right: calc(${(props): string => props.theme.dimensions.contentSideMargin.all} + 10px);
+  padding: 0 ${(props): string => props.theme.dimensions.contentSideMargin.all};
 `;
 
-export const Button = styled.button`
+export const Title = styled.p`
+  font-size: 24px;
+  text-align: center;
+`;
+
+export const IllustrationWrapper = styled.div`
+  text-align: center;
+  height: 250px;
+
+  & > svg {
+    height: 100%;
+  }
+`;
+
+export const GetStartedButtonWrapper = styled.div`
+  text-align: center;
+`;
+
+export const GetStartedButton = styled.button`
   width: 150px;
   height: 50px;
 
@@ -18,9 +32,8 @@ export const Button = styled.button`
   outline: inherit;
   font: inherit;
   color: ${(props): string => props.theme.colors.white.lightest};
-  
-  font-size: 16px;
-  font-weight: bold;
+
+  font-size: 20px;
 
   &:active {
     background: ${(props): string => props.theme.colors.green.dark};

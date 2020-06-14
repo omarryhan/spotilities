@@ -6,7 +6,7 @@ import AccessTokenLoader from '../components/AccessTokenLoader';
 import AppBody from '../components/AppBody';
 import CurrentUserLoader from '../components/CurrentUserLoader';
 import TopNav from '../components/TopNav';
-import SeedTracksSection from '../components/SeedTracksSection';
+import RecommendGetStarted from '../components/RecommendGetStarted';
 
 const Page: NextPage<{}> = () => (
   <>
@@ -14,7 +14,7 @@ const Page: NextPage<{}> = () => (
     <CurrentUserLoader />
     <TopNav title="Recommendations" showSettingsButton />
     <AppBody>
-      <SeedTracksSection />
+      <RecommendGetStarted />
     </AppBody>
     <BottomNav />
   </>

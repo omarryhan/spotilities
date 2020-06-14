@@ -1,24 +1,22 @@
 import React from 'react';
 import { NextPage } from 'next';
 
-import BottomNav from '../../../components/BottomNav';
 import AccessTokenLoader from '../../../components/AccessTokenLoader';
 import AppBody from '../../../components/AppBody';
 import CurrentUserLoader from '../../../components/CurrentUserLoader';
 import TopNav from '../../../components/TopNav';
-import MetricsSliderSection from '../../../components/MetricsSliderSection';
+import SeedTracksSection from '../../../components/SeedTracksSection';
 import ProgressBar from '../../../components/TopProgressBar';
 
 const Page: NextPage<{}> = () => (
   <>
     <AccessTokenLoader />
     <CurrentUserLoader />
-    <TopNav title="Fine Tuning" showBackButton />
+    <TopNav title="Select Seed Tracks" showBackButton />
     <AppBody>
-      <ProgressBar progress={66} />
-      <MetricsSliderSection />
+      <ProgressBar progress={33} />
+      <SeedTracksSection />
     </AppBody>
-    <BottomNav />
   </>
 );
 

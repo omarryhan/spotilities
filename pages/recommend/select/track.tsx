@@ -63,7 +63,7 @@ const Page: NextPage<{}> = () => {
     inThisListOfTracks?: string[],
   ): void => {
     dispatch(addTrackSeed(trackId));
-    Router.push('/');
+    Router.push('/recommend/select/seed-tracks');
   };
 
   return (

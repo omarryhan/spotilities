@@ -3,40 +3,19 @@ import Router from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
 import { CombinedStateType } from '../../redux/types';
 import TrackStripe from '../TrackStripe';
-import AddIcon from '../../public/icons/add.svg';
 import { removeSeedTrack } from '../../redux/recommendations/actions';
 
 import {
   Container,
-  SelectTrackStripeContainer,
-  SelectTrackStripeContents,
-  SelectTrackStripeIconContainer,
-  SelectTrackStripeText,
   TrackStripeContainer,
   RemoveButtonSection,
   TrackStripeSection,
   RemoveButton,
   Title,
-  Description,
 } from './Styled';
+import SelectBox from '../SelectBox';
 import RemoveIcon from '../../public/icons/remove.svg';
 import NextButton from '../NextButton';
-
-const SelectTrackStripe: React.FC<{}> = () => (
-  <SelectTrackStripeContainer
-    onClick={(): Promise<boolean> => Router.push('/recommend/select/playlist')}
-  >
-    <SelectTrackStripeContents>
-      <SelectTrackStripeIconContainer>
-        <AddIcon />
-      </SelectTrackStripeIconContainer>
-
-      <SelectTrackStripeText>
-        Add track
-      </SelectTrackStripeText>
-    </SelectTrackStripeContents>
-  </SelectTrackStripeContainer>
-);
 
 const Component: React.FC<{}> = () => {
   const dispatch = useDispatch();
@@ -45,24 +24,26 @@ const Component: React.FC<{}> = () => {
     (state) => state.recommendations.seedTracks,
   );
 
+  const onSelectBoxClickHandler = (): Promise<boolean> => Router.push('/recommend/select/playlist');
+
   return (
     <>
       <Title>
-        Seed Tracks:
+        Add a track or more that you like:
       </Title>
-      <Description>
-        Choose tracks that you want Spotilities to find tracks similar in taste to
-      </Description>
       <Container>
         {
           !seedTracks.length
             ? (
-              <SelectTrackStripe />
+              <SelectBox
+                onClickHandler={onSelectBoxClickHandler}
+                text="Add track"
+              />
             )
             : (
               <>
                 {
-                  seedTracks.map((seedTrackId, index) => (
+                  seedTracks.map((seedTrackId) => (
                     <TrackStripeContainer key={seedTrackId}>
                       <TrackStripeSection>
                         <TrackStripe
@@ -85,7 +66,10 @@ const Component: React.FC<{}> = () => {
                     </TrackStripeContainer>
                   ))
                 }
-                <SelectTrackStripe />
+                <SelectBox
+                  onClickHandler={onSelectBoxClickHandler}
+                  text="Add track"
+                />
               </>
             )
         }
