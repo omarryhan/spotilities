@@ -37,18 +37,25 @@ interface FeaturesMap {
 
 interface Props {
   trackId: string;
+  onTrackClick?: () => any;
   playlistId?: string;
+  notClickable?: boolean;
   onClickHandler?: (
     trackId: string,
-    playlistId?: string,
+    playlistId: string,
     inThisListOfTracks?: string[],
   ) => any;
+  hideMetrics?: boolean;
+  hideMusiciansInfo?: boolean;
 }
 
 const Component: React.FC<Props> = ({
   trackId,
   playlistId,
   onClickHandler,
+  notClickable,
+  hideMetrics,
+  hideMusiciansInfo,
 }) => {
   const dispatch = useDispatch();
 
@@ -101,19 +108,24 @@ const Component: React.FC<Props> = ({
     popularity: percentagePopularity,
   };
 
-  const showStatsForMusicians = getOrSetAndGetCurrentSettings().showMusicianStats;
+  let showStatsForMusicians = getOrSetAndGetCurrentSettings().showMusicianStats;
 
-  const { showTrackMetrics } = getOrSetAndGetCurrentSettings();
+  showStatsForMusicians = typeof hideMusiciansInfo !== 'undefined' ? !hideMusiciansInfo : showStatsForMusicians;
+
+  let { showTrackMetrics } = getOrSetAndGetCurrentSettings();
+
+  showTrackMetrics = typeof hideMetrics !== 'undefined' ? !hideMetrics : showTrackMetrics;
 
   return (
     <Button
       onClick={(): void => {
         onClickHandler
-          ? onClickHandler(trackId, playlistId)
+          ? onClickHandler(trackId, playlistId || '')
           : dispatch(playTrackInPlaylist({ trackId, playlistId: playlistId as string }));
       }}
       longLength={showStatsForMusicians}
       type="button"
+      notClickable={notClickable}
     >
       <Container>
         <LeftSection fullWidth={!showTrackMetrics}>

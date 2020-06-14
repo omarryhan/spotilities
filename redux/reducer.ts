@@ -10,6 +10,7 @@ import { reducer as tracksReducer } from './tracks/reducer';
 import { reducer as tracksAudioFeaturesReducer } from './tracksAudioFeatures/reducer';
 import { reducer as artistsReducer } from './artists/reducer';
 import { reducer as topReducer } from './top/reducer';
+import { reducer as recommendationsReducer } from './recommendations/reducer';
 
 const allReducers = {
   user: userReducer,
@@ -20,6 +21,7 @@ const allReducers = {
   tracksAudioFeatures: tracksAudioFeaturesReducer,
   artists: artistsReducer,
   top: topReducer,
+  recommendations: recommendationsReducer,
 };
 
 export const combinedReducer = combineReducers(allReducers);

@@ -9,8 +9,6 @@ import Router from 'next/router';
 import ReactGA from 'react-ga';
 import { Provider } from 'react-redux';
 import { store } from '../redux';
-import 'react-awesome-button/dist/styles.css';
-import '../components/RecommendButton/react-awesome-button.css';
 
 import GlobalStyles from '../components/GlobalStyles';
 import { styledComponentsTheme, materialUITheme } from '../configs/theme';

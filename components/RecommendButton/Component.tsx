@@ -1,18 +1,15 @@
 import React from 'react';
-// @ts-ignore
-import { AwesomeButton } from 'react-awesome-button';
-import Wand from '../../public/icons/wand-active.svg';
-
 import {
-  IconWrapper,
+  Container,
+  Button,
 } from './Styled';
 
 const Component: React.FC<{}> = () => (
-  <IconWrapper>
-    <AwesomeButton type="primary">
-      <Wand />
-    </AwesomeButton>
-  </IconWrapper>
+  <Container>
+    <Button type="submit">
+      Recommend
+    </Button>
+  </Container>
 );
 
 export default Component;

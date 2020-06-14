@@ -22,9 +22,10 @@ import { getOrSetAndGetCurrentSettings } from '../../utils';
 
 interface Props {
   playlistId: string;
+  onPlaylistItemClick?: (playlistId: string) => any;
 }
 
-const Component: React.FC<Props> = ({ playlistId }) => {
+const Component: React.FC<Props> = ({ playlistId, onPlaylistItemClick }) => {
   const playlistName = useSelector<CombinedStateType, string>(
     (state) => state.playlists.data[playlistId].name,
   );
@@ -91,7 +92,10 @@ const Component: React.FC<Props> = ({ playlistId }) => {
   ]);
 
   return (
-    <Button onClick={(): ReturnType<typeof Router.push> => Router.push('/playlists', `/playlists/${playlistId}`)} type="button">
+    <Button
+      onClick={onPlaylistItemClick ? (): any => onPlaylistItemClick(playlistId) : ((): ReturnType<typeof Router.push> => Router.push('/playlists', `/playlists/${playlistId}`))}
+      type="button"
+    >
       <Container>
         <LeftSection fullWidth={!showAllPlaylistsMetrics}>
           <ImageSection>

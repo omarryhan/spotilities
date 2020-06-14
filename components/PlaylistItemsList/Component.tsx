@@ -8,7 +8,16 @@ import { Container } from './Styled';
 import TrackStripe from '../TrackStripe';
 import Skeleton from '../TrackStripe/Skeleton';
 
-const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
+interface Props {
+  playlistId: string;
+  onTrackClick?: (
+    trackId: string,
+    playlistId: string,
+    inThisListOfTracks?: string[],
+  ) => any;
+}
+
+const Component: React.FC<Props> = ({ playlistId, onTrackClick }) => {
   const playlistTracks = useSelector<CombinedStateType, AllPlaylistItems>(
     (state) => state.playlistItems.data[playlistId]?.data,
   );
@@ -31,7 +40,12 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
                 <>
                   {
                     (allPlaylistTrackIds.slice(0, nToRender).map((trackId) => (
-                      <TrackStripe key={trackId} trackId={trackId} playlistId={playlistId} />
+                      <TrackStripe
+                        key={trackId}
+                        trackId={trackId}
+                        playlistId={playlistId}
+                        onClickHandler={onTrackClick}
+                      />
                     )))
                   }
                 </>

@@ -7,7 +7,9 @@ import { CombinedStateType } from '../../redux/types';
 import { fetchUserPlaylists } from '../../redux/playlists/actions';
 import { AllPlaylists } from '../../redux/playlists/types';
 
-const Component: React.FC<{}> = () => {
+const Component: React.FC<{
+  onPlaylistItemClick?: (playlistId: string) => any;
+}> = ({ onPlaylistItemClick }) => {
   const accessToken = useSelector<CombinedStateType, string>(
     (state) => state.user.token.accessToken,
   );
@@ -41,6 +43,7 @@ const Component: React.FC<{}> = () => {
               <PlaylistListItem
                 playlistId={playlists[playlistKey].id}
                 key={playlists[playlistKey].id}
+                onPlaylistItemClick={onPlaylistItemClick}
               />
             ))
             : <Skeleton />

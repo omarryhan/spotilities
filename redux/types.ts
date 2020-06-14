@@ -8,6 +8,7 @@ import { InitialStateInterface as TracksInitialStateInterface } from './tracks/t
 import { InitialStateInterface as TracksAudioFeaturesInitialStateInterface } from './tracksAudioFeatures/types';
 import { InitialStateInterface as ArtistsInitialStateInterface } from './artists/types';
 import { InitialStateInterface as TopInitialStateInterface } from './top/types';
+import { InitialStateInterface as RecommendationsStateInterface } from './recommendations/types';
 
 export type CombinedStateType = CombinedState<{
   user: UserInitialStateInterface;
@@ -18,4 +19,5 @@ export type CombinedStateType = CombinedState<{
   tracksAudioFeatures: TracksAudioFeaturesInitialStateInterface;
   artists: ArtistsInitialStateInterface;
   top: TopInitialStateInterface;
+  recommendations: RecommendationsStateInterface;
 }>;

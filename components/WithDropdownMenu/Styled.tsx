@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { animated } from 'react-spring';
 
 export const Container = styled.div`
   width: 100%;
@@ -13,30 +12,45 @@ export const MenuContainer = styled.div`
   padding-right: ${(props): string => props.theme.dimensions.contentSideMargin.all};
   padding-left: ${(props): string => props.theme.dimensions.contentSideMargin.all};
 
-  height: 40px;
+  min-height: 50px;
+  cursor: pointer;
+
+  background-color: rgba(30, 30, 30, 1);
+
+  &:active {
+    background-color: ${(props): string => props.theme.colors.gray.dark};
+  }
+
+  height: 1rem;
 `;
 
 export const MenuTitle = styled.h2`
   margin: 0 0;
-  font-size: 40px;
+  font-size: 30px;
+  color: ${(props): string => props.theme.colors.white.light};
 `;
 
-export const MenuIconContainer = styled.div`
+interface MenuIconContainerProps {
+  isChildVisible: boolean;
+}
+
+export const MenuIconContainer = styled.div<MenuIconContainerProps>`
   width: 40px;
   height: 100%;
   display: flex;
   align-items: center;
-  
+  justify-content: flex-end;
+
   & > svg {
     height: 100%;
     fill: ${(props): string => props.theme.colors.white.light};
+    transform: ${(props): string => (props.isChildVisible ? 'none' : 'rotate(270deg)')}
   }
 `;
 
-export const CollapseWrapper = styled(animated.div)`
+export const CollapseWrapper = styled.div`
   width: 100%;
-  padding-right: ${(props): string => props.theme.dimensions.contentSideMargin.all};
-  padding-left: ${(props): string => props.theme.dimensions.contentSideMargin.all};
+  padding: 0 calc(${(props): string => props.theme.dimensions.contentSideMargin.all});
 
   margin-top: 20px;
 `;
