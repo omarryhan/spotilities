@@ -11,7 +11,7 @@ const Page: NextPage<{}> = () => (
   <>
     <AccessTokenLoader />
     <CurrentUserLoader />
-    <TopNav title="Select an Attribute Selector" showBackButton />
+    <TopNav title="Select a filter" showBackButton />
     <AppBody>
       <MetricSelector />
     </AppBody>
