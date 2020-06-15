@@ -53,7 +53,7 @@ const Component: React.FC<{}> = () => {
   return (
     <>
       <Title>
-        Add a filter or two:
+        2. Add a filter or two (Optional):
       </Title>
       <Container>
         {
@@ -61,7 +61,7 @@ const Component: React.FC<{}> = () => {
             ? (unselectedAttributesAvailable.length ? (
               <SelectBox
                 onClickHandler={onSelectBoxClickHandler}
-                text="Add an attribute selector"
+                text="Add a filter"
               />
             ) : null
             )
@@ -98,7 +98,7 @@ const Component: React.FC<{}> = () => {
                   unselectedAttributesAvailable.length ? (
                     <SelectBox
                       onClickHandler={onSelectBoxClickHandler}
-                      text="Add another attribute selector"
+                      text="Add another filter"
                     />
                   ) : (null)
                 }

@@ -29,7 +29,7 @@ const Component: React.FC<{}> = () => {
   return (
     <>
       <Title>
-        Add a track or more that you like:
+        1. Select a track or more that you like:
       </Title>
       <Container>
         {
@@ -37,7 +37,7 @@ const Component: React.FC<{}> = () => {
             ? (
               <SelectBox
                 onClickHandler={onSelectBoxClickHandler}
-                text="Add a track"
+                text="Select a track"
               />
             )
             : (
@@ -74,7 +74,7 @@ const Component: React.FC<{}> = () => {
                     : (
                       <SelectBox
                         onClickHandler={onSelectBoxClickHandler}
-                        text="Add another track"
+                        text="Select another track"
                       />
                     )
                 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import Router from 'next/router';
 
 import {
@@ -9,24 +10,33 @@ import {
   Title,
 } from './Styled';
 
+import { clearRecommendationsInput } from '../../redux/recommendations/actions';
+
 import Magic from '../../public/icons/wizard.svg';
 
-const Component: React.FC<{}> = () => (
-  <Container>
-    <IllustrationWrapper>
-      <Magic />
-    </IllustrationWrapper>
+const Component: React.FC<{}> = () => {
+  const dispatch = useDispatch();
+  return (
+    <Container>
+      <IllustrationWrapper>
+        <Magic />
+      </IllustrationWrapper>
 
-    <Title>
-      Let&apos;s find you some good music!
-    </Title>
+      <Title>
+        Let&apos;s find you some good music!
+      </Title>
 
-    <GetStartedButtonWrapper>
-      <GetStartedButton onClick={() => Router.push('/recommend/select/seed-tracks')}>
-        Start
-      </GetStartedButton>
-    </GetStartedButtonWrapper>
-  </Container>
-);
+      <GetStartedButtonWrapper>
+        <GetStartedButton onClick={(): void => {
+          dispatch(clearRecommendationsInput());
+          Router.push('/recommend/select/seed-tracks');
+        }}
+        >
+          Start
+        </GetStartedButton>
+      </GetStartedButtonWrapper>
+    </Container>
+  );
+};
 
 export default Component;

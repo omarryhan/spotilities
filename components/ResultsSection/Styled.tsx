@@ -12,5 +12,6 @@ export const TracksContainer = styled.div`
 
 export const Title = styled.h2`
   margin: 0 0;
+  margin-bottom: 15px;
   padding: 15px 0;
 `;

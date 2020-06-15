@@ -87,6 +87,6 @@ void,
       dispatch(setTracks(fullTracks.tracks));
       await dispatch(fetchTracksAudioFeatures(resultsTrackIds));
     } finally {
-      dispatch(clearRecommendationsInput());
+      // dispatch(clearRecommendationsInput());
     }
   });

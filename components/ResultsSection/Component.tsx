@@ -29,7 +29,7 @@ const Component: React.FC<{}> = () => {
   return (
     <Container>
       {isFetchingResults
-        ? 'Loading...'
+        ? 'Doing magic...'
         : (
           <>
             <Title>
