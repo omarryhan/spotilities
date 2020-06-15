@@ -103,13 +103,13 @@ class MyApp extends App<AppInitialProps & CustomAppInitialProps> {
               <link rel="apple-touch-startup-image" href="" />
               <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#282828" />
               <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-              <meta name="apple-mobile-webapp-title" content="Spotilities" />
+              <meta name="apple-mobile-webapp-title" content="Spoxify" />
               <meta name="apple-mobile-web-app-capable" content="yes" />
               <meta name="apple-touch-fullscreen" content="yes" />
               <meta name="mobile-web-app-capable" content="yes" />
               <meta name="msapplication-TileColor" content="#282828" />
-              <meta name="title" content="Spotilities | Utilities for Spotify" />
-              <meta name="description" content="Spotilities is awesome. Should probably explain more but I'm lazy. Come check it out!" />
+              <meta name="title" content="Spoxify | Utilities for Spotify" />
+              <meta name="description" content="Spoxify is an alternative Spotify client with unique features like: Generating recommendations fitting to attributes that you decide. View your top tracks and artists in 1 month, 3 months and of all time, and many more. Come check it out!" />
               <meta name="keywords" content="Spotify, Spotify Utilities, Spotify Tools" />
               <meta name="viewport" content="width=device-width, initial-scale=1" />
               <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />

@@ -1,19 +1,19 @@
 <p align="center">
-  <img src="https://github.com/omarryhan/spotilities/raw/master/public/icons/logo/512w/logo3manifest-big.png" alt="Logo" title="Spotilities" height="250" width="250"/>
+  <img src="https://github.com/omarryhan/spoxify/raw/master/public/icons/logo/512w/logo3manifest-big.png" alt="Logo" title="Spoxify" height="250" width="250"/>
   <p align="center">
-    <a href="https://travis-ci.org/omarryhan/spotilities"><img alt="Build Status" src="https://travis-ci.org/omarryhan/spotilities.svg?branch=master"></a>
-    <a href="https://app.netlify.com/sites/spotilities/deploys"><img alt="Build status" src="https://api.netlify.com/api/v1/badges/8c0737ed-4b8a-4bb2-b61c-524085f59961/deploy-status"></a>
-    <a href="https://github.com/omarryhan/spotilities"><img alt="Software License" src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square"></a>
+    <a href="https://travis-ci.org/omarryhan/spoxify"><img alt="Build Status" src="https://travis-ci.org/omarryhan/spoxify.svg?branch=master"></a>
+    <a href="https://app.netlify.com/sites/spoxify/deploys"><img alt="Build status" src="https://api.netlify.com/api/v1/badges/8c0737ed-4b8a-4bb2-b61c-524085f59961/deploy-status"></a>
+    <a href="https://github.com/omarryhan/spoxify"><img alt="Software License" src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square"></a>
   </p>
 </p>
 
-# Spotilities
+# Spoxify
 
 The goal of this app is to provide utilities and extra info that aren't included in Spotify's main app.
 
 ## Live version (Under construction)
 
-https://spotilities.netlify.app/
+https://spoxify.com/
 
 **Tip:**
 
@@ -53,7 +53,7 @@ To install it as an app, open your browser's menu and click on "Add to homescree
 
 ## Tools and tech
 
-Spotilities is built using Next.js and it is a [static](https://nextjs.org/docs/advanced-features/static-html-export) website.
+Spoxify is built using Next.js and it is a [static](https://nextjs.org/docs/advanced-features/static-html-export) website.
 
 More tools being used:
   - Redux
