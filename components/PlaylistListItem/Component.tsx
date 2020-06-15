@@ -22,6 +22,7 @@ import { getOrSetAndGetCurrentSettings } from '../../utils';
 
 interface Props {
   playlistId: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onPlaylistItemClick?: (playlistId: string) => any;
 }
 
@@ -93,6 +94,7 @@ const Component: React.FC<Props> = ({ playlistId, onPlaylistItemClick }) => {
 
   return (
     <Button
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       onClick={onPlaylistItemClick ? (): any => onPlaylistItemClick(playlistId) : ((): ReturnType<typeof Router.push> => Router.push('/playlists', `/playlists/${playlistId}`))}
       type="button"
     >

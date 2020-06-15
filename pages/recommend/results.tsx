@@ -9,7 +9,7 @@ import ResultsSection from '../../components/ResultsSection';
 
 const Page: NextPage<{}> = () => (
   <>
-    <TopNav title="Results" />
+    <TopNav showBackButton title="Results" />
     <AppBody>
       <ProgressBar progress={100} />
       <ResultsSection />

@@ -13,6 +13,7 @@ interface Props {
   onTrackClick?: (
     trackId: string,
     playlistId: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ) => any;
 }
 

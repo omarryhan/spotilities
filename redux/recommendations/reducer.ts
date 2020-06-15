@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { InitialStateInterface } from './types';
+import { InitialStateInterface, TunableMetrics } from './types';
 import {
   setTrackResults,
   addTrackSeed,
@@ -113,13 +113,21 @@ export const reducer = createReducer<InitialStateInterface>(InitialState, (build
     },
   }));
 
-  builder.addCase(setMetric, (state, action) => ({
-    ...state,
-    metrics: {
-      ...state.metrics,
-      [action.payload.name]: action.payload.attributes,
-    },
-  }));
+  // builder.addCase(setMetric, (state, action) => ({
+  //   ...state,
+  //   metrics: {
+  //     ...state.metrics,
+  //     [action.payload.name]: action.payload.attributes,
+  //   },
+  // }));
+
+  // order of the list is not being preserved on IOS Safari
+  // That's why we're mutating the state here (which isn't really being mutated
+  // because Redux toolkit uses Immer under the hood which "purifies" any mutations)
+  builder.addCase(setMetric, (state, action) => {
+    // eslint-disable-next-line no-param-reassign
+    state.metrics[action.payload.name as TunableMetrics] = action.payload.attributes;
+  });
 
   builder.addCase(fetchRecommendations.pending, (state, action) => ({
     ...state,

@@ -53,7 +53,7 @@ const Component: React.FC<{}> = () => {
   return (
     <>
       <Title>
-        2. Add a filter or two (Optional):
+        2. Filter (Optional):
       </Title>
       <Container>
         {
@@ -123,7 +123,7 @@ const Component: React.FC<{}> = () => {
           }
           Router.push('/recommend/results');
         }}
-        text={noMetricsSelected ? 'Skip' : 'Next'}
+        text={noMetricsSelected ? 'Skip' : 'Apply Magic'}
       />
     </>
   );

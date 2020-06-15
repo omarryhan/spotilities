@@ -30,15 +30,15 @@ void,
 >('recommendations/fetch',
   async (_, { getState, dispatch }) => {
     try {
+      // clear previous results if any
+      dispatch(clearRecommendationsResults());
+
       const state = getState();
       const { token } = state.user;
       const { accessToken, expiresAt } = token;
       const { errorMessage } = state.user.tokenStatus;
       checkIsAuthorized(accessToken, expiresAt, errorMessage);
       spotifyApi.setAccessToken(accessToken);
-
-      // clear previous results if any
-      dispatch(clearRecommendationsResults());
 
       const seedTrackIds = state.recommendations.seedTracks;
 

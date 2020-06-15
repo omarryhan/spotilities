@@ -8,6 +8,7 @@ import { fetchUserPlaylists } from '../../redux/playlists/actions';
 import { AllPlaylists } from '../../redux/playlists/types';
 
 const Component: React.FC<{
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onPlaylistItemClick?: (playlistId: string) => any;
 }> = ({ onPlaylistItemClick }) => {
   const accessToken = useSelector<CombinedStateType, string>(

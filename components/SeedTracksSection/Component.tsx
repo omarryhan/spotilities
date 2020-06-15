@@ -58,7 +58,9 @@ const Component: React.FC<{}> = () => {
                       <RemoveButtonSection>
                         <RemoveButton
                           type="submit"
-                          onClick={(): any => dispatch(removeSeedTrack(seedTrackId))}
+                          onClick={(): ReturnType<typeof dispatch> => dispatch(
+                            removeSeedTrack(seedTrackId),
+                          )}
                         >
                           <RemoveIcon />
                         </RemoveButton>
@@ -83,7 +85,7 @@ const Component: React.FC<{}> = () => {
         }
       </Container>
       <NextButton
-        onClick={() => Router.push('/recommend/select/track-attributes')}
+        onClick={(): Promise<boolean> => Router.push('/recommend/select/track-attributes')}
         disabled={!seedTracks.length}
       />
     </>

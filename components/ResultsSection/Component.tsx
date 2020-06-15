@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import TrackStripe from '../TrackStripe';
+import Skeleton from '../TrackStripe/Skeleton';
 
 import { playTrackURIS } from '../../redux/playback/actions';
 import {
@@ -29,7 +30,18 @@ const Component: React.FC<{}> = () => {
   return (
     <Container>
       {isFetchingResults
-        ? 'Doing magic...'
+        ? (
+          <>
+            <Title>
+              Applying magic...
+            </Title>
+            {
+              Array(16).fill('_').map((_, i) => (
+                <Skeleton key={`${String(i)}-Skeleton`} />
+              ))
+            }
+          </>
+        )
         : (
           <>
             <Title>

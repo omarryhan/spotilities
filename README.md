@@ -9,7 +9,7 @@
 
 # Spoxify
 
-The goal of this app is to provide utilities and extra info that aren't included in Spotify's main app.
+Spoxify is a Spotify client with magic powers.
 
 ## Live version (Under construction)
 
@@ -19,7 +19,7 @@ https://spoxify.com/
 
 For optimal experience, use the website from your phone.
 
-To install it as an app, open your browser's menu and click on "Add to homescreen". Et voila, now it's an app on your phone.
+To install it as an app, after opening the website, open your browser's menu and click on "Add to homescreen". Et voila, it's now an app on your phone.
 
 ## Features
 
@@ -31,14 +31,11 @@ To install it as an app, open your browser's menu and click on "Add to homescree
     - Duration
     - Energy 
     - Instrumentalness 
-    - Key 
     - Liveness 
     - Loudness 
-    - Mode (i.e. major or minor)
     - Popularity 
     - Speechiness 
     - Tempo 
-    - Time_signature 
     - Valence
 2. Your top tracks and artists of 1 month, 3 month and a year
 3. List your playlists and tracks with more info than Spotify provides e.g. 
@@ -51,6 +48,8 @@ To install it as an app, open your browser's menu and click on "Add to homescree
     - Key signature of the track
     - Tempo of the track
 
+Note: Playback feature only works for premium accounts
+
 ## Tools and tech
 
 Spoxify is built using Next.js and it is a [static](https://nextjs.org/docs/advanced-features/static-html-export) website.
@@ -59,9 +58,9 @@ More tools being used:
   - Redux
   - Redux toolkit
   - Styled components
-  - Material UI (Sparingly)
   - Typescript
   - Testing with Jest, Sinon and React Test Renderer
+  - Spotify's web API
 
 ## Development
 
@@ -79,10 +78,14 @@ Run development server:
 npm run dev
 ```
 
-It is also recommended to use VScode and install:
+I recommend using VScode and installing the:
 
 1. Eslint VScode plugin
 2. Stylelint VScode plugin
+
+**Tip:**
+
+To keep your sanity with the linting rules, I recommend that you configure VScode to auto fix linting errors on each save.
 
 **Note:**
 
@@ -95,20 +98,18 @@ To deploy it on your own, you need to get two main keys:
 1. Spotify OAuth2 client ID
 2. Google Analytics public ID (Optional, just remove mine if you don't want GA)
 
-Then search for `SPOTIFY_CLIENT_ID` and `GA_TRACKING_ID` and replace them.
+Then search for `SPOTIFY_CLIENT_ID` and `GA_TRACKING_ID` and replace the existing keys.
 
-Then to build the project run:
+To build the project, run:
 
 ```
 npm run build && npm run export
 ```
 
-This will generate the disribution files in the /out directory. After that, all you have to do is to serve this directory with a web server.
+This will generate the disribution files in the `/out` directory. After that, all you have to do is to serve this directory with a web server.
 
 ## Privacy
 
 I do not collect any personal information or any sort of access whatsover. All the action is only on your browser.
 
 I added a Google Analytics plugin to see how users interact with the website, which pages users visit, what features users use etc. The GA plugin doesn't collect any personal information either. I also opted out from sharing the information I collect with Google (Which is kind of a moot point given that the data is already stored on Google's servers). I'd appreciate if you'd stop any tracker-blocker or adblocker (no ads) for this website.
-
-

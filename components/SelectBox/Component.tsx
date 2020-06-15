@@ -9,6 +9,7 @@ import {
 } from './Styled';
 
 interface Props {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onClickHandler: () => any;
   text: string;
 }
