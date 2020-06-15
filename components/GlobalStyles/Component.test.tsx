@@ -1,13 +1,13 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import GlobalStyles from './GlobalStyles';
+import Component from './Component';
 import 'jest-styled-components';
-import { styledComponentsTheme } from '../configs/theme';
+import { styledComponentsTheme } from '../../configs/theme';
 
 describe('GlobalStyles', () => {
   it('is unchanged', () => {
     const tree = renderer.create(
-      <GlobalStyles theme={styledComponentsTheme} />,
+      <Component theme={styledComponentsTheme} />,
     ).toJSON();
     expect(tree).toMatchSnapshot();
   });

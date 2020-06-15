@@ -50,15 +50,6 @@ const Component: React.FC<Props> = ({ currentDuration }) => {
                       <TrackStripe
                         trackId={trackId}
                         key={trackId}
-                        // backgroundColor={  // this is fugly
-                        //   index === 0
-                        //     ? styledComponentsTheme.colors.gold.primary
-                        //     : index === 1
-                        //       ? styledComponentsTheme.colors.silver.primary
-                        //       : index === 2
-                        //         ? styledComponentsTheme.colors.bronze.primary
-                        //         : undefined
-                        // }
                         onClickHandler={(): ReturnType<typeof dispatch> => dispatch(playTrackURIS({
                           trackId,
                           trackURIs: topTrackIds,
