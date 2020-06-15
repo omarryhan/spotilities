@@ -11,7 +11,7 @@
 
 Spoxify is a Spotify client with magic powers.
 
-## Live version (Under construction)
+## Live version
 
 https://spoxify.com/
 
