@@ -31,6 +31,7 @@ module.exports = {
       "indent": ["error", 2],
       "@typescript-eslint/indent": ["error", 2],
       'import/prefer-default-export': 'off',
+      'import/no-named-as-default': 'off',
       'react/prop-types': 'off',  // Typescript types are enough for most cases
       'no-return-await': 'off',
       'no-console': 'off',

@@ -37,7 +37,7 @@ const Component: React.FC<{}> = () => {
             ? (
               <SelectBox
                 onClickHandler={onSelectBoxClickHandler}
-                text="Add track"
+                text="Add a track"
               />
             )
             : (
@@ -66,10 +66,18 @@ const Component: React.FC<{}> = () => {
                     </TrackStripeContainer>
                   ))
                 }
-                <SelectBox
-                  onClickHandler={onSelectBoxClickHandler}
-                  text="Add track"
-                />
+                {
+                  seedTracks.length >= 5
+                    ? (
+                      null
+                    )
+                    : (
+                      <SelectBox
+                        onClickHandler={onSelectBoxClickHandler}
+                        text="Add another track"
+                      />
+                    )
+                }
               </>
             )
         }

@@ -5,6 +5,9 @@ import {
   addTrackSeed,
   removeSeedTrack,
   setMetric,
+  fetchRecommendations,
+  clearRecommendationsInput,
+  clearRecommendationsResults,
 } from './actions';
 
 export const InitialState: InitialStateInterface = {
@@ -18,45 +21,73 @@ export const InitialState: InitialStateInterface = {
   metrics: {
     acousticness: {
       isActivated: false,
+      min: 0,
+      max: 100,
     },
     danceability: {
       isActivated: false,
+      min: 0,
+      max: 100,
     },
     duration_ms: {
       isActivated: false,
+      min: 0,
+      max: 100,
     },
     energy: {
       isActivated: false,
+      min: 0,
+      max: 100,
     },
     instrumentalness: {
       isActivated: false,
+      min: 0,
+      max: 100,
     },
     liveness: {
       isActivated: false,
+      min: 0,
+      max: 100,
     },
     loudness: {
       isActivated: false,
+      min: 0,
+      max: 100,
     },
     popularity: {
       isActivated: false,
+      min: 0,
+      max: 100,
     },
     speechiness: {
       isActivated: false,
+      min: 0,
+      max: 100,
     },
     mode: {
       isActivated: false,
+      min: 0,
+      max: 100,
     },
     key: {
       isActivated: false,
+      min: 0,
+      max: 100,
     },
     tempo: {
       isActivated: false,
+      min: 0,
+      max: 100,
     },
     time_signature: {
       isActivated: false,
+      min: 0,
+      max: 100,
     },
     valence: {
       isActivated: false,
+      min: 0,
+      max: 100,
     },
   },
 };
@@ -88,5 +119,37 @@ export const reducer = createReducer<InitialStateInterface>(InitialState, (build
       ...state.metrics,
       [action.payload.name]: action.payload.attributes,
     },
+  }));
+
+  builder.addCase(fetchRecommendations.pending, (state, action) => ({
+    ...state,
+    status: {
+      isFetching: true,
+    },
+  }));
+
+  builder.addCase(fetchRecommendations.fulfilled, (state, action) => ({
+    ...state,
+    status: {
+      isFetching: false,
+    },
+  }));
+
+  builder.addCase(fetchRecommendations.rejected, (state, action) => ({
+    ...state,
+    status: {
+      isFetching: false,
+    },
+  }));
+
+  builder.addCase(clearRecommendationsInput, (state, action) => ({
+    ...state,
+    seedTracks: InitialState.seedTracks,
+    metrics: InitialState.metrics,
+  }));
+
+  builder.addCase(clearRecommendationsResults, (state, action) => ({
+    ...state,
+    results: InitialState.results,
   }));
 });

@@ -12,6 +12,7 @@ export const Attribute = styled.div`
   padding: 10px 10px;
   border-radius: 20px;
   border: 1px white solid;
+  margin-bottom: 10px;
 
   &:active {
     background-color: ${(props): string => props.theme.colors.gray.light};
@@ -19,23 +20,33 @@ export const Attribute = styled.div`
 `;
 
 export const AttributeIconContainer = styled.div`
-  width: 15%;
+  width: 20%;
   display: flex;
   align-items: center;
+  justify-content: center;
 
   & > svg {
     fill: ${(props): string => props.theme.colors.white.lightest};
-    width: 100%;
+
+    @media screen and (max-width: ${(props): string => props.theme.breakpoints.desktop}) {
+      width: 50%;
+    }
+
+    @media screen and (max-width: ${(props): string => props.theme.breakpoints.tablet}) {
+      width: 80%;
+    }
+
   }
 `;
 
 export const AttributeTextContainer = styled.div`
-  width: 85%;
+  width: 80%;
   padding-left: 10px;
 `;
 
 export const AttributeTitle = styled.h2`
   margin: 0 0 5px 0;
+  font-size: 24px;
 `;
 
 export const AttributeDescription = styled.p`

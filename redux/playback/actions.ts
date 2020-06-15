@@ -104,7 +104,7 @@ void,
       }));
     } else {
       await playTrackInPlaylistContext({
-        trackId: trackIds[0],
+        trackId: trackIds[Math.floor(Math.random() * trackIds.length)],
         playlistId,
         shufflePlay,
       });

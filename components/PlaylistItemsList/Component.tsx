@@ -13,7 +13,6 @@ interface Props {
   onTrackClick?: (
     trackId: string,
     playlistId: string,
-    inThisListOfTracks?: string[],
   ) => any;
 }
 
@@ -53,7 +52,7 @@ const Component: React.FC<Props> = ({ playlistId, onTrackClick }) => {
             </WithScrollLazyLoad>
           )
           : (
-            Array(8).fill('_').map((_, i) => (
+            Array(16).fill('_').map((_, i) => (
               <Skeleton key={`${String(i)}-Skeleton`} />
             ))
           )

@@ -11,21 +11,12 @@ import { CombinedStateType } from '../../../redux/types';
 import { fetchUserPlaylistItems } from '../../../redux/playlistItems/actions';
 import { addTrackSeed } from '../../../redux/recommendations/actions';
 
-// This page should only be accessed dynamically on the browser
-// Calling /playlists/your_playlist_id from the browser will return a 404
-// I don't think there's a way around that
-// When this app routes to this page, it should shallowly update the URL to include
-// the playlist_id.
 const Page: NextPage<{}> = () => {
   let playlistId = '';
   if (typeof window !== 'undefined' && window.location.href.split('/').length === 7) {
     // eslint-disable-next-line prefer-destructuring
     playlistId = window.location.href.split('/')[6];
   }
-
-  const playlistName = useSelector<CombinedStateType, string>(
-    (state) => state.playlists.data[playlistId]?.name,
-  );
 
   const isFetchingPlaylistsItems = useSelector<CombinedStateType, boolean>(
     (state) => state.playlistItems.data[playlistId]?.status?.isFetching,
@@ -60,7 +51,6 @@ const Page: NextPage<{}> = () => {
   const onTrackClick = (
     trackId: string,
     playlistId_: string,
-    inThisListOfTracks?: string[],
   ): void => {
     dispatch(addTrackSeed(trackId));
     Router.push('/recommend/select/seed-tracks');

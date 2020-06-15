@@ -10,7 +10,9 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
       <Button
         type="button"
         onClick={
-          (): ReturnType<typeof dispatch> => dispatch(playPlaylist({ playlistId }))
+          (): ReturnType<typeof dispatch> => dispatch(
+            playPlaylist({ playlistId, shufflePlay: true }),
+          )
         }
       >
         Shuffle Play

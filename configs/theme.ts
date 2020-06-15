@@ -73,6 +73,7 @@ export const styledComponentsTheme: DefaultTheme = {
   colors,
   dimensions,
   zIndeces,
+  breakpoints,
 };
 
 export const materialUITheme = createMuiTheme({

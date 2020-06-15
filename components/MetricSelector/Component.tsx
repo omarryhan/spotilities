@@ -53,6 +53,7 @@ const Component: React.FC<{}> = () => {
               onClick={(): void => handleClick(
                 dispatch, attribute.id, attribute.isActivatedPayload,
               )}
+              key={attributeKey}
             >
               <AttributeIconContainer>
                 <attribute.icon />

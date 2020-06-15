@@ -18,7 +18,7 @@ const Component: React.FC<{}> = () => (
     </IllustrationWrapper>
 
     <Title>
-      Let&apos;s find you some music!
+      Let&apos;s find you some good music!
     </Title>
 
     <GetStartedButtonWrapper>

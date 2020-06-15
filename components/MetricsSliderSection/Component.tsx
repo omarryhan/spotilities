@@ -46,10 +46,14 @@ const Component: React.FC<{}> = () => {
     .map((metric) => (metrics[metric as TunableMetrics].isActivated ? metric : undefined))
     .filter((metric) => typeof metric !== 'undefined') as TunableMetrics[];
 
+  const noMetricsSelected = (
+    Object.keys(allAttributes).length - unselectedAttributesAvailable.length
+  ) === 0;
+
   return (
     <>
       <Title>
-        Fine tune your recommendations:
+        Add a filter or two:
       </Title>
       <Container>
         {
@@ -75,7 +79,7 @@ const Component: React.FC<{}> = () => {
                       <RemoveButtonSection>
                         <RemoveButton
                           type="submit"
-                          onClick={(): any => dispatch(
+                          onClick={(): ReturnType<typeof dispatch> => dispatch(
                             setMetric({
                               name: activeMetric,
                               attributes: {
@@ -94,7 +98,7 @@ const Component: React.FC<{}> = () => {
                   unselectedAttributesAvailable.length ? (
                     <SelectBox
                       onClickHandler={onSelectBoxClickHandler}
-                      text="Add track"
+                      text="Add another attribute selector"
                     />
                   ) : (null)
                 }
@@ -103,7 +107,23 @@ const Component: React.FC<{}> = () => {
         }
       </Container>
       <NextButton
-        onClick={() => Router.push('/recommend/results')}
+        onClick={(): void => {
+          if (noMetricsSelected) {
+            // Unfortunately, Spotify requires that we provide
+            // atleast one tunable attribute value
+            // so this is probably the safest workaround.
+            setMetric({
+              name: 'popularity',
+              attributes: {
+                min: 0,
+                max: 100,
+                isActivated: true,
+              },
+            });
+          }
+          Router.push('/recommend/results');
+        }}
+        text={noMetricsSelected ? 'Skip' : 'Next'}
       />
     </>
   );

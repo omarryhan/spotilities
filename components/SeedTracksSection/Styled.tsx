@@ -20,6 +20,7 @@ export const Title = styled.h2`
 export const TrackStripeContainer = styled.div`
   width: 100%;
   display: flex;
+  margin-bottom: 20px;
 `;
 
 export const TrackStripeSection = styled.div`

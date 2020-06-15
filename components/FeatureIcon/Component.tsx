@@ -4,8 +4,6 @@ import {
   AvailableMetrics,
 } from '../PlaylistMetricBar/types';
 
-import { TunableMetrics } from '../../redux/recommendations/types';
-
 import DanceabilityIcon from '../../public/icons/dance.svg';
 import EnergyIcon from '../../public/icons/flash.svg';
 import ValenceIcon from '../../public/icons/happy.svg';
@@ -15,8 +13,9 @@ import NoiseIcon from '../../public/icons/noise.svg';
 import MicrophoneIcon from '../../public/icons/microphone.svg';
 import VideoCameraIcon from '../../public/icons/video-camera.svg';
 import MetronomeIcon from '../../public/icons/tempo.svg';
+import SpeakerIcon from '../../public/icons/speaker.svg';
 
-const Component: React.FC<{name: AvailableMetrics & TunableMetrics}> = ({ name }) => {
+const Component: React.FC<{name: AvailableMetrics}> = ({ name }) => {
   if (name === 'popularity') {
     return <PopularityIcon />;
   } else if (name === 'valence') {
@@ -32,7 +31,7 @@ const Component: React.FC<{name: AvailableMetrics & TunableMetrics}> = ({ name }
   } else if (name === 'liveness') {
     return <VideoCameraIcon />;
   } else if (name === 'loudness') {
-    return <GuitarIcon />;
+    return <SpeakerIcon />;
   } else if (name === 'speechiness') {
     return <MicrophoneIcon />;
   } else if (name === 'tempo') {

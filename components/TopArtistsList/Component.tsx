@@ -58,7 +58,7 @@ const Component: React.FC<Props> = ({ currentDuration }) => {
             </WithScrollLazyLoad>
           )
           : (
-            Array(8).fill('_').map((_, i) => (
+            Array(16).fill('_').map((_, i) => (
               <Skeleton key={`${String(i)}-Skeleton`} />
             ))
           )

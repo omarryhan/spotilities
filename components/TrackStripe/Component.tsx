@@ -37,13 +37,11 @@ interface FeaturesMap {
 
 interface Props {
   trackId: string;
-  onTrackClick?: () => any;
   playlistId?: string;
   notClickable?: boolean;
   onClickHandler?: (
     trackId: string,
     playlistId: string,
-    inThisListOfTracks?: string[],
   ) => any;
   hideMetrics?: boolean;
   hideMusiciansInfo?: boolean;

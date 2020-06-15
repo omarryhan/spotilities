@@ -2,11 +2,18 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   padding: 0 ${(props): string => props.theme.dimensions.contentSideMargin.all};
+  height: 90vh;
+  padding-bottom: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const Title = styled.p`
   font-size: 24px;
   text-align: center;
+  padding: 0 30px;
 `;
 
 export const IllustrationWrapper = styled.div`
