@@ -47,9 +47,11 @@ const Component: React.FC<Props> = ({ name }) => {
       <SliderWrapper>
         <Slider
           value={[metric.min, metric.max] as number[]}
+          min={metricDefinition.isActivatedPayload.min}
+          max={metricDefinition.isActivatedPayload.max}
           defaultValue={[metric.min, metric.max] as number[]}
           onChange={setValues}
-          step={5}
+          step={1}
           valueLabelDisplay="auto"
           aria-labelledby="range-slider"
           getAriaValueText={(values: number): string => `Values: ${values}`}

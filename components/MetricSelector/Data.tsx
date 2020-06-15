@@ -93,11 +93,13 @@ export const allAttributes: Partial<AllAttributes> = {
       min: min / 100,
     }),
   },
+  // disabling for now because Material UI slider acts funky with negative values
   loudness: {
     title: 'Loudness',
     id: 'loudness',
     description: `
-      The overall loudness of a track in decibels (dB). Loudness is the quality of a sound that is the primary psychological correlate of physical strength (amplitude).
+      The overall loudness of a track in decibels (dB). Loudness is the quality
+      of a sound that is the primary psychological correlate of physical strength (amplitude).
     `,
     icon: (): ReturnType<React.FC<{}>> => (<FeatureIcon name="loudness" />),
     isActivatedPayload: {
