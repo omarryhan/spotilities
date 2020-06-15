@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { InitialStateInterface, TunableMetrics } from './types';
+import { InitialStateInterface } from './types';
 import {
   setTrackResults,
   addTrackSeed,
@@ -20,17 +20,7 @@ export const InitialState: InitialStateInterface = {
     isFetching: false,
   },
   metrics: {
-    acousticness: {
-      isActivated: false,
-      min: 0,
-      max: 100,
-    },
     danceability: {
-      isActivated: false,
-      min: 0,
-      max: 100,
-    },
-    duration_ms: {
       isActivated: false,
       min: 0,
       max: 100,
@@ -40,7 +30,22 @@ export const InitialState: InitialStateInterface = {
       min: 0,
       max: 100,
     },
-    instrumentalness: {
+    valence: {
+      isActivated: false,
+      min: 0,
+      max: 100,
+    },
+    popularity: {
+      isActivated: false,
+      min: 0,
+      max: 100,
+    },
+    tempo: {
+      isActivated: false,
+      min: 0,
+      max: 120,
+    },
+    duration_ms: {
       isActivated: false,
       min: 0,
       max: 100,
@@ -52,10 +57,15 @@ export const InitialState: InitialStateInterface = {
     },
     loudness: {
       isActivated: false,
+      min: -60,
+      max: 0,
+    },
+    acousticness: {
+      isActivated: false,
       min: 0,
       max: 100,
     },
-    popularity: {
+    instrumentalness: {
       isActivated: false,
       min: 0,
       max: 100,
@@ -65,27 +75,17 @@ export const InitialState: InitialStateInterface = {
       min: 0,
       max: 100,
     },
-    mode: {
+    mode: { // not being used
       isActivated: false,
       min: 0,
       max: 100,
     },
-    key: {
+    key: { // not being used
       isActivated: false,
       min: 0,
       max: 100,
     },
-    tempo: {
-      isActivated: false,
-      min: 0,
-      max: 100,
-    },
-    time_signature: {
-      isActivated: false,
-      min: 0,
-      max: 100,
-    },
-    valence: {
+    time_signature: { // not being used
       isActivated: false,
       min: 0,
       max: 100,
@@ -127,14 +127,22 @@ export const reducer = createReducer<InitialStateInterface>(InitialState, (build
   // because Redux toolkit uses Immer under the hood which "purifies" any mutations)
   builder.addCase(setMetric, (state, action) => {
     // eslint-disable-next-line no-param-reassign
-    state.metrics[action.payload.name as TunableMetrics] = action.payload.attributes;
+    state.metrics[action.payload.name] = action.payload.attributes;
   });
 
+  // TODO: make it push the modified metric to the end of the dict
+  // You probably won't be able to do that using the current setup
+  // because objects preserving their order is an implementation detail
+  // in most if not all JS implementations. You'll probably need to
+  // add an array with the keys sorted as required
   builder.addCase(setMetricIsActivated, (state, action) => ({
     ...state,
     metrics: {
       ...state.metrics,
-      [action.payload.name]: action.payload.value,
+      [action.payload.name]: {
+        ...state.metrics[action.payload.name],
+        isActivated: action.payload.value,
+      },
     },
   }));
 

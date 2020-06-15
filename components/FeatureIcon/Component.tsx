@@ -14,6 +14,7 @@ import MicrophoneIcon from '../../public/icons/microphone.svg';
 import VideoCameraIcon from '../../public/icons/video-camera.svg';
 import MetronomeIcon from '../../public/icons/tempo.svg';
 import SpeakerIcon from '../../public/icons/speaker.svg';
+import StopWatchIcon from '../../public/icons/stopwatch.svg';
 
 const Component: React.FC<{name: AvailableMetrics}> = ({ name }) => {
   if (name === 'popularity') {
@@ -36,6 +37,8 @@ const Component: React.FC<{name: AvailableMetrics}> = ({ name }) => {
     return <MicrophoneIcon />;
   } else if (name === 'tempo') {
     return <MetronomeIcon />;
+  } else if (name === 'duration_ms') {
+    return <StopWatchIcon />;
   } else {
     return null;
   }

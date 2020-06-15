@@ -9,10 +9,10 @@ export const Attribute = styled.div`
   display: flex;
   cursor: pointer;
 
-  padding: 10px 10px;
+  padding: 25px 10px;
   border-radius: 20px;
   border: 1px white solid;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 
   &:active {
     background-color: ${(props): string => props.theme.colors.gray.light};

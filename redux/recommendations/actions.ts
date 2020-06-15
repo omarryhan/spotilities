@@ -17,12 +17,12 @@ export const clearRecommendationsInput = createAction<void>('recommendations/inp
 export const clearRecommendationsResults = createAction<void>('recommendations/results/clear');
 
 export const setMetricIsActivated = createAction<{
-  name: string;
+  name: TunableMetrics;
   value: boolean;
 }>('recommendations/metric/isActivated/set');
 
 export const setMetric = createAction<{
-  name: string;
+  name: TunableMetrics;
   attributes: MetricAttributes;
 }>('recommendations/metric/set');
 

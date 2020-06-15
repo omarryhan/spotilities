@@ -137,9 +137,7 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
                   'acousticness',
                   'instrumentalness',
                   'liveness',
-                  // 'loudness',
                   'speechiness',
-                  // 'tempo',
                 ] as AvailableMetrics[]).map((name) => (
                   <PlaylistCoverMetricBar
                     name={name}

@@ -19,6 +19,7 @@ const multiplier: Multiplier = {
   loudness: -60,
   speechiness: 100,
   tempo: 1000,
+  duration_ms: 1000 * 60,
 };
 
 export const getAudioFeaturesScoreFromPlaylistTracks = (
