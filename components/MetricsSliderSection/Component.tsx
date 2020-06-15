@@ -3,7 +3,7 @@ import Router from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
 import { CombinedStateType } from '../../redux/types';
 import { Metrics, TunableMetrics } from '../../redux/recommendations/types';
-import { setMetric } from '../../redux/recommendations/actions';
+import { setMetric, setMetricIsActivated } from '../../redux/recommendations/actions';
 import MetricSlider from '../MetricSlider';
 import SelectBox from '../SelectBox';
 import NextButton from '../NextButton';
@@ -80,11 +80,9 @@ const Component: React.FC<{}> = () => {
                         <RemoveButton
                           type="submit"
                           onClick={(): ReturnType<typeof dispatch> => dispatch(
-                            setMetric({
+                            setMetricIsActivated({
                               name: activeMetric,
-                              attributes: {
-                                isActivated: false,
-                              },
+                              value: false,
                             }),
                           )}
                         >
@@ -108,19 +106,6 @@ const Component: React.FC<{}> = () => {
       </Container>
       <NextButton
         onClick={(): void => {
-          if (noMetricsSelected) {
-            // Unfortunately, Spotify requires that we provide
-            // atleast one tunable attribute value
-            // so this is probably the safest workaround.
-            setMetric({
-              name: 'popularity',
-              attributes: {
-                min: 0,
-                max: 100,
-                isActivated: true,
-              },
-            });
-          }
           Router.push('/recommend/results');
         }}
         text={noMetricsSelected ? 'Skip' : 'Apply Magic'}

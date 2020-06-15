@@ -6,3 +6,6 @@ directories:
 install: npm install
 script:
   - npm run test:cov
+  - npm run build
+  - npm run export
+  - npm run lint

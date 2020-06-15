@@ -16,6 +16,11 @@ export const clearRecommendationsInput = createAction<void>('recommendations/inp
 
 export const clearRecommendationsResults = createAction<void>('recommendations/results/clear');
 
+export const setMetricIsActivated = createAction<{
+  name: string;
+  value: boolean;
+}>('recommendations/metric/isActivated/set');
+
 export const setMetric = createAction<{
   name: string;
   attributes: MetricAttributes;
@@ -42,13 +47,6 @@ void,
 
       const seedTrackIds = state.recommendations.seedTracks;
 
-      if (!seedTrackIds.length) {
-        // shouldn't normally happen
-        // Only have it here so the console doesn't show errors
-        // in develeopment
-        return;
-      }
-
       const attributes = state.recommendations.metrics;
 
       const attributeKeys = Object.keys(attributes) as TunableMetrics[];
@@ -73,7 +71,13 @@ void,
         market: 'from_token',
         seed_tracks: seedTrackIds,
         limit: 50,
-        ...allAttributesArguments,
+        ...(!Object.keys(allAttributesArguments).length
+          ? {
+            max_popularity: 100,
+            min_popularity: 0,
+          }
+          : allAttributesArguments
+        ),
       });
 
       if (!results.tracks.length) {

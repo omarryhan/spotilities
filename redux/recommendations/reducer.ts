@@ -8,6 +8,7 @@ import {
   fetchRecommendations,
   clearRecommendationsInput,
   clearRecommendationsResults,
+  setMetricIsActivated,
 } from './actions';
 
 export const InitialState: InitialStateInterface = {
@@ -128,6 +129,14 @@ export const reducer = createReducer<InitialStateInterface>(InitialState, (build
     // eslint-disable-next-line no-param-reassign
     state.metrics[action.payload.name as TunableMetrics] = action.payload.attributes;
   });
+
+  builder.addCase(setMetricIsActivated, (state, action) => ({
+    ...state,
+    metrics: {
+      ...state.metrics,
+      [action.payload.name]: action.payload.value,
+    },
+  }));
 
   builder.addCase(fetchRecommendations.pending, (state, action) => ({
     ...state,
