@@ -103,15 +103,16 @@ class MyApp extends App<AppInitialProps & CustomAppInitialProps> {
               <meta name="viewport" content="width=device-width, initial-scale=1" />
               <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
               <link rel="shortcut icon" href="/favicon.png" />
-              <link rel="icon" type="image/png" sizes="192x192" href="/icons/256w/logo3manifest-small.png" />
-              <link rel="icon" type="image/png" sizes="265x265" href="/icons/256w/logo3manifest-medium.png" />
-              <link rel="icon" type="image/png" sizes="512x512" href="/icons/512w/logo3manifest-big.png" />
+              <meta name="theme-color" content="#121212" />
+              <link rel="icon" type="image/png" sizes="192x192" href="/icons/logo/192w/logo3manifest-small.png" />
+              <link rel="icon" type="image/png" sizes="265x265" href="/icons/logo/256w/logo3manifest-medium.png" />
+              <link rel="icon" type="image/png" sizes="512x512" href="/icons/logo/512w/logo3manifest-big.png" />
               <link rel="manifest" href="/manifest.json" />
 
               {/* Apple stuff.. yuk */}
               <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
               <link rel="apple-touch-startup-image" href="" />
-              <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#282828" />
+              <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#121212" />
               <meta name="apple-mobile-web-app-status-bar-style" content="black" />
               <meta name="apple-mobile-webapp-title" content="Spoxify" />
               <meta name="apple-touch-fullscreen" content="yes" />
@@ -120,7 +121,7 @@ class MyApp extends App<AppInitialProps & CustomAppInitialProps> {
               <meta name="application-name" content="Spoxify" />
 
               {/* MS stuff.. yuk */}
-              <meta name="msapplication-TileColor" content="#282828" />
+              <meta name="msapplication-TileColor" content="#121212" />
             </Head>
             <Component
               {...pageProps}

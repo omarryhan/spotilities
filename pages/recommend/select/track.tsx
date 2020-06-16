@@ -1,6 +1,7 @@
 import React from 'react';
 import { NextPage } from 'next';
 import Router from 'next/router';
+import Head from 'next/head';
 
 import { useSelector, useDispatch } from 'react-redux';
 import AppBody from '../../../components/AppBody';
@@ -58,6 +59,10 @@ const Page: NextPage<{}> = () => {
 
   return (
     <>
+      <Head>
+        <meta name="title" content="Spoxify | Select Track" />
+        <title>Spoxify | Select Track</title>
+      </Head>
       <TopNav showBackButton title="Select Track" />
       <AppBody>
         <PlaylistItemsList playlistId={playlistId} onTrackClick={onTrackClick} />

@@ -1,5 +1,6 @@
 import React from 'react';
 import { NextPage } from 'next';
+import Head from 'next/head';
 
 import { useSelector, useDispatch } from 'react-redux';
 import AppBody from '../components/AppBody';
@@ -60,6 +61,10 @@ const Page: NextPage<{}> = () => {
 
   return (
     <>
+      <Head>
+        <meta name="title" content="Spoxify | Playlist" />
+        <title>Spoxify | Playlist</title>
+      </Head>
       <TopNav showBackButton title={playlistName} />
       <AppBody>
         <PlaylistItemsCoverSection playlistId={playlistId} />

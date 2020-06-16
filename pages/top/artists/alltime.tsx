@@ -1,5 +1,6 @@
 import React from 'react';
 import { NextPage } from 'next';
+import Head from 'next/head';
 
 import TopNav from '../../../components/TopNav';
 import BottomNav from '../../../components/BottomNav';
@@ -13,6 +14,10 @@ import TopTrackOrArtist from '../../../components/TopTrackOrArtist';
 
 const Page: NextPage<{}> = () => (
   <>
+    <Head>
+      <meta name="title" content="Spoxify | Top artists | All time" />
+      <title>Spoxify | Top artists | All time</title>
+    </Head>
     <AccessTokenLoader />
     <CurrentUserLoader />
     <TopNav title="Top" showSettingsButton />

@@ -1,6 +1,7 @@
 import React from 'react';
 import Router from 'next/router';
 import { NextPage } from 'next';
+import Head from 'next/head';
 
 import TopNav from '../../../components/TopNav';
 import AccessTokenLoader from '../../../components/AccessTokenLoader';
@@ -10,6 +11,10 @@ import CurrentUserLoader from '../../../components/CurrentUserLoader';
 
 const Page: NextPage<{}> = () => (
   <>
+    <Head>
+      <meta name="title" content="Spoxify | Select Playlist" />
+      <title>Spoxify | Select Playlist</title>
+    </Head>
     <AccessTokenLoader />
     <CurrentUserLoader />
     <TopNav title="Select Playlist" showBackButton />

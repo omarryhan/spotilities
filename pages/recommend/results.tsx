@@ -1,5 +1,6 @@
 import React from 'react';
 import { NextPage } from 'next';
+import Head from 'next/head';
 
 import AppBody from '../../components/AppBody';
 import TopNav from '../../components/TopNav';
@@ -9,6 +10,10 @@ import ResultsSection from '../../components/ResultsSection';
 
 const Page: NextPage<{}> = () => (
   <>
+    <Head>
+      <meta name="title" content="Spoxify | Recommendation Results" />
+      <title>Spoxify | Recommendation Results</title>
+    </Head>
     <TopNav showBackButton title="Results" />
     <AppBody>
       <ProgressBar progress={100} />

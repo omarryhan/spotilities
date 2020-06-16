@@ -5,7 +5,7 @@ import { Button, Container, LeftSection } from '../PlaylistListItem/Styled';
 const Component: React.FC<{}> = () => (
   <>
     {
-      Array(8).fill('_').map((_, i) => (
+      Array(16).fill('_').map((_, i) => (
         <Button key={`${String(i)}-Skeleton`} notClickable>
           <Container>
             <LeftSection>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { NextPage } from 'next';
+import Head from 'next/head';
 
 import AccessTokenLoader from '../../../components/AccessTokenLoader';
 import AppBody from '../../../components/AppBody';
@@ -10,6 +11,10 @@ import ProgressBar from '../../../components/TopProgressBar';
 
 const Page: NextPage<{}> = () => (
   <>
+    <Head>
+      <meta name="title" content="Spoxify | Select Filters" />
+      <title>Spoxify | Select Filters</title>
+    </Head>
     <AccessTokenLoader />
     <CurrentUserLoader />
     <TopNav title="Fine Tuning" showBackButton />

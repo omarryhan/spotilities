@@ -113,7 +113,7 @@ const Component: React.FC<{}> = () => {
                 category: 'recommendations',
                 action: 'select/metric/none',
               })
-              : activeMetrics.map((metric) => {
+              : activeMetrics.forEach((metric) => {
                 ReactGA.event({
                   category: 'recommendations',
                   action: `select/metric/${metric}`,

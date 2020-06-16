@@ -1,5 +1,7 @@
 import React from 'react';
 import { NextPage } from 'next';
+import Head from 'next/head';
+
 import TopNav from '../components/TopNav';
 import BottomNav from '../components/BottomNav';
 import AccessTokenLoader from '../components/AccessTokenLoader';
@@ -12,6 +14,10 @@ import AppSettings from '../components/AppSettings';
 
 const Page: NextPage<{}> = () => (
   <>
+    <Head>
+      <meta name="title" content="Spoxify | Settings" />
+      <title>Spoxify | Settings</title>
+    </Head>
     <AccessTokenLoader />
     <CurrentUserLoader />
     <TopNav title="Settings" showBackButton />
