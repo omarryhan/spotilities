@@ -39,21 +39,19 @@ const Component: React.FC<{}> = () => {
       <SettingSection>
         <SettingLeftSection>
           <SettingTitle>
-            Show playlists&apos; metrics
+            Show stats for musicians
           </SettingTitle>
           <SettingDescription>
-            Show energy, danceability, valence and popularity respectively.
-            <br />
-            Disable it for optimal performance.
+            Show tempo, key and mode
           </SettingDescription>
         </SettingLeftSection>
 
         <SettingRightSection>
           <StyledSwitch
-            checked={settings.showAllPlaylistsMetrics}
+            checked={settings.showMusicianStats}
             onChange={(props): void => setWithUpdateLocalStorage(
               props.target.checked,
-              'showAllPlaylistsMetrics',
+              'showMusicianStats',
             )}
           />
         </SettingRightSection>
@@ -83,19 +81,21 @@ const Component: React.FC<{}> = () => {
       <SettingSection>
         <SettingLeftSection>
           <SettingTitle>
-            Show stats for musicians
+            Show playlists&apos; metrics
           </SettingTitle>
           <SettingDescription>
-            Show tempo, key and mode
+            Show energy, danceability, valence and popularity respectively.
+            <br />
+            Disable it for optimal performance.
           </SettingDescription>
         </SettingLeftSection>
 
         <SettingRightSection>
           <StyledSwitch
-            checked={settings.showMusicianStats}
+            checked={settings.showAllPlaylistsMetrics}
             onChange={(props): void => setWithUpdateLocalStorage(
               props.target.checked,
-              'showMusicianStats',
+              'showAllPlaylistsMetrics',
             )}
           />
         </SettingRightSection>
