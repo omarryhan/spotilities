@@ -22,30 +22,34 @@ To install it as an app, after opening the website, open your browser's menu and
 
 ## Features
 
-1. Generate track recommendations based on:
-  - Seed tracks
-  - Tunable attributes:
-    - Acousticness 
-    - Danceability 
-    - Duration
-    - Energy 
-    - Instrumentalness 
-    - Liveness 
-    - Loudness 
-    - Popularity 
-    - Speechiness 
-    - Tempo 
-    - Valence
-2. Your top tracks and artists of 1 month, 3 month and a year
-3. List your playlists and tracks with more info than Spotify provides e.g. 
-  - General musical attributes
-    - Playlist/track valence
-    - Playlist/track popularity
-    - Playlist/track energy
-    - Playlist/track danceability
-  - And for the musicians out there,
-    - Key signature of the track
-    - Tempo of the track
+**1. Generate track recommendations based on:**
+
+- Seed tracks
+- Tunable attributes:
+  - Acousticness
+  - Danceability
+  - Duration
+  - Energy
+  - Instrumentalness
+  - Liveness
+  - Loudness
+  - Popularity
+  - Speechiness
+  - Tempo
+  - Valence
+  
+**2. Your top tracks and artists of 1 month, 3 month and a year:**
+
+**3. List your playlists and tracks with more info than Spotify provides e.g.:**
+
+- General musical attributes
+  - Playlist/track valence
+  - Playlist/track popularity
+  - Playlist/track energy
+  - Playlist/track danceability
+- And for the musicians out there:
+  - Key signature of the track
+  - Tempo of the track
 
 Note: Playback feature only works for premium accounts
 
@@ -53,31 +57,32 @@ Note: Playback feature only works for premium accounts
 
 Spoxify is built using Next.js and it is a [static](https://nextjs.org/docs/advanced-features/static-html-export) website.
 
-More tools being used:
-  - Redux
-  - Redux toolkit
-  - Styled components
-  - Typescript
-  - Testing with Jest, Sinon and React Test Renderer
-  - Spotify's web API
+**More tools being used:**
+
+- Redux
+- Redux toolkit
+- Styled components
+- Typescript
+- Testing with Jest, Sinon and React Test Renderer
+- Spotify's web API
 
 ## Development
 
 After cloning:
 
-Install the dependencies:
+**Install the dependencies:**
 
 ```sh
 npm install
 ```
 
-Run development server:
+**Run development server:**
 
 ```sh
 npm run dev
 ```
 
-I recommend using VScode and installing the:
+**I recommend using VScode and installing:**
 
 1. Eslint VScode plugin
 2. Stylelint VScode plugin
@@ -101,14 +106,20 @@ Then search for `SPOTIFY_CLIENT_ID` and `GA_TRACKING_ID` and replace the existin
 
 To build the project, run:
 
-```
+```sh
 npm run build && npm run export
 ```
 
 This will generate the disribution files in the `/out` directory. After that, all you have to do is to serve this directory with a web server.
 
+## Known issues
+
+- Playback doesn't work for non-premium users.
+- Playback doesn't work if no active official Spotify App is found.
+- If you login for the first time and mistyped your password, then when you retype it correctly, authentication will fail due to missing Client ID. To solve this, you have to close the tab and reopen it and enter the correct password on your first attempt.
+
 ## Privacy
 
-I do not collect any personal information or any sort of access whatsover. All the action is only on your browser.
+I do not collect any personal information or any sort of access whatsover. All the action is done on your browser and Spotify's API.
 
-I added a Google Analytics plugin to see how users interact with the website, which pages users visit, what features users use etc. The GA plugin doesn't collect any personal information either. I also opted out from sharing the information I collect with Google (Which is kind of a moot point given that the data is already stored on Google's servers). I'd appreciate if you'd stop any tracker-blocker or adblocker (no ads) for this website.
+I added a Google Analytics plugin to see how users interact with the website, which pages users visit, what features users use etc. The GA plugin doesn't collect any personal information either. I also opted out from sharing the information I collect with Google (Which is kind of a moot point given that the data is already stored on Google's servers). I'd appreciate if you would stop any tracker-blocker or adblocker (not that there are any ads) for this website.
