@@ -1,15 +1,15 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import shuffle from 'lodash.shuffle';
 import { CombinedStateType } from '../types';
-import { spotifyApi } from '../utils';
+import { spotifyApi, checkIsAuthorized } from '../utils';
 import { UserLibraryPlaylistId } from '../playlistItems/actions';
 
 const flashPlaybackError = (e: XMLHttpRequest | Error): void => {
   if (e instanceof XMLHttpRequest) {
     const errorMessage = e.response && JSON.parse(e.response)?.error?.message as undefined | string;
     if (errorMessage && errorMessage.includes('active device')) {
-      alert('Playback Failed.\nPlease make sure you have a song already playing in your main Spotify app.\nThis is a limitation of Spotify.');
-      window.location.href = 'spotify:';
+      alert('Playback Failed.\nPlease make sure you have a song already playing in your official Spotify app.\nThis is a limitation of Spotify.');
+      // window.location.href = 'spotify:';
     } else if (errorMessage) {
       alert(errorMessage);
     } else {
@@ -29,7 +29,14 @@ void,
 },
 { state: CombinedStateType }
 >('play/trackURIs',
-  async ({ trackId, trackURIs, shufflePlay = false }) => {
+  async ({ trackId, trackURIs, shufflePlay = false }, { getState }) => {
+    const state = getState();
+    checkIsAuthorized(
+      state.user.token.accessToken,
+      state.user.token.expiresAt,
+      state.user.tokenStatus.errorMessage,
+    );
+
     const shuffledTrackUris = shufflePlay ? shuffle(trackURIs) : trackURIs;
     const trackIdIndex = shuffledTrackUris.indexOf(trackId);
     const trackIdsToEnqueue = shuffledTrackUris.slice(trackIdIndex, 500);
@@ -75,6 +82,13 @@ void,
 { state: CombinedStateType }
 >('play/trackInPlaylist',
   async ({ trackId, playlistId, shufflePlay = false }, { getState, dispatch }) => {
+    const state = getState();
+    checkIsAuthorized(
+      state.user.token.accessToken,
+      state.user.token.expiresAt,
+      state.user.tokenStatus.errorMessage,
+    );
+
     if (playlistId === UserLibraryPlaylistId) {
       const trackIds = Object.keys(getState().playlistItems.data[playlistId].data);
       // Workaround because there's no context for "Saved tracks"
@@ -94,7 +108,14 @@ void,
 { state: CombinedStateType }
 >('shufflePlay/playlist',
   async ({ playlistId, shufflePlay = true }, { getState, dispatch }) => {
-    const trackIds = Object.keys(getState().playlistItems.data[playlistId]?.data);
+    const state = getState();
+    checkIsAuthorized(
+      state.user.token.accessToken,
+      state.user.token.expiresAt,
+      state.user.tokenStatus.errorMessage,
+    );
+
+    const trackIds = Object.keys(state.playlistItems.data[playlistId]?.data);
 
     if (playlistId === UserLibraryPlaylistId) {
       await dispatch(playTrackURIS({

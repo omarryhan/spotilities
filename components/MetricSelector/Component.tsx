@@ -25,7 +25,7 @@ const handleClick = (
   payload: MetricAttributes,
 ): void => {
   dispatch(setMetric({ attributes: payload, name: id }));
-  Router.push('/recommend/select/track-attributes');
+  Router.push('/recommend/select/metrics');
 };
 
 const Component: React.FC<{}> = () => {

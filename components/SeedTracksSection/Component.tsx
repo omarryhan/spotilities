@@ -1,5 +1,6 @@
 import React from 'react';
 import Router from 'next/router';
+import ReactGA from 'react-ga';
 import { useSelector, useDispatch } from 'react-redux';
 import { CombinedStateType } from '../../redux/types';
 import TrackStripe from '../TrackStripe';
@@ -85,7 +86,17 @@ const Component: React.FC<{}> = () => {
         }
       </Container>
       <NextButton
-        onClick={(): Promise<boolean> => Router.push('/recommend/select/track-attributes')}
+        onClick={(): void => {
+          try {
+            ReactGA.event({
+              category: 'recommendation',
+              action: 'select/seed-tracks',
+              value: seedTracks.length,
+            });
+          } finally {
+            Router.push('/recommend/select/metrics');
+          }
+        }}
         disabled={!seedTracks.length}
       />
     </>

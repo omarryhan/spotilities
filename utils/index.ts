@@ -1,9 +1,5 @@
 import { defaultSettings } from '../configs/settings';
 
-export function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 export const getOrSetAndGetCurrentSettings = (): typeof defaultSettings => {
   if (typeof window === 'undefined') {
     return defaultSettings;

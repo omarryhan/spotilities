@@ -32,11 +32,11 @@ export const fetchTopItems = createAsyncThunk<
   'top/set',
   async ({ resourceType, duration }, { getState, dispatch }) => {
     const state = getState();
-    const { token } = state.user;
-    const { accessToken, expiresAt } = token;
-    const { errorMessage } = state.user.tokenStatus;
-    checkIsAuthorized(accessToken, expiresAt, errorMessage);
-    spotifyApi.setAccessToken(accessToken);
+    checkIsAuthorized(
+      state.user.token.accessToken,
+      state.user.token.expiresAt,
+      state.user.tokenStatus.errorMessage,
+    );
 
     let response;
     if (resourceType === 'tracks') {

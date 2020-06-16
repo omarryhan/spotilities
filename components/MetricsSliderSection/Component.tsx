@@ -1,9 +1,10 @@
 import React from 'react';
 import Router from 'next/router';
+import ReactGA from 'react-ga';
 import { useSelector, useDispatch } from 'react-redux';
 import { CombinedStateType } from '../../redux/types';
 import { Metrics, TunableMetrics } from '../../redux/recommendations/types';
-import { setMetric, setMetricIsActivated } from '../../redux/recommendations/actions';
+import { setMetricIsActivated } from '../../redux/recommendations/actions';
 import MetricSlider from '../MetricSlider';
 import SelectBox from '../SelectBox';
 import NextButton from '../NextButton';
@@ -106,7 +107,21 @@ const Component: React.FC<{}> = () => {
       </Container>
       <NextButton
         onClick={(): void => {
-          Router.push('/recommend/results');
+          try {
+            noMetricsSelected
+              ? ReactGA.event({
+                category: 'recommendations',
+                action: 'select/metric/none',
+              })
+              : activeMetrics.map((metric) => {
+                ReactGA.event({
+                  category: 'recommendations',
+                  action: `select/metric/${metric}`,
+                });
+              });
+          } finally {
+            Router.push('/recommend/results');
+          }
         }}
         text={noMetricsSelected ? 'Skip' : 'Apply Magic'}
       />

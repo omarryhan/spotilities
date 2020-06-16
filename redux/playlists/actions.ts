@@ -42,11 +42,11 @@ string,
   'playlists/set',
   async (userId, { getState, dispatch }) => {
     const state = getState();
-    const { token } = state.user;
-    const { accessToken, expiresAt } = token;
-    const { errorMessage } = state.user.tokenStatus;
-    checkIsAuthorized(accessToken, expiresAt, errorMessage);
-    spotifyApi.setAccessToken(accessToken);
+    checkIsAuthorized(
+      state.user.token.accessToken,
+      state.user.token.expiresAt,
+      state.user.tokenStatus.errorMessage,
+    );
 
     const fullResponse = await getAllPages<SpotifyApi.ListOfUsersPlaylistsResponse>(
       spotifyApi.getUserPlaylists(userId, { limit: 50 }),

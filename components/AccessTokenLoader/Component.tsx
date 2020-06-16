@@ -4,9 +4,11 @@ import { openAuthorizeWindow } from '../../redux/utils';
 import { CombinedStateType } from '../../redux/types';
 
 /*
-  VERY IMPORTANT: Mounting this in _app.ts will cause the
-  app to infinitely loop. Though it shouldn't but the first trigger
-  to the effect below will not be able to read the access token.
+  VERY IMPORTANT: Mounting this component in _app.tsx
+  instead of mounting it to normal compoenents will cause the
+  app to infinitely loop. It shouldn't, but for some reason
+  the first trigger of the effect below will not be able to
+  read the access token when mounted in _app.tsx.
 */
 const Component: React.FC<{}> = () => {
   const accessToken = useSelector<CombinedStateType, string>(

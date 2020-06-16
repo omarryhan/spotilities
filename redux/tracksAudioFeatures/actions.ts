@@ -20,11 +20,11 @@ string[],
   'tracksAudioFeatures/tracks/set',
   async (trackIds, { getState, dispatch }) => {
     const state = getState();
-    const { token } = state.user;
-    const { accessToken, expiresAt } = token;
-    const { errorMessage } = state.user.tokenStatus;
-    checkIsAuthorized(accessToken, expiresAt, errorMessage);
-    spotifyApi.setAccessToken(accessToken);
+    checkIsAuthorized(
+      state.user.token.accessToken,
+      state.user.token.expiresAt,
+      state.user.tokenStatus.errorMessage,
+    );
 
     const trackIdChunks = chunk(trackIds, 100);
 
@@ -59,11 +59,11 @@ string,
   'tracksAudioFeatures/playlistItems/set',
   async (playlistId, { getState, dispatch }) => {
     const state = getState();
-    const { token } = state.user;
-    const { accessToken, expiresAt } = token;
-    const { errorMessage } = state.user.tokenStatus;
-    checkIsAuthorized(accessToken, expiresAt, errorMessage);
-    spotifyApi.setAccessToken(accessToken);
+    checkIsAuthorized(
+      state.user.token.accessToken,
+      state.user.token.expiresAt,
+      state.user.tokenStatus.errorMessage,
+    );
 
     const allPlaylistItems = state.playlistItems.data[playlistId].data;
     const allTrackIds = Object.keys(allPlaylistItems);
@@ -80,11 +80,11 @@ void,
   'tracksAudioFeatures/allPlaylistsItems/set',
   async (_, { getState, dispatch }) => {
     const state = getState();
-    const { token } = state.user;
-    const { accessToken, expiresAt } = token;
-    const { errorMessage } = state.user.tokenStatus;
-    checkIsAuthorized(accessToken, expiresAt, errorMessage);
-    spotifyApi.setAccessToken(accessToken);
+    checkIsAuthorized(
+      state.user.token.accessToken,
+      state.user.token.expiresAt,
+      state.user.tokenStatus.errorMessage,
+    );
 
     const allPlaylistIds = Object.keys(state.playlistItems.data);
 

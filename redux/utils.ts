@@ -14,6 +14,8 @@ export const checkIsAuthorized = (accessToken: string, expiresAt: number, error:
   if ((!accessToken || !expiresAt || (Date.now() >= expiresAt)) && !error) {
     openAuthorizeWindow();
     // Application closes
+  } else {
+    spotifyApi.setAccessToken(accessToken);
   }
 };
 

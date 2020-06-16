@@ -46,11 +46,11 @@ void,
 >('userLibrary/set',
   async ({ dispatchSetAudioFeatures = false }, { dispatch, getState }) => {
     const state = getState();
-    const { token } = state.user;
-    const { accessToken, expiresAt } = token;
-    const { errorMessage } = state.user.tokenStatus;
-    checkIsAuthorized(accessToken, expiresAt, errorMessage);
-    spotifyApi.setAccessToken(accessToken);
+    checkIsAuthorized(
+      state.user.token.accessToken,
+      state.user.token.expiresAt,
+      state.user.tokenStatus.errorMessage,
+    );
 
     await getAllPages<SpotifyApi.UsersSavedTracksResponse>(
       spotifyApi.getMySavedTracks({ limit: 50 }),
@@ -82,11 +82,11 @@ export const fetchUserPlaylistItems = createAsyncThunk<
     }
 
     const state = getState();
-    const { token } = state.user;
-    const { accessToken, expiresAt } = token;
-    const { errorMessage } = state.user.tokenStatus;
-    checkIsAuthorized(accessToken, expiresAt, errorMessage);
-    spotifyApi.setAccessToken(accessToken);
+    checkIsAuthorized(
+      state.user.token.accessToken,
+      state.user.token.expiresAt,
+      state.user.tokenStatus.errorMessage,
+    );
 
     const dispatchCallback = async (eachPage: SpotifyApi.PlaylistTrackResponse): Promise<void> => {
       dispatch(setPlaylistItems({ playlistId, playlistItems: eachPage.items }));
