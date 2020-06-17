@@ -82,7 +82,7 @@ export const materialUITheme = createMuiTheme({
       main: colors.green.primary,
     },
     secondary: {
-      main: styledComponentsTheme.colors.green.primary,
+      main: colors.green.primary,
     },
   },
 });

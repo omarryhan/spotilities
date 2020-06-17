@@ -37,7 +37,7 @@ module.exports = {
       'no-console': 'off',
       'no-await-in-loop': 'off',
       'no-nested-ternary': 'off',
-      '@typescript-eslint/ban-ts-ignore': 'warn',
+      '@typescript-eslint/ban-ts-ignore': 'warn',  // not error
       'no-else-return': 'off',
       'no-alert': 'off'
     }

@@ -83,10 +83,11 @@ npm install
 npm run dev
 ```
 
-**I recommend using VScode and installing:**
+**I recommend using VScode and installing the following plugins:**
 
 1. Eslint VScode plugin
 2. Stylelint VScode plugin
+3. vscode-styled-components by Julien Poissonnier for styled-components linting
 
 **Tip:**
 
