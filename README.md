@@ -126,6 +126,6 @@ This will generate the disribution files in the `/out` directory. After that, al
 
 ## Privacy
 
-I do not collect any personal information or any sort of access whatsover. All the action is done on your browser and Spotify's API.
+I do not collect any personal information or any sort of access whatsover. All the action is happening only between your browser and Spotify's API.
 
 I added a Google Analytics plugin to see how users interact with the website, which pages users visit, what features users use etc. The GA plugin doesn't collect any personal information either. I also opted out from sharing the information I collect with Google (Which is kind of a moot point given that the data is already stored on Google's servers). I'd appreciate if you would stop any tracker-blocker or adblocker (not that there are any ads) for this website.
