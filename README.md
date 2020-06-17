@@ -11,6 +11,10 @@
 
 Spoxify is a Spotify client with magic powers.
 
+## Preview
+
+![Preview](https://media.giphy.com/media/Pk9umkY5wUR4QRF3w0/giphy.gif)
+
 ## Live version
 
 https://spoxify.com/
@@ -19,7 +23,7 @@ https://spoxify.com/
 
 For optimal experience, use the website from your phone.
 
-To install it as an app, after opening the website, open your browser's menu and click on "Add to homescreen". Et voila, it's now an app on your phone.
+To install it as an app, after opening the website, open your browser's menu and click on **"Add to homescreen"**. Et voila, it's now an app on your phone.
 
 ## Features
 
