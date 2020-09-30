@@ -11,6 +11,7 @@ const Background = styled.div`
   top: 35px;
   left: 50%;
   transform: translateX(-50%);
+  z-index: ${(props): string => props.theme.zIndeces.header};
 
   height: 3px;
   width: 700px;
