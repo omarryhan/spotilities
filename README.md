@@ -123,6 +123,7 @@ This will generate the disribution files in the `/out` directory. After that, al
 - Playback doesn't work for non-premium users.
 - Playback doesn't work if no active official Spotify App is found.
 - If you login for the first time and mistyped your password, then when you retype it correctly, authentication will fail due to missing Client ID. To solve this, you have to close the tab and reopen it and enter the correct password on your first attempt.
+- Some privacy plugins like [Privacy Badger](https://privacybadger.org/) incorrectly block all traffic to: api.spotify.com. If you're stuck with a loading screen, try whitelisting api.spotify.com.
 
 ## Privacy
 
