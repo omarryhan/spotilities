@@ -143,7 +143,7 @@ const Component: React.FC<Props> = ({
             </Name>
 
             <ArtistAndAlbumName>
-              {`${artistName} . ${albumName} ${albumYear ? `. ${albumYear.substring(0, 4)}` : ''}`}
+              {`${artistName} ⬤ ${albumName} ${albumYear ? `⬤ ${albumYear.substring(0, 4)}` : ''}`}
             </ArtistAndAlbumName>
 
             {

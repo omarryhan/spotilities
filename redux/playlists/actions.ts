@@ -14,6 +14,7 @@ const userLibraryPlaylist = {
     spotify: '',
   },
   href: '',
+  description: 'Liked tracks',
   id: 'userLibrary',
   images: [{
     url: '/cover_art/spotify_likes_icon.png',

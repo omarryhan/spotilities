@@ -7,22 +7,33 @@ interface Props {
 }
 
 const Background = styled.div`
-  width: 100%;
+  position: fixed;
+  top: 35px;
+  left: 50%;
+  transform: translateX(-50%);
+
   height: 3px;
+  width: 700px;
+`;
+
+const Bg = styled.div`
+  width: 100%;
+  height: 100%;
   position: relative;
 `;
 
 const Bar = styled.span<Props>`
-  position: absolute;
-  text-align: left;
-  height: 100%;
   background-color: ${(props): string => props.theme.colors.green.primary};
   width: ${(props): string => props.progress.toString()}%;
+  height: 100%;
+  position: absolute;
 `;
 
 const Component: React.FC<Props> = ({ progress }) => (
   <Background>
-    <Bar progress={progress} />
+    <Bg>
+      <Bar progress={progress} />
+    </Bg>
   </Background>
 );
 

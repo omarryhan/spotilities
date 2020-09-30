@@ -10,15 +10,15 @@
   ],
   "scripts": {
     "dev": "next dev",
-    "dev:static": "npm run build && npm run export && npm run start:static",
+    "dev:static": "yarn build && yarn export && yarn start:static",
     "build": "next build",
     "export": "next export",
     "build:analyze": "ANALYZE=true next build",
     "start": "next start",
     "start:static": "http-server ./out",
-    "prod": "npm run start",
-    "lint": "echo \" \n\nlinting all JS and TS files.\n\n\" && npm run lint:ts; echo \"\n\nLinting styled components.\n\n\" && npm run lint:css",
-    "lint:fix": "echo \" \n\nlinting all JS and TS files.\n\n\" && npm run lint:ts:fix ; echo \"\n\nLinting styled components.\n\n\" && npm run lint:css",
+    "prod": "yarn start",
+    "lint": "echo \" \n\nlinting all JS and TS files.\n\n\" && yarn lint:ts; echo \"\n\nLinting styled components.\n\n\" && yarn lint:css",
+    "lint:fix": "echo \" \n\nlinting all JS and TS files.\n\n\" && yarn lint:ts:fix ; echo \"\n\nLinting styled components.\n\n\" && yarn lint:css",
     "lint:ts": "eslint ./**/*.{js,jsx,tsx,ts,css}",
     "lint:ts:fix": "eslint ./**/*.{js,jsx,tsx,ts,css} --fix",
     "lint:css": "stylelint ./**/*.{js,jsx,tsx,ts}",
@@ -93,7 +93,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run test && npm run lint && npm run build && npm run export # && npm run lint:fix"
+      "pre-commit": "yarn test && yarn lint && yarn build && yarn export # && yarn lint:fix"
     }
   }
 }
