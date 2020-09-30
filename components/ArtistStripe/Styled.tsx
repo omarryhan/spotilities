@@ -33,6 +33,7 @@ export const Container = styled.div`
 export const ImageSection = styled.div`
   height: 100%;
   width: ${height};
+  border-radius: 50%;
   overflow: hidden;
   text-align: center;
 `;
