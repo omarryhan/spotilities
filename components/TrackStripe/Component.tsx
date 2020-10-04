@@ -48,6 +48,8 @@ interface Props {
   hideMusiciansInfo?: boolean;
 }
 
+// const seperator = '⬤';
+
 const Component: React.FC<Props> = ({
   trackId,
   playlistId,
@@ -143,7 +145,7 @@ const Component: React.FC<Props> = ({
             </Name>
 
             <ArtistAndAlbumName>
-              {`${artistName} ⬤ ${albumName} ${albumYear ? `⬤ ${albumYear.substring(0, 4)}` : ''}`}
+              {`${artistName} - ${albumName} ${albumYear ? `- ${albumYear.substring(0, 4)}` : ''}`}
             </ArtistAndAlbumName>
 
             {
