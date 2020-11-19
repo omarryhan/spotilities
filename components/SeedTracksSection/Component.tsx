@@ -101,15 +101,21 @@ const Component: React.FC<{}> = () => {
       </Container>
       <NextButton
         onClick={(): void => {
-          if (!seedTracks.length) {
-            randomSeedTracks.map((trackId) => dispatch(addTrackSeed(trackId)));
-          }
+          // Setting a small timeout so that it waits after the page
+          // has transitioned. That way it doesn't show any quick animations
+          // needlessly.
+          setTimeout(() => {
+            if (!seedTracks.length) {
+              randomSeedTracks.map((trackId) => dispatch(addTrackSeed(trackId)));
+            }
+          }, 500);
 
           ReactGA.event({
             category: 'recommendation',
             action: 'select/seed-tracks',
             value: seedTracks.length,
           });
+
           Router.push('/recommend/select/metrics');
         }}
         text={isFetchingRandomSeedTracks ? 'Loading...' : seedTracks.length ? 'Next' : !randomSeedTracks.length ? 'Next' : 'Skip'}
