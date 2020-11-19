@@ -26,7 +26,9 @@ export type Metrics = {
 
 export interface InitialStateInterface {
   seedTracks: string[];
+  randomSeedTracks: string[];
   status: {
+    isFetchingSeedTracks: boolean;
     isFetching: boolean;
   };
   results: {

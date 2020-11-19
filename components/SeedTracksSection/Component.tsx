@@ -4,7 +4,7 @@ import ReactGA from 'react-ga';
 import { useSelector, useDispatch } from 'react-redux';
 import { CombinedStateType } from '../../redux/types';
 import TrackStripe from '../TrackStripe';
-import { removeSeedTrack } from '../../redux/recommendations/actions';
+import { removeSeedTrack, setRandomSeedTracks, addTrackSeed } from '../../redux/recommendations/actions';
 
 import {
   Container,
@@ -25,7 +25,21 @@ const Component: React.FC<{}> = () => {
     (state) => state.recommendations.seedTracks,
   );
 
-  const onSelectBoxClickHandler = (): Promise<boolean> => Router.push('/recommend/select/playlist');
+  const isFetchingRandomSeedTracks = useSelector<CombinedStateType, boolean>(
+    (state) => state.recommendations.status.isFetchingSeedTracks,
+  );
+
+  const randomSeedTracks = useSelector<CombinedStateType, string[]>(
+    (state) => state.recommendations.randomSeedTracks,
+  );
+
+  React.useEffect(() => {
+    dispatch(setRandomSeedTracks());
+  }, [dispatch]);
+
+  const onSelectBoxClickHandler = (): Promise<boolean> => Router.push(
+    '/recommend/select/playlist',
+  );
 
   return (
     <>
@@ -87,7 +101,12 @@ const Component: React.FC<{}> = () => {
       </Container>
       <NextButton
         onClick={(): void => {
+          if (!seedTracks.length) {
+            randomSeedTracks.map((trackId) => dispatch(addTrackSeed(trackId)));
+          }
+
           try {
+            // !seedTracks.length
             ReactGA.event({
               category: 'recommendation',
               action: 'select/seed-tracks',
@@ -97,7 +116,14 @@ const Component: React.FC<{}> = () => {
             Router.push('/recommend/select/metrics');
           }
         }}
-        disabled={!seedTracks.length}
+        text={isFetchingRandomSeedTracks ? 'Loading...' : (
+          !randomSeedTracks.length && !isFetchingRandomSeedTracks
+        ) ? 'Next' : 'Skip'}
+        disabled={
+          isFetchingRandomSeedTracks || (
+            !isFetchingRandomSeedTracks && !randomSeedTracks.length && !seedTracks.length
+          )
+        }
       />
     </>
   );

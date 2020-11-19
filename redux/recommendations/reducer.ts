@@ -9,14 +9,17 @@ import {
   clearRecommendationsInput,
   clearRecommendationsResults,
   setMetricIsActivated,
+  setRandomSeedTracks,
 } from './actions';
 
 export const InitialState: InitialStateInterface = {
   results: {
     trackIds: [],
   },
+  randomSeedTracks: [],
   seedTracks: [],
   status: {
+    isFetchingSeedTracks: false,
     isFetching: false,
   },
   metrics: {
@@ -149,6 +152,7 @@ export const reducer = createReducer<InitialStateInterface>(InitialState, (build
   builder.addCase(fetchRecommendations.pending, (state, action) => ({
     ...state,
     status: {
+      ...state.status,
       isFetching: true,
     },
   }));
@@ -156,6 +160,7 @@ export const reducer = createReducer<InitialStateInterface>(InitialState, (build
   builder.addCase(fetchRecommendations.fulfilled, (state, action) => ({
     ...state,
     status: {
+      ...state.status,
       isFetching: false,
     },
   }));
@@ -163,6 +168,7 @@ export const reducer = createReducer<InitialStateInterface>(InitialState, (build
   builder.addCase(fetchRecommendations.rejected, (state, action) => ({
     ...state,
     status: {
+      ...state.status,
       isFetching: false,
     },
   }));
@@ -176,5 +182,32 @@ export const reducer = createReducer<InitialStateInterface>(InitialState, (build
   builder.addCase(clearRecommendationsResults, (state, action) => ({
     ...state,
     results: InitialState.results,
+  }));
+
+  builder.addCase(setRandomSeedTracks.pending, (state, action) => ({
+    ...state,
+    status: {
+      ...state.status,
+      isFetchingSeedTracks: true,
+    },
+  }));
+
+  builder.addCase(setRandomSeedTracks.fulfilled, (state, action) => ({
+    ...state,
+    status: {
+      ...state.status,
+      isFetchingSeedTracks: false,
+    },
+    randomSeedTracks: [
+      ...action.payload.randomSeedTracks.map((track) => track.track.id),
+    ],
+  }));
+
+  builder.addCase(setRandomSeedTracks.rejected, (state, action) => ({
+    ...state,
+    status: {
+      ...state.status,
+      isFetchingSeedTracks: false,
+    },
   }));
 });

@@ -12,6 +12,7 @@ export const SelectTrackStripeContainer = styled.button`
   display: block;
   cursor: pointer;
   border: 1px ${(props): string => props.theme.colors.white.evenDarker} dashed;
+  border-radius: 5px;
 
   &:active {
     background-color: ${(props): string => props.theme.colors.gray.light};

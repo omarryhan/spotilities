@@ -9,7 +9,7 @@ interface FetchUserPlaylistItemsPayload {
   playlistItems: SpotifyApi.PlaylistTrackObject[];
 }
 
-const getAllTracksFromPlaylistItems = (
+export const getAllTracksFromPlaylistItems = (
   playlistItems: SpotifyApi.PlaylistTrackResponse,
 ): SpotifyApi.TrackObjectFull[] => playlistItems.items.map(
   (playlistItem) => (playlistItem.track as SpotifyApi.TrackObjectFull),
@@ -19,7 +19,7 @@ export const UserLibraryPlaylistId = 'userLibrary';
 
 export const setPlaylistItems = createAction<FetchUserPlaylistItemsPayload>('playlistItems/set');
 
-const convertMyTracksToPlaylist = (
+export const convertMyTracksToPlaylist = (
   fullResponse: SpotifyApi.UsersSavedTracksResponse,
 ): SpotifyApi.PlaylistTrackResponse => ({
   ...fullResponse,

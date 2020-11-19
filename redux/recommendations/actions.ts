@@ -1,10 +1,12 @@
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
+import shuffle from 'lodash.shuffle';
 import { MetricAttributes, TunableMetrics } from './types';
 import { spotifyApi, checkIsAuthorized } from '../utils';
 import { CombinedStateType } from '../types';
 import { allAttributes } from '../../components/MetricSelector/Data';
 import { setTracks } from '../tracks/actions';
 import { fetchTracksAudioFeatures } from '../tracksAudioFeatures/actions';
+import { convertMyTracksToPlaylist, getAllTracksFromPlaylistItems } from '../playlistItems/actions';
 
 export const setTrackResults = createAction<string[]>('recommendations/trackResults/set');
 
@@ -15,6 +17,30 @@ export const removeSeedTrack = createAction<string>('recommendations/trackSeeds/
 export const clearRecommendationsInput = createAction<void>('recommendations/input/clear');
 
 export const clearRecommendationsResults = createAction<void>('recommendations/results/clear');
+
+// Used to skip selecting tracks for recommendations
+// fetches first 5 tracks from User Library (aka saved items aka likes) if available.
+export const setRandomSeedTracks = createAsyncThunk<
+{ randomSeedTracks: SpotifyApi.SavedTrackObject[]},
+void,
+{ state: CombinedStateType }
+>('recommendations/setRandomSeedTracks',
+  async (_, { dispatch, getState }) => {
+    const state = getState();
+    checkIsAuthorized(
+      state.user.token.accessToken,
+      state.user.token.expiresAt,
+      state.user.tokenStatus.errorMessage,
+    );
+
+    const first50Tracks = await spotifyApi.getMySavedTracks({ limit: 50 });
+    const convertedFirst5Tracks = convertMyTracksToPlaylist(first50Tracks);
+    dispatch(setTracks(getAllTracksFromPlaylistItems(convertedFirst5Tracks)));
+    first50Tracks.items = shuffle(first50Tracks.items);
+    // first 5 tracks of the shuffled list. 5 is the max.
+    // Won't fail if there's less than 5 items in the array.
+    return { randomSeedTracks: first50Tracks.items.slice(0, 5) };
+  });
 
 export const setMetricIsActivated = createAction<{
   name: TunableMetrics;
