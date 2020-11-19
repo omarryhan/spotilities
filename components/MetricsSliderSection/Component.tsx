@@ -24,7 +24,7 @@ import { allAttributes } from '../MetricSelector/Data';
 const Component: React.FC<{}> = () => {
   // If a user clicks quick enough on the `next` button in this page
   // after skipping selecting tracks,
-  // they might not get a result because the previous page waits for 200ms to
+  // they might not get a result because the previous page waits for 600ms to
   // add the tracks, so that it doesn't show the user that it's being done under the hood.
   const [
     shouldWaitForRandomSeedTracks,
@@ -32,7 +32,7 @@ const Component: React.FC<{}> = () => {
   ] = React.useState(true);
 
   React.useEffect(() => {
-    setTimeout(() => setShouldWaitForRandomSeedTracks(false), 200);
+    setTimeout(() => setShouldWaitForRandomSeedTracks(false), 600);
   }, []);
   const dispatch = useDispatch();
 
