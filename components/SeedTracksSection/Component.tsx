@@ -108,7 +108,7 @@ const Component: React.FC<{}> = () => {
             if (!seedTracks.length) {
               randomSeedTracks.map((trackId) => dispatch(addTrackSeed(trackId)));
             }
-          }, 500);
+          }, 400);
 
           ReactGA.event({
             category: 'recommendation',
@@ -120,7 +120,7 @@ const Component: React.FC<{}> = () => {
         }}
         text={isFetchingRandomSeedTracks ? 'Loading...' : seedTracks.length ? 'Next' : !randomSeedTracks.length ? 'Next' : 'Skip'}
         disabled={
-          isFetchingRandomSeedTracks || (
+          (isFetchingRandomSeedTracks && !seedTracks.length) || (
             !isFetchingRandomSeedTracks && !randomSeedTracks.length && !seedTracks.length
           )
         }
