@@ -108,7 +108,7 @@ const Component: React.FC<{}> = () => {
             if (!seedTracks.length) {
               randomSeedTracks.map((trackId) => dispatch(addTrackSeed(trackId)));
             }
-          }, 400);
+          }, 500);
 
           ReactGA.event({
             category: 'recommendation',
