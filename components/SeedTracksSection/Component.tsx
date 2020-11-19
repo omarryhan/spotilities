@@ -105,20 +105,14 @@ const Component: React.FC<{}> = () => {
             randomSeedTracks.map((trackId) => dispatch(addTrackSeed(trackId)));
           }
 
-          try {
-            // !seedTracks.length
-            ReactGA.event({
-              category: 'recommendation',
-              action: 'select/seed-tracks',
-              value: seedTracks.length,
-            });
-          } finally {
-            Router.push('/recommend/select/metrics');
-          }
+          ReactGA.event({
+            category: 'recommendation',
+            action: 'select/seed-tracks',
+            value: seedTracks.length,
+          });
+          Router.push('/recommend/select/metrics');
         }}
-        text={isFetchingRandomSeedTracks ? 'Loading...' : (
-          !randomSeedTracks.length && !isFetchingRandomSeedTracks
-        ) ? 'Next' : 'Skip'}
+        text={isFetchingRandomSeedTracks ? 'Loading...' : seedTracks.length ? 'Next' : !randomSeedTracks.length ? 'Next' : 'Skip'}
         disabled={
           isFetchingRandomSeedTracks || (
             !isFetchingRandomSeedTracks && !randomSeedTracks.length && !seedTracks.length
