@@ -15,6 +15,24 @@ Spoxify is a Spotify client with magic powers.
 
 ![Preview](https://media.giphy.com/media/Pk9umkY5wUR4QRF3w0/giphy.gif)
 
+## Goals
+
+Complement Spotify's official app and add features that might be useful to people.
+
+## Why I made it
+I wanted to test out the song-analysis endpoints provided by Spotify through their API.
+Stuff like: song's energy, danceability etc. Unfortunately, the official Spotify web app doesn't show you these stats.
+Also, the app I used to check my top tracks and artists was unfortunately removed from the PlayStore, so I thought I might add that as well.
+
+## Todo
+
+- [x] Show top tracks and top artists for 1 month, 3 months and of all time.
+- [x] Show the stats of your tracks and playlists.
+- [x] Generate recommendations using Spotify's stats.
+- [ ] Create your own playlist cover art and upload it.
+- [ ] Add the generated recommendations to a new playlist (currently you can only add the to the playing queue).
+- [ ] Make a landing page.
+
 ## Live version
 
 https://spoxify.com/
