@@ -17,9 +17,10 @@ Spoxify is a Spotify client with magic powers.
 
 ## Goals
 
-Complement Spotify's official app and add features that might be useful to people.
+Complement Spotify's official mobile app and not replace it.
 
 ## Why I made it
+
 I wanted to test out the song-analysis endpoints provided by Spotify through their API.
 Stuff like: song's energy, danceability etc. Unfortunately, the official Spotify web app doesn't show you these stats.
 Also, the app I used to check my top tracks and artists was unfortunately removed from the PlayStore, so I thought I might add that as well.
