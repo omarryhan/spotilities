@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React from 'react';
 import Document, {
-  DocumentContext, Head, Main, NextScript,
+  DocumentContext, Html, Head, Main, NextScript,
 } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
@@ -22,7 +22,7 @@ export default class MyDocument extends Document {
 
   render() {
     return (
-      <html
+      <Html
         lang="en"
       >
         <Head>
@@ -38,7 +38,7 @@ export default class MyDocument extends Document {
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     );
   }
 }

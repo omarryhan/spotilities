@@ -59,6 +59,8 @@ export const TitleSection = styled.div`
 `;
 
 export const Img = styled.img`
+  object-fit: contain;
+  max-width: 80px;
   height: 100%;
 `;
 

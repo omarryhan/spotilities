@@ -106,6 +106,10 @@ const Component: React.FC<Props> = ({ playlistId, onPlaylistItemClick }) => {
                 playlistPhotos.length ? playlistPhotos[0] : playlistPhotos.length > 1 ? playlistPhotos[1] : ''
               }
               alt="Playlist cover"
+              onError={(e): void => {
+                // @ts-expect-error
+                e.target.src = '/cover_art/fallback_cover_icon.png';
+              }}
             />
           </ImageSection>
 
