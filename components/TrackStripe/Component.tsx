@@ -134,8 +134,12 @@ const Component: React.FC<Props> = ({
             longLength={showStatsForMusicians}
           >
             <Img
-              src={trackImage}
+              src={trackImage || '/cover_art/fallback_cover_icon.png'}
               alt="Track album cover"
+              onError={(e): void => {
+                // @ts-expect-error
+                e.target.src = '/cover_art/fallback_cover_icon.png';
+              }}
             />
           </ImageSection>
 

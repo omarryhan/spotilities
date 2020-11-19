@@ -103,7 +103,15 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
               <ColorExtractor getColors={setColor}>
                 { /* ColorExtractor only accepts <img>, that's why
                   we're not using a styled component */ }
-                <img style={{ width: '100%' }} src={playlistPhotos ? playlistPhotos[0] : backupPhotoURL} alt={`${playlistName} playlist cover`} />
+                <img
+                  style={{ width: '100%' }}
+                  src={playlistPhotos ? playlistPhotos[0] || '/cover_art/fallback_cover_icon.png' : backupPhotoURL}
+                  alt={`${playlistName} playlist cover`}
+                  onError={(e): void => {
+                    // @ts-expect-error
+                    e.target.src = '/cover_art/fallback_cover_icon.png';
+                  }}
+                />
               </ColorExtractor>
             </PlaylistCoverPhotoWrapper>
 

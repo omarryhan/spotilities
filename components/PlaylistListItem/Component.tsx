@@ -103,7 +103,7 @@ const Component: React.FC<Props> = ({ playlistId, onPlaylistItemClick }) => {
           <ImageSection>
             <Img
               src={
-                playlistPhotos.length ? playlistPhotos[0] : playlistPhotos.length > 1 ? playlistPhotos[1] : ''
+                playlistPhotos.length ? playlistPhotos[0] || '/cover_art/fallback_cover_icon.png' : playlistPhotos.length > 1 ? playlistPhotos[1] : ''
               }
               alt="Playlist cover"
               onError={(e): void => {
