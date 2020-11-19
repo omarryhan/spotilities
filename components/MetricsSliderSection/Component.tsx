@@ -22,6 +22,18 @@ import {
 import { allAttributes } from '../MetricSelector/Data';
 
 const Component: React.FC<{}> = () => {
+  // If a user clicks quick enough on the `next` button in this page
+  // after skipping selecting tracks,
+  // they might not get a result because the previous page waits for 200ms to
+  // add the tracks, so that it doesn't show the user that it's being done under the hood.
+  const [
+    shouldWaitForRandomSeedTracks,
+    setShouldWaitForRandomSeedTracks,
+  ] = React.useState(true);
+
+  React.useEffect(() => {
+    setTimeout(() => setShouldWaitForRandomSeedTracks(false), 200);
+  }, []);
   const dispatch = useDispatch();
 
   const metrics = useSelector<CombinedStateType, Metrics>(
@@ -124,6 +136,7 @@ const Component: React.FC<{}> = () => {
           }
         }}
         text={noMetricsSelected ? 'Skip' : 'Apply Magic'}
+        disabled={shouldWaitForRandomSeedTracks}
       />
     </>
   );
