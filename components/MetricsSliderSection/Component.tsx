@@ -31,8 +31,19 @@ const Component: React.FC<{}> = () => {
     setShouldWaitForRandomSeedTracks,
   ] = React.useState(true);
 
+  const seedTracks = useSelector<CombinedStateType, string[]>(
+    (state) => state.recommendations.seedTracks,
+  );
+
   React.useEffect(() => {
-    setTimeout(() => setShouldWaitForRandomSeedTracks(false), 500);
+    if (!seedTracks.length) {
+      setTimeout(() => setShouldWaitForRandomSeedTracks(false), 500);
+    } else {
+      // Change immediately
+      setShouldWaitForRandomSeedTracks(false);
+    }
+    // We only need to check once when mounted. Not every time seedTracks.lengths is changed.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const dispatch = useDispatch();
 
