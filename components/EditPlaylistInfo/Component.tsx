@@ -112,6 +112,11 @@ const Component: React.FC<Props> = ({ playlistId }) => {
               return;
             }
 
+            if (!trim(name)) {
+              alert('Name cannot be empty');
+              return;
+            }
+
             if (playlistDescription && !trim(description)) {
               alert('Description cannot be empty.\nThis is a limitation of Spotify.');
               return;
