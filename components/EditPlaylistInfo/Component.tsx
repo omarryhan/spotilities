@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { ColorExtractor } from 'react-color-extractor';
 import { useSelector, useDispatch } from 'react-redux';
 import Router, { useRouter } from 'next/router';
+import trim from 'lodash.trim';
 
 import { styledComponentsTheme } from '../../configs/theme';
 import {
@@ -68,8 +69,6 @@ const Component: React.FC<Props> = ({ playlistId }) => {
     setBgColor(colors[5]);
   };
 
-  console.log(isUpdatingPlaylist);
-
   return (
     <Container>
       <BackgroundGradient
@@ -113,7 +112,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
               return;
             }
 
-            if (playlistDescription && !description) {
+            if (playlistDescription && !trim(description)) {
               alert('Description cannot be empty.\nThis is a limitation of Spotify.');
               return;
             }

@@ -51,12 +51,17 @@ void,
       state.user.tokenStatus.errorMessage,
     );
 
+    const payload: {name: string; description?: string} = {
+      name,
+    };
+
+    if (description) {
+      payload.description = description;
+    }
+
     try {
       await spotifyApi.changePlaylistDetails(
-        id, {
-          name,
-          description,
-        },
+        id, payload,
       );
 
       // Some buffer so that when that when you refresh the playlists

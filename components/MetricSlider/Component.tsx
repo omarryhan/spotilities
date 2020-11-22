@@ -27,7 +27,6 @@ const Component: React.FC<Props> = ({ name }) => {
 
   const setValues = (event: React.ChangeEvent<{}>, values: number | number[]): void => {
     const minAndMax = values as number[];
-    console.log(values);
     dispatch(setMetric({
       name,
       attributes: {
