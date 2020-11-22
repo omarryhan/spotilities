@@ -14,7 +14,7 @@ const handleLinkClick = (route: string): void => {
   Router.push(route);
 };
 
-const Component: React.FC<{}> = () => {
+const Component: React.FC = () => {
   let path = '/';
 
   if (typeof window !== 'undefined') {

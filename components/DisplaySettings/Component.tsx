@@ -11,7 +11,7 @@ import {
   StyledSwitch,
 } from '../Settings/Styled';
 
-const Component: React.FC<{}> = () => {
+const Component: React.FC = () => {
   const settings = getOrSetAndGetCurrentSettings();
   const [settingsState, setSettingsState] = React.useState(
     settings,

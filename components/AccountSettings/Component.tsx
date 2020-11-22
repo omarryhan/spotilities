@@ -10,7 +10,7 @@ import {
   StyledLogoutButton,
 } from '../Settings/Styled';
 
-const Component: React.FC<{}> = () => (
+const Component: React.FC = () => (
   <SettingsSection>
     <SectionTitle>
       Account

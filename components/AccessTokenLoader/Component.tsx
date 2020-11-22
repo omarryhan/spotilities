@@ -10,7 +10,7 @@ import { CombinedStateType } from '../../redux/types';
   the first trigger of the effect below will not be able to
   read the access token when mounted in _app.tsx.
 */
-const Component: React.FC<{}> = () => {
+const Component: React.FC = () => {
   const accessToken = useSelector<CombinedStateType, string>(
     (state) => state.user.token.accessToken,
   );

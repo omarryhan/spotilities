@@ -4,7 +4,7 @@ import {
   Button,
 } from './Styled';
 
-const Component: React.FC<{}> = () => (
+const Component: React.FC = () => (
   <Container>
     <Button type="submit">
       Recommend

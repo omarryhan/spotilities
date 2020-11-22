@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { CombinedStateType } from '../../redux/types';
 import { fetchUserProfile } from '../../redux/profile/actions';
 
-const Component: React.FC<{}> = () => {
+const Component: React.FC = () => {
   const accessToken = useSelector<CombinedStateType, string>(
     (state) => state.user.token.accessToken,
   );

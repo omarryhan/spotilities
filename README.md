@@ -30,6 +30,7 @@ Also, the app I used to check my top tracks and artists was unfortunately remove
 - [x] Show top tracks and top artists for 1 month, 3 months and of all time.
 - [x] Show the stats of your tracks and playlists.
 - [x] Generate recommendations using Spotify's stats.
+- [x] Edit playlist description
 - [ ] Create your own playlist cover art and upload it.
 - [ ] Add the generated recommendations to a new playlist (currently you can only add the to the playing queue).
 - [ ] Make a landing page.

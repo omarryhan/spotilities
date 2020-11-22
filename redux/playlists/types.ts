@@ -8,5 +8,6 @@ export interface InitialStateInterface {
   status: {
     isFetching: boolean;
     fetchedOnce: boolean;
+    isUpdating: boolean;
   };
 }

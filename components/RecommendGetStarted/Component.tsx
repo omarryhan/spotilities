@@ -14,7 +14,7 @@ import { clearRecommendationsInput } from '../../redux/recommendations/actions';
 
 import Magic from '../../public/icons/wizard.svg';
 
-const Component: React.FC<{}> = () => {
+const Component: React.FC = () => {
   const dispatch = useDispatch();
   return (
     <Container>

@@ -43,7 +43,7 @@ const Component: React.FC<Props> = ({ currentDuration }) => {
               maxItems={topArtistIds.length}
               startingItems={15}
             >
-              { ({ nToRender }): ReturnType<React.FC<{}>> => (
+              { ({ nToRender }): ReturnType<React.FC> => (
                 <>
                   {
                     (topArtistIds.slice(0, nToRender).map((artistId, index) => (

@@ -20,7 +20,7 @@ const Page: NextPage<{}> = () => (
     </Head>
     <AccessTokenLoader />
     <CurrentUserLoader />
-    <TopNav title="Top" showSettingsButton />
+    <TopNav title="Top" showRightButton />
     <AppBody>
       <TopTrackOrArtist currentType="artists" currentDuration="onemonth" />
       <TopArtistsList currentType="artists" currentDuration="onemonth" />

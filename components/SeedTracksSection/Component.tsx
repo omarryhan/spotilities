@@ -18,7 +18,7 @@ import SelectBox from '../SelectBox';
 import RemoveIcon from '../../public/icons/remove.svg';
 import NextButton from '../NextButton';
 
-const Component: React.FC<{}> = () => {
+const Component: React.FC = () => {
   const dispatch = useDispatch();
 
   const seedTracks = useSelector<CombinedStateType, string[]>(

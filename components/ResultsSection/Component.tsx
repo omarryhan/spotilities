@@ -12,7 +12,7 @@ import {
 import { fetchRecommendations } from '../../redux/recommendations/actions';
 import { CombinedStateType } from '../../redux/types';
 
-const Component: React.FC<{}> = () => {
+const Component: React.FC = () => {
   const isFetchingResults = useSelector<CombinedStateType, boolean>(
     (state) => state.recommendations.status.isFetching,
   );

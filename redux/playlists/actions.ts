@@ -35,6 +35,35 @@ const userLibraryPlaylist = {
   uri: '',
 };
 
+export const updateUserPlaylistInfo = createAsyncThunk<
+void,
+{ id: string; name: string; description: string },
+{ state: CombinedStateType }
+>(
+  'playlists/update/info',
+  async ({
+    id, name, description,
+  }, { getState, dispatch }) => {
+    const state = getState();
+    checkIsAuthorized(
+      state.user.token.accessToken,
+      state.user.token.expiresAt,
+      state.user.tokenStatus.errorMessage,
+    );
+
+    alert(description);
+
+    await spotifyApi.changePlaylistDetails(
+      id, {
+        name,
+        description,
+      },
+    );
+
+    await dispatch(fetchUserPlaylists(state.profile.data.id));
+  },
+);
+
 export const fetchUserPlaylists = createAsyncThunk<
 SpotifyApi.PlaylistObjectSimplified[],
 string,

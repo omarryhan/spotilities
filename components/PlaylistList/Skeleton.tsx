@@ -2,7 +2,7 @@ import React from 'react';
 import { PictureSkeleton, BodySkeleton, BodySkeletonWrapper } from './Styled';
 import { Button, Container, LeftSection } from '../PlaylistListItem/Styled';
 
-const Component: React.FC<{}> = () => (
+const Component: React.FC = () => (
   <>
     {
       Array(16).fill('_').map((_, i) => (

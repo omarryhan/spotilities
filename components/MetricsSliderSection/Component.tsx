@@ -21,7 +21,7 @@ import {
 
 import { allAttributes } from '../MetricSelector/Data';
 
-const Component: React.FC<{}> = () => {
+const Component: React.FC = () => {
   // If a user clicks quick enough on the `next` button in this page
   // after skipping selecting tracks,
   // they might not get a result because the previous page waits for 500ms to

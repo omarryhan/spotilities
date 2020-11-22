@@ -28,7 +28,7 @@ const handleClick = (
   Router.push('/recommend/select/metrics');
 };
 
-const Component: React.FC<{}> = () => {
+const Component: React.FC = () => {
   const dispatch = useDispatch();
   const unselectedAttributes = useSelector<CombinedStateType, TunableMetrics[]>(
     (state) => {

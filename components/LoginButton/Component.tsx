@@ -6,7 +6,7 @@ const onClickHanlder = async (): Promise<void> => {
   await openAuthorizeWindow();
 };
 
-const Component: React.FC<{}> = () => (
+const Component: React.FC = () => (
   <Button onClick={onClickHanlder} type="button">
     Login to Spotify
   </Button>

@@ -3,15 +3,17 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 
 import { useSelector, useDispatch } from 'react-redux';
-import AppBody from '../components/AppBody';
-import PlaylistItemsList from '../components/PlaylistItemsList';
-import TopNav from '../components/TopNav';
-import BottomNav from '../components/BottomNav';
-import PlaylistItemsCoverSection from '../components/PlaylistItemsCoverSection';
-import PlayShufflePlaylistButton from '../components/PlayShufflePlaylistButton';
+import Router, { useRouter } from 'next/router';
+import AppBody from '../../components/AppBody';
+import PlaylistItemsList from '../../components/PlaylistItemsList';
+import TopNav from '../../components/TopNav';
+import BottomNav from '../../components/BottomNav';
+import PlaylistItemsCoverSection from '../../components/PlaylistItemsCoverSection';
+import PlayShufflePlaylistButton from '../../components/PlayShufflePlaylistButton';
+import EditIcon from '../../public/icons/edit.svg';
 
-import { CombinedStateType } from '../redux/types';
-import { fetchUserPlaylistItems } from '../redux/playlistItems/actions';
+import { CombinedStateType } from '../../redux/types';
+import { fetchUserPlaylistItems } from '../../redux/playlistItems/actions';
 
 // This page should only be accessed dynamically on the browser
 // Calling /playlists/your_playlist_id from the browser will return a 404
@@ -34,6 +36,8 @@ const Page: NextPage<{}> = () => {
   ) as boolean | undefined;
 
   const dispatch = useDispatch();
+
+  const router = useRouter();
 
   React.useEffect(() => {
     const effect = async (): Promise<void> => {
@@ -59,13 +63,21 @@ const Page: NextPage<{}> = () => {
     playlistId,
   ]);
 
+  const EditIconComponent: React.FC = () => (<EditIcon />);
+
   return (
     <>
       <Head>
         <meta name="title" content="Spoxify | Playlist" />
         <title>Spoxify | Playlist</title>
       </Head>
-      <TopNav showBackButton title={playlistName} />
+      <TopNav
+        showBackButton
+        title={playlistName}
+        showRightButton
+        RightButton={EditIconComponent}
+        onRightButtonClick={(): ReturnType<typeof Router.push> => router.push('/playlists/edit-info', `/playlists/edit-info/${playlistId}`)}
+      />
       <AppBody>
         <PlaylistItemsCoverSection playlistId={playlistId} />
         <PlayShufflePlaylistButton playlistId={playlistId} />

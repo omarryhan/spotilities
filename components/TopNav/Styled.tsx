@@ -75,6 +75,12 @@ export const SettingsButtonWapper = styled.button`
     width: 100%;
     fill: ${(props): string => props.theme.colors.white.dark};
   }
+
+  /* For the edit icon. Probably should have its own class. But I'm too lazy */
+  & > svg > path {
+    stroke: ${(props): string => props.theme.colors.white.dark};
+    stroke-width: 3;
+  }
 `;
 
 export const BackButtonWrapper = styled.button`

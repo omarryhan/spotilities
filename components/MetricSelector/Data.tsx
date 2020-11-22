@@ -18,7 +18,7 @@ export const allAttributes: Partial<AllAttributes> = {
     description: `
       Filter by tempo, rhythm stability, beat strength, and overall regularity.
     `,
-    icon: (): ReturnType<React.FC<{}>> => (<FeatureIcon name="danceability" />),
+    icon: (): ReturnType<React.FC> => (<FeatureIcon name="danceability" />),
     isActivatedPayload: {
       isActivated: true,
       max: 100,
@@ -35,7 +35,7 @@ export const allAttributes: Partial<AllAttributes> = {
     description: `
       Filter by dynamic range, perceived loudness, timbre, onset rate, and general entropy.
     `,
-    icon: (): ReturnType<React.FC<{}>> => (<FeatureIcon name="energy" />),
+    icon: (): ReturnType<React.FC> => (<FeatureIcon name="energy" />),
     isActivatedPayload: {
       isActivated: true,
       max: 100,
@@ -52,7 +52,7 @@ export const allAttributes: Partial<AllAttributes> = {
     description: `
       Tracks with high valence sound more positive, while tracks with low valence sound more negative.
     `,
-    icon: (): ReturnType<React.FC<{}>> => (<FeatureIcon name="valence" />),
+    icon: (): ReturnType<React.FC> => (<FeatureIcon name="valence" />),
     isActivatedPayload: {
       isActivated: true,
       max: 100,
@@ -69,7 +69,7 @@ export const allAttributes: Partial<AllAttributes> = {
     description: `
       Filter by the total number of plays the track has had and how recent those plays are.
     `,
-    icon: (): ReturnType<React.FC<{}>> => (<FeatureIcon name="popularity" />),
+    icon: (): ReturnType<React.FC> => (<FeatureIcon name="popularity" />),
     isActivatedPayload: {
       isActivated: true,
       max: 100,
@@ -86,7 +86,7 @@ export const allAttributes: Partial<AllAttributes> = {
     description: `
       The overall estimated tempo of a track in beats per minute (BPM).
     `,
-    icon: (): ReturnType<React.FC<{}>> => (<FeatureIcon name="tempo" />),
+    icon: (): ReturnType<React.FC> => (<FeatureIcon name="tempo" />),
     isActivatedPayload: {
       isActivated: true,
       max: 300,
@@ -103,7 +103,7 @@ export const allAttributes: Partial<AllAttributes> = {
     description: `
       The duration of the track in minutes.
     `,
-    icon: (): ReturnType<React.FC<{}>> => (<FeatureIcon name="duration_ms" />),
+    icon: (): ReturnType<React.FC> => (<FeatureIcon name="duration_ms" />),
     isActivatedPayload: {
       isActivated: true,
       max: 120,
@@ -120,7 +120,7 @@ export const allAttributes: Partial<AllAttributes> = {
     description: `
       Detects the presence of an audience in the recording.
     `,
-    icon: (): ReturnType<React.FC<{}>> => (<FeatureIcon name="liveness" />),
+    icon: (): ReturnType<React.FC> => (<FeatureIcon name="liveness" />),
     isActivatedPayload: {
       isActivated: true,
       max: 100,
@@ -138,7 +138,7 @@ export const allAttributes: Partial<AllAttributes> = {
     description: `
       The overall loudness of a track in decibels (dB).
     `,
-    icon: (): ReturnType<React.FC<{}>> => (<FeatureIcon name="loudness" />),
+    icon: (): ReturnType<React.FC> => (<FeatureIcon name="loudness" />),
     isActivatedPayload: {
       isActivated: true,
       max: 0,
@@ -155,7 +155,7 @@ export const allAttributes: Partial<AllAttributes> = {
     description: `
       A confidence measure of whether the track is acoustic.
     `,
-    icon: (): ReturnType<React.FC<{}>> => (<FeatureIcon name="acousticness" />),
+    icon: (): ReturnType<React.FC> => (<FeatureIcon name="acousticness" />),
     isActivatedPayload: {
       isActivated: true,
       max: 100,
@@ -172,7 +172,7 @@ export const allAttributes: Partial<AllAttributes> = {
     description: `
       Values above 50 are intended to represent instrumental tracks, less is for tracks with vocals.
     `,
-    icon: (): ReturnType<React.FC<{}>> => (<FeatureIcon name="instrumentalness" />),
+    icon: (): ReturnType<React.FC> => (<FeatureIcon name="instrumentalness" />),
     isActivatedPayload: {
       isActivated: true,
       max: 100,
@@ -189,7 +189,7 @@ export const allAttributes: Partial<AllAttributes> = {
     description: `
       Filter by the amount of spoken words in a track. Values under 30 should have no spoken words.
     `,
-    icon: (): ReturnType<React.FC<{}>> => (<FeatureIcon name="speechiness" />),
+    icon: (): ReturnType<React.FC> => (<FeatureIcon name="speechiness" />),
     isActivatedPayload: {
       isActivated: true,
       max: 100,

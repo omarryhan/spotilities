@@ -36,7 +36,7 @@ const Component: React.FC<Props> = ({ playlistId, onTrackClick }) => {
               maxItems={allPlaylistTrackIds.length}
               startingItems={15}
             >
-              { ({ nToRender }): ReturnType<React.FC<{}>> => (
+              { ({ nToRender }): ReturnType<React.FC> => (
                 <>
                   {
                     (allPlaylistTrackIds.slice(0, nToRender).map((trackId) => (

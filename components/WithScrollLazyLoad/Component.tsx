@@ -5,7 +5,7 @@ interface ChildElementProps {
 }
 
 interface Props {
-  children: (arg0: ChildElementProps) => ReturnType<React.FC<{}>>;
+  children: (arg0: ChildElementProps) => ReturnType<React.FC>;
   maxItems: number;
   startingItems: number;
 }

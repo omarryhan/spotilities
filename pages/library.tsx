@@ -17,7 +17,7 @@ const Page: NextPage<{}> = () => (
     </Head>
     <AccessTokenLoader />
     <CurrentUserLoader />
-    <TopNav title="Library" showSettingsButton />
+    <TopNav title="Library" showRightButton />
     <AppBody>
       <PlaylistList />
     </AppBody>

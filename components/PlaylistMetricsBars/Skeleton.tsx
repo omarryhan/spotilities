@@ -13,7 +13,7 @@ import EnergyIcon from '../../public/icons/flash.svg';
 import ValenceIcon from '../../public/icons/happy.svg';
 import PopularityIcon from '../../public/icons/trending.svg';
 
-const Component: React.FC<{}> = () => (
+const Component: React.FC = () => (
   <Container>
     <Metric>
       <MetricWrapper>

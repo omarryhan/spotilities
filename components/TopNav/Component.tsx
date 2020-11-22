@@ -12,11 +12,21 @@ import {
   BackButtonWrapper,
 } from './Styled';
 
-const Component: React.FC<
-{title?: string; showBackButton?: boolean; showSettingsButton?: boolean}
-> = (
-  { title = '', showBackButton = false, showSettingsButton = false },
-) => (
+interface Props {
+  title?: string;
+  showBackButton?: boolean;
+  showRightButton?: boolean;
+  RightButton?: React.FC;
+  onRightButtonClick?: () => ReturnType<typeof Router.push>;
+}
+
+const Component: React.FC<Props> = ({
+  title = '',
+  showBackButton = false,
+  showRightButton = false,
+  RightButton,
+  onRightButtonClick,
+}) => (
   <Header>
     <Nav>
       <NavItem left>
@@ -53,17 +63,26 @@ const Component: React.FC<
 
       <NavItem right>
         {
-          showSettingsButton
-            ? (
-              <SettingsButtonWapper
-                type="button"
-                onClick={
-                  (): ReturnType<typeof Router.push> => Router.push('/settings')
-                }
-              >
-                <SettingsIcon />
-              </SettingsButtonWapper>
-            )
+          showRightButton
+            ? typeof RightButton === 'undefined'
+              ? (
+                <SettingsButtonWapper
+                  type="button"
+                  onClick={
+                    (): ReturnType<typeof Router.push> => Router.push('/settings')
+                  }
+                >
+                  <SettingsIcon />
+                </SettingsButtonWapper>
+              )
+              : (
+                <SettingsButtonWapper
+                  type="button"
+                  onClick={onRightButtonClick}
+                >
+                  <RightButton />
+                </SettingsButtonWapper>
+              )
             : ''
         }
       </NavItem>

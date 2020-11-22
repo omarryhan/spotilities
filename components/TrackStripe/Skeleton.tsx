@@ -8,7 +8,7 @@ import {
   Button,
 } from './Styled';
 
-const Component: React.FC<{}> = () => (
+const Component: React.FC = () => (
   <Button notClickable>
     <Container>
       <LeftSection>

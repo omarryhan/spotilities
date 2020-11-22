@@ -9,7 +9,7 @@ export interface AttributeInfo {
   title: string;
   id: TunableMetrics;
   description: string;
-  icon: React.FC<{}>;
+  icon: React.FC;
   isActivatedPayload: MetricAttributes;
   resultsTransformer: (arg0: SliderResults) => SliderResults;
 }
