@@ -108,6 +108,16 @@ const Component: React.FC<Props> = ({ playlistId }) => {
       <Form
         onSubmit={handleSubmit(
           async ({ name, description }) => {
+            if (description.includes('\n')) {
+              alert('Description cannot include more than one line (Shouldn\'t hit enter).\nThis is a limitation of Spotify.');
+              return;
+            }
+
+            if (playlistDescription && !description) {
+              alert('Description cannot be empty.\nThis is a limitation of Spotify.');
+              return;
+            }
+
             await dispatch(updateUserPlaylistInfo({
               name,
               description,
@@ -144,7 +154,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
             <TextArea
               name="description"
               id="description"
-              placeholder={!playlistDescription ? 'Playlist description' : "Playlist description - Can't be empty unfortunately :("}
+              placeholder="Playlist description"
               ref={register}
             />
           </Label>

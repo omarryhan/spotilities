@@ -84,6 +84,8 @@ export const DescriptionWrapper = styled.div`
 export const DescriptionText = styled.p`
   font-size: 0.8rem;
   text-align: center;
+  overflow-wrap: break-word;
+  width: 100%;
 `;
 
 export const MetricsSpinnerContainer = styled.div`

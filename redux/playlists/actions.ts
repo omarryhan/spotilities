@@ -51,14 +51,37 @@ void,
       state.user.tokenStatus.errorMessage,
     );
 
-    await spotifyApi.changePlaylistDetails(
-      id, {
-        name,
-        description,
-      },
-    );
+    try {
+      await spotifyApi.changePlaylistDetails(
+        id, {
+          name,
+          description,
+        },
+      );
 
-    await dispatch(fetchUserPlaylists(state.profile.data.id));
+      // Some buffer so that when that when you refresh the playlists
+      // you gett the new info
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+    } catch (e) {
+      if (e instanceof XMLHttpRequest) {
+        const errorMessage = e.response && JSON.parse(
+          e.response,
+        )?.error?.message as undefined | string;
+
+        if (errorMessage && errorMessage.includes('description is empty')) {
+          alert('Description cannot be empty.\nThis is a limitation of Spotify.');
+          // window.location.href = 'spotify:';
+        } else if (errorMessage) {
+          alert(errorMessage);
+        } else {
+          alert('Something went wrong');
+        }
+      } else {
+        alert(e.message || 'Something went wrong');
+      }
+    } finally {
+      await dispatch(fetchUserPlaylists(state.profile.data.id));
+    }
   },
 );
 
