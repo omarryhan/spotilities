@@ -27,6 +27,7 @@ export const IllustrationWrapper = styled.div`
 
 export const GetStartedButtonWrapper = styled.div`
   text-align: center;
+  margin-top: 10px;
 `;
 
 export const GetStartedButton = styled.button`

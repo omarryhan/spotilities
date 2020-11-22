@@ -51,8 +51,6 @@ void,
       state.user.tokenStatus.errorMessage,
     );
 
-    alert(description);
-
     await spotifyApi.changePlaylistDetails(
       id, {
         name,

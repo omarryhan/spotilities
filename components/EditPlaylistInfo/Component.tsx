@@ -144,7 +144,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
             <TextArea
               name="description"
               id="description"
-              placeholder="Playlist description - Can't be empty unfortunately :("
+              placeholder={!playlistDescription ? 'Playlist description' : "Playlist description - Can't be empty unfortunately :("}
               ref={register}
             />
           </Label>

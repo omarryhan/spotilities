@@ -76,7 +76,7 @@ export const Input = styled.input`
   outline: none;
   height: 50px;
   width: 100%;
-  border-radius: 25px;
+  border-radius: 5px;
   padding: 0 15px;
   border: ${(props): string => props.theme.colors.gray.dark} solid 2px;
   font-size: 16px;
@@ -106,7 +106,7 @@ export const TextArea = styled.textarea`
   outline: none;
   height: 100px;
   width: 100%;
-  border-radius: 25px;
+  border-radius: 5px;
   padding: 15px 15px;
   border: ${(props): string => props.theme.colors.gray.dark} solid 2px;
   font-size: 16px;
@@ -147,8 +147,8 @@ export const SubmitButton = styled.button<{ isUpdatingPlaylist: boolean}>`
   background-color: ${(props): string => (props.isUpdatingPlaylist ? props.theme.colors.gray.lightest : props.theme.colors.green.primary)};
   color: ${(props): string => (props.isUpdatingPlaylist ? props.theme.colors.white.dark : props.theme.colors.white.light)};
   font-size: 20px;
-  width: 135px;
-  height: 40px;
+  width: 145px;
+  height: 50px;
   border-radius: 25px;
   font-weight: bold;
 
@@ -169,8 +169,8 @@ export const CancelButton = styled.button`
   background-color: ${(props): string => props.theme.colors.gray.lightest};
   color: ${(props): string => props.theme.colors.white.dark};
   font-size: 20px;
-  width: 135px;
-  height: 40px;
+  width: 145px;
+  height: 50px;
   border-radius: 25px;
   font-weight: bold;
 
