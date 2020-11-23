@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { ColorExtractor } from 'react-color-extractor';
 import { useSelector, useDispatch } from 'react-redux';
-import Router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import trim from 'lodash.trim';
 
 import { styledComponentsTheme } from '../../configs/theme';
@@ -57,8 +57,36 @@ const Component: React.FC<Props> = ({ playlistId }) => {
     description: playlistDescription,
   };
 
-  const { handleSubmit, register, reset } = useForm<FormData>({
+  const {
+    handleSubmit, register, reset, formState,
+  } = useForm<FormData>({
     defaultValues,
+  });
+
+  const handleBeforeUnload = (e: BeforeUnloadEvent): string => {
+    const confirmationMessage = 'You have unsaved changes. Discard?';
+    e.returnValue = confirmationMessage;
+    return confirmationMessage;
+  };
+
+  useEffect(() => {
+    if (!formState.isDirty) {
+      return (): void => {};
+    }
+
+    // 1. Handle back button
+    router.beforePopState(() => (!!window.confirm('You have unsaved changes. Discard?')));
+
+    // 2. Handle exit window
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    // 3. Handle push state (e.g. edit cover)
+    // will handle in the button handler instead
+
+    return (): void => {
+      router.beforePopState(() => true);
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
   });
 
   const dispatch = useDispatch();
@@ -94,9 +122,16 @@ const Component: React.FC<Props> = ({ playlistId }) => {
           <EditCoverButton
             type="button"
             onClick={
-              (): ReturnType<typeof Router.push> => router.push(
-                '/playlists/edit-cover', `/playlists/edit-cover/${playlistId}`,
-              )
+              (): void => {
+                if (formState.isDirty) {
+                  window.alert('Please save your changes first, then edit the cover picture.');
+                  return;
+                }
+
+                router.push(
+                  '/playlists/edit-cover', `/playlists/edit-cover/${playlistId}`,
+                );
+              }
             }
           >
             Edit cover

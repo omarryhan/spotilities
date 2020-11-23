@@ -132,7 +132,7 @@ export const TwoButtonsContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   margin: 30px 0;
-  padding-bottom: 30px;
+  padding: 10px 0 30px 0;
 `;
 
 export const SubmitButton = styled.button<{ isUpdatingPlaylist: boolean}>`
