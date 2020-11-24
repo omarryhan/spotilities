@@ -135,7 +135,7 @@ export const TwoButtonsContainer = styled.div`
   padding: 10px 0 30px 0;
 `;
 
-export const SubmitButton = styled.button<{ isUpdatingPlaylist: boolean}>`
+export const SubmitButton = styled.button`
   /* Remove all styles */
   background: none;
   padding: 0;
@@ -144,8 +144,8 @@ export const SubmitButton = styled.button<{ isUpdatingPlaylist: boolean}>`
   cursor: pointer;
   outline: inherit;
 
-  background-color: ${(props): string => (props.isUpdatingPlaylist ? props.theme.colors.gray.lightest : props.theme.colors.green.primary)};
-  color: ${(props): string => (props.isUpdatingPlaylist ? props.theme.colors.white.dark : props.theme.colors.white.light)};
+  background-color: ${(props): string => props.theme.colors.green.primary};
+  color: ${(props): string => props.theme.colors.white.light};
   font-size: 20px;
   width: 145px;
   height: 50px;
@@ -154,6 +154,11 @@ export const SubmitButton = styled.button<{ isUpdatingPlaylist: boolean}>`
 
   &:active {
     color: ${(props): string => props.theme.colors.white.lightest};
+  }
+
+  &:disabled {
+    background-color: ${(props): string => props.theme.colors.gray.lightest};
+    color: ${(props): string => props.theme.colors.white.dark};
   }
 `;
 

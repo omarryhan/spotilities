@@ -210,7 +210,6 @@ const Component: React.FC<Props> = ({ playlistId }) => {
           <SubmitButton
             type="submit"
             disabled={isUpdatingPlaylist}
-            isUpdatingPlaylist={isUpdatingPlaylist}
           >
             {
               isUpdatingPlaylist ? 'Submitting...' : 'Submit'
