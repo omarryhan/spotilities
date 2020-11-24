@@ -34,6 +34,7 @@ Also, the app I used to check my top tracks and artists was unfortunately remove
 - [ ] Create your own playlist cover art and upload it.
 - [ ] Add the generated recommendations to a new playlist (currently you can only add the to the playing queue).
 - [ ] Make a landing page.
+- [ ] Upgrade to react-konva 17.0.0 after https://github.com/konvajs/react-konva/issues/171 is resolved.
 
 ## Live version
 

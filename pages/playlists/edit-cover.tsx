@@ -5,7 +5,7 @@ import Head from 'next/head';
 import { useSelector } from 'react-redux';
 import AppBody from '../../components/AppBody';
 import TopNav from '../../components/TopNav';
-import BottomNav from '../../components/BottomNav';
+import EditPlaylistCover from '../../components/EditPlaylistCover';
 
 import { CombinedStateType } from '../../redux/types';
 
@@ -33,12 +33,11 @@ const Page: NextPage<{}> = () => {
       </Head>
       <TopNav
         showBackButton
-        title={`Edit: ${playlistName}`}
+        title={`Edit cover: ${playlistName}`}
       />
       <AppBody>
-        Under construction
+        <EditPlaylistCover playlistId={playlistId} />
       </AppBody>
-      <BottomNav />
     </>
   );
 };
