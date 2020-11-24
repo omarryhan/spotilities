@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  margin-bottom: calc(${(props): string => props.theme.dimensions.bottomAppBarHeight.all} + 10px);
 `;
 
 export const BackgroundGradient = styled.div<{bgColor: string}>`
@@ -132,7 +131,7 @@ export const TwoButtonsContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   margin: 30px 0;
-  padding: 10px 0 30px 0;
+  padding: 10px 0 10px 0;
 `;
 
 export const SubmitButton = styled.button`

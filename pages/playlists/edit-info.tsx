@@ -39,7 +39,6 @@ const Page: NextPage<{}> = () => {
       <AppBody>
         <EditPlaylistInfo playlistId={playlistId} />
       </AppBody>
-      <BottomNav />
     </>
   );
 };
