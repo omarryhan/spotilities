@@ -15,6 +15,8 @@ export const Header = styled.header`
 
 export const Nav = styled.nav`
   height: 100%;
+  max-width: 700px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   padding: 5px ${(props): string => props.theme.dimensions.contentSideMargin.all};

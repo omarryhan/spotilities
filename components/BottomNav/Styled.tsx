@@ -19,6 +19,8 @@ export const LinksContainer = styled.div`
   justify-content: space-evenly;
   align-items: center;
   height: 100%;
+  max-width: 700px;
+  margin: 0 auto;
 `;
 
 export const LinkContainer = styled(Button)`

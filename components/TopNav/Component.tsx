@@ -12,7 +12,7 @@ import {
   BackButtonWrapper,
 } from './Styled';
 
-interface Props {
+export interface Props {
   title?: string;
   showBackButton?: boolean;
   showRightButton?: boolean;

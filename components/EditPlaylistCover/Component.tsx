@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -6,8 +7,14 @@ import {
   Text,
   Rect,
 } from 'react-konva';
+import Konva from 'konva';
 import { useRouter } from 'next/router';
 
+import {
+  getLinearGradientVariants,
+  getRadialGradientVariants,
+  getColorStops,
+} from './config';
 import {
   Body,
   BottomNav,
@@ -19,6 +26,7 @@ import {
   CanvasWrapper,
 } from './Styled';
 import { CombinedStateType } from '../../redux/types';
+import { updateUserPlaylistCover } from '../../redux/playlists/actions';
 
 interface Props {
   playlistId: string;
@@ -33,52 +41,21 @@ const menuSections: MenuSections[] = [
 ];
 
 const Component: React.FC<Props> = ({ playlistId }) => {
-  const [canvasIsDirty, setCanvasIsDirty] = React.useState(false);
+  const [bgColors, setBgColors] = React.useState<string[]>(['#fff']);
   const [currentMenuSection, setCurrentMenuSection] = React.useState<MenuSections>(menuSections[0]);
+  const [canvasWrapperWidth, setCanvasWrapperWidth] = React.useState(300); // 300 is random
 
-  const wrapperRef = useRef(null);
-
-  const playlistName = useSelector<CombinedStateType, string>(
-    (state) => state.playlists.data[playlistId]?.name,
-  );
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const stageRef = useRef<Konva.Stage>(null);
+  const dispatch = useDispatch();
+  const router = useRouter();
 
   const isUpdatingPlaylist = useSelector<CombinedStateType, boolean>(
     (state) => state.playlists.status.isUpdating,
   );
 
-  const dispatch = useDispatch();
-  const router = useRouter();
-
-  const handleBeforeUnload = (e: BeforeUnloadEvent): string => {
-    const confirmationMessage = 'You have unsaved changes. Discard?';
-    e.returnValue = confirmationMessage;
-    return confirmationMessage;
-  };
-
   useEffect(() => {
-    if (!canvasIsDirty) {
-      return (): void => {};
-    }
-
-    // 1. Handle back button
-    router.beforePopState(() => (!!window.confirm('You have unsaved changes. Discard?')));
-
-    // 2. Handle exit window
-    window.addEventListener('beforeunload', handleBeforeUnload);
-
-    // 3. Handle push state (e.g. edit cover)
-    // will handle in the button handler instead
-
-    return (): void => {
-      router.beforePopState(() => true);
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
-  });
-
-  const [canvasWrapperWidth, setCanvasWrapperWidth] = React.useState(200);
-  useEffect(() => {
-    // @ts-expect-error
-    setCanvasWrapperWidth(wrapperRef.current.clientWidth);
+    setCanvasWrapperWidth((wrapperRef.current as HTMLDivElement).clientWidth);
   }, []);
 
   return (
@@ -87,9 +64,16 @@ const Component: React.FC<Props> = ({ playlistId }) => {
         <TopBar>
           <div />
           <SubmitButton
-            onClick={(): void => {}}
+            onClick={async (): Promise<void> => {
+              await dispatch(updateUserPlaylistCover({
+                id: playlistId,
+                img: (stageRef.current as Konva.Stage).toDataURL().split(',')[1],
+                router,
+              }));
+            }}
+            disabled={isUpdatingPlaylist}
           >
-            Save
+            { isUpdatingPlaylist ? 'Updating...' : 'Save'}
           </SubmitButton>
         </TopBar>
 
@@ -97,12 +81,16 @@ const Component: React.FC<Props> = ({ playlistId }) => {
           <Stage
             width={canvasWrapperWidth}
             height={canvasWrapperWidth}
+            ref={stageRef}
           >
             <Layer>
               <Rect
-                fill="white"
                 width={canvasWrapperWidth}
                 height={canvasWrapperWidth}
+                // {...getLinearGradientVariants(canvasWrapperWidth).horizontal}
+                // fillLinearGradientColorStops={getColorStops(bgColors)}
+                {...getRadialGradientVariants(canvasWrapperWidth).bottomRight}
+                fillRadialGradientColorStops={getColorStops(bgColors)}
               />
             </Layer>
             <Layer>
@@ -111,18 +99,19 @@ const Component: React.FC<Props> = ({ playlistId }) => {
           </Stage>
         </CanvasWrapper>
       </Body>
+
       <BottomNav>
         <BottomEditMenus>
           {menuSections.map((section) => (
             <BottomEditMenu
               onClick={(): void => setCurrentMenuSection(section)}
-              active={section === currentMenuSection}
+              isactive={section === currentMenuSection}
               key={section}
             >
               <p>
                 {section}
               </p>
-              <BottomEditMenuStatus active={section === currentMenuSection} />
+              <BottomEditMenuStatus isactive={section === currentMenuSection} />
             </BottomEditMenu>
           ))}
         </BottomEditMenus>

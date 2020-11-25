@@ -16,6 +16,8 @@ export const Nav = styled.nav`
 `;
 
 export const LinksContainer = styled.div`
+  max-width: 700px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-evenly;
   align-items: center;

@@ -1,6 +1,11 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { InitialStateInterface } from './types';
-import { fetchUserPlaylists, updateUserPlaylistInfo, deletePlaylists } from './actions';
+import {
+  fetchUserPlaylists,
+  updateUserPlaylistInfo,
+  deletePlaylists,
+  updateUserPlaylistCover,
+} from './actions';
 
 export const InitialState: InitialStateInterface = {
   data: {},
@@ -58,6 +63,31 @@ export const reducer = createReducer<InitialStateInterface>(InitialState, (build
   }));
 
   builder.addCase(updateUserPlaylistInfo.fulfilled, (state, action) => ({
+    ...state,
+    status: {
+      isUpdating: false,
+      fetchedOnce: false,
+      isFetching: false,
+    },
+  }));
+
+  builder.addCase(updateUserPlaylistCover.rejected, (state, action) => ({
+    ...state,
+    status: {
+      ...state.status,
+      isUpdating: false,
+    },
+  }));
+
+  builder.addCase(updateUserPlaylistCover.pending, (state, action) => ({
+    ...state,
+    status: {
+      ...state.status,
+      isUpdating: true,
+    },
+  }));
+
+  builder.addCase(updateUserPlaylistCover.fulfilled, (state, action) => ({
     ...state,
     status: {
       isUpdating: false,

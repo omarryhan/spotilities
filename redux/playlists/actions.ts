@@ -1,4 +1,5 @@
 import { createAsyncThunk, createAction } from '@reduxjs/toolkit';
+import { useRouter } from 'next/router';
 import { checkIsAuthorized, getAllPages, spotifyApi } from '../utils';
 import { CombinedStateType } from '../types';
 
@@ -34,6 +35,48 @@ const userLibraryPlaylist = {
   type: 'playlist' as const,
   uri: '',
 };
+
+export const updateUserPlaylistCover = createAsyncThunk<
+void,
+{ id: string; img: string; router: ReturnType<typeof useRouter> },
+{ state: CombinedStateType }
+>(
+  'playlists/update/cover',
+  async ({ img, id, router }, { getState, dispatch }) => {
+    const state = getState();
+    checkIsAuthorized(
+      state.user.token.accessToken,
+      state.user.token.expiresAt,
+      state.user.tokenStatus.errorMessage,
+    );
+
+    try {
+      await spotifyApi.uploadCustomPlaylistCoverImage(id, img);
+
+      // Some buffer so that when that when you refresh the playlists
+      // you gett the new info
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+    } catch (e) {
+      if (e instanceof XMLHttpRequest) {
+        const errorMessage = e.response && JSON.parse(
+          e.response,
+        )?.error?.message as undefined | string;
+
+        if (errorMessage) {
+          alert(errorMessage);
+        } else {
+          alert('Something went wrong');
+        }
+      } else {
+        alert(e.message || 'Something went wrong');
+      }
+      return;
+    } finally {
+      await dispatch(fetchUserPlaylists(state.profile.data.id));
+    }
+    router.back();
+  },
+);
 
 export const updateUserPlaylistInfo = createAsyncThunk<
 void,

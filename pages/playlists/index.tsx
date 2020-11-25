@@ -7,6 +7,7 @@ import Router, { useRouter } from 'next/router';
 import AppBody from '../../components/AppBody';
 import PlaylistItemsList from '../../components/PlaylistItemsList';
 import TopNav from '../../components/TopNav';
+import { Props as TopNavProps } from '../../components/TopNav/Component';
 import BottomNav from '../../components/BottomNav';
 import PlaylistItemsCoverSection from '../../components/PlaylistItemsCoverSection';
 import PlayShufflePlaylistButton from '../../components/PlayShufflePlaylistButton';
@@ -29,6 +30,10 @@ const Page: NextPage<{}> = () => {
 
   const playlistName = useSelector<CombinedStateType, string>(
     (state) => state.playlists.data[playlistId]?.name,
+  );
+
+  const canEditPlaylist = useSelector<CombinedStateType, boolean>(
+    (state) => state.playlists.data[playlistId]?.owner.id === state.profile.data.id,
   );
 
   const isFetchingPlaylistsItems = useSelector<CombinedStateType, boolean>(
@@ -64,6 +69,11 @@ const Page: NextPage<{}> = () => {
   ]);
 
   const EditIconComponent: React.FC = () => (<EditIcon />);
+  const topNavEditProps: TopNavProps = canEditPlaylist ? {
+    showRightButton: true,
+    RightButton: EditIconComponent,
+    onRightButtonClick: (): ReturnType<typeof Router.push> => router.push('/playlists/edit-info', `/playlists/edit-info/${playlistId}`),
+  } : {};
 
   return (
     <>
@@ -74,9 +84,8 @@ const Page: NextPage<{}> = () => {
       <TopNav
         showBackButton
         title={playlistName}
-        showRightButton
-        RightButton={EditIconComponent}
-        onRightButtonClick={(): ReturnType<typeof Router.push> => router.push('/playlists/edit-info', `/playlists/edit-info/${playlistId}`)}
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...topNavEditProps}
       />
       <AppBody>
         <PlaylistItemsCoverSection playlistId={playlistId} />

@@ -15,4 +15,5 @@ export const SPOTIFY_SCOPES_NEEDED = [
   'user-library-read',
   'user-top-read',
   'user-modify-playback-state',
+  'ugc-image-upload',
 ];

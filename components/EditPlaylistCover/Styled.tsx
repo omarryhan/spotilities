@@ -44,7 +44,6 @@ export const CanvasWrapper = styled.div`
   width: 100%;
   max-width: 350px;
   margin: 0 auto;
-  padding-bottom: 20px;
 
   & div {
     & div {
@@ -67,12 +66,12 @@ export const BottomEditMenus = styled.div`
   display: flex;
 
   width: 100%;
-  max-width: 500px;
+  max-width: 700px;
   margin: 0 auto;
   height: 100%;
 `;
 
-export const BottomEditMenu = styled(Button)<{active: boolean}>`
+export const BottomEditMenu = styled(Button)<{isactive: boolean}>`
   height: 100%;
   /*Fill the remaining horizontal space*/
   flex: 1;
@@ -85,7 +84,7 @@ export const BottomEditMenu = styled(Button)<{active: boolean}>`
     margin: 0;
     display: block;
     text-align: center;
-    color: ${(props): string => (props.active ? props.theme.colors.white.light : props.theme.colors.white.evenDarkest)}; 
+    color: ${(props): string => (props.isactive ? props.theme.colors.white.light : props.theme.colors.white.evenDarkest)}; 
   }
 
   & span {
@@ -97,10 +96,10 @@ export const BottomEditMenu = styled(Button)<{active: boolean}>`
   }
 `;
 
-export const BottomEditMenuStatus = styled.div<{active: boolean}>`
+export const BottomEditMenuStatus = styled.div<{isactive: boolean}>`
   width: 100%;
   height: 3px;
   position: absolute;
   bottom: 0;
-  background-color: ${(props): string => (props.active ? props.theme.colors.green.primary : 'transparent')};
+  background-color: ${(props): string => (props.isactive ? props.theme.colors.green.primary : 'transparent')};
 `;
