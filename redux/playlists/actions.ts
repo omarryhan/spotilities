@@ -108,8 +108,8 @@ void,
       );
 
       // Some buffer so that when that when you refresh the playlists
-      // you gett the new info
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // you get an uptodate response
+      await new Promise((resolve) => setTimeout(resolve, 1500));
     } catch (e) {
       if (e instanceof XMLHttpRequest) {
         const errorMessage = e.response && JSON.parse(

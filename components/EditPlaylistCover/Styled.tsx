@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 export const Body = styled.div`
   width: 100%;
   padding: 0 ${(props): string => props.theme.dimensions.contentSideMargin.all};
-  margin-bottom: calc(${(props): string => props.theme.dimensions.bottomAppBarHeight.all} + 10px);
+  margin-bottom: 45px;
 `;
 
 export const SubmitButton = styled.button`
@@ -37,12 +37,12 @@ export const SubmitButton = styled.button`
 export const TopBar = styled.div`
   display: flex;
   padding: 30px 0;
-  justify-content: space-between;
+  justify-content: flex-end;
 `;
 
 export const CanvasWrapper = styled.div`
   width: 100%;
-  max-width: 350px;
+  max-width: 300px;
   margin: 0 auto;
 
   & div {
@@ -78,6 +78,7 @@ export const BottomEditMenu = styled(Button)<{isactive: boolean}>`
   display: block;
   text-transform: capitalize;
   padding: 0;
+  margin: 0;
 
   & p {
     font-size: 16px;
@@ -102,4 +103,53 @@ export const BottomEditMenuStatus = styled.div<{isactive: boolean}>`
   position: absolute;
   bottom: 0;
   background-color: ${(props): string => (props.isactive ? props.theme.colors.green.primary : 'transparent')};
+`;
+
+export const SubmenuSections = styled.nav`
+  width: 100%;
+  display: flex;
+`;
+
+export const SubmenuSectionButton = styled.button<{ isactive: boolean }>`
+  /* Remove all styles */
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+
+  border-bottom: ${(props): string => (props.isactive ? `${props.theme.colors.green.primary} solid 3px` : 'transparent solid 3px')};
+
+  font-size: 16px;
+
+  text-transform: capitalize;
+
+  color: ${(props): string => (props.isactive ? props.theme.colors.white.light : props.theme.colors.white.evenDarkest)}; 
+
+  min-width: 80px;
+  padding: 10px;
+  margin: 20px 0 10px 0;
+`;
+
+export const MainEditSection = styled.div`
+  width: 100%;
+  padding: 20px 0;
+`;
+
+export const ColorsWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+export const GradientSubSettingWrapper = styled.div`
+  width: 50%;
+
+  @media (min-width: ${(props): string => props.theme.breakpoints.tablet}) {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 120px;
+  }
 `;
