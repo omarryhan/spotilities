@@ -61,7 +61,7 @@ const ColorButton = styled.button<{ currentColor: string }>`
 
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+  border-radius: 0;
   background-color: ${(props): string => props.currentColor};
   cursor: pointer;
 `;
@@ -108,10 +108,10 @@ const Component: React.FC<Props> = ({ currentColor, setCurrentColor, index }) =>
       <p style={{
         color: colors.white.dark,
         fontSize: '14px',
-        textTransform: 'uppercase',
+        textTransform: 'capitalize',
       }}
       >
-        {currentColor}
+        {`Color ${index + 1}`}
       </p>
     </div>
   );

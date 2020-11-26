@@ -11,6 +11,7 @@ import {
 } from 'konva/types/Shape';
 import Konva from 'konva';
 import { useRouter } from 'next/router';
+import Slider from '@material-ui/core/Slider';
 
 import Color, { AddOrRemoveColor } from './Color';
 import {
@@ -152,6 +153,9 @@ const Component: React.FC<Props> = ({ playlistId }) => {
   // the actual value is 100% of vw-paddings or the max-width of Styled.CanvasWrapper
   const [canvasWrapperWidth, setCanvasWrapperWidth] = React.useState(300);
   const [currentGradientSettings, setCurrentGradientSettings] = React.useState<string[]>(['none', '']);
+  const [{ strokeColor, strokeWidth }, setCanvasBorder] = React.useState<
+  {strokeColor: string; strokeWidth: number}
+  >({ strokeColor: '#e6e6e6', strokeWidth: 0 });
 
   const wrapperRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<Konva.Stage>(null);
@@ -192,6 +196,8 @@ const Component: React.FC<Props> = ({ playlistId }) => {
               <Rect
                 width={canvasWrapperWidth}
                 height={canvasWrapperWidth}
+                stroke={strokeColor}
+                strokeWidth={strokeWidth}
                 {...getCurrentBackgoundProps(
                   bgColors,
                   currentGradientSettings,
@@ -222,9 +228,9 @@ const Component: React.FC<Props> = ({ playlistId }) => {
             currentSubmenuSecion === menuSections.background[0] ? (
               <ColorsWrapper>
                 {/* Color palettes */}
-                {bgColors.map((color, i) => (
+                {bgColors.map((bgColor, i) => (
                   <Color
-                    currentColor={color}
+                    currentColor={bgColor}
                     index={i}
                     setCurrentColor={(newColor, index): void => {
                       setBgColors(
@@ -293,6 +299,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
                           display: 'block',
                           padding: '5px 0',
                           fontSize: '16px',
+                          textTransform: 'capitalize',
                         }}
                       >
                         <input
@@ -344,9 +351,49 @@ const Component: React.FC<Props> = ({ playlistId }) => {
                   </GradientSubSettingWrapper>
                 </div>
               ) : currentSubmenuSecion === menuSections.background[2] ? (
-                <p>
-                  s
-                </p>
+                <div style={{
+                  display: 'flex',
+                }}
+                >
+                  <div
+                    style={{ width: '30%' }}
+                  >
+                    <Color
+                      currentColor={strokeColor}
+                      index={0}
+                      setCurrentColor={(newColor): void => setCanvasBorder({
+                        strokeColor: newColor,
+                        strokeWidth,
+                      })}
+                    />
+                  </div>
+
+                  <div style={{
+                    display: 'flex',
+                    width: '70%',
+                    paddingRight: '20px',
+                  }}
+                  >
+                    <p style={{
+                      margin: '0 15px 0 0',
+                      fontSize: '16px',
+                    }}
+                    >
+                      Size:
+                    </p>
+
+                    <Slider
+                      value={strokeWidth}
+                      onChange={(e, newValue): void => setCanvasBorder({
+                        strokeColor,
+                        strokeWidth: newValue as number,
+                      })}
+                      min={0}
+                      max={canvasWrapperWidth}
+                      marks
+                    />
+                  </div>
+                </div>
               ) : currentSubmenuSecion === menuSections.image[0] ? (
                 <p>
                   s
