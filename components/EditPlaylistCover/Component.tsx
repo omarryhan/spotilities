@@ -6,19 +6,21 @@ import {
   Layer,
   Rect,
 } from 'react-konva';
-import {
-  ShapeConfig,
-} from 'konva/types/Shape';
 import Konva from 'konva';
 import { useRouter } from 'next/router';
 import Slider from '@material-ui/core/Slider';
 
+import { searchPixabay, PixabayHit } from './pixabayAPI';
 import Color, { AddOrRemoveColor } from './Color';
+import PixabayForm from './PixabayForm';
+import ImageRoll from './ImageRoll';
+import Image, { CanvasImage } from './Image';
 import {
-  getLinearGradientVariants,
-  getRadialGradientVariants,
-  getColorStops,
-} from './config';
+  getCurrentBackgoundProps,
+  getGradientSubsetting,
+  gradientSettings,
+} from './config/gradient';
+import { menuSections } from './config/menu';
 import {
   Body,
   BottomNav,
@@ -41,128 +43,71 @@ interface Props {
   playlistId: string;
 }
 
-type MenuSections = 'background' | 'image' | 'text';
-type BackgroundSubmenuSections = 'colors' | 'gradient' | 'border';
-type ImageSubmenuSections = 'PNG' | 'JPEG' | 'custom';
-type TextSubmenuSections = 'style';
-type SubmenuSections = BackgroundSubmenuSections | ImageSubmenuSections | TextSubmenuSections;
-type GradientSettings = 'none' | 'linear' | 'radial';
-
-const gradientSettings: { [key: string]: {[key: string]: string}} = {
-  none: {},
-  linear: {
-    horizontal: 'Horizontal',
-    vertical: 'Vertical',
-    diagonalRight: 'Diagonal right',
-    diagonalLeft: 'Diagonal left',
-  },
-  radial: {
-    center: 'Center',
-    topLeft: 'Top left',
-    topRight: 'Top right',
-    bottomLeft: 'Bottom left',
-    bottomRight: 'Bottom right',
-  },
-};
-
-const menuSections: {
-  [key: string]: Array<
-  BackgroundSubmenuSections
-  > | Array<
-  ImageSubmenuSections
-  > | Array<
-  TextSubmenuSections
-  >;
-} = {
-  background: [
-    'colors',
-    'gradient',
-    'border',
-  ],
-  image: [
-    'PNG',
-    'JPEG',
-    'custom',
-  ],
-  text: [
-    'style',
-  ],
-};
-
-const getCurrentBackgoundProps = (
-  bgColors: string[],
-  currentGradientSettings: string[],
-  canvasWrapperWidth: number,
-): ShapeConfig => {
-  if (bgColors.length <= 1 || currentGradientSettings[0] === 'none') {
-    // eslint-disable-next-line prefer-destructuring
-    return {
-      fill: bgColors[0],
-    };
-  } else if (currentGradientSettings[0] === 'linear') {
-    const possibleSubSettings = Object.keys(gradientSettings.linear);
-    const subSetting = possibleSubSettings.includes(
-      currentGradientSettings[1],
-    ) ? currentGradientSettings[1] : possibleSubSettings[0];
-    return {
-      ...getLinearGradientVariants(
-        canvasWrapperWidth,
-      )[subSetting],
-      fillLinearGradientColorStops: getColorStops(bgColors),
-    };
-  } else if (currentGradientSettings[0] === 'radial') {
-    const possibleSubSettings = Object.keys(gradientSettings.radial);
-    const subSetting = possibleSubSettings.includes(
-      currentGradientSettings[1],
-    ) ? currentGradientSettings[1] : possibleSubSettings[0];
-    return {
-      ...getRadialGradientVariants(
-        canvasWrapperWidth,
-      )[subSetting],
-      fillRadialGradientColorStops: getColorStops(bgColors),
-    };
-  } else {
-    console.warn('This shouldn\'t happen');
-    return {};
-  }
-};
-
-const getGradientSubsetting = (
-  currentGradientSetting: string,
-  currentGradientSubSetting: string,
-): string => {
-  const possibleSubSettings = Object.keys(gradientSettings[currentGradientSetting]);
-  if (!possibleSubSettings.includes(currentGradientSubSetting)) {
-    return Object.keys(gradientSettings[currentGradientSetting])[0];
-  }
-  return currentGradientSubSetting;
-};
-
 const Component: React.FC<Props> = ({ playlistId }) => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const [bgColors, setBgColors] = React.useState<string[]>(['#e6e6e6']);
+  /** ************* Menu and submenu *********** */
   const [currentMenuSection, setCurrentMenuSection] = React.useState<string>(
     Object.keys(menuSections)[0],
   );
   const [currentSubmenuSecion, setCurrentSubmenuSection] = React.useState<string>(
     menuSections.background[0],
   );
+
+  /** ************* Canvas *********** */
+  const [canvasImages, setCanvasImages] = React.useState<CanvasImage[]>([]);
+  const [selectedId, selectShape] = React.useState<string | null>(null);
+  const [canvasWrapperWidth, setCanvasWrapperWidth] = React.useState(300);
+
+  /** ************* Background *********** */
+  const [bgColors, setBgColors] = React.useState<string[]>(['#e6e6e6']);
   // the default is random, just so it renders on the server
   // the actual value is 100% of vw-paddings or the max-width of Styled.CanvasWrapper
-  const [canvasWrapperWidth, setCanvasWrapperWidth] = React.useState(300);
   const [currentGradientSettings, setCurrentGradientSettings] = React.useState<string[]>(['none', '']);
   const [{ strokeColor, strokeWidth }, setCanvasBorder] = React.useState<
   {strokeColor: string; strokeWidth: number}
   >({ strokeColor: '#e6e6e6', strokeWidth: 0 });
 
+  /** ************* Pixabay form *********** */
+  const [pixabayPage, setPixabayPage] = React.useState<number>(1);
+  const [isSearchingPixabay, setIsSearchingPixabay] = React.useState(false);
+  // for pagination
+  const [lastSearchQuery, setLastPageQuery] = React.useState<string>('');
+  const [currentPixabayHits, setCurrentPixabayHits] = React.useState<PixabayHit[]>([]);
+
   const wrapperRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<Konva.Stage>(null);
+  const imageDragUrl = React.useRef<string>(null);
 
   const isUpdatingPlaylist = useSelector<CombinedStateType, boolean>(
     (state) => state.playlists.status.isUpdating,
   );
+
+  const getNewPixabayPage = async (): Promise<void> => {
+    setIsSearchingPixabay(true);
+    try {
+      const response = await searchPixabay(
+        { q: lastSearchQuery, page: pixabayPage + 1 },
+      );
+      setPixabayPage(pixabayPage + 1);
+      setCurrentPixabayHits([
+        ...currentPixabayHits,
+        ...response.hits,
+      ]);
+    } finally {
+      setIsSearchingPixabay(false);
+    }
+  };
+
+  const checkDeselect = (e: Konva.KonvaEventObject<MouseEvent | TouchEvent>): void => {
+    // deselect when clicked on empty area
+    const clickedOnEmpty = e.target === e.target.getStage();
+    console.log('Triggerred');
+    if (clickedOnEmpty) {
+      selectShape(null);
+    }
+  };
 
   useEffect(() => {
     setCanvasWrapperWidth((wrapperRef.current as HTMLDivElement).clientWidth);
@@ -186,11 +131,32 @@ const Component: React.FC<Props> = ({ playlistId }) => {
           </SubmitButton>
         </TopBar>
 
-        <CanvasWrapper ref={wrapperRef}>
+        <CanvasWrapper
+          ref={wrapperRef}
+          onDrop={(e): void => {
+            e.preventDefault();
+            // register event position
+            (stageRef.current as Konva.Stage).setPointersPositions(e);
+            // add image
+            setCanvasImages([
+              ...canvasImages,
+              {
+                props: {
+                  ...(stageRef.current as Konva.Stage).getPointerPosition() || {},
+                  image: undefined, // Only here to not break the typings
+                },
+                src: imageDragUrl.current as string,
+              },
+            ]);
+          }}
+          onDragOver={(e): void => e.preventDefault()}
+        >
           <Stage
             width={canvasWrapperWidth}
             height={canvasWrapperWidth}
             ref={stageRef}
+            onMouseDown={checkDeselect}
+            onTouchStart={checkDeselect}
           >
             <Layer>
               <Rect
@@ -204,6 +170,25 @@ const Component: React.FC<Props> = ({ playlistId }) => {
                   canvasWrapperWidth,
                 )}
               />
+            </Layer>
+            <Layer>
+              {canvasImages.map((image, i) => (
+                <Image
+                  konvaProps={image.props}
+                  src={image.src}
+                  // eslint-disable-next-line react/no-array-index-key
+                  key={`${i.toString()}-${image.src}`}
+                  isSelected={`${i}-${image.src}` === selectedId}
+                  onSelect={(): void => {
+                    selectShape(`${i}-${image.src}`);
+                  }}
+                  onChange={(newAttrs): void => {
+                    const newCanvasImages = canvasImages.slice();
+                    newCanvasImages[i] = newAttrs;
+                    setCanvasImages(newCanvasImages);
+                  }}
+                />
+              ))}
             </Layer>
           </Stage>
         </CanvasWrapper>
@@ -232,6 +217,8 @@ const Component: React.FC<Props> = ({ playlistId }) => {
                   <Color
                     currentColor={bgColor}
                     index={i}
+                    // eslint-disable-next-line react/no-array-index-key
+                    key={`${bgColor}${i}`}
                     setCurrentColor={(newColor, index): void => {
                       setBgColors(
                         bgColors.map(
@@ -375,7 +362,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
                   }}
                   >
                     <p style={{
-                      margin: '0 15px 0 0',
+                      margin: '3px 15px 0 0',
                       fontSize: '16px',
                     }}
                     >
@@ -395,20 +382,40 @@ const Component: React.FC<Props> = ({ playlistId }) => {
                   </div>
                 </div>
               ) : currentSubmenuSecion === menuSections.image[0] ? (
-                <p>
-                  s
-                </p>
+                <div>
+                  <PixabayForm
+                    isSearchingPixabay={isSearchingPixabay}
+                    setIsSearchingPixabay={setIsSearchingPixabay}
+                    setCurrentPixabayHits={setCurrentPixabayHits}
+                    setLastPageQuery={setLastPageQuery}
+                  />
+                  <ImageRoll
+                    hits={currentPixabayHits}
+                    requestOneMorePage={(): Promise<void> => getNewPixabayPage()}
+                    imageDragUrl={imageDragUrl}
+                    onImgClick={(src): void => {
+                      setCanvasImages([
+                        ...canvasImages,
+                        {
+                          props: {
+                            x: canvasWrapperWidth / 2,
+                            y: canvasWrapperWidth / 2,
+                            // ...(stageRef.current as Konva.Stage).getPointerPosition() || {},
+                            image: undefined, // Only here to not break the typings
+                          },
+                          src,
+                        },
+                      ]);
+                    }}
+                  />
+                </div>
               ) : currentSubmenuSecion === menuSections.image[1] ? (
                 <p>
-                  s
-                </p>
-              ) : currentSubmenuSecion === menuSections.image[2] ? (
-                <p>
-                  s
+                  Custom image
                 </p>
               ) : currentSubmenuSecion === menuSections.text[0] ? (
                 <p>
-                  s
+                  Text
                 </p>
               ) : null
           }

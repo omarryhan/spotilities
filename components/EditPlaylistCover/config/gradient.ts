@@ -2,12 +2,29 @@ import {
   ShapeConfig,
 } from 'konva/types/Shape';
 
+export const gradientSettings: { [key: string]: {[key: string]: string}} = {
+  none: {},
+  linear: {
+    horizontal: 'Horizontal',
+    vertical: 'Vertical',
+    diagonalRight: 'Diagonal right',
+    diagonalLeft: 'Diagonal left',
+  },
+  radial: {
+    center: 'Center',
+    topLeft: 'Top left',
+    topRight: 'Top right',
+    bottomLeft: 'Bottom left',
+    bottomRight: 'Bottom right',
+  },
+};
+
 /* Given ['blue', 'red'] should return [0, 'blue', 1, 'red']
    Given ['blue', 'red', 'green'] should return [0, 'blue', 0.5, 'red', 1, 'green']
    Given ['blue'] should return [0, 'blue']
    Spreads them evenly for simplicity.
 */
-export const getColorStops = (colors: string[]): Array<number | string> => {
+const getColorStops = (colors: string[]): Array<number | string> => {
   const len = colors.length;
   if (len === 0) {
     return [];
@@ -30,7 +47,7 @@ export const getColorStops = (colors: string[]): Array<number | string> => {
   return retval;
 };
 
-export const getLinearGradientVariants = (width: number): {[key: string]: ShapeConfig} => ({
+const getLinearGradientVariants = (width: number): {[key: string]: ShapeConfig} => ({
   horizontal: {
     fillLinearGradientStartPoint: { x: 0, y: width / 2 },
     fillLinearGradientEndPoint: { x: width, y: width / 2 },
@@ -49,7 +66,7 @@ export const getLinearGradientVariants = (width: number): {[key: string]: ShapeC
   },
 });
 
-export const getRadialGradientVariants = (width: number): {[key: string]: ShapeConfig} => ({
+const getRadialGradientVariants = (width: number): {[key: string]: ShapeConfig} => ({
   center: {
     fillRadialGradientStartPoint: { x: (width / 2), y: (width / 2) },
     fillRadialGradientStartRadius: 0,
@@ -81,3 +98,52 @@ export const getRadialGradientVariants = (width: number): {[key: string]: ShapeC
     fillRadialGradientEndRadius: width,
   },
 });
+
+export const getCurrentBackgoundProps = (
+  bgColors: string[],
+  currentGradientSettings: string[],
+  canvasWrapperWidth: number,
+): ShapeConfig => {
+  if (bgColors.length <= 1 || currentGradientSettings[0] === 'none') {
+    // eslint-disable-next-line prefer-destructuring
+    return {
+      fill: bgColors[0],
+    };
+  } else if (currentGradientSettings[0] === 'linear') {
+    const possibleSubSettings = Object.keys(gradientSettings.linear);
+    const subSetting = possibleSubSettings.includes(
+      currentGradientSettings[1],
+    ) ? currentGradientSettings[1] : possibleSubSettings[0];
+    return {
+      ...getLinearGradientVariants(
+        canvasWrapperWidth,
+      )[subSetting],
+      fillLinearGradientColorStops: getColorStops(bgColors),
+    };
+  } else if (currentGradientSettings[0] === 'radial') {
+    const possibleSubSettings = Object.keys(gradientSettings.radial);
+    const subSetting = possibleSubSettings.includes(
+      currentGradientSettings[1],
+    ) ? currentGradientSettings[1] : possibleSubSettings[0];
+    return {
+      ...getRadialGradientVariants(
+        canvasWrapperWidth,
+      )[subSetting],
+      fillRadialGradientColorStops: getColorStops(bgColors),
+    };
+  } else {
+    console.warn('This shouldn\'t happen');
+    return {};
+  }
+};
+
+export const getGradientSubsetting = (
+  currentGradientSetting: string,
+  currentGradientSubSetting: string,
+): string => {
+  const possibleSubSettings = Object.keys(gradientSettings[currentGradientSetting]);
+  if (!possibleSubSettings.includes(currentGradientSubSetting)) {
+    return Object.keys(gradientSettings[currentGradientSetting])[0];
+  }
+  return currentGradientSubSetting;
+};

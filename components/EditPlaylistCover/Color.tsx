@@ -26,30 +26,21 @@ const AddOrRemoveButton = styled.button`
   height: 40px;
   border-radius: 50%;
   border: white solid 2px;
+  margin-right: 40px;
 `;
 
 export const AddOrRemoveColor: React.FC<AddOrRemoveColorProps> = ({
   addOrRemove, handler,
-}) => {
-  let l;
-  return (
-    <div style={{
-      display: 'flex',
-      width: '80px',
-      justifyContent: 'center',
-    }}
-    >
-      <AddOrRemoveButton
-        type="button"
-        onClick={handler}
-      >
-        {
-          addOrRemove === 'add' ? '+' : '-'
-        }
-      </AddOrRemoveButton>
-    </div>
-  );
-};
+}) => (
+  <AddOrRemoveButton
+    type="button"
+    onClick={handler}
+  >
+    {
+      addOrRemove === 'add' ? '+' : '-'
+    }
+  </AddOrRemoveButton>
+);
 
 const ColorButton = styled.button<{ currentColor: string }>`
   display: block;
@@ -66,23 +57,16 @@ const ColorButton = styled.button<{ currentColor: string }>`
   cursor: pointer;
 `;
 
-const ColorPickerWrapper = styled.div<{isVisible: boolean}>`
-  position: absolute;
-  top: -100;
-  left: -10000;
-  display: ${(props): string => (props.isVisible ? 'block' : 'none')};
-  padding-bottom: 50px;
-`;
-
 const Component: React.FC<Props> = ({ currentColor, setCurrentColor, index }) => {
   const [colorPickerVisible, setColorPickerVisible] = React.useState(false);
   return (
     <div style={{
-      width: '80px',
+      width: '50px',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       position: 'relative',
+      marginRight: '30px',
     }}
     >
       <Modal
@@ -92,8 +76,10 @@ const Component: React.FC<Props> = ({ currentColor, setCurrentColor, index }) =>
         style={{
           display: 'flex',
           justifyContent: 'center',
-          alignItems: 'center',
+          alignItems: 'flex-end',
+          paddingBottom: '40px',
         }}
+        BackdropProps={{ invisible: true }}
       >
         <ChromePicker
           color={currentColor}

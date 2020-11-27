@@ -133,7 +133,7 @@ export const SubmenuSectionButton = styled.button<{ isactive: boolean }>`
 
 export const MainEditSection = styled.div`
   width: 100%;
-  padding: 20px 0;
+  padding: 15px 0;
 `;
 
 export const ColorsWrapper = styled.div`

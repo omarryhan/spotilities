@@ -1,6 +1,6 @@
 {
   "name": "spoxify",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "license": "MIT",
   "private": false,
   "browserslist": [
@@ -9,7 +9,7 @@
     "not ie > 0"
   ],
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --hostname 0.0.0.0",
     "dev:static": "yarn build && yarn export && yarn start:static",
     "build": "next build",
     "export": "next export",
@@ -52,7 +52,8 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "spotify-web-api-js": "^1.4.0",
-    "styled-components": "^5.1.0"
+    "styled-components": "^5.1.0",
+    "use-image": "^1.0.6"
   },
   "devDependencies": {
     "@svgr/webpack": "^5.4.0",
