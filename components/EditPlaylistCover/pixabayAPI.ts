@@ -27,7 +27,6 @@ export interface PixabayHit {
   user_id: number;
   user: string;
   userImageURL: string;
-
 }
 
 export interface PixabayResponse {

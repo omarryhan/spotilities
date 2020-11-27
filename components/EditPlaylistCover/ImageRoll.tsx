@@ -42,6 +42,11 @@ const Component: React.FC<Props> = ({
     <Roll onScroll={handleScroll}>
       {hits.map((hit) => (
         <Img
+          // Options
+          // 1. previewURL (smallest)
+          // 2. webformatURL
+          // 3. largeImageURL
+          // 4. fullHDURL
           src={hit.webformatURL}
           alt="pixabay search result"
           key={hit.webformatURL}
@@ -53,7 +58,7 @@ const Component: React.FC<Props> = ({
                   e.target as HTMLImageElement
                 ).src;
           }}
-          onClick={(): void => onImgClick(hit.webformatURL)}
+          onTouchStart={(): void => onImgClick(hit.webformatURL)}
         />
       ))}
     </Roll>

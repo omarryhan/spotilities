@@ -5,6 +5,7 @@ import {
   Stage,
   Layer,
   Rect,
+  Line,
 } from 'react-konva';
 import Konva from 'konva';
 import { useRouter } from 'next/router';
@@ -102,6 +103,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
 
   const checkDeselect = (e: Konva.KonvaEventObject<MouseEvent | TouchEvent>): void => {
     // deselect when clicked on empty area
+    selectShape(null);
     const clickedOnEmpty = e.target === e.target.getStage();
     console.log('Triggerred');
     if (clickedOnEmpty) {
@@ -148,6 +150,8 @@ const Component: React.FC<Props> = ({ playlistId }) => {
                 src: imageDragUrl.current as string,
               },
             ]);
+            // Open transformer once added
+            selectShape(`${canvasImages.length}-${imageDragUrl.current}`);
           }}
           onDragOver={(e): void => e.preventDefault()}
         >
@@ -155,20 +159,18 @@ const Component: React.FC<Props> = ({ playlistId }) => {
             width={canvasWrapperWidth}
             height={canvasWrapperWidth}
             ref={stageRef}
-            onMouseDown={checkDeselect}
-            onTouchStart={checkDeselect}
           >
             <Layer>
               <Rect
                 width={canvasWrapperWidth}
                 height={canvasWrapperWidth}
-                stroke={strokeColor}
-                strokeWidth={strokeWidth}
                 {...getCurrentBackgoundProps(
                   bgColors,
                   currentGradientSettings,
                   canvasWrapperWidth,
                 )}
+                onMouseDown={checkDeselect}
+                onTouchStart={checkDeselect}
               />
             </Layer>
             <Layer>
@@ -189,6 +191,37 @@ const Component: React.FC<Props> = ({ playlistId }) => {
                   }}
                 />
               ))}
+            </Layer>
+            <Layer>
+              <Line
+                // X1, Y1, X2, Y2 etc.
+                points={[
+                  0, 0,
+                  canvasWrapperWidth, 0,
+                  canvasWrapperWidth, canvasWrapperWidth,
+                  0, canvasWrapperWidth,
+                ]}
+                stroke={strokeColor}
+                strokeWidth={strokeWidth}
+                // Deselect here as well
+                onMouseDown={checkDeselect}
+                onTouchStart={checkDeselect}
+              />
+              <Line
+                // This is a hack.
+                // We can just pass a "closed" property to the `Line` above
+                // to achieve a proper canvas border. But that will not make the
+                // click event propogate to other elements because when a line is
+                // `closed`, it occupies all what's inside the closure.
+                points={[
+                  0, 0,
+                  0, canvasWrapperWidth,
+                ]}
+                stroke={strokeColor}
+                strokeWidth={strokeWidth}
+                onMouseDown={checkDeselect}
+                onTouchStart={checkDeselect}
+              />
             </Layer>
           </Stage>
         </CanvasWrapper>
@@ -406,6 +439,8 @@ const Component: React.FC<Props> = ({ playlistId }) => {
                           src,
                         },
                       ]);
+                      // Open transformer once added
+                      selectShape(`${canvasImages.length}-${src}`);
                     }}
                   />
                 </div>
