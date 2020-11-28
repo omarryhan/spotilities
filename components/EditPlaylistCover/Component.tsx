@@ -115,10 +115,16 @@ const Component: React.FC<Props> = ({ playlistId }) => {
   };
 
   const onDeleteSelectedCanvasItem = (): void => {
-    selectShape(null);
-    setCanvasImages(
-      canvasImages.filter((image) => image.id !== selectedId),
-    );
+    // For some reason this makes it delete two objects instead of just one.
+    const selectedShapeId = selectedId;
+    if (selectedShapeId !== null) {
+      console.log(selectedId);
+      console.log(canvasImages.map((i) => i.id));
+      selectShape(null);
+      setCanvasImages(
+        canvasImages.filter((image) => image.id !== selectedShapeId),
+      );
+    }
   };
 
   const handleBeforeUnload = (e: BeforeUnloadEvent): string => {
@@ -156,16 +162,16 @@ const Component: React.FC<Props> = ({ playlistId }) => {
 
   useEffect(() => {
     const listener = (e: KeyboardEvent): void => {
-      console.log(e.key);
-      if (e.key === '46') {
-        selectShape(null);
+      if (e.keyCode === 46 || e.key === 'Delete') {
+        // FIX: This keeps deleting all images, not just the selected one.. very weird.
+        // onDeleteSelectedCanvasItem();
       }
     };
-    document.addEventListener('keypress', () => listener);
-    document.addEventListener('keydown', () => listener);
+
+    document.addEventListener('keydown', listener);
+
     return (): void => {
       document.removeEventListener('keydown', listener);
-      document.removeEventListener('keypress', listener);
     };
   }, []);
 
