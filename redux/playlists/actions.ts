@@ -66,15 +66,16 @@ void,
     try {
       // Trying to fix a bug on Firefox Android
       // Not sure why this method is failing only there.
-      await spotifyApi.uploadCustomPlaylistCoverImage(id, img);
-      // await fetch(`https://api.spotify.com/v1/playlists/${id}/images`, {
-      //   headers: {
-      //     Authorization: `Bearer ${state.user.token.accessToken}`,
-      //     'Content-Type': 'image/jpeg',
-      //   },
-      //   method: 'PUT',
-      //   body: img,
-      // });
+      // await spotifyApi.uploadCustomPlaylistCoverImage(id, img);
+      await fetch(`https://api.spotify.com/v1/playlists/${id}/images`, {
+        headers: {
+          Authorization: `Bearer ${state.user.token.accessToken}`,
+          'Content-Type': 'image/jpeg',
+        },
+        method: 'PUT',
+        body: img,
+        credentials: 'omit',
+      });
 
       // Some buffer so that when that when you refresh the playlists
       // you gett the new info
