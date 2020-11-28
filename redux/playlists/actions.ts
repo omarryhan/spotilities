@@ -1,5 +1,6 @@
 import { createAsyncThunk, createAction } from '@reduxjs/toolkit';
 import { useRouter } from 'next/router';
+import ReactGA from 'react-ga';
 import { checkIsAuthorized, getAllPages, spotifyApi } from '../utils';
 import { CombinedStateType } from '../types';
 
@@ -53,7 +54,19 @@ void,
     // It seems that deselecting the shape is done asynchronously.
     // So, we're waiting one second so that we're sure that Konva's transformer isn't
     // visible in the uploaded image.
-    setTimeout(() => {}, 1000);
+    setTimeout(() => {}, 2000);
+
+    const handleFailedUploadForUnknownReason = (): void => {
+      alert(`Something went wrong.\nFailed to upload: ${img}}`);
+    };
+
+    const handleUploadError = (message?: string): void => {
+      ReactGA.event({
+        action: 'error',
+        category: 'CoverUploadError',
+        label: `Message: ${message}. ||| Img: ${img}`,
+      });
+    };
 
     try {
       await spotifyApi.uploadCustomPlaylistCoverImage(id, img);
@@ -67,13 +80,15 @@ void,
           e.response,
         )?.error?.message as undefined | string;
 
+        handleUploadError();
         if (errorMessage) {
           alert(errorMessage);
         } else {
-          alert('Something went wrong');
+          handleFailedUploadForUnknownReason();
         }
       } else {
-        alert(e.message || 'Something went wrong');
+        handleUploadError(e.message);
+        e.message ? alert(e.message) : handleFailedUploadForUnknownReason();
       }
       return;
     } finally {
