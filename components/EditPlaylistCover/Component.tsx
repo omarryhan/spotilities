@@ -23,6 +23,7 @@ import {
 } from './config/gradient';
 import { menuSections } from './config/menu';
 import DeleteIcon from '../../public/icons/delete.svg';
+import CustomUpload from './CustomUpload';
 import {
   Body,
   BottomNav,
@@ -153,6 +154,21 @@ const Component: React.FC<Props> = ({ playlistId }) => {
     setCanvasWrapperWidth((wrapperRef.current as HTMLDivElement).clientWidth);
   }, []);
 
+  useEffect(() => {
+    const listener = (e: KeyboardEvent): void => {
+      console.log(e.key);
+      if (e.key === '46') {
+        selectShape(null);
+      }
+    };
+    document.addEventListener('keypress', () => listener);
+    document.addEventListener('keydown', () => listener);
+    return (): void => {
+      document.removeEventListener('keydown', listener);
+      document.removeEventListener('keypress', listener);
+    };
+  }, []);
+
   return (
     <>
       <Body>
@@ -169,6 +185,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
             onClick={async (): Promise<void> => {
               // deselect any selection, so that it doesn't appear in the end result.
               selectShape(null);
+
               await dispatch(updateUserPlaylistCover({
                 id: playlistId,
                 img: (stageRef.current as Konva.Stage).toDataURL().split(',')[1],
@@ -184,6 +201,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
         <CanvasWrapper
           ref={wrapperRef}
           onDrop={(e): void => {
+            const id = Math.random().toString(36).substring(7);
             e.preventDefault();
             // register event position
             (stageRef.current as Konva.Stage).setPointersPositions(e);
@@ -196,11 +214,11 @@ const Component: React.FC<Props> = ({ playlistId }) => {
                   image: undefined, // Only here to not break the typings
                 },
                 src: imageDragUrl.current as string,
-                id: Math.random().toString(36).substring(7),
+                id,
               },
             ]);
             // Open transformer once added
-            selectShape(`${canvasImages.length}-${imageDragUrl.current}`);
+            selectShape(id);
           }}
           onDragOver={(e): void => e.preventDefault()}
         >
@@ -497,9 +515,25 @@ const Component: React.FC<Props> = ({ playlistId }) => {
                   />
                 </div>
               ) : currentSubmenuSecion === menuSections.image[1] ? (
-                <p>
-                  Custom image
-                </p>
+                <CustomUpload
+                  onUpload={(src: string): void => {
+                    const id = Math.random().toString(36).substring(7);
+                    setCanvasImages([
+                      ...canvasImages,
+                      {
+                        props: {
+                          x: canvasWrapperWidth / 2,
+                          y: canvasWrapperWidth / 2,
+                          // ...(stageRef.current as Konva.Stage).getPointerPosition() || {},
+                          image: undefined, // Only here to not break the typings
+                        },
+                        src,
+                        id,
+                      },
+                    ]);
+                    selectShape(id);
+                  }}
+                />
               ) : currentSubmenuSecion === menuSections.text[0] ? (
                 <p>
                   Text

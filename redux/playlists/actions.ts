@@ -50,6 +50,11 @@ void,
       state.user.tokenStatus.errorMessage,
     );
 
+    // It seems that deselecting the shape is done asynchronously.
+    // So, we're waiting one second so that we're sure that Konva's transformer isn't
+    // visible in the uploaded image.
+    setTimeout(() => {}, 1000);
+
     try {
       await spotifyApi.uploadCustomPlaylistCoverImage(id, img);
 
@@ -74,7 +79,8 @@ void,
     } finally {
       await dispatch(fetchUserPlaylists(state.profile.data.id));
     }
-    router.back();
+    router.push('/library');
+    // router.back();
   },
 );
 
