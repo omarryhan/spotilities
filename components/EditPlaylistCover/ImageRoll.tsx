@@ -19,7 +19,7 @@ const Roll = styled.div`
 
 const Img = styled.img`
   margin-right: 20px;
-  height: 80px;
+  height: 120px;
 `;
 
 const Component: React.FC<Props> = ({
@@ -31,8 +31,10 @@ const Component: React.FC<Props> = ({
   const handleScroll = (e: React.UIEvent<HTMLDivElement>): void => {
     const reachedEnd = (
       e.target as HTMLDivElement).scrollWidth - (
-      e.target as HTMLDivElement).scrollLeft === (
-      e.target as HTMLDivElement).clientWidth;
+      e.target as HTMLDivElement).scrollLeft - (
+      // +50 to make it load a new page a bit before reaching the end.
+      e.target as HTMLDivElement).clientWidth === 0;
+
     if (reachedEnd) {
       requestOneMorePage();
     }
@@ -58,7 +60,7 @@ const Component: React.FC<Props> = ({
                   e.target as HTMLImageElement
                 ).src;
           }}
-          onTouchStart={(): void => onImgClick(hit.webformatURL)}
+          onClick={(): void => onImgClick(hit.webformatURL)}
         />
       ))}
     </Roll>

@@ -8,11 +8,11 @@ import { Layer } from 'konva/types/Layer';
 import { Image, Transformer } from 'react-konva';
 import useImage from 'use-image';
 
-import { styled } from '@material-ui/core';
 import { styledComponentsTheme } from '../../configs/theme';
 
 export interface CanvasImage {
   src: string;
+  id: string;
   props: ImageConfig;
 }
 
@@ -22,6 +22,8 @@ interface Props {
   isSelected: boolean;
   onSelect: () => void;
   onChange: (newAttribs: CanvasImage) => void;
+  canvasWidth: number;
+  id: string;
 }
 
 const Component: React.FC<Props> = ({
@@ -30,9 +32,12 @@ const Component: React.FC<Props> = ({
   isSelected,
   onSelect,
   onChange,
+  canvasWidth,
+  id,
 }) => {
   const imageRef = React.useRef<Konva.Image>(null);
   const transformerRef = React.useRef<Konva.Transformer>(null);
+  const [initialScalingDone, setInitialScalingDone] = React.useState(false);
 
   React.useEffect(() => {
     if (isSelected) {
@@ -44,7 +49,26 @@ const Component: React.FC<Props> = ({
     }
   }, [isSelected]);
 
-  const [image] = useImage(src, 'Anonymous');
+  const [image, loadingStatus] = useImage(src, 'Anonymous');
+
+  // When first adding the image to the canvas
+  // the image should be 75% the width of the canvas
+  // regardless of the size of the image
+  React.useEffect(() => {
+    const node = imageRef.current as Konva.Image;
+    const width = node.getWidth();
+    if (!initialScalingDone && loadingStatus === 'loaded' && width) {
+      node.scaleX((canvasWidth / width) * 0.75);
+      node.scaleY((canvasWidth / width) * 0.75);
+      setInitialScalingDone(true);
+    }
+  }, [
+    setInitialScalingDone,
+    canvasWidth,
+    initialScalingDone,
+    loadingStatus,
+  ]);
+
   return (
     <>
       <Image
@@ -63,8 +87,10 @@ const Component: React.FC<Props> = ({
               x: e.target.x(),
               y: e.target.y(),
             },
+            id,
           });
         }}
+        onDragStart={onSelect}
         // This was copied from the example by Anton (Konva's author)
         // from here:
         // https://konvajs.org/docs/react/Transformer.html

@@ -37,7 +37,7 @@ export const SubmitButton = styled.button`
 export const TopBar = styled.div`
   display: flex;
   padding: 30px 0;
-  justify-content: flex-end;
+  justify-content: space-between;
 `;
 
 export const CanvasWrapper = styled.div`
@@ -151,5 +151,39 @@ export const GradientSubSettingWrapper = styled.div`
     flex-direction: column;
     flex-wrap: wrap;
     height: 120px;
+  }
+`;
+
+export const DeleteButton = styled.button`
+  /* Remove all styles */
+  background: none;
+  padding: 0;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & svg {
+    width: 60%;
+  }
+
+  & svg path {
+    stroke: ${(props): string => props.theme.colors.white.primary};
+  }
+
+  &:disabled {
+    color: black;
+    cursor: default;
+
+    & svg path {
+      stroke: ${(props): string => props.theme.colors.white.evenDarkest};
+    }
   }
 `;

@@ -22,6 +22,7 @@ import {
   gradientSettings,
 } from './config/gradient';
 import { menuSections } from './config/menu';
+import DeleteIcon from '../../public/icons/delete.svg';
 import {
   Body,
   BottomNav,
@@ -36,6 +37,7 @@ import {
   MainEditSection,
   ColorsWrapper,
   GradientSubSettingWrapper,
+  DeleteButton,
 } from './Styled';
 import { CombinedStateType } from '../../redux/types';
 import { updateUserPlaylistCover } from '../../redux/playlists/actions';
@@ -62,7 +64,8 @@ const Component: React.FC<Props> = ({ playlistId }) => {
   const [canvasWrapperWidth, setCanvasWrapperWidth] = React.useState(300);
 
   /** ************* Background *********** */
-  const [bgColors, setBgColors] = React.useState<string[]>(['#e6e6e6']);
+  const defaultBgColor = '#e6e6e6';
+  const [bgColors, setBgColors] = React.useState<string[]>([defaultBgColor]);
   // the default is random, just so it renders on the server
   // the actual value is 100% of vw-paddings or the max-width of Styled.CanvasWrapper
   const [currentGradientSettings, setCurrentGradientSettings] = React.useState<string[]>(['none', '']);
@@ -105,11 +108,46 @@ const Component: React.FC<Props> = ({ playlistId }) => {
     // deselect when clicked on empty area
     selectShape(null);
     const clickedOnEmpty = e.target === e.target.getStage();
-    console.log('Triggerred');
     if (clickedOnEmpty) {
       selectShape(null);
     }
   };
+
+  const onDeleteSelectedCanvasItem = (): void => {
+    selectShape(null);
+    setCanvasImages(
+      canvasImages.filter((image) => image.id !== selectedId),
+    );
+  };
+
+  const handleBeforeUnload = (e: BeforeUnloadEvent): string => {
+    const confirmationMessage = 'You have unsaved changes. Discard?';
+    e.returnValue = confirmationMessage;
+    return confirmationMessage;
+  };
+
+  useEffect(() => {
+    const dirtyCanvasState = bgColors.length !== 1
+      || bgColors[0] !== defaultBgColor || canvasImages.length;
+
+    if (!dirtyCanvasState) {
+      return (): void => {};
+    }
+
+    // 1. Handle back button
+    router.beforePopState(() => (!!window.confirm('You have unsaved changes. Discard?')));
+
+    // 2. Handle exit window
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    // 3. Handle push state (e.g. edit cover)
+    // will handle in the button handler instead
+
+    return (): void => {
+      router.beforePopState(() => true);
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  });
 
   useEffect(() => {
     setCanvasWrapperWidth((wrapperRef.current as HTMLDivElement).clientWidth);
@@ -119,8 +157,18 @@ const Component: React.FC<Props> = ({ playlistId }) => {
     <>
       <Body>
         <TopBar>
+          <DeleteButton
+            disabled={selectedId === null}
+            title="Delete selected item"
+            type="button"
+            onClick={onDeleteSelectedCanvasItem}
+          >
+            <DeleteIcon />
+          </DeleteButton>
           <SubmitButton
             onClick={async (): Promise<void> => {
+              // deselect any selection, so that it doesn't appear in the end result.
+              selectShape(null);
               await dispatch(updateUserPlaylistCover({
                 id: playlistId,
                 img: (stageRef.current as Konva.Stage).toDataURL().split(',')[1],
@@ -148,6 +196,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
                   image: undefined, // Only here to not break the typings
                 },
                 src: imageDragUrl.current as string,
+                id: Math.random().toString(36).substring(7),
               },
             ]);
             // Open transformer once added
@@ -179,16 +228,18 @@ const Component: React.FC<Props> = ({ playlistId }) => {
                   konvaProps={image.props}
                   src={image.src}
                   // eslint-disable-next-line react/no-array-index-key
-                  key={`${i.toString()}-${image.src}`}
-                  isSelected={`${i}-${image.src}` === selectedId}
+                  key={image.id}
+                  isSelected={image.id === selectedId}
                   onSelect={(): void => {
-                    selectShape(`${i}-${image.src}`);
+                    selectShape(image.id);
                   }}
                   onChange={(newAttrs): void => {
                     const newCanvasImages = canvasImages.slice();
                     newCanvasImages[i] = newAttrs;
                     setCanvasImages(newCanvasImages);
                   }}
+                  canvasWidth={canvasWrapperWidth}
+                  id={image.id}
                 />
               ))}
             </Layer>
@@ -437,6 +488,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
                             image: undefined, // Only here to not break the typings
                           },
                           src,
+                          id: Math.random().toString(36).substring(7),
                         },
                       ]);
                       // Open transformer once added
