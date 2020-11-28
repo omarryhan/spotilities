@@ -478,6 +478,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
                     requestOneMorePage={(): Promise<void> => getNewPixabayPage()}
                     imageDragUrl={imageDragUrl}
                     onImgClick={(src): void => {
+                      const id = Math.random().toString(36).substring(7);
                       setCanvasImages([
                         ...canvasImages,
                         {
@@ -488,11 +489,10 @@ const Component: React.FC<Props> = ({ playlistId }) => {
                             image: undefined, // Only here to not break the typings
                           },
                           src,
-                          id: Math.random().toString(36).substring(7),
+                          id,
                         },
                       ]);
-                      // Open transformer once added
-                      selectShape(`${canvasImages.length}-${src}`);
+                      selectShape(id);
                     }}
                   />
                 </div>
