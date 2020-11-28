@@ -51,11 +51,6 @@ void,
       state.user.tokenStatus.errorMessage,
     );
 
-    // It seems that deselecting the shape is done asynchronously.
-    // So, we're waiting one second so that we're sure that Konva's transformer isn't
-    // visible in the uploaded image.
-    setTimeout(() => {}, 2000);
-
     const handleFailedUploadForUnknownReason = (): void => {
       alert(`Something went wrong.\nFailed to upload: ${img}}`);
     };

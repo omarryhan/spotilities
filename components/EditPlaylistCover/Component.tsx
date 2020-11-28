@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   Stage,
@@ -63,6 +63,9 @@ const Component: React.FC<Props> = ({ playlistId }) => {
   const [canvasImages, setCanvasImages] = React.useState<CanvasImage[]>([]);
   const [selectedId, selectShape] = React.useState<string | null>(null);
   const [canvasWrapperWidth, setCanvasWrapperWidth] = React.useState(300);
+
+  /** ************* API *********** */
+  const [doUpdateUserPlaylistCover, setDoUpdateUserPlaylistCover] = useState(false);
 
   /** ************* Background *********** */
   const defaultBgColor = '#e6e6e6';
@@ -173,6 +176,28 @@ const Component: React.FC<Props> = ({ playlistId }) => {
     };
   }, []);
 
+  useEffect(() => {
+    const effect = async (): Promise<void> => {
+      await dispatch(updateUserPlaylistCover({
+        id: playlistId,
+        img: (stageRef.current as Konva.Stage).toDataURL().split(',')[1],
+        router,
+      }));
+
+      setDoUpdateUserPlaylistCover(false);
+    };
+
+    if (doUpdateUserPlaylistCover) {
+      effect();
+    }
+  }, [
+    doUpdateUserPlaylistCover,
+    setDoUpdateUserPlaylistCover,
+    dispatch,
+    playlistId,
+    router,
+  ]);
+
   return (
     <>
       <Body>
@@ -186,15 +211,15 @@ const Component: React.FC<Props> = ({ playlistId }) => {
             <DeleteIcon />
           </DeleteButton>
           <SubmitButton
+            // It seems that deselecting the shape is done asynchronously. Probably from React.
+            // So, we're doing this hack to make sure that Konva's transformer isn't
+            // visible in the uploaded image.
+            // The hack:
+            // https://stackoverflow.com/questions/53898810/executing-async-code-on-update-of-state-with-react-hooks
             onClick={async (): Promise<void> => {
               // deselect any selection, so that it doesn't appear in the end result.
               selectShape(null);
-
-              await dispatch(updateUserPlaylistCover({
-                id: playlistId,
-                img: (stageRef.current as Konva.Stage).toDataURL().split(',')[1],
-                router,
-              }));
+              setDoUpdateUserPlaylistCover(true);
             }}
             disabled={isUpdatingPlaylist}
           >
