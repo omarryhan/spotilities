@@ -183,12 +183,14 @@ const Component: React.FC<Props> = ({ playlistId }) => {
         img: (stageRef.current as Konva.Stage).toDataURL().split(',')[1],
         router,
       }));
-
-      setDoUpdateUserPlaylistCover(false);
     };
 
     if (doUpdateUserPlaylistCover) {
-      effect();
+      try {
+        effect();
+      } finally {
+        setDoUpdateUserPlaylistCover(false);
+      }
     }
   }, [
     doUpdateUserPlaylistCover,
