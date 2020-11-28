@@ -72,7 +72,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
   const [currentGradientSettings, setCurrentGradientSettings] = React.useState<string[]>(['none', '']);
   const [{ strokeColor, strokeWidth }, setCanvasBorder] = React.useState<
   {strokeColor: string; strokeWidth: number}
-  >({ strokeColor: '#e6e6e6', strokeWidth: 0 });
+  >({ strokeColor: '#1DB954', strokeWidth: 0 });
 
   /** ************* Pixabay form *********** */
   const [pixabayPage, setPixabayPage] = React.useState<number>(1);
@@ -118,8 +118,6 @@ const Component: React.FC<Props> = ({ playlistId }) => {
     // For some reason this makes it delete two objects instead of just one.
     const selectedShapeId = selectedId;
     if (selectedShapeId !== null) {
-      console.log(selectedId);
-      console.log(canvasImages.map((i) => i.id));
       selectShape(null);
       setCanvasImages(
         canvasImages.filter((image) => image.id !== selectedShapeId),

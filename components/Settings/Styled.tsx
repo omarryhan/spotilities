@@ -68,27 +68,13 @@ export const StyledSwitch = withStyles({
   },
 })(Switch);
 
-export const StyledLogoutButton = styled.button`
+export const StyledLogoutLink = styled.a`
+  display: flex;
+  align-items: center;
   border: none;
   outline: inherit;
-  
-  width: 100px;
-  height: 35px;
-  cursor: pointer;
-
-  background-color: ${(props): string => props.theme.colors.white.dark};
-  padding-top: 0;
-  padding-bottom: 0;
-  
-  color: ${(props): string => props.theme.colors.gray.light};
-  font-size: 0.9rem;
+  color: ${(props): string => props.theme.colors.white.dark};
+  font-size: 18px;
   font-weight: bold;
   text-transform: capitalize;
-  border-radius: 5px;
-  text-align: center;
-
-  &:active {
-    background-color: #fff;
-  }
-
 `;

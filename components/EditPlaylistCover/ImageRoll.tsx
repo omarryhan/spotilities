@@ -60,7 +60,9 @@ const Component: React.FC<Props> = ({
                   e.target as HTMLImageElement
                 ).src;
           }}
-          onTouchStart={(): void => onImgClick(hit.webformatURL)}
+          onClick={(): void => {
+            onImgClick(hit.webformatURL);
+          }}
         />
       ))}
     </Roll>
