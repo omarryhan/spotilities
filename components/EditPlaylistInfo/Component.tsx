@@ -134,7 +134,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
               }
             }
           >
-            Edit cover
+            Create cover
           </EditCoverButton>
         </EditCoverButtonContainer>
       </BackgroundGradient>

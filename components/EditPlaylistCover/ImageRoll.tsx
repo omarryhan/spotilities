@@ -60,8 +60,10 @@ const Component: React.FC<Props> = ({
                   e.target as HTMLImageElement
                 ).src;
           }}
-          onClick={(): void => {
-            onImgClick(hit.webformatURL);
+          onClick={(e): void => {
+            onImgClick((
+              e.target as HTMLImageElement
+            ).src);
           }}
         />
       ))}
