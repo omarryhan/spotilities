@@ -51,8 +51,8 @@ void,
       state.user.tokenStatus.errorMessage,
     );
 
-    const handleFailedUploadForUnknownReason = (): void => {
-      alert(`Something went wrong.\nFailed to upload: ${img}}`);
+    const handleFailedUploadForUnknownReason = (status: number): void => {
+      alert(`Something went wrong.\nStatus:${status}\nFailed to upload: ${img}}`);
     };
 
     const handleUploadError = (message?: string): void => {
@@ -87,13 +87,13 @@ void,
 
         handleUploadError();
         if (errorMessage) {
-          alert(errorMessage);
+          alert(`${errorMessage} | Error code: ${e.status}`);
         } else {
-          handleFailedUploadForUnknownReason();
+          handleFailedUploadForUnknownReason(e.status);
         }
       } else {
         handleUploadError(e.message);
-        e.message ? alert(e.message) : handleFailedUploadForUnknownReason();
+        e.message ? alert(e.message) : handleFailedUploadForUnknownReason(e.status);
       }
       return;
     } finally {
