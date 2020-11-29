@@ -27,7 +27,22 @@ const Component: React.FC = () => {
     effect();
   });
 
-  return null;
+  return !accessToken && !errorMessage ? (
+    <div style={{
+      position: 'absolute',
+      backgroundColor: '#121212',
+      width: '100vw',
+      height: '100vh',
+      top: '0',
+      left: '0',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}
+    >
+      Authenticating...
+    </div>
+  ) : null;
 };
 
 export default Component;
