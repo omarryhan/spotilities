@@ -74,6 +74,7 @@ void,
         },
         method: 'PUT',
         body: img,
+        // https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors/CORSNotSupportingCredentials
         credentials: 'omit',
       });
 

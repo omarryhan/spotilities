@@ -64,6 +64,9 @@ const Component: React.FC<Props> = ({
             onImgClick((
               e.target as HTMLImageElement
             ).src);
+            onImgClick((
+              e.target as HTMLImageElement
+            ).src);
           }}
         />
       ))}
