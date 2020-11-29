@@ -24,8 +24,8 @@ interface Props {
   onSelect: () => void;
   canvasWidth: number;
   onChange: (props: {
-    id: string;
-    konvaProps: Konva.TextConfig;
+    x: number;
+    y: number;
   }) => void;
 }
 
@@ -37,7 +37,7 @@ const defaultConfig: TextProps = {
   isItalic: false,
   isUnderlined: false,
   fontSize: 24,
-  color: 'black',
+  color: '#0a5809',
   konvaProps: {},
 };
 
@@ -93,12 +93,8 @@ const Component: React.FC<Props> = ({
         onDragStart={onSelect}
         onDragEnd={(e): void => {
           onChange({
-            id,
-            konvaProps: {
-              ...konvaProps,
-              x: e.target.x(),
-              y: e.target.y(),
-            },
+            x: e.target.x(),
+            y: e.target.y(),
           });
         }}
       />

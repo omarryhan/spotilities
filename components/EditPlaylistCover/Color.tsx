@@ -6,8 +6,9 @@ import { colors } from '../../configs/theme';
 
 interface Props {
   currentColor: string;
-  index: number;
-  setCurrentColor: (color: string, index: number) => void;
+  index?: number;
+  setCurrentColor: (color: string, index?: number) => void;
+  disabled?: boolean;
 }
 
 interface AddOrRemoveColorProps {
@@ -43,6 +44,7 @@ export const AddOrRemoveButton: React.FC<AddOrRemoveColorProps> = ({
 
 const ColorButton = styled.button<{ currentColor: string }>`
   display: block;
+  position: relative;
   /* Remove all styles */
   background: none;
   border: none;
@@ -56,7 +58,21 @@ const ColorButton = styled.button<{ currentColor: string }>`
   cursor: pointer;
 `;
 
-const Component: React.FC<Props> = ({ currentColor, setCurrentColor, index }) => {
+const DisableColorPicker = styled.span`
+  position:absolute;
+  top: 0;
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 0% 0%;
+  height: 1px;
+  background-color: red;
+  /* Pythagoras bitch */ 
+  width:56.57px;
+`;
+
+const Component: React.FC<Props> = ({
+  currentColor, setCurrentColor, index, disabled,
+}) => {
   const [colorPickerVisible, setColorPickerVisible] = React.useState(false);
   return (
     <div style={{
@@ -89,15 +105,22 @@ const Component: React.FC<Props> = ({ currentColor, setCurrentColor, index }) =>
         onClick={(): void => setColorPickerVisible(!colorPickerVisible)}
         type="button"
         currentColor={currentColor}
-      />
-      <p style={{
-        color: colors.white.dark,
-        fontSize: '14px',
-        textTransform: 'capitalize',
-      }}
+        disabled={disabled}
       >
-        {`Color ${index + 1}`}
-      </p>
+        {disabled && <DisableColorPicker />}
+      </ColorButton>
+      {
+        typeof index === 'number' ? (
+          <p style={{
+            color: colors.white.dark,
+            fontSize: '14px',
+            textTransform: 'capitalize',
+          }}
+          >
+            {`Color ${index + 1}`}
+          </p>
+        ) : null
+      }
     </div>
   );
 };

@@ -1,6 +1,6 @@
 {
   "name": "spoxify",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "license": "MIT",
   "private": false,
   "browserslist": [
@@ -53,7 +53,8 @@
     "redux-thunk": "^2.3.0",
     "spotify-web-api-js": "^1.4.0",
     "styled-components": "^5.1.0",
-    "use-image": "^1.0.6"
+    "use-image": "^1.0.6",
+    "webfontloader": "^1.6.28"
   },
   "devDependencies": {
     "@svgr/webpack": "^5.4.0",
@@ -72,6 +73,7 @@
     "@types/sinon": "^9.0.4",
     "@types/styled-components": "^5.1.0",
     "@types/superagent": "^4.1.7",
+    "@types/webfontloader": "^1.6.32",
     "@typescript-eslint/eslint-plugin": "^2.28.0",
     "@typescript-eslint/parser": "^2.28.0",
     "babel-plugin-styled-components": "^1.10.7",

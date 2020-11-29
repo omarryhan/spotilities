@@ -45,6 +45,7 @@ import {
 import { CombinedStateType } from '../../redux/types';
 import { updateUserPlaylistCover } from '../../redux/playlists/actions';
 import Text, { TextProps, createNewText } from './Text';
+import SelectFontFamily from './SelectFontFamily';
 
 interface Props {
   playlistId: string;
@@ -96,6 +97,20 @@ const Component: React.FC<Props> = ({ playlistId }) => {
     (text) => text.id === selectedId,
   );
   const selectedTextItem = selectedId === null ? '' : selectedTextItem_.length ? selectedTextItem_[0] : '';
+  const currentFontFamily = !selectedTextItem ? '' : selectedTextItem.fontFamily;
+  const setCurrentTextProp = (object: Partial<TextProps>): void => {
+    if (!selectedTextItem) {
+      return;
+    }
+
+    setCurrentText([
+      ...currentText.filter((currentText_) => currentText_.id !== selectedTextItem.id),
+      {
+        ...selectedTextItem,
+        ...object,
+      },
+    ]);
+  };
 
   const wrapperRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<Konva.Stage>(null);
@@ -310,13 +325,12 @@ const Component: React.FC<Props> = ({ playlistId }) => {
                   isSelected={selectedId !== null && text.id === selectedId}
                   onSelect={(): void => selectShape(text.id)}
                   canvasWidth={canvasWrapperWidth}
-                  onChange={({ id, konvaProps }): void => {
+                  onChange={({ x, y }): void => {
                     const newCurrentText = currentText.slice();
-                    newCurrentText[i] = {
-                      id,
-                      text: text.text,
-                      konvaProps,
-                    };
+                    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                    newCurrentText[i]!.konvaProps!.x = x;
+                    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                    newCurrentText[i]!.konvaProps!.y = y;
                     setCurrentText(newCurrentText);
                   }}
                 />
@@ -514,7 +528,6 @@ const Component: React.FC<Props> = ({ playlistId }) => {
                   >
                     <Color
                       currentColor={strokeColor}
-                      index={0}
                       setCurrentColor={(newColor): void => setCanvasBorder({
                         strokeColor: newColor,
                         strokeWidth,
@@ -617,7 +630,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
                       addOrRemove="add"
                       handler={(): void => {
                         const newText = createNewText({
-                          text: 'Best playlist in the world!',
+                          text: 'Yo',
                         });
                         newText.konvaProps = {
                           x: 10,
@@ -663,9 +676,179 @@ const Component: React.FC<Props> = ({ playlistId }) => {
                   }
                 </div>
               ) : currentSubmenuSecion === menuSections.text[1] ? (
-                <p>
-                  Style
-                </p>
+                <div>
+                  {!selectedTextItem
+                    ? (
+                      <p style={{ fontSize: '16px' }}>
+                        Please select or add a text to be able to edit
+                      </p>
+                    ) : (
+                      <div>
+                        <div>
+                          <div style={{
+                            display: 'flex',
+                          }}
+                          >
+                            <div>
+                              <Color
+                                disabled={!selectedTextItem}
+                                currentColor={selectedTextItem ? selectedTextItem.color as string : '#fff'}
+                                setCurrentColor={(newColor): void => {
+                                  if (selectedTextItem) {
+                                    selectedTextItem.color = newColor;
+                                    setCurrentText([
+                                    // add all the ones that aren't the one the user is editing
+                                      ...currentText.filter(
+                                        (text) => text.id !== (selectedTextItem as TextProps).id,
+                                      ),
+                                      selectedTextItem,
+                                    ]);
+                                  }
+                                }}
+                              />
+                            </div>
+                            <div style={{
+                              display: 'flex',
+                              paddingRight: '20px',
+                              flex: '1',
+                              alignItems: 'center',
+                            }}
+                            >
+                              <p style={{
+                                margin: '3px 15px 0 0',
+                                fontSize: '16px',
+                              }}
+                              >
+                                Size:
+                              </p>
+
+                              <Slider
+                                value={selectedTextItem ? selectedTextItem.fontSize : 0}
+                                onChange={(e, newValue): void => {
+                                  if (selectedTextItem) {
+                                    selectedTextItem.fontSize = newValue as number;
+                                    setCurrentText([
+                                    // add all the ones that aren't the one the user is editing
+                                      ...currentText.filter(
+                                        (text) => text.id !== (selectedTextItem as TextProps).id,
+                                      ),
+                                      selectedTextItem,
+                                    ]);
+                                  }
+                                }}
+                                min={10}
+                                max={300}
+                                marks
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div style={{
+                          display: 'flex',
+                          paddingTop: '30px',
+                        }}
+                        >
+                          <div style={{
+                            display: 'flex',
+                          }}
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              aria-labelledby="Bold"
+                              width="44"
+                              height="44"
+                              viewBox="0 0 24 24"
+                              style={{
+                                marginLeft: '-4px',
+                                marginRight: '6px',
+                              }}
+                              strokeWidth="1.5"
+                              stroke={!selectedTextItem ? '' : selectedTextItem.isBold ? '#fff' : 'rgb(100, 100, 100)'}
+                              onClick={(): void => {
+                                setCurrentTextProp({
+                                  isBold: !selectedTextItem ? false : !selectedTextItem.isBold,
+                                });
+                              }}
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M7 5h6a3.5 3.5 0 0 1 0 7h-6z" />
+                              <path d="M13 12h1a3.5 3.5 0 0 1 0 7h-7v-7" />
+                            </svg>
+
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              aria-labelledby="Italic"
+                              width="44"
+                              height="44"
+                              viewBox="0 0 24 24"
+                              style={{
+                                marginLeft: '-4px',
+                                marginRight: '6px',
+                              }}
+                              strokeWidth="1.5"
+                              stroke={!selectedTextItem ? '' : selectedTextItem.isItalic ? '#fff' : 'rgb(100, 100, 100)'}
+                              onClick={(): void => {
+                                setCurrentTextProp({
+                                  isItalic: !selectedTextItem ? false : !selectedTextItem.isItalic,
+                                });
+                              }}
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <line x1="11" y1="5" x2="17" y2="5" />
+                              <line x1="7" y1="19" x2="13" y2="19" />
+                              <line x1="14" y1="5" x2="10" y2="19" />
+                            </svg>
+
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              aria-labelledby="Underline"
+                              width="44"
+                              height="44"
+                              viewBox="0 0 24 24"
+                              style={{
+                                marginLeft: '-4px',
+                                marginRight: '6px',
+                              }}
+                              strokeWidth="1.5"
+                              stroke={!selectedTextItem ? '' : selectedTextItem.isUnderlined ? '#fff' : 'rgb(100, 100, 100)'}
+                              onClick={(): void => {
+                                setCurrentTextProp({
+                                  isUnderlined: !selectedTextItem
+                                    ? false : !selectedTextItem.isUnderlined,
+                                });
+                              }}
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <line x1="6" y1="20" x2="18" y2="20" />
+                              <path d="M8 5v6a4 4 0 0 0 8 0v-6" />
+                            </svg>
+                          </div>
+                          <SelectFontFamily
+                            disabled={!selectedTextItem}
+                            currentFontFamily={currentFontFamily || ''}
+                            setCurrentFontFamily={
+                              (family: string): void => setCurrentTextProp({ fontFamily: family })
+                            }
+                            onSelect={(): void => {
+                              setTimeout(() => {
+                                // Trigger a rerender so that the font updates
+                                // after the new font has been downloaded
+                                const currentShape = selectedId;
+                                selectShape(null);
+                                selectShape(currentShape);
+                              }, 1000);
+                            }}
+                          />
+                        </div>
+                      </div>
+                    )}
+                </div>
               ) : null
           }
         </MainEditSection>
