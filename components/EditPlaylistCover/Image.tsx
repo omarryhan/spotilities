@@ -91,6 +91,9 @@ const Component: React.FC<Props> = ({
           });
         }}
         onDragStart={onSelect}
+        offsetX={image ? image.width / 2 : 0}
+        offsetY={image ? image.height / 2 : 0}
+        draggable
         // This was copied from the example by Anton (Konva's author)
         // from here:
         // https://konvajs.org/docs/react/Transformer.html
@@ -98,35 +101,33 @@ const Component: React.FC<Props> = ({
         // its purpose. And it was actually making the scaling function
         // a bit buggy. (After scaling, sometimes the pictures move away from
         // their end position). The comments in this event handler is by Anton.
-        onTransformEnd={(e): void => {
-          // transformer is changing scale of the node
-          // and NOT its width or height
-          // but in the store we have only width and height
-          // to match the data better we will reset scale on transform end
 
-          // const node = imageRef.current as Konva.Image;
-          // const scaleX = node.scaleX();
-          // const scaleY = node.scaleY();
+        // onTransformEnd={(e): void => {
+        // transformer is changing scale of the node
+        // and NOT its width or height
+        // but in the store we have only width and height
+        // to match the data better we will reset scale on transform end
 
-          // we will reset it back
-          // node.scaleX(1);
-          // node.scaleY(1);
-          // onChange({
-          //   src,
-          //   props: {
-          //     ...konvaProps,
-          //     x: node.x(),
-          //     y: node.y(),
-          //     // set minimal value
-          //     width: Math.max(node.width() * scaleX),
-          //     height: Math.max(node.height() * scaleY),
-          //   },
-          // });
-        }}
+        // const node = imageRef.current as Konva.Image;
+        // const scaleX = node.scaleX();
+        // const scaleY = node.scaleY();
+
+        // we will reset it back
+        // node.scaleX(1);
+        // node.scaleY(1);
+        // onChange({
+        //   src,
+        //   props: {
+        //     ...konvaProps,
+        //     x: node.x(),
+        //     y: node.y(),
+        //     // set minimal value
+        //     width: Math.max(node.width() * scaleX),
+        //     height: Math.max(node.height() * scaleY),
+        //   },
+        // });
+        // }}
         // I will use offset to set origin to the center of the image
-        offsetX={image ? image.width / 2 : 0}
-        offsetY={image ? image.height / 2 : 0}
-        draggable
       />
       {isSelected && (
         <Transformer
