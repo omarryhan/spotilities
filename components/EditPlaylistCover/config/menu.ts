@@ -1,6 +1,6 @@
 type BackgroundSubmenuSections = 'colors' | 'gradient' | 'border';
 type ImageSubmenuSections = 'stock' | 'custom';
-type TextSubmenuSections = 'style';
+type TextSubmenuSections = 'content' | 'style';
 // export type SubmenuSections = BackgroundSubmenuSections |
 // ImageSubmenuSections | TextSubmenuSections;
 
@@ -23,6 +23,7 @@ export const menuSections: {
     'custom',
   ],
   text: [
+    'content',
     'style',
   ],
 };

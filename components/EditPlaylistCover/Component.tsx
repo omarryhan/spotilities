@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -12,7 +13,7 @@ import { useRouter } from 'next/router';
 import Slider from '@material-ui/core/Slider';
 
 import { searchPixabay, PixabayHit } from './pixabayAPI';
-import Color, { AddOrRemoveColor } from './Color';
+import Color, { AddOrRemoveButton } from './Color';
 import PixabayForm from './PixabayForm';
 import ImageRoll from './ImageRoll';
 import Image, { CanvasImage } from './Image';
@@ -24,6 +25,7 @@ import {
 import { menuSections } from './config/menu';
 import DeleteIcon from '../../public/icons/delete.svg';
 import CustomUpload from './CustomUpload';
+import { Input as TextInputForm } from '../EditPlaylistInfo/Styled';
 import {
   Body,
   BottomNav,
@@ -42,6 +44,7 @@ import {
 } from './Styled';
 import { CombinedStateType } from '../../redux/types';
 import { updateUserPlaylistCover } from '../../redux/playlists/actions';
+import Text, { TextProps, createNewText } from './Text';
 
 interface Props {
   playlistId: string;
@@ -66,6 +69,9 @@ const Component: React.FC<Props> = ({ playlistId }) => {
 
   /** ************* API *********** */
   const [doUpdateUserPlaylistCover, setDoUpdateUserPlaylistCover] = useState(false);
+  const isUpdatingPlaylist = useSelector<CombinedStateType, boolean>(
+    (state) => state.playlists.status.isUpdating,
+  );
 
   /** ************* Background *********** */
   const defaultBgColor = '#e6e6e6';
@@ -84,13 +90,16 @@ const Component: React.FC<Props> = ({ playlistId }) => {
   const [lastSearchQuery, setLastPageQuery] = React.useState<string>('');
   const [currentPixabayHits, setCurrentPixabayHits] = React.useState<PixabayHit[]>([]);
 
+  /** ************* Text *********** */
+  const [currentText, setCurrentText] = React.useState<TextProps[]>([]);
+  const selectedTextItem_ = currentText.filter(
+    (text) => text.id === selectedId,
+  );
+  const selectedTextItem = selectedId === null ? '' : selectedTextItem_.length ? selectedTextItem_[0] : '';
+
   const wrapperRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<Konva.Stage>(null);
   const imageDragUrl = React.useRef<string>(null);
-
-  const isUpdatingPlaylist = useSelector<CombinedStateType, boolean>(
-    (state) => state.playlists.status.isUpdating,
-  );
 
   const getNewPixabayPage = async (): Promise<void> => {
     setIsSearchingPixabay(true);
@@ -118,9 +127,10 @@ const Component: React.FC<Props> = ({ playlistId }) => {
   };
 
   const onDeleteSelectedCanvasItem = (): void => {
-    // For some reason this makes it delete two objects instead of just one.
     const selectedShapeId = selectedId;
-    if (selectedShapeId !== null) {
+    if (selectedTextItem && selectedShapeId === selectedTextItem.id) {
+      setCurrentText(currentText.filter((text) => text.id !== selectedTextItem.id));
+    } else if (selectedShapeId !== null) {
       selectShape(null);
       setCanvasImages(
         canvasImages.filter((image) => image.id !== selectedShapeId),
@@ -293,6 +303,26 @@ const Component: React.FC<Props> = ({ playlistId }) => {
               ))}
             </Layer>
             <Layer>
+              {currentText.map((text, i) => (
+                <Text
+                  textProps={text}
+                  key={text.id}
+                  isSelected={selectedId !== null && text.id === selectedId}
+                  onSelect={(): void => selectShape(text.id)}
+                  canvasWidth={canvasWrapperWidth}
+                  onChange={({ id, konvaProps }): void => {
+                    const newCurrentText = currentText.slice();
+                    newCurrentText[i] = {
+                      id,
+                      text: text.text,
+                      konvaProps,
+                    };
+                    setCurrentText(newCurrentText);
+                  }}
+                />
+              ))}
+            </Layer>
+            <Layer>
               <Line
                 // X1, Y1, X2, Y2 etc.
                 points={[
@@ -366,36 +396,40 @@ const Component: React.FC<Props> = ({ playlistId }) => {
                 ))}
 
                 {/* Add button */}
-                <AddOrRemoveColor
-                  addOrRemove="add"
-                  handler={(): void => {
-                    setBgColors([
-                      ...bgColors,
-                      // eslint-disable-next-line no-bitwise
-                      `#${(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0')}`,
-                    ]);
-                    // If adding one more color, check that a gradient will render
-                    if (currentGradientSettings[0] === 'none') {
-                      setCurrentGradientSettings([
-                        'linear',
-                        getGradientSubsetting(
-                          'linear',
-                          currentGradientSettings[1],
-                        ),
+                <div style={{ marginRight: '40px' }}>
+                  <AddOrRemoveButton
+                    addOrRemove="add"
+                    handler={(): void => {
+                      setBgColors([
+                        ...bgColors,
+                        // eslint-disable-next-line no-bitwise
+                        `#${(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0')}`,
                       ]);
-                    }
-                  }}
-                />
+                      // If adding one more color, check that a gradient will render
+                      if (currentGradientSettings[0] === 'none') {
+                        setCurrentGradientSettings([
+                          'linear',
+                          getGradientSubsetting(
+                            'linear',
+                            currentGradientSettings[1],
+                          ),
+                        ]);
+                      }
+                    }}
+                  />
+                </div>
 
                 {/* Remove button */}
                 {
                   bgColors.length >= 2 ? (
-                    <AddOrRemoveColor
-                      addOrRemove="remove"
-                      handler={(): void => {
-                        setBgColors(bgColors.filter((val, i) => i !== bgColors.length - 1));
-                      }}
-                    />
+                    <div style={{ marginRight: '40px' }}>
+                      <AddOrRemoveButton
+                        addOrRemove="remove"
+                        handler={(): void => {
+                          setBgColors(bgColors.filter((val, i) => i !== bgColors.length - 1));
+                        }}
+                      />
+                    </div>
                   ) : null
                 }
               </ColorsWrapper>
@@ -566,8 +600,71 @@ const Component: React.FC<Props> = ({ playlistId }) => {
                   }}
                 />
               ) : currentSubmenuSecion === menuSections.text[0] ? (
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  width: '100%',
+                }}
+                >
+                  <div style={{
+                    display: 'flex',
+                    justifyContent: 'flex-start',
+                    marginTop: '10px',
+                    marginRight: '20px',
+                  }}
+                  >
+                    <AddOrRemoveButton
+                      addOrRemove="add"
+                      handler={(): void => {
+                        const newText = createNewText({
+                          text: 'Best playlist in the world!',
+                        });
+                        newText.konvaProps = {
+                          x: 10,
+                          y: canvasWrapperWidth / 2,
+                        };
+                        setCurrentText([
+                          ...currentText,
+                          newText,
+                        ]);
+                        selectShape(newText.id);
+                      }}
+                    />
+                  </div>
+                  {
+                    // if currently a text item is selected, show the input element
+                    selectedTextItem ? (
+                      <div style={{
+                        width: '100%',
+                      }}
+                      >
+                        <TextInputForm
+                          name="Input text"
+                          placeholder="Enter text"
+                          type="text"
+                          id="inputText"
+                          onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
+                            const newSelectedItem = {
+                              ...selectedTextItem,
+                              text: e.target.value,
+                            };
+                            setCurrentText([
+                              // add all the ones that aren't the one the user is editing
+                              ...currentText.filter(
+                                (text) => text.id !== newSelectedItem.id,
+                              ),
+                              newSelectedItem,
+                            ]);
+                          }}
+                          value={selectedTextItem.text}
+                        />
+                      </div>
+                    ) : null
+                  }
+                </div>
+              ) : currentSubmenuSecion === menuSections.text[1] ? (
                 <p>
-                  Text
+                  Style
                 </p>
               ) : null
           }

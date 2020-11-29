@@ -15,7 +15,7 @@ interface AddOrRemoveColorProps {
   handler: () => void;
 }
 
-const AddOrRemoveButton = styled.button`
+const AddOrRemoveButtonStyled = styled.button`
   display: block;
   /* Remove all styles */
   background: none;
@@ -26,20 +26,19 @@ const AddOrRemoveButton = styled.button`
   height: 40px;
   border-radius: 50%;
   border: white solid 2px;
-  margin-right: 40px;
 `;
 
-export const AddOrRemoveColor: React.FC<AddOrRemoveColorProps> = ({
+export const AddOrRemoveButton: React.FC<AddOrRemoveColorProps> = ({
   addOrRemove, handler,
 }) => (
-  <AddOrRemoveButton
+  <AddOrRemoveButtonStyled
     type="button"
     onClick={handler}
   >
     {
       addOrRemove === 'add' ? '+' : '-'
     }
-  </AddOrRemoveButton>
+  </AddOrRemoveButtonStyled>
 );
 
 const ColorButton = styled.button<{ currentColor: string }>`

@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React from 'react';
 import Konva from 'konva';
 import { Box } from 'konva/types/shapes/Transformer';
@@ -45,7 +44,7 @@ const Component: React.FC<Props> = ({
       (transformerRef.current as Konva.Transformer).nodes([
         imageRef.current as Konva.Image,
       ]);
-      (transformerRef.current!.getLayer() as Layer).batchDraw();
+      ((transformerRef.current as Konva.Transformer).getLayer() as Layer).batchDraw();
     }
   }, [isSelected]);
 
