@@ -845,7 +845,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
                                 const currentShape = selectedId;
                                 selectShape(null);
                                 selectShape(currentShape);
-                              }, 1000);
+                              }, 2000);
                             }}
                           />
                         </div>
