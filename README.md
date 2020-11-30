@@ -9,7 +9,7 @@
 
 # Spoxify
 
-Spoxify is a Spotify client with magic powers.
+Spoxify is your swiss army knife for Spotify.
 
 ## Preview
 
@@ -23,7 +23,8 @@ Complement Spotify's official mobile app and not replace it.
 
 I wanted to test out the song-analysis endpoints provided by Spotify through their API.
 Stuff like: song's energy, danceability etc. Unfortunately, the official Spotify web app doesn't show you these stats.
-Also, the app I used to check my top tracks and artists was unfortunately removed from the PlayStore, so I thought I might add that as well.
+Also, there used to be an app on the PlayStore that I used to use to check my top tracks and artists. It was abruptly removed for a reason I don't know, so I thought I might add these features as well.
+A couple of months later, I wanted to try working with HTML canvas to prepare for a larger commercial project. So I thought, it might be nice to have a playlist cover creator right in the app. That's probably going to be the last major feature. But who knows.. maybe something else might popup, so stay tuned.
 
 ## Todo
 
@@ -84,7 +85,7 @@ Note: Playback and the album cover upload feature only works for premium account
 
 ## Tools and tech
 
-Spoxify is built using Next.js and it is a [static](https://nextjs.org/docs/advanced-features/static-html-export) website.
+Spoxify is built using Next.js (a React framework) and it is a [static](https://nextjs.org/docs/advanced-features/static-html-export) website.
 
 **More tools being used:**
 
@@ -132,6 +133,8 @@ To deploy it on your own, you need to get two main keys:
 
 1. Spotify OAuth2 client ID
 2. Google Analytics public ID (Optional, just remove mine if you don't want GA)
+3. Pixabay API key
+4. API key for Google's web fonts API. (Search for: https://www.googleapis.com/webfonts/v1/webfonts?) and replace the API key in the URL
 
 Then search for `SPOTIFY_CLIENT_ID` and `GA_TRACKING_ID` and replace the existing keys.
 
@@ -149,6 +152,7 @@ This will generate the disribution files in the `/out` directory. After that, al
 - Playback doesn't work if no active official Spotify App is found.
 - If you login for the first time and mistyped your password, then when you retype it correctly, authentication will fail due to missing Client ID. To solve this, you have to close the tab and reopen it and enter the correct password on your first attempt.
 - Some privacy plugins like [Privacy Badger](https://privacybadger.org/) incorrectly block all traffic to: api.spotify.com. If you're stuck with a loading screen, try whitelisting api.spotify.com.
+- For some very weird reason (CORS related), you might need to click on (or drag and drop) a stock image twice to make it visible in the canvas.
 
 ## Privacy
 

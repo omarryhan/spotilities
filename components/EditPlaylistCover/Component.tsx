@@ -74,7 +74,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
     (state) => state.playlists.status.isUpdating,
   );
   const playlistName = useSelector<CombinedStateType, string>(
-    (state) => state.playlists.data[playlistId].name,
+    (state) => state.playlists.data[playlistId]?.name,
   );
 
   /** ************* Background *********** */
@@ -164,7 +164,8 @@ const Component: React.FC<Props> = ({ playlistId }) => {
 
   useEffect(() => {
     const dirtyCanvasState = bgColors.length !== 1
-      || bgColors[0] !== defaultBgColor || canvasImages.length;
+      // should add border too
+      || bgColors[0] !== defaultBgColor || canvasImages.length || currentText.length;
 
     if (!dirtyCanvasState) {
       return (): void => {};
@@ -326,7 +327,11 @@ const Component: React.FC<Props> = ({ playlistId }) => {
                   textProps={text}
                   key={text.id}
                   isSelected={selectedId !== null && text.id === selectedId}
-                  onSelect={(): void => selectShape(text.id)}
+                  onSelect={(): void => {
+                    setCurrentMenuSection('text');
+                    currentSubmenuSecion !== 'content' && currentSubmenuSecion !== 'style' && setCurrentSubmenuSection('content');
+                    selectShape(text.id);
+                  }}
                   canvasWidth={canvasWrapperWidth}
                   onChange={({ x, y }): void => {
                     const newCurrentText = currentText.slice();
@@ -845,7 +850,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
                                 const currentShape = selectedId;
                                 selectShape(null);
                                 selectShape(currentShape);
-                              }, 2000);
+                              }, 1500);
                             }}
                           />
                         </div>

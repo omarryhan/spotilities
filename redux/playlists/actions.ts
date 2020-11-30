@@ -52,14 +52,14 @@ void,
     );
 
     const handleFailedUploadForUnknownReason = (status: number): void => {
-      alert(`Something went wrong.\nStatus:${status}\nFailed to upload: ${img}}`);
+      alert(`Something went wrong.\nStatus:${status}`);
     };
 
     const handleUploadError = (message?: string): void => {
       ReactGA.event({
         action: 'error',
         category: 'CoverUploadError',
-        label: `Message: ${message}. ||| Img: ${img}`,
+        label: `Message: ${message}`,
       });
     };
 
