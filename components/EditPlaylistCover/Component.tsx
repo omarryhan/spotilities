@@ -73,6 +73,9 @@ const Component: React.FC<Props> = ({ playlistId }) => {
   const isUpdatingPlaylist = useSelector<CombinedStateType, boolean>(
     (state) => state.playlists.status.isUpdating,
   );
+  const playlistName = useSelector<CombinedStateType, string>(
+    (state) => state.playlists.data[playlistId].name,
+  );
 
   /** ************* Background *********** */
   const defaultBgColor = '#e6e6e6';
@@ -630,7 +633,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
                       addOrRemove="add"
                       handler={(): void => {
                         const newText = createNewText({
-                          text: 'Yo',
+                          text: playlistName,
                         });
                         newText.konvaProps = {
                           x: 10,

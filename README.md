@@ -31,7 +31,7 @@ Also, the app I used to check my top tracks and artists was unfortunately remove
 - [x] Show the stats of your tracks and playlists.
 - [x] Generate recommendations using Spotify's stats.
 - [x] Edit playlist description
-- [ ] Create your own playlist cover art and upload it.
+- [x] Create your own playlist cover art and upload it.
 - [ ] Add the generated recommendations to a new playlist (currently you can only add the to the playing queue).
 - [ ] Make a very simple landing page so that users aren't automatically redirected to Spotify's login page once they visit the website.
 
@@ -76,7 +76,11 @@ To install it as an app, after opening the website, open your browser's menu and
   - Key signature of the track
   - Tempo of the track
 
-Note: Playback feature only works for premium accounts
+**4. Create an album cover straight from the webapp**
+
+Using HTML5 canvas and Konva.js
+
+Note: Playback and the album cover upload feature only works for premium accounts
 
 ## Tools and tech
 
@@ -86,6 +90,7 @@ Spoxify is built using Next.js and it is a [static](https://nextjs.org/docs/adva
 
 - Redux
 - Redux toolkit
+- Konva JS & React Konva
 - Styled components
 - Typescript
 - Testing with Jest, Sinon and React Test Renderer
