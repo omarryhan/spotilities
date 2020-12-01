@@ -293,7 +293,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
               }}
               disabled={isUpdatingPlaylist}
             >
-              { isUpdatingPlaylist ? 'Updating...' : 'Save' }
+              { isUpdatingPlaylist ? 'Updating...' : 'Update' }
             </SubmitButton>
           </div>
         </TopBar>
