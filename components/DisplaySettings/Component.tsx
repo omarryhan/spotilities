@@ -42,7 +42,7 @@ const Component: React.FC = () => {
             Show stats for musicians
           </SettingTitle>
           <SettingDescription>
-            Show tempo, key and mode
+            Show tempo, key and mode.
           </SettingDescription>
         </SettingLeftSection>
 
@@ -63,7 +63,7 @@ const Component: React.FC = () => {
             Show tracks&apos; metrics
           </SettingTitle>
           <SettingDescription>
-            Show energy, danceability, valence and popularity respectively
+            Show energy, danceability, valence and popularity respectively.
           </SettingDescription>
         </SettingLeftSection>
 

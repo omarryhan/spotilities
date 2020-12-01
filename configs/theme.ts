@@ -78,6 +78,7 @@ export const styledComponentsTheme: DefaultTheme = {
 
 export const materialUITheme = createMuiTheme({
   palette: {
+    // type: 'dark',
     primary: {
       main: colors.green.primary,
     },

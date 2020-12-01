@@ -40,7 +40,7 @@ const Component: React.FC = () => {
       justifyContent: 'center',
     }}
     >
-      Authenticating...
+      Loading...
     </div>
   ) : null;
 };

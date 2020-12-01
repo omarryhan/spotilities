@@ -162,12 +162,12 @@ const Component: React.FC<Props> = ({ playlistId }) => {
     return confirmationMessage;
   };
 
-  useEffect(() => {
-    const dirtyCanvasState = bgColors.length !== 1
-      // should add border too
-      || bgColors[0] !== defaultBgColor || canvasImages.length || currentText.length;
+  const canvasIsDirty = bgColors.length !== 1
+  // should add border too
+  || bgColors[0] !== defaultBgColor || canvasImages.length || currentText.length;
 
-    if (!dirtyCanvasState) {
+  useEffect(() => {
+    if (!canvasIsDirty) {
       return (): void => {};
     }
 
@@ -241,21 +241,61 @@ const Component: React.FC<Props> = ({ playlistId }) => {
           >
             <DeleteIcon />
           </DeleteButton>
-          <SubmitButton
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+          }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="icon icon-tabler icon-tabler-download"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              style={{
+                marginRight: '10px',
+              }}
+              onClick={(): void => {
+                if (!canvasIsDirty) {
+                  return undefined;
+                }
+                const url = (stageRef.current as Konva.Stage).toDataURL();
+                const link = document.createElement('a');
+                link.download = `${playlistName} - album cover`;
+                link.href = url;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                // delete link;
+                return undefined;
+              }}
+              stroke={canvasIsDirty ? '#fff' : 'rgb(100, 100, 100)'}
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
+              <polyline points="7 11 12 16 17 11" />
+              <line x1="12" y1="4" x2="12" y2="16" />
+            </svg>
+            <SubmitButton
             // It seems that deselecting the shape is done asynchronously. Probably from React.
             // So, we're doing this hack to make sure that Konva's transformer isn't
             // visible in the uploaded image.
             // The hack:
             // https://stackoverflow.com/questions/53898810/executing-async-code-on-update-of-state-with-react-hooks
-            onClick={async (): Promise<void> => {
+              onClick={async (): Promise<void> => {
               // deselect any selection, so that it doesn't appear in the end result.
-              selectShape(null);
-              setDoUpdateUserPlaylistCover(true);
-            }}
-            disabled={isUpdatingPlaylist}
-          >
-            { isUpdatingPlaylist ? 'Updating...' : 'Save' }
-          </SubmitButton>
+                selectShape(null);
+                setDoUpdateUserPlaylistCover(true);
+              }}
+              disabled={isUpdatingPlaylist}
+            >
+              { isUpdatingPlaylist ? 'Updating...' : 'Save' }
+            </SubmitButton>
+          </div>
         </TopBar>
 
         <CanvasWrapper
@@ -758,101 +798,107 @@ const Component: React.FC<Props> = ({ playlistId }) => {
                         >
                           <div style={{
                             display: 'flex',
+                            justifyContent: 'space-between',
+                            width: '100%',
                           }}
                           >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              aria-labelledby="Bold"
-                              width="44"
-                              height="44"
-                              viewBox="0 0 24 24"
-                              style={{
-                                marginLeft: '-4px',
-                                marginRight: '6px',
-                              }}
-                              strokeWidth="1.5"
-                              stroke={!selectedTextItem ? '' : selectedTextItem.isBold ? '#fff' : 'rgb(100, 100, 100)'}
-                              onClick={(): void => {
-                                setCurrentTextProp({
-                                  isBold: !selectedTextItem ? false : !selectedTextItem.isBold,
-                                });
-                              }}
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path d="M7 5h6a3.5 3.5 0 0 1 0 7h-6z" />
-                              <path d="M13 12h1a3.5 3.5 0 0 1 0 7h-7v-7" />
-                            </svg>
-
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              aria-labelledby="Italic"
-                              width="44"
-                              height="44"
-                              viewBox="0 0 24 24"
-                              style={{
-                                marginLeft: '-4px',
-                                marginRight: '6px',
-                              }}
-                              strokeWidth="1.5"
-                              stroke={!selectedTextItem ? '' : selectedTextItem.isItalic ? '#fff' : 'rgb(100, 100, 100)'}
-                              onClick={(): void => {
-                                setCurrentTextProp({
-                                  isItalic: !selectedTextItem ? false : !selectedTextItem.isItalic,
-                                });
-                              }}
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <line x1="11" y1="5" x2="17" y2="5" />
-                              <line x1="7" y1="19" x2="13" y2="19" />
-                              <line x1="14" y1="5" x2="10" y2="19" />
-                            </svg>
-
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              aria-labelledby="Underline"
-                              width="44"
-                              height="44"
-                              viewBox="0 0 24 24"
-                              style={{
-                                marginLeft: '-4px',
-                                marginRight: '6px',
-                              }}
-                              strokeWidth="1.5"
-                              stroke={!selectedTextItem ? '' : selectedTextItem.isUnderlined ? '#fff' : 'rgb(100, 100, 100)'}
-                              onClick={(): void => {
-                                setCurrentTextProp({
-                                  isUnderlined: !selectedTextItem
-                                    ? false : !selectedTextItem.isUnderlined,
-                                });
-                              }}
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <line x1="6" y1="20" x2="18" y2="20" />
-                              <path d="M8 5v6a4 4 0 0 0 8 0v-6" />
-                            </svg>
-                          </div>
-                          <SelectFontFamily
-                            disabled={!selectedTextItem}
-                            currentFontFamily={currentFontFamily || ''}
-                            setCurrentFontFamily={
-                              (family: string): void => setCurrentTextProp({ fontFamily: family })
-                            }
-                            onSelect={(): void => {
-                              setTimeout(() => {
+                            <SelectFontFamily
+                              disabled={!selectedTextItem}
+                              currentFontFamily={currentFontFamily || ''}
+                              setCurrentFontFamily={
+                                (family: string): void => setCurrentTextProp({ fontFamily: family })
+                              }
+                              onSelect={(): void => {
+                                setTimeout(() => {
                                 // Trigger a rerender so that the font updates
                                 // after the new font has been downloaded
-                                const currentShape = selectedId;
-                                selectShape(null);
-                                selectShape(currentShape);
-                              }, 1500);
-                            }}
-                          />
+                                  const currentShape = selectedId;
+                                  selectShape(null);
+                                  selectShape(currentShape);
+                                }, 1500);
+                              }}
+                            />
+                            <div>
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-labelledby="Bold"
+                                width="44"
+                                height="44"
+                                viewBox="0 0 24 24"
+                                style={{
+                                  marginLeft: '-4px',
+                                  marginRight: '6px',
+                                }}
+                                strokeWidth="1.5"
+                                stroke={!selectedTextItem ? '' : selectedTextItem.isBold ? '#fff' : 'rgb(100, 100, 100)'}
+                                onClick={(): void => {
+                                  setCurrentTextProp({
+                                    isBold: !selectedTextItem ? false : !selectedTextItem.isBold,
+                                  });
+                                }}
+                                fill="none"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
+                                <path d="M7 5h6a3.5 3.5 0 0 1 0 7h-6z" />
+                                <path d="M13 12h1a3.5 3.5 0 0 1 0 7h-7v-7" />
+                              </svg>
+
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-labelledby="Italic"
+                                width="44"
+                                height="44"
+                                viewBox="0 0 24 24"
+                                style={{
+                                  marginLeft: '-4px',
+                                  marginRight: '6px',
+                                }}
+                                strokeWidth="1.5"
+                                stroke={!selectedTextItem ? '' : selectedTextItem.isItalic ? '#fff' : 'rgb(100, 100, 100)'}
+                                onClick={(): void => {
+                                  setCurrentTextProp({
+                                    isItalic: !selectedTextItem
+                                      ? false
+                                      : !selectedTextItem.isItalic,
+                                  });
+                                }}
+                                fill="none"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
+                                <line x1="11" y1="5" x2="17" y2="5" />
+                                <line x1="7" y1="19" x2="13" y2="19" />
+                                <line x1="14" y1="5" x2="10" y2="19" />
+                              </svg>
+
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-labelledby="Underline"
+                                width="44"
+                                height="44"
+                                viewBox="0 0 24 24"
+                                style={{
+                                  marginLeft: '-4px',
+                                  marginRight: '6px',
+                                }}
+                                strokeWidth="1.5"
+                                stroke={!selectedTextItem ? '' : selectedTextItem.isUnderlined ? '#fff' : 'rgb(100, 100, 100)'}
+                                onClick={(): void => {
+                                  setCurrentTextProp({
+                                    isUnderlined: !selectedTextItem
+                                      ? false : !selectedTextItem.isUnderlined,
+                                  });
+                                }}
+                                fill="none"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
+                                <line x1="6" y1="20" x2="18" y2="20" />
+                                <path d="M8 5v6a4 4 0 0 0 8 0v-6" />
+                              </svg>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     )}

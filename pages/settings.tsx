@@ -11,6 +11,7 @@ import Settings from '../components/Settings';
 import DisplaySettings from '../components/DisplaySettings';
 import AccountSettings from '../components/AccountSettings';
 import AppSettings from '../components/AppSettings';
+import Feedback from '../components/Feedback';
 
 const Page: NextPage<{}> = () => (
   <>
@@ -25,6 +26,7 @@ const Page: NextPage<{}> = () => (
       <Settings>
         <DisplaySettings />
         <AccountSettings />
+        <Feedback />
         <AppSettings />
       </Settings>
     </AppBody>
