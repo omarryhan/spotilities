@@ -94,6 +94,7 @@ const Component: React.FC<Props> = ({
         onTap={onSelect}
         onDragStart={onSelect}
         onDblClick={onDblClick}
+        onDblTap={onDblClick}
         onDragEnd={(e): void => {
           onChange({
             x: e.target.x(),
