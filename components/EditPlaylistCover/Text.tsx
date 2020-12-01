@@ -27,6 +27,7 @@ interface Props {
     x: number;
     y: number;
   }) => void;
+  onDblClick: () => void;
 }
 
 const defaultConfig: TextProps = {
@@ -62,6 +63,7 @@ const Component: React.FC<Props> = ({
   onSelect,
   isSelected,
   onChange,
+  onDblClick,
 }) => {
   const transformerRef = React.useRef<Konva.Transformer>(null);
   const textRef = React.useRef<Konva.Text>(null);
@@ -91,6 +93,7 @@ const Component: React.FC<Props> = ({
         onClick={onSelect}
         onTap={onSelect}
         onDragStart={onSelect}
+        onDblClick={onDblClick}
         onDragEnd={(e): void => {
           onChange({
             x: e.target.x(),

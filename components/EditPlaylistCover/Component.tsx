@@ -118,6 +118,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<Konva.Stage>(null);
   const imageDragUrl = React.useRef<string>(null);
+  const textInputRef = React.useRef<HTMLInputElement>(null);
 
   const getNewPixabayPage = async (): Promise<void> => {
     setIsSearchingPixabay(true);
@@ -380,6 +381,11 @@ const Component: React.FC<Props> = ({ playlistId }) => {
                     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                     newCurrentText[i]!.konvaProps!.y = y;
                     setCurrentText(newCurrentText);
+                  }}
+                  onDblClick={(): void => {
+                    setCurrentMenuSection('text');
+                    setCurrentSubmenuSection('content');
+                    (textInputRef.current as HTMLInputElement).select();
                   }}
                 />
               ))}
@@ -702,6 +708,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
                         <TextInputForm
                           name="Input text"
                           placeholder="Enter text"
+                          ref={textInputRef}
                           type="text"
                           onFocus={(e): void => e.target.select()}
                           id="inputText"
