@@ -34,30 +34,26 @@ const UploadButton = styled.div`
   border-radius: 30px;
 `;
 
-const Component: React.FC<Props> = ({ onUpload }) => {
-  let l;
-
-  return (
-    <Label>
-      <p>
-        Select image:
-        {' '}
-      </p>
-      <UploadButton>
-        Select
-      </UploadButton>
-      <Input
-        id="fileUpload"
-        accept="image/*"
-        type="file"
-        name="fileUpload"
-        onChange={(e): void => {
-          const baseURL = window.webkitURL || window.URL;
-          onUpload(baseURL.createObjectURL((e.target.files as FileList)[0]));
-        }}
-      />
-    </Label>
-  );
-};
+const Component: React.FC<Props> = ({ onUpload }) => (
+  <Label>
+    <p>
+      Select image:
+      {' '}
+    </p>
+    <UploadButton>
+      Select
+    </UploadButton>
+    <Input
+      id="fileUpload"
+      accept="image/*"
+      type="file"
+      name="fileUpload"
+      onChange={(e): void => {
+        const baseURL = window.webkitURL || window.URL;
+        onUpload(baseURL.createObjectURL((e.target.files as FileList)[0]));
+      }}
+    />
+  </Label>
+);
 
 export default Component;

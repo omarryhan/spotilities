@@ -49,7 +49,7 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
   );
 
   const playlistDescription = useSelector<CombinedStateType, string | undefined>(
-    // @ts-ignore
+    // @ts-expect-error
     (state) => state.playlists.data[playlistId]?.description,
   );
 

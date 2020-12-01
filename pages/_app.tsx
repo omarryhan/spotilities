@@ -17,11 +17,11 @@ import { GA_TRACKING_ID, GA_CONFIGS } from '../configs/services';
 const initGA = (): void => {
   if (
     typeof window !== 'undefined'
-    // @ts-ignore
+    // @ts-expect-error
     && !window.isGAInitialized
   ) {
     ReactGA.initialize(GA_TRACKING_ID, GA_CONFIGS);
-    // @ts-ignore
+    // @ts-expect-error
     window.isGAInitialized = true;
   }
 };

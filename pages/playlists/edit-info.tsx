@@ -5,7 +5,6 @@ import Head from 'next/head';
 import { useSelector } from 'react-redux';
 import AppBody from '../../components/AppBody';
 import TopNav from '../../components/TopNav';
-import BottomNav from '../../components/BottomNav';
 import EditPlaylistInfo from '../../components/EditPlaylistInfo';
 
 import { CombinedStateType } from '../../redux/types';

@@ -73,7 +73,7 @@ const Component: React.FC<Props> = ({
   );
 
   const albumYear = useSelector<CombinedStateType, string>(
-    // @ts-ignore
+    // @ts-expect-error
     (state) => state.tracks.data[trackId]?.data?.album.release_date,
   );
 
