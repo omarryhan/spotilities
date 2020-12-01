@@ -703,6 +703,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
                           name="Input text"
                           placeholder="Enter text"
                           type="text"
+                          onFocus={(e): void => e.target.select()}
                           id="inputText"
                           onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
                             const newSelectedItem = {
