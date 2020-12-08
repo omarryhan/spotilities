@@ -97,6 +97,13 @@ const Component: React.FC<Props> = ({
         BackdropProps={{ invisible: true }}
       >
         <ChromePicker
+          styles={{
+            default: {
+              picker: {
+                width: '320px',
+              },
+            },
+          }}
           color={currentColor}
           onChangeComplete={(color): void => setCurrentColor(color.hex, index)}
         />
