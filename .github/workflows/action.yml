@@ -1,12 +1,14 @@
 name: CI
 on: push
 jobs:
-  build:
+  CI:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Install modules
       run: yarn
+    - name: Build
+      run: yarn build
     - name: Export
       run: yarn export
     - name: Lint
