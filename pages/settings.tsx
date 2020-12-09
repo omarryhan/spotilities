@@ -25,8 +25,8 @@ const Page: NextPage<{}> = () => (
     <AppBody>
       <Settings>
         <DisplaySettings />
-        <AccountSettings />
         <Feedback />
+        <AccountSettings />
         <AppSettings />
       </Settings>
     </AppBody>
