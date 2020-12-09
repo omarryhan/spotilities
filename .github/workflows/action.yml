@@ -1,7 +1,12 @@
 name: CI
-on: push
+on:
+  push:
+  pull_request:
+  pull_request_review:
+  schedule:
+      - cron: '0 0 * * *' # Once per day at midnight
 jobs:
-  CI:
+  build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -11,7 +16,19 @@ jobs:
       run: yarn build
     - name: Export
       run: yarn export
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install modules
+      run: yarn
     - name: Lint
       run: yarn lint
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install modules
+      run: yarn
     - name: Run tests
       run: yarn test:cov
