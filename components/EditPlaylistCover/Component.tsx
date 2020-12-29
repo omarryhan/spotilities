@@ -261,7 +261,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
                 if (!canvasIsDirty) {
                   return undefined;
                 }
-                const url = (stageRef.current as Konva.Stage).toDataURL();
+                const url = (stageRef.current as Konva.Stage).toDataURL({ pixelRatio: 5 });
                 const link = document.createElement('a');
                 link.download = `${playlistName} - album cover`;
                 link.href = url;
