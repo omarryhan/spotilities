@@ -78,8 +78,8 @@ const Page: NextPage<{}> = () => {
   return (
     <>
       <Head>
-        <meta name="title" content="Spoxify | Playlist" />
-        <title>Spoxify | Playlist</title>
+        <meta name="title" content="Spotilities | Playlist" />
+        <title>Spotilities | Playlist</title>
       </Head>
       <TopNav
         showBackButton

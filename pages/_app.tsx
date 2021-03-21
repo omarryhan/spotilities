@@ -97,8 +97,8 @@ class MyApp extends App<AppInitialProps & CustomAppInitialProps> {
             <GlobalStyles />
             <Head>
               {/* Cool web standards */}
-              <meta name="title" content="Spoxify | Spoxify is a Spotify client with magic powers." />
-              <meta name="description" content="Spoxify is an alternative Spotify client with unique features like: Generating recommendations fitting to attributes that you choose. View your top tracks and artists in 1 month, 3 months and of all time, and many more. Come check it out!" />
+              <meta name="title" content="Spotilities | Spotilities is a Spotify client with magic powers." />
+              <meta name="description" content="Spotilities is an alternative Spotify client with unique features like: Generating recommendations fitting to attributes that you choose. View your top tracks and artists in 1 month, 3 months and of all time, and many more. Come check it out!" />
               <meta name="keywords" content="Spotify, Spotify Utilities, Spotify Tools, Spotify Client, Spotify PWA, Spotify recommend, Recommend music" />
               <meta name="viewport" content="width=device-width, initial-scale=1" />
               <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
@@ -114,11 +114,11 @@ class MyApp extends App<AppInitialProps & CustomAppInitialProps> {
               <link rel="apple-touch-startup-image" href="" />
               <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#121212" />
               <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-              <meta name="apple-mobile-webapp-title" content="Spoxify" />
+              <meta name="apple-mobile-webapp-title" content="Spotilities" />
               <meta name="apple-touch-fullscreen" content="yes" />
               <meta name="mobile-web-app-capable" content="yes" />
               <meta name="apple-mobile-web-app-capable" content="yes" />
-              <meta name="application-name" content="Spoxify" />
+              <meta name="application-name" content="Spotilities" />
 
               {/* MS stuff.. yuk */}
               <meta name="msapplication-TileColor" content="#121212" />

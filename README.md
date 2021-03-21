@@ -1,15 +1,15 @@
 <p align="center">
-  <img src="https://github.com/omarryhan/spoxify/raw/master/public/icons/logo/512w/logo3manifest-big.png" alt="Logo" title="Spoxify" height="250" width="250"/>
+  <img src="https://github.com/omarryhan/spotilities/raw/master/public/icons/logo/512w/logo3manifest-big.png" alt="Logo" title="Spotilities" height="250" width="250"/>
   <p align="center">
-    <a href="https://github.com/omarryhan/spoxify/actions?query=workflow%3ACI"><img alt="Build Status" src="https://github.com/omarryhan/spoxify/workflows/CI/badge.svg"></a>
-    <a href="https://app.netlify.com/sites/spoxify/deploys"><img alt="Build status" src="https://api.netlify.com/api/v1/badges/8c0737ed-4b8a-4bb2-b61c-524085f59961/deploy-status"></a>
-    <a href="https://github.com/omarryhan/spoxify"><img alt="Software License" src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square"></a>
+    <a href="https://github.com/omarryhan/spotilities/actions?query=workflow%3ACI"><img alt="Build Status" src="https://github.com/omarryhan/spotilities/workflows/CI/badge.svg"></a>
+    <a href="https://app.netlify.com/sites/spotilities/deploys"><img alt="Build status" src="https://api.netlify.com/api/v1/badges/8c0737ed-4b8a-4bb2-b61c-524085f59961/deploy-status"></a>
+    <a href="https://github.com/omarryhan/spotilities"><img alt="Software License" src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square"></a>
   </p>
 </p>
 
-# Spoxify
+# Spotilities
 
-Spoxify is your swiss army knife for Spotify.
+Spotilities is your swiss army knife for Spotify.
 
 ## Preview
 
@@ -33,12 +33,12 @@ A couple of months later, I wanted to try working with HTML canvas to prepare fo
 - [x] Generate recommendations using Spotify's stats.
 - [x] Edit playlist description
 - [x] Create your own playlist cover art and upload it.
-- [ ] Add the generated recommendations to a new playlist (currently you can only add the to the playing queue).
+- [ ] Add the generated recommendations to a new playlist (currently you can only add the results to the queue).
 - [ ] Make a very simple landing page so that users aren't automatically redirected to Spotify's login page once they visit the website.
 
 ## Live version
 
-https://spoxify.com/
+https://spotilities.netlify.app/
 
 **Tip:**
 
@@ -85,7 +85,7 @@ Note: Playback and the album cover upload feature only works for premium account
 
 ## Tools and tech
 
-Spoxify is built using Next.js (a React framework) and it is a [static](https://nextjs.org/docs/advanced-features/static-html-export) website.
+Spotilities is built using Next.js (a React framework) and it is a [static](https://nextjs.org/docs/advanced-features/static-html-export) website.
 
 **More tools being used:**
 

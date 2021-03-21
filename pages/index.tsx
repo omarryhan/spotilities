@@ -12,8 +12,8 @@ import RecommendGetStarted from '../components/RecommendGetStarted';
 const Page: NextPage<{}> = () => (
   <>
     <Head>
-      <meta name="title" content="Spoxify | Recommendations" />
-      <title>Spoxify | Recommendations</title>
+      <meta name="title" content="Spotilities | Recommendations" />
+      <title>Spotilities | Recommendations</title>
     </Head>
     <AccessTokenLoader />
     <CurrentUserLoader />

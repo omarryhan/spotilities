@@ -12,8 +12,8 @@ import ProgressBar from '../../../components/TopProgressBar';
 const Page: NextPage<{}> = () => (
   <>
     <Head>
-      <meta name="title" content="Spoxify | Select Seed Tracks" />
-      <title>Spoxify | Select Seed Tracks</title>
+      <meta name="title" content="Spotilities | Select Seed Tracks" />
+      <title>Spotilities | Select Seed Tracks</title>
     </Head>
     <AccessTokenLoader />
     <CurrentUserLoader />

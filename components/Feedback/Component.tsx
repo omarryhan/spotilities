@@ -26,7 +26,7 @@ const Component: React.FC = () => (
           this project&apos;s
           {' '}
           <a
-            href="https://github.com/omarryhan/spoxify/issues/new"
+            href="https://github.com/omarryhan/spotilities/issues/new"
             target="_blank"
             rel="noreferrer"
           >
@@ -48,7 +48,7 @@ const Component: React.FC = () => (
 
       <SettingRightSection>
         <StyledLogoutLink
-          href="https://github.com/omarryhan/spoxify/issues/new"
+          href="https://github.com/omarryhan/spotilities/issues/new"
           target="_blank"
         >
           Github

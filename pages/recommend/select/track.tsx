@@ -60,8 +60,8 @@ const Page: NextPage<{}> = () => {
   return (
     <>
       <Head>
-        <meta name="title" content="Spoxify | Select Track" />
-        <title>Spoxify | Select Track</title>
+        <meta name="title" content="Spotilities | Select Track" />
+        <title>Spotilities | Select Track</title>
       </Head>
       <TopNav showBackButton title="Select Track" />
       <AppBody>

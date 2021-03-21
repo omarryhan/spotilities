@@ -28,8 +28,8 @@ const Page: NextPage<{}> = () => {
   return (
     <>
       <Head>
-        <meta name="title" content="Spoxify | Edit cover" />
-        <title>Spoxify | Edit cover</title>
+        <meta name="title" content="Spotilities | Edit cover" />
+        <title>Spotilities | Edit cover</title>
       </Head>
       <TopNav
         showBackButton

@@ -24,7 +24,7 @@ const Component: React.FC = () => (
         <SettingDescription>
           You&apos;ll be redirected to a list of apps
           connected to your Spotify account.
-          Remove Spoxify from there if you want to log out.
+          Remove Spotilities from there if you want to log out.
         </SettingDescription>
       </SettingLeftSection>
 

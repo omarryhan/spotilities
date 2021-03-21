@@ -12,8 +12,8 @@ import ProgressBar from '../../../components/TopProgressBar';
 const Page: NextPage<{}> = () => (
   <>
     <Head>
-      <meta name="title" content="Spoxify | Select Filters" />
-      <title>Spoxify | Select Filters</title>
+      <meta name="title" content="Spotilities | Select Filters" />
+      <title>Spotilities | Select Filters</title>
     </Head>
     <AccessTokenLoader />
     <CurrentUserLoader />

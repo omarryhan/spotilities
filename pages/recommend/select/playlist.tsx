@@ -12,8 +12,8 @@ import CurrentUserLoader from '../../../components/CurrentUserLoader';
 const Page: NextPage<{}> = () => (
   <>
     <Head>
-      <meta name="title" content="Spoxify | Select Playlist" />
-      <title>Spoxify | Select Playlist</title>
+      <meta name="title" content="Spotilities | Select Playlist" />
+      <title>Spotilities | Select Playlist</title>
     </Head>
     <AccessTokenLoader />
     <CurrentUserLoader />

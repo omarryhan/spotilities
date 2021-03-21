@@ -11,8 +11,8 @@ import ResultsSection from '../../components/ResultsSection';
 const Page: NextPage<{}> = () => (
   <>
     <Head>
-      <meta name="title" content="Spoxify | Recommendation Results" />
-      <title>Spoxify | Recommendation Results</title>
+      <meta name="title" content="Spotilities | Recommendation Results" />
+      <title>Spotilities | Recommendation Results</title>
     </Head>
     <TopNav showBackButton title="Results" />
     <AppBody>

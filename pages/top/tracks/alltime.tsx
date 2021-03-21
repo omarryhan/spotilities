@@ -15,8 +15,8 @@ import TopTrackOrArtist from '../../../components/TopTrackOrArtist';
 const Page: NextPage<{}> = () => (
   <>
     <Head>
-      <meta name="title" content="Spoxify | Top tracks | All time" />
-      <title>Spoxify | Top tracks | All time</title>
+      <meta name="title" content="Spotilities | Top tracks | All time" />
+      <title>Spotilities | Top tracks | All time</title>
     </Head>
     <AccessTokenLoader />
     <CurrentUserLoader />

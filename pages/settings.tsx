@@ -16,8 +16,8 @@ import Feedback from '../components/Feedback';
 const Page: NextPage<{}> = () => (
   <>
     <Head>
-      <meta name="title" content="Spoxify | Settings" />
-      <title>Spoxify | Settings</title>
+      <meta name="title" content="Spotilities | Settings" />
+      <title>Spotilities | Settings</title>
     </Head>
     <AccessTokenLoader />
     <CurrentUserLoader />
