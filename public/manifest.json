@@ -2,7 +2,7 @@
     "name": "Spotilities",
     "short_name": "Spotilities",
     "scope": "/",
-    "start_url": "/",
+    "start_url": "/recommend",
     "display": "standalone",
     "background_color": "#121212",
     "theme_color": "#121212",

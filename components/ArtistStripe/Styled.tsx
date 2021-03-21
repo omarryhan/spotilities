@@ -63,7 +63,7 @@ export const Name = styled.p`
   text-overflow: ellipsis;
 
   padding-left: 10px;
-  font-family: "Proxima Bold", Georgia, sans-serif;
+  font-family: "Proxima Bold", "Proxima Nova", Georgia, sans-serif;
   color: ${(props): string => props.theme.colors.white.light};
 `;
 

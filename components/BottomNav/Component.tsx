@@ -27,9 +27,9 @@ const Component: React.FC = () => {
     <Nav>
       <LinksContainer>
         {
-          path === '/'
+          path === '/recommend'
             ? (
-              <LinkContainer type="button" onClick={(): void => handleLinkClick('/')}>
+              <LinkContainer type="button" onClick={(): void => handleLinkClick('/recommend')}>
                 <LinkIcon isLight>
                   <WandActive />
                 </LinkIcon>
@@ -39,7 +39,7 @@ const Component: React.FC = () => {
               </LinkContainer>
             )
             : (
-              <LinkContainer type="button" onClick={(): void => handleLinkClick('/')}>
+              <LinkContainer type="button" onClick={(): void => handleLinkClick('/recommend')}>
                 <LinkIcon>
                   <WandInactive />
                 </LinkIcon>

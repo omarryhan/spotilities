@@ -2,26 +2,15 @@ import React from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
 
-import BottomNav from '../components/BottomNav';
-import AccessTokenLoader from '../components/AccessTokenLoader';
-import AppBody from '../components/AppBody';
-import CurrentUserLoader from '../components/CurrentUserLoader';
-import TopNav from '../components/TopNav';
-import RecommendGetStarted from '../components/RecommendGetStarted';
+import LandingPage from '../components/LandingPage';
 
 const Page: NextPage<{}> = () => (
   <>
     <Head>
-      <meta name="title" content="Spotilities | Recommendations" />
-      <title>Spotilities | Recommendations</title>
+      <meta name="title" content="Spotilities | Home" />
+      <title>Spotilities | Home</title>
     </Head>
-    <AccessTokenLoader />
-    <CurrentUserLoader />
-    <TopNav title="Recommendations" showRightButton />
-    <AppBody>
-      <RecommendGetStarted />
-    </AppBody>
-    <BottomNav />
+    <LandingPage />
   </>
 );
 
