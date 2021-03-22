@@ -81,3 +81,18 @@ export const OpenSourceIconContainer = styled.div`
     width: 150px;
   }
 `;
+
+export const FeaturesContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: ${(props): string => props.theme.breakpoints.tablet}) {
+    display: flex;
+    flex-direction: row;
+    align-items: top;
+  }
+
+  & > div > p {
+    font-size: 20px;
+  }
+`;
