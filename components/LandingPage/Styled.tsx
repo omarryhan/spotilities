@@ -9,7 +9,7 @@ export const SignInButton = styled.button`
   height: 60px;
 
   background: ${(props): string => props.theme.colors.green.primary};
-  border-radius: 5px;
+  border-radius: 30px;
   border: none;
   outline: inherit;
   font: inherit;
@@ -20,6 +20,11 @@ export const SignInButton = styled.button`
   &:active {
     background: ${(props): string => props.theme.colors.green.dark};
     color: ${(props): string => props.theme.colors.white.dark};
+  }
+
+  &:hover {
+    background: #19a249;
+    color: ${(props): string => props.theme.colors.white.primary};
   }
 
   &:disabled {

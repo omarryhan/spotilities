@@ -30,7 +30,7 @@ const SigninButton: React.FC = () => (
     }}
     >
       <div style={{
-        width: '32px', height: '32px', overflow: 'visible', margin: '0 5px',
+        width: '32px', height: '32px', overflow: 'visible', margin: '0 0 0 0',
       }}
       >
         <SpotifyWhite />
