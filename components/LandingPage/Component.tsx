@@ -132,22 +132,34 @@ const Component: React.FC = () => (
           }}
           >
             <p>
-              1. Generate new playlists using special music attributes.
+              <span role="img" aria-label="number 1 emoji">
+                1️⃣
+              </span>
+              . Generate new playlists using special music attributes.
               e.g. Danceability and popularity.
             </p>
 
             <p>
-              2. View your top tracks and artists, this month, this year and of all time.
+              <span role="img" aria-label="number 2 emoji">
+                2️⃣
+              </span>
+              . View your top tracks and artists, this month, this year and of all time.
             </p>
 
             <p>
-              3. Know how your playlists are perceived by Spotify.
+              <span role="img" aria-label="number 3 emoji">
+                3️⃣
+              </span>
+              . Know how your playlists are perceived by Spotify.
               For example, you can know how danceable your playlist is and
               compare it with other playlists.
             </p>
 
             <p>
-              4. Create a playlist cover using our cute cover design tool.
+              <span role="img" aria-label="number 4 emoji">
+                4️⃣
+              </span>
+              . Create a playlist cover using our cute cover design tool.
             </p>
           </div>
           <div style={{
