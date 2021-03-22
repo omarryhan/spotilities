@@ -33,8 +33,10 @@ A couple of months later, I wanted to try working with HTML canvas to prepare fo
 - [x] Generate recommendations using Spotify's stats.
 - [x] Edit playlist description
 - [x] Create your own playlist cover art and upload it.
+- [x] Make a very simple landing page so that users aren't automatically redirected to Spotify's login page once they visit the website.
 - [ ] Add the generated recommendations to a new playlist (currently you can only add the results to the queue).
-- [ ] Make a very simple landing page so that users aren't automatically redirected to Spotify's login page once they visit the website.
+- [ ] Ability to sort playlist by attribute
+
 
 ## Live version
 
