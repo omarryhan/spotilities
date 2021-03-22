@@ -93,6 +93,7 @@ export const FeaturesContainer = styled.div`
   }
 
   & > div > p {
-    font-size: 20px;
+    font-size: 22px;
+    margin: 0 0 42px 0;
   }
 `;

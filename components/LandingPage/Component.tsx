@@ -119,28 +119,28 @@ const Component: React.FC = () => (
       >
         <h2 style={{
           fontSize: '42px',
-          margin: '24px 0 36px 0',
+          margin: '24px 0 50px 0',
         }}
         >
-          Here&apos;s what you&apos;re missing out on:
+          Here&apos;s what you&apos;re missing out on
         </h2>
 
         <FeaturesContainer>
           <div style={{
-            paddingRight: '10px',
+            paddingRight: '20px',
             paddingBottom: '32px',
           }}
           >
             <p>
-              1. Generate new playlists using different music attributes
+              1. Generate new playlists using special music attributes.
             </p>
 
             <p>
-              2. View your top tracks and artists
+              2. View your top tracks and artists, this month, this year and of all time.
             </p>
 
             <p>
-              3. Know how your music is perceived by the algo
+              3. Know how your music is perceived by the algo.
             </p>
 
             <p>
@@ -186,7 +186,7 @@ const Component: React.FC = () => (
             Still not convinced?
           </h2>
           <p style={{
-            fontSize: '20px',
+            fontSize: '22px',
             fontFamily: 'Proxima Nova',
           }}
           >
