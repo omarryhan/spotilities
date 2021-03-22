@@ -133,7 +133,7 @@ const Component: React.FC = () => (
           >
             <p>
               1. Generate new playlists using special music attributes.
-              e.g. Danceability and popularity
+              e.g. Danceability and popularity.
             </p>
 
             <p>
