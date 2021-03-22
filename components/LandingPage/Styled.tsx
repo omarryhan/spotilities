@@ -5,8 +5,8 @@ export const Container = styled.div`
 `;
 
 export const SignInButton = styled.button`
-  width: 220px;
-  height: 50px;
+  width: 275px;
+  height: 60px;
 
   background: ${(props): string => props.theme.colors.green.primary};
   border-radius: 5px;
@@ -65,12 +65,19 @@ export const OpenSourceTextContainer = styled.div`
   @media (min-width: ${(props): string => props.theme.breakpoints.tablet}) {
     order: 1;
   }
+  padding: 0 20px 0 0;
 `;
 
 export const OpenSourceIconContainer = styled.div`
-    order: 1;
-    text-align: center;
+  order: 1;
+  text-align: center;
+
   @media (min-width: ${(props): string => props.theme.breakpoints.tablet}) {
     order: 2;
+    text-align: right;
+  }
+
+  & > svg {
+    width: 150px;
   }
 `;

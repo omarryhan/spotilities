@@ -29,13 +29,13 @@ const SigninButton: React.FC = () => (
     }}
     >
       <div style={{
-        width: '30px', height: '30px', overflow: 'visible', margin: '0 5px',
+        width: '32px', height: '32px', overflow: 'visible', margin: '0 5px',
       }}
       >
         <SpotifyWhite />
       </div>
       <p style={{
-        fontSize: '18px',
+        fontSize: '22px',
         margin: '0 0',
         fontWeight: 'bold',
       }}
@@ -59,9 +59,9 @@ const Component: React.FC = () => {
       >
         <div
           style={{
-            width: '175px',
+            width: '200px',
             margin: '0 auto',
-            paddingTop: '25px',
+            paddingTop: '60px',
           }}
         >
           <SpotilitiesIconGreen />
@@ -69,7 +69,7 @@ const Component: React.FC = () => {
         <h1 style={{
           textAlign: 'center',
           fontSize: '52px',
-          margin: '30px 0 15px 0',
+          margin: '30px 0 10px 0',
         }}
         >
           Spotilities
@@ -120,7 +120,7 @@ const Component: React.FC = () => {
           padding: '30px 0',
         }}
         >
-          yoo
+          Features incoming
         </section>
       </div>
 
@@ -159,9 +159,7 @@ const Component: React.FC = () => {
               <strong>open source</strong>
               .
               <br />
-              That means you can host it on your own server if you wish.
-              <br />
-              You can check the source code here on Github.
+              That means you can freely checkout the source code and change it if you wish.
             </p>
           </OpenSourceTextContainer>
 
@@ -172,7 +170,7 @@ const Component: React.FC = () => {
 
         <div style={{
           textAlign: 'center',
-          padding: '50px',
+          padding: '50px 0',
         }}
         >
           <SigninButton />
@@ -198,9 +196,14 @@ const Component: React.FC = () => {
           style={{
             opacity: '0.3',
             fontSize: '12px',
+            margin: '5px',
           }}
         >
-          Spotilities | © 2020 All rights not reserved ;p
+          Spotilities | ©
+          {' '}
+          {new Date().getFullYear()}
+          {' '}
+          All rights not reserved ;p
         </p>
         <p
           style={{
