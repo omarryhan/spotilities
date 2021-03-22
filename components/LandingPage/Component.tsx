@@ -122,7 +122,7 @@ const Component: React.FC = () => (
           margin: '24px 0 50px 0',
         }}
         >
-          Here&apos;s what you&apos;re missing out on
+          Here&apos;s what you&apos;ve been missing out on
         </h2>
 
         <FeaturesContainer>
@@ -133,6 +133,7 @@ const Component: React.FC = () => (
           >
             <p>
               1. Generate new playlists using special music attributes.
+              e.g. Danceability and popularity
             </p>
 
             <p>
@@ -140,7 +141,9 @@ const Component: React.FC = () => (
             </p>
 
             <p>
-              3. Know how your music is perceived by the algo.
+              3. Know how your playlists are perceived by Spotify.
+              For example, you can know how danceable your playlist is and
+              compare it with other playlists.
             </p>
 
             <p>
@@ -156,6 +159,7 @@ const Component: React.FC = () => (
               alt="Animated usage of the app show casing it"
               style={{
                 margin: '0 auto',
+                paddingBottom: '40px',
               }}
             />
           </div>
@@ -173,7 +177,7 @@ const Component: React.FC = () => (
       margin: '0 auto',
       width: '100%',
       padding: '15px',
-      paddingBottom: '100px',
+      paddingBottom: '75px',
     }}
     >
       <OpenSourceContainer>
