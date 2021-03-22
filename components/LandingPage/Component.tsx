@@ -144,7 +144,7 @@ const Component: React.FC = () => (
             </p>
 
             <p>
-              4. Create a playlist cover using our cute cover design tool
+              4. Create a playlist cover using our cute cover design tool.
             </p>
           </div>
           <div style={{
