@@ -11,6 +11,7 @@ export const SignInButton = styled.button`
   background: ${(props): string => props.theme.colors.green.primary};
   border-radius: 30px;
   border: none;
+  white-space: nowrap;
   outline: inherit;
   font: inherit;
   color: ${(props): string => props.theme.colors.white.lightest};
