@@ -107,19 +107,19 @@ const heartBeat = keyframes`
   {
     0%
     {
-      transform: scale( .85 );
+      transform: scale( 1 );
     }
     10%
     {
-      transform: scale( 1 );
+      transform: scale( .85 );
     }
     20%
     {
-      transform: scale( .9 );
+      transform: scale( 1 );
     }
     30%
     {
-      transform: scale( 1 );
+      transform: scale( .9 );
     }
     40%
     {
@@ -127,19 +127,19 @@ const heartBeat = keyframes`
     }
     50%
     {
-      transform: scale( .85 );
+      transform: scale( 1 );
     }
     60%
     {
-      transform: scale( 1 );
+      transform: scale( .85 );
     }
     70%
     {
-      transform: scale( .9 );
+      transform: scale( 1 );
     }
     80%
     {
-      transform: scale( 1 );
+      transform: scale( .9 );
     }
     90%
     {
@@ -155,6 +155,6 @@ export const SpotilitiesLogoWrapper = styled.div`
 
   & > svg {
     animation: ${heartBeat} 2s;
-    animation-delay: 2.5s;
+    animation-delay: 2s;
   }
 `;
