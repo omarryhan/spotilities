@@ -148,13 +148,13 @@ const heartBeat = keyframes`
   }
 `;
 
-export const SpotilitiesLogoWrapper = styled.div`
+export const SpotilitiesLogoWrapper = styled.div<{isHeartBeatOn: boolean}>`
   width: 200px;
   margin: 0 auto;
   padding-top: 60px;
 
   & > svg {
-    animation: ${heartBeat} 2s;
-    animation-delay: 2s;
+    animation: ${(props): any => (props.isHeartBeatOn ? heartBeat : 'none')};
+    animation-duration: 2s;
   }
 `;
