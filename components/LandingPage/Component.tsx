@@ -451,7 +451,7 @@ const Component: React.FC = () => {
           onClick={async (): Promise<void> => {
             if (isHeartbeatAnimationOn === false) {
               setIsHeartbeatAnimationOn(true);
-              setTimeout(() => setIsHeartbeatAnimationOn(false), 2000);
+              setTimeout(() => setIsHeartbeatAnimationOn(false), 1000);
             }
           }}
           isHeartBeatOn={isHeartbeatAnimationOn}

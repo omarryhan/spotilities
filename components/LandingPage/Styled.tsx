@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, Keyframes } from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
@@ -109,39 +109,23 @@ const heartBeat = keyframes`
     {
       transform: scale( 1 );
     }
-    10%
-    {
-      transform: scale( .85 );
-    }
     20%
-    {
-      transform: scale( 1 );
-    }
-    30%
     {
       transform: scale( .9 );
     }
     40%
     {
-      transform: scale( 1 );
-    }
-    50%
-    {
-      transform: scale( 1 );
+      transform: scale( 1.1 );
     }
     60%
     {
-      transform: scale( .85 );
-    }
-    70%
-    {
-      transform: scale( 1 );
+      transform: scale( .97 );
     }
     80%
     {
-      transform: scale( .9 );
+      transform: scale( 1.1 );
     }
-    90%
+    100%
     {
       transform: scale( 1 );
     }
@@ -154,7 +138,7 @@ export const SpotilitiesLogoWrapper = styled.div<{isHeartBeatOn: boolean}>`
   padding-top: 60px;
 
   & > svg {
-    animation: ${(props): any => (props.isHeartBeatOn ? heartBeat : 'none')};
-    animation-duration: 2s;
+    animation: ${(props): Keyframes | string => (props.isHeartBeatOn ? heartBeat : 'none')};
+    animation-duration: 1s;
   }
 `;
