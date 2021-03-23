@@ -519,7 +519,8 @@ const Component: React.FC = () => (
               <span role="img" aria-label="number 1 emoji">
                 1️⃣
               </span>
-              . Generate new playlists using special music attributes.
+              {' '}
+              Generate new playlists using special music attributes.
               e.g. Danceability and popularity.
             </p>
 
@@ -527,14 +528,16 @@ const Component: React.FC = () => (
               <span role="img" aria-label="number 2 emoji">
                 2️⃣
               </span>
-              . View your top tracks and artists, this month, this year and of all time.
+              {' '}
+              View your top tracks and artists, this month, this year and of all time.
             </p>
 
             <p>
               <span role="img" aria-label="number 3 emoji">
                 3️⃣
               </span>
-              . Know how your playlists are perceived by Spotify.
+              {' '}
+              Know how your playlists are perceived by Spotify.
               For example, you can know how danceable your playlist is and
               compare it with other playlists.
             </p>
@@ -543,7 +546,8 @@ const Component: React.FC = () => (
               <span role="img" aria-label="number 4 emoji">
                 4️⃣
               </span>
-              . Create a playlist cover using our cute cover design tool.
+              {' '}
+              Create a playlist cover using our cute cover design tool.
             </p>
           </div>
           <div style={{
@@ -599,7 +603,7 @@ const Component: React.FC = () => (
             <strong>open source</strong>
             .
             <br />
-            That means you can freely checkout the source code and change it if you wish.
+            That means you can freely check out the source code and change it if you wish.
           </p>
         </OpenSourceTextContainer>
 

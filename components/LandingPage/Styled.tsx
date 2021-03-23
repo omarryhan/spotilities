@@ -155,6 +155,6 @@ export const SpotilitiesLogoWrapper = styled.div`
 
   & > svg {
     animation: ${heartBeat} 2s;
-    animation-delay: 1s;
+    animation-delay: 2.5s;
   }
 `;
