@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
@@ -100,5 +100,61 @@ export const FeaturesContainer = styled.div`
   & > div > p {
     font-size: 22px;
     margin: 0 0 42px 0;
+  }
+`;
+
+const heartBeat = keyframes`
+  {
+    0%
+    {
+      transform: scale( .85 );
+    }
+    10%
+    {
+      transform: scale( 1 );
+    }
+    20%
+    {
+      transform: scale( .9 );
+    }
+    30%
+    {
+      transform: scale( 1 );
+    }
+    40%
+    {
+      transform: scale( 1 );
+    }
+    50%
+    {
+      transform: scale( .85 );
+    }
+    60%
+    {
+      transform: scale( 1 );
+    }
+    70%
+    {
+      transform: scale( .9 );
+    }
+    80%
+    {
+      transform: scale( 1 );
+    }
+    90%
+    {
+      transform: scale( 1 );
+    }
+  }
+`;
+
+export const SpotilitiesLogoWrapper = styled.div`
+  width: 200px;
+  margin: 0 auto;
+  padding-top: 60px;
+
+  & > svg {
+    animation: ${heartBeat} 2s;
+    animation-delay: 1s;
   }
 `;

@@ -10,6 +10,7 @@ import {
   OpenSourceTextContainer,
   OpenSourceIconContainer,
   FeaturesContainer,
+  SpotilitiesLogoWrapper,
 } from './Styled';
 
 import SpotilitiesIconGreen from '../../public/icons/spotilites_green.svg';
@@ -444,15 +445,9 @@ const Component: React.FC = () => (
       paddingTop: '35px',
     }}
     >
-      <div
-        style={{
-          width: '200px',
-          margin: '0 auto',
-          paddingTop: '60px',
-        }}
-      >
+      <SpotilitiesLogoWrapper>
         <SpotilitiesIconGreen />
-      </div>
+      </SpotilitiesLogoWrapper>
       <h1 style={{
         textAlign: 'center',
         fontSize: '52px',
