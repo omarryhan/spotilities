@@ -20,8 +20,11 @@ import Waves2 from '../../public/icons/waves_2.svg';
 import SpotifyWhite from '../../public/icons/spotify_white.svg';
 import OpenSourceLogo from '../../public/icons/opensource.svg';
 
-const SigninButton: React.FC = () => (
-  <SignInButton onClick={(): void => {
+const SigninButton: React.FC<{cb?: () => Promise<void>}> = ({ cb }) => (
+  <SignInButton onClick={async (): Promise<void> => {
+    if (cb) {
+      await cb();
+    }
     Router.push('/recommend');
   }}
   >
@@ -51,6 +54,15 @@ const SigninButton: React.FC = () => (
 
 const Component: React.FC = () => {
   const [isHeartbeatAnimationOn, setIsHeartbeatAnimationOn] = React.useState(false);
+
+  const activateHeartbeat = async (): Promise<void> => {
+    if (isHeartbeatAnimationOn === false) {
+      setIsHeartbeatAnimationOn(true);
+      await new Promise((resolve) => setTimeout(resolve, 800));
+      setIsHeartbeatAnimationOn(false);
+    }
+  };
+
   return (
     <main>
       <div style={{
@@ -448,12 +460,7 @@ const Component: React.FC = () => {
       }}
       >
         <SpotilitiesLogoWrapper
-          onClick={async (): Promise<void> => {
-            if (isHeartbeatAnimationOn === false) {
-              setIsHeartbeatAnimationOn(true);
-              setTimeout(() => setIsHeartbeatAnimationOn(false), 1000);
-            }
-          }}
+          onClick={activateHeartbeat}
           isHeartBeatOn={isHeartbeatAnimationOn}
         >
           <SpotilitiesIconGreen />
@@ -491,7 +498,7 @@ const Component: React.FC = () => {
           textAlign: 'center',
         }}
         >
-          <SigninButton />
+          <SigninButton cb={activateHeartbeat} />
         </div>
       </section>
 

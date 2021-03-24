@@ -140,6 +140,6 @@ export const SpotilitiesLogoWrapper = styled.div<{isHeartBeatOn: boolean}>`
 
   & > svg {
     animation: ${(props): Keyframes | string => (props.isHeartBeatOn ? heartBeat : 'none')};
-    animation-duration: 1s;
+    animation-duration: 0.8s;
   }
 `;
