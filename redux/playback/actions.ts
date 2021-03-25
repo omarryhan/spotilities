@@ -4,12 +4,21 @@ import { CombinedStateType } from '../types';
 import { spotifyApi, checkIsAuthorized } from '../utils';
 import { UserLibraryPlaylistId } from '../playlistItems/actions';
 
-const flashPlaybackError = (e: XMLHttpRequest | Error): void => {
+const flashPlaybackError = (e: XMLHttpRequest | Error, { track, playlist }: {
+  track?: string;
+  playlist?: string;
+}): void => {
   if (e instanceof XMLHttpRequest) {
     const errorMessage = e.response && JSON.parse(e.response)?.error?.message as undefined | string;
     if (errorMessage && errorMessage.includes('active device')) {
       alert('Playback failed.\nPlease make sure you have a song already playing on your official Spotify app.\nThis is a limitation of Spotify.');
-      window.location.href = 'spotify:';
+      if (playlist) {
+        window.location.href = `spotify:playlist:${playlist}`;
+      } else if (track) {
+        window.location.href = `spotify:track:${track}`;
+      } else {
+        window.location.href = 'spotify:';
+      }
     } else if (errorMessage) {
       alert(errorMessage);
     } else {
@@ -56,7 +65,7 @@ void,
         uris: reorderedList.map((trackURI) => `spotify:track:${trackURI}`),
       });
     } catch (e) {
-      flashPlaybackError(e);
+      flashPlaybackError(e, { track: reorderedList[0] });
     }
   });
 
@@ -80,7 +89,8 @@ export const playTrackInPlaylistContext = async ({
       },
     });
   } catch (e) {
-    flashPlaybackError(e);
+    // flashPlaybackError(e, { playlist: playlistId });
+    flashPlaybackError(e, { track: `spotify:track:${trackId}?context=spotify%3Aplaylist%3A${playlistId}` });
   }
 };
 
