@@ -4,8 +4,6 @@ import { CombinedStateType } from '../types';
 import { spotifyApi, checkIsAuthorized } from '../utils';
 import { UserLibraryPlaylistId } from '../playlistItems/actions';
 
-// Oh man, this function has grown huge.
-// It just works (tm).
 const flashPlaybackError = (
   e: XMLHttpRequest | Error, { track, playlist }: {
     track?: string;
@@ -137,7 +135,7 @@ export const playTrackInPlaylistContext = async ({
     });
   } catch (e) {
     // flashPlaybackError(e, { playlist: playlistId });
-    flashPlaybackError(e, { track: `spotify:track:${trackId}?context=spotify%3Aplaylist%3A${playlistId}` });
+    flashPlaybackError(e, { track: `${trackId}?context=spotify%3Aplaylist%3A${playlistId}` });
   }
 };
 
