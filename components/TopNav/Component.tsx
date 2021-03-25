@@ -18,6 +18,7 @@ export interface Props {
   showRightButton?: boolean;
   RightButton?: React.FC;
   onRightButtonClick?: () => ReturnType<typeof Router.push>;
+  backTo?: string | string[];
 }
 
 const Component: React.FC<Props> = ({
@@ -26,6 +27,7 @@ const Component: React.FC<Props> = ({
   showRightButton = false,
   RightButton,
   onRightButtonClick,
+  backTo,
 }) => (
   <Header>
     <Nav>
@@ -36,7 +38,17 @@ const Component: React.FC<Props> = ({
               <BackButtonWrapper
                 type="button"
                 onClick={
-                  (): void => Router.back()
+                  (): void => {
+                    if (backTo) {
+                      if (Array.isArray(backTo)) {
+                        Router.push(backTo[0], backTo[1]);
+                      } else {
+                        Router.push(backTo);
+                      }
+                    } else {
+                      Router.back();
+                    }
+                  }
                 }
               >
                 <BackButton />

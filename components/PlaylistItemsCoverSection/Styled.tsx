@@ -52,13 +52,10 @@ export const PlaylistCoverPhotoWrapper = styled.div`
 export const PlaylistTitle = styled.h2`
   text-align: center;
   color: #fff;
-  margin: 0 0;
+  margin: 30px 0 40px 0;
   max-height: 125px;
   font-size: 1.5rem;
   padding-left: ${(props): string => props.theme.dimensions.contentSideMargin.all};
-
-  padding-top: 30px;
-  padding-bottom: 40px;
 `;
 
 export const MetricsContainer = styled.div`

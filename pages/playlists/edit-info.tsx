@@ -33,6 +33,7 @@ const Page: NextPage<{}> = () => {
       </Head>
       <TopNav
         showBackButton
+        backTo={['/playlists', `/playlists/${playlistId}`]}
         title={`Edit: ${playlistName}`}
       />
       <AppBody>

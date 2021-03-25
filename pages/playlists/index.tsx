@@ -83,6 +83,7 @@ const Page: NextPage<{}> = () => {
       </Head>
       <TopNav
         showBackButton
+        backTo="/library"
         title={playlistName}
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...topNavEditProps}

@@ -17,7 +17,7 @@ const Page: NextPage<{}> = () => (
     </Head>
     <AccessTokenLoader />
     <CurrentUserLoader />
-    <TopNav title="Select Seed Tracks" showBackButton />
+    <TopNav title="Select Seed Tracks" showBackButton backTo="/recommend" />
     <AppBody>
       <ProgressBar progress={33} />
       <SeedTracksSection />
