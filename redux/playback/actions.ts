@@ -4,6 +4,8 @@ import { CombinedStateType } from '../types';
 import { spotifyApi, checkIsAuthorized } from '../utils';
 import { UserLibraryPlaylistId } from '../playlistItems/actions';
 
+// Oh man, this function has grown huge.
+// It just works (tm).
 const flashPlaybackError = (
   e: XMLHttpRequest | Error, { track, playlist }: {
     track?: string;
@@ -11,23 +13,21 @@ const flashPlaybackError = (
   },
   fallback?: () => Promise<void>,
 ): void => {
+  const routeToSong = (): void => {
+    if (playlist) {
+      window.location.href = `spotify:playlist:${playlist}`;
+    } else if (track) {
+      window.location.href = `spotify:track:${track}`;
+    } else {
+      window.location.href = 'spotify:';
+    }
+  };
   if (e instanceof XMLHttpRequest) {
-    const routeToSong = (): void => {
-      if (playlist) {
-        window.location.href = `spotify:playlist:${playlist}`;
-      } else if (track) {
-        window.location.href = `spotify:track:${track}`;
-      } else {
-        window.location.href = 'spotify:';
-      }
-    };
-
     const errorMessage = e.response && JSON.parse(e.response)?.error?.message as undefined | string;
     if (errorMessage && errorMessage.includes('active device')) {
       if (fallback) {
-        // eslint-disable-next-line no-restricted-globals
-        if (confirm(
-          'Playback failed.\nPlease make sure you have a song already playing on your official Spotify app.\nThis is limitation of Spotify\nDo you want to create a playlist instead?',
+        if (window.confirm(
+          'Playback failed.\nDo you want to create a playlist instead?',
         )) {
           fallback();
         } else {
@@ -38,12 +38,32 @@ const flashPlaybackError = (
         routeToSong();
       }
     } else if (errorMessage) {
-      alert(errorMessage);
+      if (fallback) {
+        if (window.confirm(
+          'Playback failed.\nDo you want to create a playlist instead?',
+        )) {
+          fallback();
+        } else {
+          routeToSong();
+        }
+      } else {
+        alert(errorMessage);
+        routeToSong();
+      }
+    } else if (fallback) {
+      if (window.confirm(
+        'Playback failed.\nDo you want to create a playlist instead?',
+      )) {
+        fallback();
+      } else {
+        routeToSong();
+      }
     } else {
-      alert('Sorry something went wrong, please try again');
+      alert('Sorry, something went wrong. Please try again.');
     }
   } else {
-    alert(e.message || 'Sorry something went wrong');
+    alert(e.message || 'Sorry, something went wrong.');
+    routeToSong();
   }
 };
 
