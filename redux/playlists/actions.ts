@@ -187,11 +187,11 @@ string,
 
 export const createUserPlaylist = createAsyncThunk<
 void,
-{ name: string; trackIds: string[] },
+{ name: string; trackIds: string[]; description: string },
 { state: CombinedStateType }
 >(
   'playlists/new',
-  async ({ name, trackIds }, { getState, dispatch }) => {
+  async ({ name, trackIds, description }, { getState, dispatch }) => {
     const state = getState();
     checkIsAuthorized(
       state.user.token.accessToken,
@@ -204,6 +204,7 @@ void,
       {
         name,
         public: false,
+        description: description || '',
       },
     );
 

@@ -27,11 +27,39 @@ const Component: React.FC = () => {
     (state) => state.recommendations.results.trackIds,
   );
 
+  // const seedTracksIDs = useSelector<CombinedStateType, string[]>(
+  //   (state) => state.recommendations.seedTracks,
+  // );
+  // const tracks = useSelector<CombinedStateType, {[key: string]: Track}>(
+  //   (state) => state.tracks.data,
+  // );
+  // const seedTracksTitles = seedTracksIDs.map((seedTrackId) => {
+  //   const track = tracks[seedTrackId];
+  //   const artistNames = track.data.artists.map((artist) => artist.name).join(' & ');
+  //   return `${track.data.name}-${artistNames}-${track.data.album.name}`;
+  // });
+  // const playlistDescription = `Seed tracks: ${seedTracksTitles.join(' | ')}`;
+
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     dispatch(fetchRecommendations());
   }, [dispatch]);
+
+  const createNewPlaylist = async (): Promise<void> => {
+    const playlistName = prompt(
+      'Please give your playlist a name',
+      'New Spotilities Playlist',
+    );
+    dispatch(createUserPlaylist(
+      {
+        name: playlistName as string,
+        // description: playlistDescription,
+        description: 'Created by Spotilities',
+        trackIds: trackIdsResults,
+      },
+    ));
+  };
 
   return (
     <Container>
@@ -60,16 +88,7 @@ const Component: React.FC = () => {
                 {' '}
                 recommendations
               </Title>
-              <AddToPlaylistButton onClick={async (): Promise<void> => {
-                const playlistName = prompt(
-                  'Please enter a name for your playlist',
-                  'New Spotilities Playlist',
-                );
-                dispatch(createUserPlaylist(
-                  { name: playlistName as string, trackIds: trackIdsResults },
-                ));
-              }}
-              >
+              <AddToPlaylistButton onClick={createNewPlaylist}>
                 <AddToPlaylistIcon />
               </AddToPlaylistButton>
             </TitleContainer>
@@ -84,6 +103,7 @@ const Component: React.FC = () => {
                         trackId: trackIdClicked,
                         trackURIs: trackIdsResults,
                         shufflePlay: false,
+                        fallback: createNewPlaylist,
                       }));
                     }}
                   />

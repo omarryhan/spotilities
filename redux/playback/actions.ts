@@ -4,20 +4,38 @@ import { CombinedStateType } from '../types';
 import { spotifyApi, checkIsAuthorized } from '../utils';
 import { UserLibraryPlaylistId } from '../playlistItems/actions';
 
-const flashPlaybackError = (e: XMLHttpRequest | Error, { track, playlist }: {
-  track?: string;
-  playlist?: string;
-}): void => {
+const flashPlaybackError = (
+  e: XMLHttpRequest | Error, { track, playlist }: {
+    track?: string;
+    playlist?: string;
+  },
+  fallback?: () => Promise<void>,
+): void => {
   if (e instanceof XMLHttpRequest) {
-    const errorMessage = e.response && JSON.parse(e.response)?.error?.message as undefined | string;
-    if (errorMessage && errorMessage.includes('active device')) {
-      alert('Playback failed.\nPlease make sure you have a song already playing on your official Spotify app.\nThis is a limitation of Spotify.');
+    const routeToSong = (): void => {
       if (playlist) {
         window.location.href = `spotify:playlist:${playlist}`;
       } else if (track) {
         window.location.href = `spotify:track:${track}`;
       } else {
         window.location.href = 'spotify:';
+      }
+    };
+
+    const errorMessage = e.response && JSON.parse(e.response)?.error?.message as undefined | string;
+    if (errorMessage && errorMessage.includes('active device')) {
+      if (fallback) {
+        // eslint-disable-next-line no-restricted-globals
+        if (confirm(
+          'Playback failed.\nPlease make sure you have a song already playing on your official Spotify app.\nThis is limitation of Spotify\nDo you want to create a playlist instead?',
+        )) {
+          fallback();
+        } else {
+          routeToSong();
+        }
+      } else {
+        alert('Playback failed.\nPlease make sure you have a song already playing on your official Spotify app.\nThis is a limitation of Spotify.');
+        routeToSong();
       }
     } else if (errorMessage) {
       alert(errorMessage);
@@ -35,23 +53,32 @@ void,
   trackId: string;
   trackURIs: string[];
   shufflePlay?: boolean;
+  // eslint bug
+  // eslint-disable-next-line
+  fallback?:() => Promise<void>
+  // eslint bug
+  // eslint-disable-next-line
 },
 { state: CombinedStateType }
->('play/trackURIs',
-  async ({ trackId, trackURIs, shufflePlay = false }, { getState }) => {
-    const state = getState();
-    checkIsAuthorized(
-      state.user.token.accessToken,
-      state.user.token.expiresAt,
-      state.user.tokenStatus.errorMessage,
-    );
+// eslint bug
+// eslint-disable-next-line
+  >('play/trackURIs',
+    async ({
+      trackId, trackURIs, shufflePlay = false, fallback,
+    }, { getState }) => {
+      const state = getState();
+      checkIsAuthorized(
+        state.user.token.accessToken,
+        state.user.token.expiresAt,
+        state.user.tokenStatus.errorMessage,
+      );
 
-    const shuffledTrackUris = shufflePlay ? shuffle(trackURIs) : trackURIs;
-    const trackIdIndex = shuffledTrackUris.indexOf(trackId);
-    const trackIdsToEnqueue = shuffledTrackUris.slice(trackIdIndex, 500);
-    const restOfTheTracks = shuffledTrackUris.slice(0, trackIdIndex);
-    const reorderedList = [...trackIdsToEnqueue, ...restOfTheTracks].slice(0, 500);
-    try {
+      const shuffledTrackUris = shufflePlay ? shuffle(trackURIs) : trackURIs;
+      const trackIdIndex = shuffledTrackUris.indexOf(trackId);
+      const trackIdsToEnqueue = shuffledTrackUris.slice(trackIdIndex, 500);
+      const restOfTheTracks = shuffledTrackUris.slice(0, trackIdIndex);
+      const reorderedList = [...trackIdsToEnqueue, ...restOfTheTracks].slice(0, 500);
+      try {
       // window.open(`https://open.spotify.com/track/${reorderedList.shift()}`);
       // window.location.href = `https://open.spotify.com/track/${reorderedList.shift()}`;
       // window.location.href = `spotify:track:${reorderedList.shift()}`;
@@ -60,14 +87,14 @@ void,
       //   await spotifyApi.queue(`spotify:track:${trackToQueue}`);
       // });
 
-      await spotifyApi.setShuffle(shufflePlay);
-      await spotifyApi.play({
-        uris: reorderedList.map((trackURI) => `spotify:track:${trackURI}`),
-      });
-    } catch (e) {
-      flashPlaybackError(e, { track: reorderedList[0] });
-    }
-  });
+        await spotifyApi.setShuffle(shufflePlay);
+        await spotifyApi.play({
+          uris: reorderedList.map((trackURI) => `spotify:track:${trackURI}`),
+        });
+      } catch (e) {
+        flashPlaybackError(e, { track: reorderedList[0] }, fallback);
+      }
+    });
 
 export const playTrackInPlaylistContext = async ({
   trackId,
