@@ -184,3 +184,34 @@ string,
     return fullResponse.items;
   },
 );
+
+export const createUserPlaylist = createAsyncThunk<
+void,
+{ name: string; trackIds: string[] },
+{ state: CombinedStateType }
+>(
+  'playlists/new',
+  async ({ name, trackIds }, { getState, dispatch }) => {
+    const state = getState();
+    checkIsAuthorized(
+      state.user.token.accessToken,
+      state.user.token.expiresAt,
+      state.user.tokenStatus.errorMessage,
+    );
+
+    const createPlaylistResponse = await spotifyApi.createPlaylist(
+      state.profile.data.id,
+      {
+        name,
+        public: false,
+      },
+    );
+
+    await spotifyApi.addTracksToPlaylist(
+      createPlaylistResponse.id,
+      trackIds.map((trackId) => `spotify:track:${trackId}`),
+    );
+
+    window.location.href = `spotify:playlist:${createPlaylistResponse.id}`;
+  },
+);

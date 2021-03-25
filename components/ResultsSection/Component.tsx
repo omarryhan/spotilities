@@ -2,13 +2,19 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import TrackStripe from '../TrackStripe';
 import Skeleton from '../TrackStripe/Skeleton';
+import AddToPlaylistIcon from '../../public/icons/add_to_playlist.svg';
 
 import { playTrackURIS } from '../../redux/playback/actions';
 import {
   Container,
   Title,
   TracksContainer,
+  TitleContainer,
+  AddToPlaylistButton,
 } from './Styled';
+import {
+  createUserPlaylist,
+} from '../../redux/playlists/actions';
 import { fetchRecommendations } from '../../redux/recommendations/actions';
 import { CombinedStateType } from '../../redux/types';
 
@@ -32,9 +38,11 @@ const Component: React.FC = () => {
       {isFetchingResults
         ? (
           <>
-            <Title>
-              Applying magic...
-            </Title>
+            <TitleContainer>
+              <Title>
+                Applying magic...
+              </Title>
+            </TitleContainer>
             {
               Array(16).fill('_').map((_, i) => (
                 <Skeleton key={`${String(i)}-Skeleton`} />
@@ -44,13 +52,27 @@ const Component: React.FC = () => {
         )
         : (
           <>
-            <Title>
-              Found
-              {' '}
-              {trackIdsResults.length}
-              {' '}
-              recommendations
-            </Title>
+            <TitleContainer>
+              <Title>
+                Found
+                {' '}
+                {trackIdsResults.length}
+                {' '}
+                recommendations
+              </Title>
+              <AddToPlaylistButton onClick={async (): Promise<void> => {
+                const playlistName = prompt(
+                  'Please enter a name for your playlist',
+                  'New Spotilities Playlist',
+                );
+                dispatch(createUserPlaylist(
+                  { name: playlistName as string, trackIds: trackIdsResults },
+                ));
+              }}
+              >
+                <AddToPlaylistIcon />
+              </AddToPlaylistButton>
+            </TitleContainer>
             <TracksContainer>
               {
                 trackIdsResults.map((trackId) => (
