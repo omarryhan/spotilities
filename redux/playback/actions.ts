@@ -9,7 +9,7 @@ const flashPlaybackError = (e: XMLHttpRequest | Error): void => {
     const errorMessage = e.response && JSON.parse(e.response)?.error?.message as undefined | string;
     if (errorMessage && errorMessage.includes('active device')) {
       alert('Playback failed.\nPlease make sure you have a song already playing on your official Spotify app.\nThis is a limitation of Spotify.');
-      // window.location.href = 'spotify:';
+      window.location.href = 'spotify:';
     } else if (errorMessage) {
       alert(errorMessage);
     } else {
@@ -43,6 +43,14 @@ void,
     const restOfTheTracks = shuffledTrackUris.slice(0, trackIdIndex);
     const reorderedList = [...trackIdsToEnqueue, ...restOfTheTracks].slice(0, 500);
     try {
+      // window.open(`https://open.spotify.com/track/${reorderedList.shift()}`);
+      // window.location.href = `https://open.spotify.com/track/${reorderedList.shift()}`;
+      // window.location.href = `spotify:track:${reorderedList.shift()}`;
+      // await new Promise((resolve) => setTimeout(resolve, 10000));
+      // reorderedList.map(async (trackToQueue: string) => {
+      //   await spotifyApi.queue(`spotify:track:${trackToQueue}`);
+      // });
+
       await spotifyApi.setShuffle(shufflePlay);
       await spotifyApi.play({
         uris: reorderedList.map((trackURI) => `spotify:track:${trackURI}`),
