@@ -9,15 +9,11 @@
 
 # Spotilities
 
-Spotilities is your swiss army knife for Spotify.
+Your swiss army knife for Spotify.
 
-## Preview
+## Live version
 
-![Preview](https://media.giphy.com/media/Pk9umkY5wUR4QRF3w0/giphy.gif)
-
-## Goals
-
-Complement Spotify's official mobile app and not replace it.
+https://spotilities.netlify.app/
 
 ## Why I made it
 
@@ -34,56 +30,8 @@ A couple of months later, I wanted to try working with HTML canvas to prepare fo
 - [x] Edit playlist description
 - [x] Create your own playlist cover art and upload it.
 - [x] Make a very simple landing page so that users aren't automatically redirected to Spotify's login page once they visit the website.
-- [ ] Add the generated recommendations to a new playlist (currently you can only add the results to the queue).
+- [x] Add the generated recommendations to a new playlist (currently you can only add the results to the queue).
 - [ ] Ability to sort playlist by attribute
-
-
-## Live version
-
-https://spotilities.netlify.app/
-
-**Tip:**
-
-For optimal experience, use the website from your phone.
-
-To install it as an app, after opening the website, open your browser's menu and click on **"Add to homescreen"**. Et voila, it's now an app on your phone.
-
-## Features
-
-**1. Generate track recommendations based on:**
-
-- Seed tracks
-- Tunable attributes:
-  - Acousticness
-  - Danceability
-  - Duration
-  - Energy
-  - Instrumentalness
-  - Liveness
-  - Loudness
-  - Popularity
-  - Speechiness
-  - Tempo
-  - Valence
-  
-**2. Your top tracks and artists of 1 month, 3 month and a year:**
-
-**3. List your playlists and tracks with more info than Spotify provides e.g.:**
-
-- General musical attributes
-  - Playlist/track valence
-  - Playlist/track popularity
-  - Playlist/track energy
-  - Playlist/track danceability
-- And for the musicians out there:
-  - Key signature of the track
-  - Tempo of the track
-
-**4. Create an album cover straight from the webapp**
-
-Using HTML5 canvas and Konva.js
-
-Note: Playback and the album cover upload feature only works for premium accounts
 
 ## Tools and tech
 

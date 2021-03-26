@@ -86,7 +86,8 @@ const Component: React.FC = () => {
           <SettingDescription>
             Show energy, danceability, valence and popularity respectively.
             <br />
-            Disable it for optimal performance.
+            Warning: this might slow down your device considerably.
+            Especially if your library is big.
           </SettingDescription>
         </SettingLeftSection>
 

@@ -6,7 +6,10 @@ import { CombinedStateType } from '../types';
 import { allAttributes } from '../../components/MetricSelector/Data';
 import { setTracks } from '../tracks/actions';
 import { fetchTracksAudioFeatures } from '../tracksAudioFeatures/actions';
-import { convertMyTracksToPlaylist, getAllTracksFromPlaylistItems } from '../playlistItems/actions';
+// import {
+//   convertMyTracksToPlaylist,
+//   getAllTracksFromPlaylistItems,
+// } from '../playlistItems/actions';
 
 export const setTrackResults = createAction<string[]>('recommendations/trackResults/set');
 
@@ -19,7 +22,6 @@ export const clearRecommendationsInput = createAction<void>('recommendations/inp
 export const clearRecommendationsResults = createAction<void>('recommendations/results/clear');
 
 // Used to skip selecting tracks for recommendations
-// fetches first 5 tracks from User Library (aka saved items aka likes) if available.
 export const setRandomSeedTracks = createAsyncThunk<
 { randomSeedTracks: SpotifyApi.SavedTrackObject[]},
 void,
@@ -33,13 +35,28 @@ void,
       state.user.tokenStatus.errorMessage,
     );
 
-    const first50Tracks = await spotifyApi.getMySavedTracks({ limit: 50 });
-    const convertedFirst5Tracks = convertMyTracksToPlaylist(first50Tracks);
-    dispatch(setTracks(getAllTracksFromPlaylistItems(convertedFirst5Tracks)));
+    // fetches first 5 tracks from User Library (aka saved items aka likes) if available.
+    // const first50Tracks = await spotifyApi.getMySavedTracks({ limit: 50 });
+    // const convertedFirst5Tracks = convertMyTracksToPlaylist(first50Tracks);
+    // dispatch(setTracks(getAllTracksFromPlaylistItems(convertedFirst5Tracks)));
+    // first50Tracks.items = shuffle(first50Tracks.items);
+    // // first 5 tracks of the shuffled list. 5 is the max.
+    // // Won't fail if there's less than 5 items in the array.
+    // return { randomSeedTracks: first50Tracks.items.slice(0, 5) };
+
+    // 5 of your top tracks this month
+    // I think this is a better default than 5 of your most recent 50 saved tracks
+    const first50Tracks = await spotifyApi.getMyTopTracks({
+      time_range: 'short_term',
+      limit: 50,
+    });
+    dispatch(setTracks(first50Tracks.items));
     first50Tracks.items = shuffle(first50Tracks.items);
-    // first 5 tracks of the shuffled list. 5 is the max.
-    // Won't fail if there's less than 5 items in the array.
-    return { randomSeedTracks: first50Tracks.items.slice(0, 5) };
+    const retval = first50Tracks.items.map((track) => ({
+      added_at: '',
+      track,
+    }));
+    return { randomSeedTracks: retval.slice(0, 5) };
   });
 
 export const setMetricIsActivated = createAction<{

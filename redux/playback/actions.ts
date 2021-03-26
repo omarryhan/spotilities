@@ -25,14 +25,14 @@ const flashPlaybackError = (
     if (errorMessage && errorMessage.includes('active device')) {
       if (fallback) {
         if (window.confirm(
-          'Playback failed.\nDo you want to create a playlist instead?',
+          'Remote playback failed.\nDo you want to create a playlist instead?',
         )) {
           fallback();
         } else {
           routeToSong();
         }
       } else {
-        alert('Playback failed.\nPlease make sure you have a song already playing on your official Spotify app.\nThis is a limitation of Spotify.');
+        alert('Remote playback failed.\n\nPlease make sure you have a song already playing on your official Spotify app.\nThis is a limitation of Spotify.\nYou will be redirected to your official Spotify app now.\nOnly the song you clicked will be played. A queue will not be created.\n After the song plays, come back and click again to be add the rest of the tracks to the queue.');
         routeToSong();
       }
     } else if (errorMessage) {
