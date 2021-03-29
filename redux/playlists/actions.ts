@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import ReactGA from 'react-ga';
 import { checkIsAuthorized, getAllPages, spotifyApi } from '../utils';
 import { CombinedStateType } from '../types';
+import { setSnackbarState } from '../ui/actions';
 
 export const deletePlaylists = createAction<void>('playlists/delete');
 
@@ -213,6 +214,13 @@ void,
       trackIds.map((trackId) => `spotify:track:${trackId}`),
     );
 
-    window.location.href = `spotify:playlist:${createPlaylistResponse.id}`;
+    dispatch(setSnackbarState({
+      ...state.ui.snackbar,
+      isOpen: true,
+      text: 'Playlist created',
+      actionText: 'Visit 🔗',
+      action: () => { window.location.href = `spotify:playlist:${createPlaylistResponse.id}`; },
+      time: 4000,
+    }));
   },
 );

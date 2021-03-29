@@ -20,14 +20,15 @@ export const TitleContainer = styled.div`
 
 export const Title = styled.h2`
   padding-right: 10px;
-  font-size: 24px;
+  font-size: 22px;
   margin: 0 0;
 `;
 
 export const AddToPlaylistButton = styled(Button)`
-  width: 24px;
+  width: 22px;
   min-width: 0px;
   border-radius: 0;
+  font-weight: normal;
   display: flex;
   margin-top: 6px;
   padding: 0 0;

@@ -7,6 +7,7 @@ import Router, { useRouter } from 'next/router';
 import AppBody from '../../components/AppBody';
 import PlaylistItemsList from '../../components/PlaylistItemsList';
 import TopNav from '../../components/TopNav';
+import Snackbar from '../../components/Snackbar';
 import { Props as TopNavProps } from '../../components/TopNav/Component';
 import BottomNav from '../../components/BottomNav';
 import PlaylistItemsCoverSection from '../../components/PlaylistItemsCoverSection';
@@ -81,6 +82,7 @@ const Page: NextPage<{}> = () => {
         <meta name="title" content="Spotilities | Playlist" />
         <title>Spotilities | Playlist</title>
       </Head>
+      <Snackbar />
       <TopNav
         showBackButton
         backTo="/library"

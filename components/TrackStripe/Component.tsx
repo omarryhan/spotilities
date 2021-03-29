@@ -134,6 +134,7 @@ const Component: React.FC<Props> = ({
             longLength={showStatsForMusicians}
           >
             <Img
+              longLength={showStatsForMusicians}
               src={trackImage || '/cover_art/fallback_cover_icon.png'}
               alt="Track album cover"
               onError={(e): void => {

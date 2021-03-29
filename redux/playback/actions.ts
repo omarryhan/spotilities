@@ -3,13 +3,13 @@ import shuffle from 'lodash.shuffle';
 import { CombinedStateType } from '../types';
 import { spotifyApi, checkIsAuthorized } from '../utils';
 import { UserLibraryPlaylistId } from '../playlistItems/actions';
+import { setSnackbarState } from '../ui/actions';
 
 const flashPlaybackError = (
   e: XMLHttpRequest | Error, { track, playlist }: {
     track?: string;
     playlist?: string;
   },
-  fallback?: () => Promise<void>,
 ): void => {
   const routeToSong = (): void => {
     if (playlist) {
@@ -22,45 +22,16 @@ const flashPlaybackError = (
   };
   if (e instanceof XMLHttpRequest) {
     const errorMessage = e.response && JSON.parse(e.response)?.error?.message as undefined | string;
+    // This might look like a pointless if-statement, but there used to be stuff here.
+    // Leaving it for convenience
     if (errorMessage && errorMessage.includes('active device')) {
-      if (fallback) {
-        if (window.confirm(
-          'Remote playback failed.\nDo you want to create a playlist instead?',
-        )) {
-          fallback();
-        } else {
-          routeToSong();
-        }
-      } else {
-        alert('Remote playback failed.\n\nPlease make sure you have a song already playing on your official Spotify app.\nThis is a limitation of Spotify.\nYou will be redirected to your official Spotify app now.\nOnly the song you clicked will be played. A queue will not be created.\n After the song plays, come back and click again to be add the rest of the tracks to the queue.');
-        routeToSong();
-      }
+      routeToSong();
     } else if (errorMessage) {
-      if (fallback) {
-        if (window.confirm(
-          'Playback failed.\nDo you want to create a playlist instead?',
-        )) {
-          fallback();
-        } else {
-          routeToSong();
-        }
-      } else {
-        alert(errorMessage);
-        routeToSong();
-      }
-    } else if (fallback) {
-      if (window.confirm(
-        'Playback failed.\nDo you want to create a playlist instead?',
-      )) {
-        fallback();
-      } else {
-        routeToSong();
-      }
+      routeToSong();
     } else {
-      alert('Sorry, something went wrong. Please try again.');
+      routeToSong();
     }
   } else {
-    alert(e.message || 'Sorry, something went wrong.');
     routeToSong();
   }
 };
@@ -71,32 +42,25 @@ void,
   trackId: string;
   trackURIs: string[];
   shufflePlay?: boolean;
-  // eslint bug
-  // eslint-disable-next-line
-  fallback?:() => Promise<void>
-  // eslint bug
-  // eslint-disable-next-line
 },
 { state: CombinedStateType }
-// eslint bug
-// eslint-disable-next-line
-  >('play/trackURIs',
-    async ({
-      trackId, trackURIs, shufflePlay = false, fallback,
-    }, { getState }) => {
-      const state = getState();
-      checkIsAuthorized(
-        state.user.token.accessToken,
-        state.user.token.expiresAt,
-        state.user.tokenStatus.errorMessage,
-      );
+>('play/trackURIs',
+  async ({
+    trackId, trackURIs, shufflePlay = false,
+  }, { getState, dispatch }) => {
+    const state = getState();
+    checkIsAuthorized(
+      state.user.token.accessToken,
+      state.user.token.expiresAt,
+      state.user.tokenStatus.errorMessage,
+    );
 
-      const shuffledTrackUris = shufflePlay ? shuffle(trackURIs) : trackURIs;
-      const trackIdIndex = shuffledTrackUris.indexOf(trackId);
-      const trackIdsToEnqueue = shuffledTrackUris.slice(trackIdIndex, 500);
-      const restOfTheTracks = shuffledTrackUris.slice(0, trackIdIndex);
-      const reorderedList = [...trackIdsToEnqueue, ...restOfTheTracks].slice(0, 500);
-      try {
+    const shuffledTrackUris = shufflePlay ? shuffle(trackURIs) : trackURIs;
+    const trackIdIndex = shuffledTrackUris.indexOf(trackId);
+    const trackIdsToEnqueue = shuffledTrackUris.slice(trackIdIndex, 500);
+    const restOfTheTracks = shuffledTrackUris.slice(0, trackIdIndex);
+    const reorderedList = [...trackIdsToEnqueue, ...restOfTheTracks].slice(0, 500);
+    try {
       // window.open(`https://open.spotify.com/track/${reorderedList.shift()}`);
       // window.location.href = `https://open.spotify.com/track/${reorderedList.shift()}`;
       // window.location.href = `spotify:track:${reorderedList.shift()}`;
@@ -105,14 +69,19 @@ void,
       //   await spotifyApi.queue(`spotify:track:${trackToQueue}`);
       // });
 
-        await spotifyApi.setShuffle(shufflePlay);
-        await spotifyApi.play({
-          uris: reorderedList.map((trackURI) => `spotify:track:${trackURI}`),
-        });
-      } catch (e) {
-        flashPlaybackError(e, { track: reorderedList[0] }, fallback);
-      }
-    });
+      await spotifyApi.setShuffle(shufflePlay);
+      dispatch(setSnackbarState({
+        ...state.ui.snackbar,
+        isOpen: true,
+        text: 'Playing...',
+      }));
+      await spotifyApi.play({
+        uris: reorderedList.map((trackURI) => `spotify:track:${trackURI}`),
+      });
+    } catch (e) {
+      flashPlaybackError(e, { track: reorderedList[0] });
+    }
+  });
 
 export const playTrackInPlaylistContext = async ({
   trackId,
@@ -157,6 +126,11 @@ void,
       // Workaround because there's no context for "Saved tracks"
       await dispatch(playTrackURIS({ trackId, trackURIs: trackIds }));
     } else {
+      dispatch(setSnackbarState({
+        ...state.ui.snackbar,
+        isOpen: true,
+        text: 'Playing...',
+      }));
       await playTrackInPlaylistContext({
         trackId,
         playlistId,
@@ -187,6 +161,11 @@ void,
         shufflePlay,
       }));
     } else {
+      dispatch(setSnackbarState({
+        ...state.ui.snackbar,
+        isOpen: true,
+        text: 'Playing...',
+      }));
       await playTrackInPlaylistContext({
         trackId: trackIds[Math.floor(Math.random() * trackIds.length)],
         playlistId,

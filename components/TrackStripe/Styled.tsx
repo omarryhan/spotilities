@@ -57,8 +57,9 @@ export const ImageSection = styled.div<{longLength?: boolean}>`
   min-width: ${(props): string => (props.longLength ? longLength : shortLength)};
 `;
 
-export const Img = styled.img`
+export const Img = styled.img<{longLength?: boolean}>`
   height: 100%;
+  max-width: ${(props): string => (props.longLength ? longLength : shortLength)};
 `;
 
 export const TitleSection = styled.div`

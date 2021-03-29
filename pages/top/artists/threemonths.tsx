@@ -7,6 +7,7 @@ import BottomNav from '../../../components/BottomNav';
 import AccessTokenLoader from '../../../components/AccessTokenLoader';
 import AppBody from '../../../components/AppBody';
 import CurrentUserLoader from '../../../components/CurrentUserLoader';
+import Snackbar from '../../../components/Snackbar';
 
 import TopArtistsList from '../../../components/TopArtistsList';
 import TopResourceNavbar from '../../../components/TopResourceNavbar';
@@ -20,6 +21,7 @@ const Page: NextPage<{}> = () => (
     </Head>
     <AccessTokenLoader />
     <CurrentUserLoader />
+    <Snackbar />
     <TopNav title="Top" showRightButton />
     <AppBody>
       <TopTrackOrArtist currentType="artists" currentDuration="threemonths" />

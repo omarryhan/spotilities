@@ -84,7 +84,9 @@ const Component: React.FC = () => {
               <Title>
                 Found
                 {' '}
-                {trackIdsResults.length}
+                <strong>
+                  {trackIdsResults.length}
+                </strong>
                 {' '}
                 recommendations
               </Title>
@@ -103,7 +105,6 @@ const Component: React.FC = () => {
                         trackId: trackIdClicked,
                         trackURIs: trackIdsResults,
                         shufflePlay: false,
-                        fallback: createNewPlaylist,
                       }));
                     }}
                   />
