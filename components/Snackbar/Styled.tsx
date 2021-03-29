@@ -7,9 +7,9 @@ export const Button = styled(MaterialButton)`
   text-transform: capitalize;
 `;
 
-export const Snackbar = styled(MaterialSnackbar)`
+export const Snackbar = styled(MaterialSnackbar)<{isSuccess?: boolean}>`
   & > div {
-    background-color: ${(props): string => props.theme.colors.gray.lightest};
+    background-color: ${(props): string => (props.isSuccess ? props.theme.colors.green.primary : props.theme.colors.gray.lightest)};
   }
 
   & > div > div {

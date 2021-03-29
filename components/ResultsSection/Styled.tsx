@@ -20,8 +20,9 @@ export const TitleContainer = styled.div`
 
 export const Title = styled.h2`
   padding-right: 10px;
-  font-size: 22px;
+  font-size: 18px;
   margin: 0 0;
+  color: ${(props): string => props.theme.colors.white.dark};
 `;
 
 export const AddToPlaylistButton = styled(Button)`
@@ -40,6 +41,6 @@ export const AddToPlaylistButton = styled(Button)`
   
   & > span > svg {
     width: 100%;
-    fill: rgb(235,235,235,1);
+    fill: ${(props): string => props.theme.colors.white.light};
   }
 `;

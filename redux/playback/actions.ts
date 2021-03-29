@@ -73,6 +73,10 @@ void,
       dispatch(setSnackbarState({
         ...state.ui.snackbar,
         isOpen: true,
+        type: 'neutral',
+        actionText: '',
+        action: () => {},
+        time: 2500,
         text: 'Playing...',
       }));
       await spotifyApi.play({
@@ -129,6 +133,10 @@ void,
       dispatch(setSnackbarState({
         ...state.ui.snackbar,
         isOpen: true,
+        type: 'neutral',
+        actionText: '',
+        action: () => {},
+        time: 2500,
         text: 'Playing...',
       }));
       await playTrackInPlaylistContext({
@@ -164,6 +172,10 @@ void,
       dispatch(setSnackbarState({
         ...state.ui.snackbar,
         isOpen: true,
+        type: 'neutral',
+        actionText: '',
+        action: () => {},
+        time: 2500,
         text: 'Playing...',
       }));
       await playTrackInPlaylistContext({

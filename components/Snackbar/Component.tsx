@@ -30,6 +30,7 @@ const Component: React.FC = () => {
         vertical: 'bottom',
         horizontal: 'center',
       }}
+      isSuccess={snackbarState.type === 'success'}
       open={snackbarState.isOpen}
       autoHideDuration={snackbarState.time}
       onClose={handleClose}
