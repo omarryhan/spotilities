@@ -37,7 +37,7 @@ const getKeySignature = (key: number | undefined, mode: number | undefined): nul
   if (
     typeof key === 'undefined'
     || typeof mode === 'undefined'
-    || (mode !== noKeyDetectedPitchClassNotation && mode !== 0)
+    || (mode === noKeyDetectedPitchClassNotation)
     || key === -1
   ) {
     return null;
