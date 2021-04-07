@@ -77,7 +77,7 @@ const Component: React.FC = () => {
   return (
     <>
       <Title>
-        2. Filter (Optional):
+        2. Filter (Optional)
       </Title>
       <Container>
         {

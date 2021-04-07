@@ -44,7 +44,7 @@ const Component: React.FC = () => {
   return (
     <>
       <Title>
-        1. Select a track or more that you like:
+        1. Select a track or more that you like
       </Title>
       <Container>
         {
