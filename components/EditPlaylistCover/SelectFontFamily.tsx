@@ -49,9 +49,10 @@ const Component: React.FC<Props> = ({
   React.useEffect(() => {
     const effect = async (): Promise<void> => {
       if (typeof window !== 'undefined') {
+        const FONTS_API_KEY = 'AIzaSyD1kuVg618miADnmNr5YKcQT5LU3As4Us0';
         const fonts = (await (await fetch(
           // sort either by: alpha, date, popularity, style, trending
-          'https://www.googleapis.com/webfonts/v1/webfonts?sort=alpha&key=AIzaSyD1kuVg618miADnmNr5YKcQT5LU3As4Us0',
+          `https://www.googleapis.com/webfonts/v1/webfonts?sort=alpha&key=${FONTS_API_KEY}`,
         )).json() as Response).items;
         fonts.push({
           family: 'Proxima Nova',

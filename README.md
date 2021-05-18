@@ -79,14 +79,12 @@ Development requires Node version 12+
 
 ## Deployment
 
-To deploy it on your own, you need to get two main keys:
+To deploy it on your own, you need to get these keys:
 
-1. Spotify OAuth2 client ID
-2. Google Analytics public ID (Optional, just remove mine if you don't want GA)
-3. Pixabay API key
-4. API key for Google's web fonts API. (Search for: https://www.googleapis.com/webfonts/v1/webfonts?) and replace the API key in the URL
-
-Then search for `SPOTIFY_CLIENT_ID` and `GA_TRACKING_ID` and replace the existing keys.
+1. Spotify OAuth2 client ID (`SPOTIFY_CLIENT_ID`)
+2. Google Analytics public ID (Optional, just remove mine if you don't want GA) (`GA_TRACKING_ID`)
+3. Pixabay API key (`PIXABAY_API_KEY`)
+4. API key for Google's web fonts API. (`FONTS_API_KEY`)
 
 To build the project, run:
 
