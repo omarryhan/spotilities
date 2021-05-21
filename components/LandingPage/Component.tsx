@@ -523,7 +523,7 @@ const Component: React.FC = () => {
             margin: '24px 0 50px 0',
           }}
           >
-            Here&apos;s what you&apos;ve been missing out on
+            Spotilities will allow you to
           </h2>
 
           <FeaturesContainer>
