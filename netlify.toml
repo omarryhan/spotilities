@@ -5,6 +5,6 @@
   NODE_VERSION = "12.16.3"
 [[redirects]]
   from = "/playlists/*"
-  to = "/playlists"
+  to = "/library"
   status = 200
   force = true
