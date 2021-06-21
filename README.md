@@ -2,7 +2,6 @@
   <img src="https://github.com/omarryhan/spotilities/raw/master/public/icons/logo/512w/logo3manifest-big.png" alt="Logo" title="Spotilities" height="250" width="250"/>
   <p align="center">
     <a href="https://github.com/omarryhan/spotilities/actions?query=workflow%3ACI"><img alt="Build Status" src="https://github.com/omarryhan/spotilities/workflows/CI/badge.svg"></a>
-    <a href="https://app.netlify.com/sites/spotilities/deploys"><img alt="Build status" src="https://api.netlify.com/api/v1/badges/8c0737ed-4b8a-4bb2-b61c-524085f59961/deploy-status"></a>
     <a href="https://github.com/omarryhan/spotilities"><img alt="Software License" src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square"></a>
   </p>
 </p>
@@ -13,7 +12,7 @@ Your swiss army knife for Spotify.
 
 ## Live version
 
-https://spotilities.netlify.app/
+https://spotilities.vercel.app/
 
 ## Why I made it
 
