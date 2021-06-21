@@ -1,5 +1,5 @@
 {
   "redirects": [
-    { "source": "/playlists/*", "destination": "/playlists", "permanent": true }
+    { "source": "/playlists/.*", "destination": "/playlists", "permanent": true }
   ]
 }
