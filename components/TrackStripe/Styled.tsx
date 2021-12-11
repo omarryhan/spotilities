@@ -39,7 +39,7 @@ export const Container = styled.div`
   
 `;
 
-export const LeftSection = styled.div<{fullWidth?: boolean}>`
+export const LeftSection = styled.div<{ fullWidth?: boolean }>`
   height: 100%;
   max-width: ${(props): string => (props.fullWidth ? '100%' : '75%')};
   display: flex;
@@ -52,12 +52,12 @@ export const RightSection = styled.div`
   justify-content: flex-end;
 `;
 
-export const ImageSection = styled.div<{longLength?: boolean}>`
+export const ImageSection = styled.div<{ longLength?: boolean }>`
   height: 100%;
   min-width: ${(props): string => (props.longLength ? longLength : shortLength)};
 `;
 
-export const Img = styled.img<{longLength?: boolean}>`
+export const Img = styled.img<{ longLength?: boolean }>`
   height: 100%;
   max-width: ${(props): string => (props.longLength ? longLength : shortLength)};
 `;

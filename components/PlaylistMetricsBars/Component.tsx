@@ -16,7 +16,7 @@ import {
   AvailableFeatures, AvailableMetrics,
 } from '../PlaylistMetricBar/types';
 
-const Component: React.FC<{trackIds: string[]}> = ({ trackIds }) => {
+const Component: React.FC<{ trackIds: string[] }> = ({ trackIds }) => {
   const playlistsTracks = useSelector<CombinedStateType, AllTracks>(
     (state) => {
       const keys = Object.keys(state.tracks.data).filter(

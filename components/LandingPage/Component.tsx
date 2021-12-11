@@ -20,7 +20,7 @@ import Waves2 from '../../public/icons/waves_2.svg';
 import SpotifyWhite from '../../public/icons/spotify_white.svg';
 import OpenSourceLogo from '../../public/icons/opensource.svg';
 
-const SigninButton: React.FC<{cb?: () => Promise<void>}> = ({ cb }) => (
+const SigninButton: React.FC<{ cb?: () => Promise<void> }> = ({ cb }) => (
   <SignInButton onClick={async (): Promise<void> => {
     if (cb) {
       await cb();
@@ -664,7 +664,7 @@ const Component: React.FC = () => {
           {' '}
           {new Date().getFullYear()}
           {' '}
-          All rights not reserved ;p
+          All rights reserved
         </p>
         <p
           style={{

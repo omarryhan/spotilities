@@ -120,6 +120,7 @@ const Component: React.FC<Props> = ({
         {
           allGoogleFonts.filter((f) => selectedCategories.includes(f.category)).map((font) => (
             <option
+              key={font.family}
               value={font.family}
               selected={font.family === currentFontFamily}
             >
@@ -135,7 +136,7 @@ const Component: React.FC<Props> = ({
         }}
       >
         {allFontCategories.map((category) => (
-          <div>
+          <div key={category}>
             <label
               htmlFor={category}
               style={{

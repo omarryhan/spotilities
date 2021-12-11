@@ -4,7 +4,7 @@ export const Container = styled.div`
   width: 100%;
 `;
 
-export const BackgroundGradient = styled.div<{bgColor: string}>`
+export const BackgroundGradient = styled.div<{ bgColor: string }>`
   width: 100%;
   background: rgba(18,18,18,1);
 

@@ -9,7 +9,7 @@ import TopNav from '../../../components/TopNav';
 import MetricsSliderSection from '../../../components/MetricsSliderSection';
 import ProgressBar from '../../../components/TopProgressBar';
 
-const Page: NextPage<{}> = () => (
+const Page: NextPage = () => (
   <>
     <Head>
       <meta name="title" content="Spotilities | Select Filters" />

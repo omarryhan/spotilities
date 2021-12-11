@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Button = styled.button<{notClickable?: boolean}>`
+export const Button = styled.button<{ notClickable?: boolean }>`
   /* Remove all styles */
   background: none;
   color: inherit;
@@ -29,7 +29,7 @@ export const Container = styled.div`
   justify-content: space-between;
 `;
 
-export const LeftSection = styled.div<{fullWidth?: boolean}>`
+export const LeftSection = styled.div<{ fullWidth?: boolean }>`
   height: 100%;
   max-width: ${(props): string => (props.fullWidth ? '100%' : '70%')};
   display: flex;

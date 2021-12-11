@@ -23,7 +23,7 @@ export const clearRecommendationsResults = createAction<void>('recommendations/r
 
 // Used to skip selecting tracks for recommendations
 export const setRandomSeedTracks = createAsyncThunk<
-{ randomSeedTracks: SpotifyApi.SavedTrackObject[]},
+{ randomSeedTracks: SpotifyApi.SavedTrackObject[] },
 void,
 { state: CombinedStateType }
 >('recommendations/setRandomSeedTracks',
@@ -95,7 +95,7 @@ void,
       const attributeKeys = Object.keys(attributes) as TunableMetrics[];
       const attributeKeysToSend = attributeKeys.filter((key) => attributes[key].isActivated);
 
-      const allAttributesArguments: {[key: string]: number} = {};
+      const allAttributesArguments: { [key: string]: number } = {};
 
       attributeKeysToSend.forEach((key) => {
         const maxKey = `max_${key}`;

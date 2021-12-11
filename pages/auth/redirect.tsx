@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 
 import { setAccessToken, setTokenErrorMessage } from '../../redux/user/actions';
 
-const Page: NextPage<{}> = () => {
+const Page: NextPage = () => {
   const dispatch = useDispatch();
   React.useEffect(() => {
     const hash = window.location.hash.substr(1);

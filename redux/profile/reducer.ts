@@ -17,14 +17,14 @@ export const InitialState: InitialStateInterface = {
     },
     followers: {
       href: '',
-      // @ts-expect-error
+      // @ts-expect-error missing in lib
       total: '',
     },
     href: '',
     id: '',
     images: [],
     product: '',
-    // @ts-expect-error
+    // @ts-expect-error missing in lib
     type: '',
     uri: '',
   },

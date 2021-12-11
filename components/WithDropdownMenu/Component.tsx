@@ -9,7 +9,7 @@ import {
 } from './Styled';
 import DownArrowIcon from '../../public/icons/down.svg';
 
-const Component: React.FC<{title: string}> = ({ children, title }) => {
+const Component: React.FC<{ title: string }> = ({ children, title }) => {
   const [isChildVisible, setIsChildVisible] = React.useState(true);
   const toggleIsChildVisible = (): void => setIsChildVisible(!isChildVisible);
   return (

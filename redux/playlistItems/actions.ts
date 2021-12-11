@@ -41,8 +41,8 @@ export const convertMyTracksToPlaylist = (
 
 export const fetchUserLibraryAsPlaylist = createAsyncThunk<
 void,
-{ dispatchSetAudioFeatures?: boolean},
-{ state: CombinedStateType}
+{ dispatchSetAudioFeatures?: boolean },
+{ state: CombinedStateType }
 >('userLibrary/set',
   async ({ dispatchSetAudioFeatures = false }, { dispatch, getState }) => {
     const state = getState();

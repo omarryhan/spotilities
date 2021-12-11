@@ -44,7 +44,7 @@ export const MetricBarBackground = styled.span`
   }
 `;
 
-export const MetricBar = styled.span<{percentageHeight?: number}>`
+export const MetricBar = styled.span<{ percentageHeight?: number }>`
   position: absolute;
   background-color: ${(props): string => props.theme.colors.green.primary};
   height: ${(props): string => (typeof props.percentageHeight !== 'undefined' ? props.percentageHeight.toString() : '1')}%;

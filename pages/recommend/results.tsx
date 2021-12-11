@@ -9,7 +9,7 @@ import ProgressBar from '../../components/TopProgressBar';
 import ResultsSection from '../../components/ResultsSection';
 import Snackbar from '../../components/Snackbar';
 
-const Page: NextPage<{}> = () => (
+const Page: NextPage = () => (
   <>
     <Head>
       <meta name="title" content="Spotilities | Recommendation Results" />

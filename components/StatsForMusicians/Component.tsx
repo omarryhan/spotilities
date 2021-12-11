@@ -46,7 +46,7 @@ const getKeySignature = (key: number | undefined, mode: number | undefined): nul
   return `${musicalKeyLetterMapping[key]} ${modeMapping[mode]}`;
 };
 
-const Component: React.FC<{trackId: string}> = ({ trackId }) => {
+const Component: React.FC<{ trackId: string }> = ({ trackId }) => {
   const tempo = useSelector<CombinedStateType, number | undefined>(
     (state) => state.tracksAudioFeatures.data[trackId]?.data?.tempo,
   );

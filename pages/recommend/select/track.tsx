@@ -12,7 +12,7 @@ import { CombinedStateType } from '../../../redux/types';
 import { fetchUserPlaylistItems } from '../../../redux/playlistItems/actions';
 import { addTrackSeed } from '../../../redux/recommendations/actions';
 
-const Page: NextPage<{}> = () => {
+const Page: NextPage = () => {
   let playlistId = '';
   if (typeof window !== 'undefined' && window.location.href.split('/').length === 7) {
     // eslint-disable-next-line prefer-destructuring

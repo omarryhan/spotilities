@@ -25,18 +25,6 @@ const Component: React.FC<Props> = ({ name }) => {
   );
   const metricDefinition = allAttributes[name] as AttributeInfo;
 
-  const setValues = (event: React.ChangeEvent<{}>, values: number | number[]): void => {
-    const minAndMax = values as number[];
-    dispatch(setMetric({
-      name,
-      attributes: {
-        isActivated: true,
-        min: minAndMax[0],
-        max: minAndMax[1],
-      },
-    }));
-  };
-
   return (
     <Container>
       <IconWrapper>
@@ -49,7 +37,17 @@ const Component: React.FC<Props> = ({ name }) => {
           min={metricDefinition.isActivatedPayload.min}
           max={metricDefinition.isActivatedPayload.max}
           defaultValue={[metric.min, metric.max] as number[]}
-          onChange={setValues}
+          onChange={(event, values): void => {
+            const minAndMax = values as number[];
+            dispatch(setMetric({
+              name,
+              attributes: {
+                isActivated: true,
+                min: minAndMax[0],
+                max: minAndMax[1],
+              },
+            }));
+          }}
           step={1}
           valueLabelDisplay="auto"
           aria-labelledby="range-slider"

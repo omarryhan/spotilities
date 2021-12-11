@@ -13,7 +13,7 @@ import AccountSettings from '../components/AccountSettings';
 import AppSettings from '../components/AppSettings';
 import Feedback from '../components/Feedback';
 
-const Page: NextPage<{}> = () => (
+const Page: NextPage = () => (
   <>
     <Head>
       <meta name="title" content="Spotilities | Settings" />

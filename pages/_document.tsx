@@ -14,7 +14,7 @@ export default class MyDocument extends Document {
     try {
       const page = originalRenderPage((App) => (props) => sheet.collectStyles(<App {...props} />));
       const styleTags = sheet.getStyleElement();
-      return { ...page, styleTags };
+      return await { ...page, styleTags };
     } finally {
       sheet.seal();
     }
@@ -26,7 +26,7 @@ export default class MyDocument extends Document {
         lang="en"
       >
         <Head>
-          {/* @ts-ignore */}
+          {/* @ts-expect-error idk whyy :@ */}
           {this.props.styleTags}
         </Head>
         <body

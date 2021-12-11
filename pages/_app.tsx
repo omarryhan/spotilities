@@ -17,11 +17,11 @@ import { GA_TRACKING_ID, GA_CONFIGS } from '../configs/services';
 const initGA = (): void => {
   if (
     typeof window !== 'undefined'
-    // @ts-expect-error
+    // @ts-expect-error mehh
     && !window.isGAInitialized
   ) {
     ReactGA.initialize(GA_TRACKING_ID, GA_CONFIGS);
-    // @ts-expect-error
+    // @ts-expect-error mehh
     window.isGAInitialized = true;
   }
 };
@@ -80,7 +80,9 @@ class MyApp extends App<AppInitialProps & CustomAppInitialProps> {
       componentStack: errorInfo.componentStack,
       isDevEnv: process.env.NODE_ENV === 'development',
     });
-    super.componentDidCatch(error, errorInfo);
+    if (super.componentDidCatch) {
+      super.componentDidCatch(error, errorInfo);
+    }
   }
 
   public render(): React.ReactElement {

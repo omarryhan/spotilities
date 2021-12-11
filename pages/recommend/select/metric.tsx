@@ -8,7 +8,7 @@ import CurrentUserLoader from '../../../components/CurrentUserLoader';
 import TopNav from '../../../components/TopNav';
 import MetricSelector from '../../../components/MetricSelector';
 
-const Page: NextPage<{}> = () => (
+const Page: NextPage = () => (
   <>
     <Head>
       <meta name="title" content="Spotilities | Select a Filter" />

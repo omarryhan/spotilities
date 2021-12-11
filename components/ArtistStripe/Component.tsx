@@ -43,7 +43,7 @@ const Component: React.FC<Props> = ({
             src={artistImage || '/cover_art/fallback_cover_icon.png'}
             alt="Image of the artist"
             onError={(e): void => {
-              // @ts-expect-error
+              // @ts-expect-error not included in lib
               e.target.src = '/cover_art/fallback_cover_icon.png';
             }}
           />

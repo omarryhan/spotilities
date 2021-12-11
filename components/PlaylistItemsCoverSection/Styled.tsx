@@ -11,7 +11,7 @@ export const Slider = styled.div`
 
 // https://codepen.io/chriscoyier/pen/XwbNwX?editors=1100
 // https://codepen.io/Schepp/pen/WNbQByE?editors=1100
-export const Slides = styled.div<{bgColor: string}>`
+export const Slides = styled.div<{ bgColor: string }>`
   display: flex;
   
   overflow-x: auto;
@@ -24,7 +24,7 @@ export const Slides = styled.div<{bgColor: string}>`
   scrollbar-arrow-color: ${(props): string => props.theme.colors.gray.dark};
 `;
 
-export const Slide = styled.div<{bgColor: string}>`
+export const Slide = styled.div<{ bgColor: string }>`
   scroll-snap-align: start;
   flex-shrink: 0;
   width: 100%;

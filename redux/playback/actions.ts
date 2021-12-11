@@ -83,7 +83,7 @@ void,
         uris: reorderedList.map((trackURI) => `spotify:track:${trackURI}`),
       });
     } catch (e) {
-      flashPlaybackError(e, { track: reorderedList[0] });
+      flashPlaybackError(e as Error, { track: reorderedList[0] });
     }
   });
 
@@ -108,7 +108,7 @@ export const playTrackInPlaylistContext = async ({
     });
   } catch (e) {
     // flashPlaybackError(e, { playlist: playlistId });
-    flashPlaybackError(e, { track: `${trackId}?context=spotify%3Aplaylist%3A${playlistId}` });
+    flashPlaybackError(e as Error, { track: `${trackId}?context=spotify%3Aplaylist%3A${playlistId}` });
   }
 };
 
@@ -149,7 +149,7 @@ void,
 
 export const playPlaylist = createAsyncThunk<
 void,
-{ playlistId: string; shufflePlay?: boolean},
+{ playlistId: string; shufflePlay?: boolean },
 { state: CombinedStateType }
 >('shufflePlay/playlist',
   async ({ playlistId, shufflePlay = true }, { getState, dispatch }) => {

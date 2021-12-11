@@ -3,7 +3,8 @@
     "**/*.ts",
     "**/*.tsx",
     "**/*.js",
-    "**/*.jsx"
+    "**/*.jsx",
+    ".eslintrc.js"
   ],
   "exclude": [
     "node_modules",
@@ -15,9 +16,10 @@
     "coverage"
   ],
   "compilerOptions": {
-    "target": "es5",
-    "module": "esnext",
+    "target": "es6",
+    "module": "commonjs",
     "lib": [
+      "es6",
       "dom",
       "dom.iterable",
       "esnext"
@@ -32,6 +34,7 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "allowJs": true
+    "allowJs": true,
+    "incremental": true
   }
 }

@@ -9,7 +9,7 @@ import AppBody from '../../../components/AppBody';
 import PlaylistList from '../../../components/PlaylistList';
 import CurrentUserLoader from '../../../components/CurrentUserLoader';
 
-const Page: NextPage<{}> = () => (
+const Page: NextPage = () => (
   <>
     <Head>
       <meta name="title" content="Spotilities | Select Playlist" />

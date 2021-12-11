@@ -10,7 +10,7 @@ const fetchAudioFeatures = async (
   trackIds: string[], // max 100
 ): Promise<
 SpotifyApi.MultipleAudioFeaturesResponse
-> => await spotifyApi.getAudioFeaturesForTracks(trackIds);
+> => spotifyApi.getAudioFeaturesForTracks(trackIds);
 
 export const fetchTracksAudioFeatures = createAsyncThunk<
 void,

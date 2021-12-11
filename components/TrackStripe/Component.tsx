@@ -73,7 +73,7 @@ const Component: React.FC<Props> = ({
   );
 
   const albumYear = useSelector<CombinedStateType, string>(
-    // @ts-expect-error
+    // @ts-expect-error missing in lib
     (state) => state.tracks.data[trackId]?.data?.album.release_date,
   );
 
@@ -138,7 +138,7 @@ const Component: React.FC<Props> = ({
               src={trackImage || '/cover_art/fallback_cover_icon.png'}
               alt="Track album cover"
               onError={(e): void => {
-                // @ts-expect-error
+                // @ts-expect-error missing in lib
                 e.target.src = '/cover_art/fallback_cover_icon.png';
               }}
             />

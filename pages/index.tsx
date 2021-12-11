@@ -4,7 +4,7 @@ import Head from 'next/head';
 
 import LandingPage from '../components/LandingPage';
 
-const Page: NextPage<{}> = () => (
+const Page: NextPage = () => (
   <>
     <Head>
       <meta name="title" content="Spotilities | Home" />

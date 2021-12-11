@@ -19,7 +19,7 @@ export const Nav = styled.nav`
 
 `;
 
-export const StyledLink = styled.a<{isActive?: boolean}>`
+export const StyledLink = styled.a<{ isActive?: boolean }>`
   font-size: 20px;
   margin-right: 20px;
   font-weight: bold;

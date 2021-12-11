@@ -33,7 +33,7 @@ import {
   AvailableFeatures,
 } from '../PlaylistMetricBar/types';
 
-const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
+const Component: React.FC<{ playlistId: string }> = ({ playlistId }) => {
   const [bgColor, setBgColor] = React.useState(styledComponentsTheme.colors.gray.dark);
 
   const playlistName = useSelector<CombinedStateType, string>(
@@ -49,7 +49,7 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
   );
 
   const playlistDescription = useSelector<CombinedStateType, string | undefined>(
-    // @ts-expect-error
+    // @ts-expect-error missing in lib
     (state) => state.playlists.data[playlistId]?.description,
   );
 
@@ -108,7 +108,7 @@ const Component: React.FC<{playlistId: string}> = ({ playlistId }) => {
                   src={playlistPhotos ? playlistPhotos[0] || '/cover_art/fallback_cover_icon.png' : backupPhotoURL}
                   alt={`${playlistName} playlist cover`}
                   onError={(e): void => {
-                    // @ts-expect-error
+                    // @ts-expect-error missing in lib
                     e.target.src = '/cover_art/fallback_cover_icon.png';
                   }}
                 />

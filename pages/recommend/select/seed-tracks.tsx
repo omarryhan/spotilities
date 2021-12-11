@@ -9,7 +9,7 @@ import TopNav from '../../../components/TopNav';
 import SeedTracksSection from '../../../components/SeedTracksSection';
 import ProgressBar from '../../../components/TopProgressBar';
 
-const Page: NextPage<{}> = () => (
+const Page: NextPage = () => (
   <>
     <Head>
       <meta name="title" content="Spotilities | Select Seed Tracks" />

@@ -84,7 +84,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
   // the actual value is 100% of vw-paddings or the max-width of Styled.CanvasWrapper
   const [currentGradientSettings, setCurrentGradientSettings] = React.useState<string[]>(['none', '']);
   const [{ strokeColor, strokeWidth }, setCanvasBorder] = React.useState<
-  {strokeColor: string; strokeWidth: number}
+  { strokeColor: string; strokeWidth: number }
   >({ strokeColor: '#1DB954', strokeWidth: 0 });
 
   /** ************* Pixabay form *********** */
@@ -96,9 +96,11 @@ const Component: React.FC<Props> = ({ playlistId }) => {
 
   /** ************* Text *********** */
   const [currentText, setCurrentText] = React.useState<TextProps[]>([]);
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   const selectedTextItem_ = currentText.filter(
     (text) => text.id === selectedId,
   );
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   const selectedTextItem = selectedId === null ? '' : selectedTextItem_.length ? selectedTextItem_[0] : '';
   const currentFontFamily = !selectedTextItem ? '' : selectedTextItem.fontFamily;
   const setCurrentTextProp = (object: Partial<TextProps>): void => {

@@ -95,8 +95,8 @@ void,
           handleFailedUploadForUnknownReason(e.status);
         }
       } else {
-        handleUploadError(e.message);
-        e.message ? alert(e.message) : handleFailedUploadForUnknownReason(e.status);
+        handleUploadError((e as Error).message);
+        (e as Error).message ? alert((e as Error).message) : handleFailedUploadForUnknownReason((e as any).status);
       }
       return;
     } finally {
@@ -123,7 +123,7 @@ void,
       state.user.tokenStatus.errorMessage,
     );
 
-    const payload: {name: string; description?: string} = {
+    const payload: { name: string; description?: string } = {
       name,
     };
 
@@ -154,7 +154,7 @@ void,
           alert('Something went wrong');
         }
       } else {
-        alert(e.message || 'Something went wrong');
+        alert((e as Error).message || 'Something went wrong');
       }
     } finally {
       await dispatch(fetchUserPlaylists(state.profile.data.id));

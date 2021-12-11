@@ -13,7 +13,7 @@ import TopTracksList from '../../../components/TopTracksList';
 import TopResourceNavbar from '../../../components/TopResourceNavbar';
 import TopTrackOrArtist from '../../../components/TopTrackOrArtist';
 
-const Page: NextPage<{}> = () => (
+const Page: NextPage = () => (
   <>
     <Head>
       <meta name="title" content="Spotilities | Top tracks | 1 month" />

@@ -133,7 +133,7 @@ const heartBeat = keyframes`
   }
 `;
 
-export const SpotilitiesLogoWrapper = styled.div<{isHeartBeatOn: boolean}>`
+export const SpotilitiesLogoWrapper = styled.div<{ isHeartBeatOn: boolean }>`
   width: 200px;
   margin: 0 auto;
   padding-top: 60px;

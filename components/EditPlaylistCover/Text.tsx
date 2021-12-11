@@ -2,8 +2,6 @@
 import React from 'react';
 import { Text, Transformer } from 'react-konva';
 import Konva from 'konva';
-import { Layer } from 'konva/types/Layer';
-import { Box } from 'konva/types/shapes/Transformer';
 import { styledComponentsTheme } from '../../configs/theme';
 
 export interface TextProps {
@@ -74,7 +72,7 @@ const Component: React.FC<Props> = ({
       (transformerRef.current as Konva.Transformer).nodes([
         textRef.current as Konva.Text,
       ]);
-      ((transformerRef.current as Konva.Transformer).getLayer() as Layer).batchDraw();
+      ((transformerRef.current as Konva.Transformer).getLayer() as Konva.Layer).batchDraw();
     }
   }, [isSelected]);
 
@@ -109,7 +107,7 @@ const Component: React.FC<Props> = ({
           borderStroke={styledComponentsTheme.colors.gray.darkest}
           ref={transformerRef}
           resizeEnabled={false}
-          boundBoxFunc={(oldBox, newBox): Box => {
+          boundBoxFunc={(oldBox, newBox) => {
             if (newBox.width < 5 || newBox.height < 5) {
               return oldBox;
             }

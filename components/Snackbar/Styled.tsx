@@ -7,7 +7,7 @@ export const Button = styled(MaterialButton)`
   text-transform: capitalize;
 `;
 
-export const Snackbar = styled(MaterialSnackbar)<{isSuccess?: boolean}>`
+export const Snackbar = styled(MaterialSnackbar)<{ isSuccess?: boolean }>`
   margin-bottom: 60px;
   & > div {
     background-color: ${(props): string => (props.isSuccess ? props.theme.colors.green.primary : props.theme.colors.gray.lightest)};

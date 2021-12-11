@@ -107,7 +107,7 @@ const Component: React.FC<Props> = ({ playlistId, onPlaylistItemClick }) => {
               }
               alt="Playlist cover"
               onError={(e): void => {
-                // @ts-expect-error
+                // @ts-expect-error missing in lib
                 e.target.src = '/cover_art/fallback_cover_icon.png';
               }}
             />

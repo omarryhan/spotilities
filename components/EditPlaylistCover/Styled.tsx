@@ -71,7 +71,7 @@ export const BottomEditMenus = styled.div`
   height: 100%;
 `;
 
-export const BottomEditMenu = styled(Button)<{isactive: boolean}>`
+export const BottomEditMenu = styled(Button)<{ isactive: boolean }>`
   height: 100%;
   /*Fill the remaining horizontal space*/
   flex: 1;
@@ -97,7 +97,7 @@ export const BottomEditMenu = styled(Button)<{isactive: boolean}>`
   }
 `;
 
-export const BottomEditMenuStatus = styled.div<{isactive: boolean}>`
+export const BottomEditMenuStatus = styled.div<{ isactive: boolean }>`
   width: 100%;
   height: 3px;
   position: absolute;

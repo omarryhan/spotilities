@@ -22,7 +22,7 @@ export const Nav = styled.nav`
   padding: 5px ${(props): string => props.theme.dimensions.contentSideMargin.all};
 `;
 
-export const NavItem = styled.div<{left?: boolean; right?: boolean}>`
+export const NavItem = styled.div<{ left?: boolean; right?: boolean }>`
   display: flex;
   justify-content: ${(props): string => (props.left ? 'flex-start' : props.right ? 'flex-end' : 'center')};
   align-items: center;

@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useState } from 'react';
 import { ColorExtractor } from 'react-color-extractor';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
@@ -28,11 +27,6 @@ interface Props {
   playlistId: string;
 }
 
-interface FormData {
-  name: string;
-  description: string;
-}
-
 const Component: React.FC<Props> = ({ playlistId }) => {
   const [bgColor, setBgColor] = React.useState(styledComponentsTheme.colors.gray.dark);
 
@@ -57,37 +51,12 @@ const Component: React.FC<Props> = ({ playlistId }) => {
     description: playlistDescription,
   };
 
-  const {
-    handleSubmit, register, reset, formState,
-  } = useForm<FormData>({
-    defaultValues,
-  });
-
-  const handleBeforeUnload = (e: BeforeUnloadEvent): string => {
-    const confirmationMessage = 'You have unsaved changes. Discard?';
-    e.returnValue = confirmationMessage;
-    return confirmationMessage;
+  const [name, setName] = useState(defaultValues.name);
+  const [description, setDescription] = useState(defaultValues.description);
+  const reset = () => {
+    setName('');
+    setDescription('');
   };
-
-  useEffect(() => {
-    if (!formState.isDirty) {
-      return (): void => {};
-    }
-
-    // 1. Handle back button
-    router.beforePopState(() => (!!window.confirm('You have unsaved changes. Discard?')));
-
-    // 2. Handle exit window
-    window.addEventListener('beforeunload', handleBeforeUnload);
-
-    // 3. Handle push state (e.g. edit cover)
-    // will handle in the button handler instead
-
-    return (): void => {
-      router.beforePopState(() => true);
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
-  });
 
   const dispatch = useDispatch();
 
@@ -111,7 +80,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
               src={playlistPhotos ? playlistPhotos[0] || '/cover_art/fallback_cover_icon.png' : ''}
               alt={`${playlistName} playlist cover`}
               onError={(e): void => {
-                // @ts-expect-error
+                // @ts-expect-error missing in lib
                 e.target.src = '/cover_art/fallback_cover_icon.png';
               }}
             />
@@ -123,7 +92,7 @@ const Component: React.FC<Props> = ({ playlistId }) => {
             type="button"
             onClick={
               (): void => {
-                if (formState.isDirty) {
+                if (name !== defaultValues.name || description !== defaultValues.description) {
                   window.alert('Please save your changes first, then edit the cover picture.');
                   return;
                 }
@@ -140,35 +109,32 @@ const Component: React.FC<Props> = ({ playlistId }) => {
       </BackgroundGradient>
 
       <Form
-        onSubmit={handleSubmit(
-          async ({ name, description }) => {
-            if (description.includes('\n')) {
-              alert('Description cannot include more than one line (Shouldn\'t hit enter).\nThis is a limitation of Spotify.');
-              return;
-            }
+        onSubmit={async (e) => {
+          e.preventDefault();
+          if (description.includes('\n')) {
+            alert('Description cannot include more than one line (Shouldn\'t hit enter).\nThis is a limitation of Spotify.');
+            return;
+          }
 
-            if (!trim(name)) {
-              alert('Name cannot be empty');
-              return;
-            }
+          if (!trim(name)) {
+            alert('Name cannot be empty');
+            return;
+          }
 
-            if (playlistDescription && !trim(description)) {
-              alert('Description cannot be empty.\nThis is a limitation of Spotify.');
-              return;
-            }
+          if (playlistDescription && !trim(description)) {
+            alert('Description cannot be empty.\nThis is a limitation of Spotify.');
+            return;
+          }
 
-            await dispatch(updateUserPlaylistInfo({
-              name,
-              description,
-              id: playlistId,
-            }));
-            reset();
-            router.push('/playlists', `/playlists/${playlistId}`);
-          },
-          () => {
-            alert('Something went wrong :(.');
-          },
-        )}
+          await dispatch(updateUserPlaylistInfo({
+            name,
+            description,
+            id: playlistId,
+          }));
+          reset();
+          router.push('/playlists', `/playlists/${playlistId}`);
+        }
+        }
       >
         <InputBox>
           <Label
@@ -176,11 +142,13 @@ const Component: React.FC<Props> = ({ playlistId }) => {
           >
             Name
             <Input
-              name="name"
               type="text"
               id="name"
               placeholder="Playlist name"
-              ref={register}
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
             />
           </Label>
         </InputBox>
@@ -191,10 +159,13 @@ const Component: React.FC<Props> = ({ playlistId }) => {
           >
             Description
             <TextArea
-              name="description"
               id="description"
               placeholder="Playlist description"
-              ref={register}
+              name="description"
+              value={description}
+              onChange={(e) => {
+                setDescription(e.target.value);
+              }}
             />
           </Label>
         </InputBox>

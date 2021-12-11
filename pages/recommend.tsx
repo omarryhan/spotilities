@@ -9,7 +9,7 @@ import CurrentUserLoader from '../components/CurrentUserLoader';
 import TopNav from '../components/TopNav';
 import RecommendGetStarted from '../components/RecommendGetStarted';
 
-const Page: NextPage<{}> = () => (
+const Page: NextPage = () => (
   <>
     <Head>
       <meta name="title" content="Spotilities | Recommendations" />

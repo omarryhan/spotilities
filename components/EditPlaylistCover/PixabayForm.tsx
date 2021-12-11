@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useForm } from 'react-hook-form';
 
 import SearchIcon from '../../public/icons/search.svg';
 import { searchPixabay, PixabayHit } from './pixabayAPI';
@@ -119,6 +118,8 @@ const Component: React.FC<Props> = ({
     pixabayQuery: 'cat png',
   };
 
+  const [pixabayQuery, setPixabayQuery] = React.useState('');
+
   const newPixabaySearch = async (q: string): Promise<void> => {
     setIsSearchingPixabay(true);
     setLastPageQuery(q);
@@ -137,32 +138,26 @@ const Component: React.FC<Props> = ({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const {
-    handleSubmit, register,
-  } = useForm<FormData>({
-    defaultValues,
-  });
-
   return (
     <Form
-      onSubmit={handleSubmit(
-        async ({ pixabayQuery }) => {
-          await newPixabaySearch(pixabayQuery);
-        },
-        () => {
-          alert('Something went wrong');
-        },
-      )}
+      onSubmit={(e) => {
+        e.preventDefault();
+        newPixabaySearch(pixabayQuery);
+      }
+      }
     >
       <Label
         htmlFor="pixabayQuery"
       >
         <Input
+          value={pixabayQuery}
+          onChange={(e) => {
+            setPixabayQuery(e.target.value);
+          }}
           name="pixabayQuery"
           type="search"
           id="pixabayQuery"
           placeholder="Search pixabay"
-          ref={register}
           style={{
             color: 'black',
           }}

@@ -1,8 +1,7 @@
-import {
-  ShapeConfig,
-} from 'konva/types/Shape';
+import Konva from 'konva';
 
-export const gradientSettings: { [key: string]: {[key: string]: string}} = {
+
+export const gradientSettings: { [key: string]: { [key: string]: string } } = {
   none: {},
   linear: {
     horizontal: 'Horizontal',
@@ -47,7 +46,7 @@ const getColorStops = (colors: string[]): Array<number | string> => {
   return retval;
 };
 
-const getLinearGradientVariants = (width: number): {[key: string]: ShapeConfig} => ({
+const getLinearGradientVariants = (width: number): { [key: string]: Konva.ShapeConfig } => ({
   horizontal: {
     fillLinearGradientStartPoint: { x: 0, y: width / 2 },
     fillLinearGradientEndPoint: { x: width, y: width / 2 },
@@ -66,7 +65,7 @@ const getLinearGradientVariants = (width: number): {[key: string]: ShapeConfig} 
   },
 });
 
-const getRadialGradientVariants = (width: number): {[key: string]: ShapeConfig} => ({
+const getRadialGradientVariants = (width: number): { [key: string]: Konva.ShapeConfig } => ({
   center: {
     fillRadialGradientStartPoint: { x: (width / 2), y: (width / 2) },
     fillRadialGradientStartRadius: 0,
@@ -103,7 +102,7 @@ export const getCurrentBackgoundProps = (
   bgColors: string[],
   currentGradientSettings: string[],
   canvasWrapperWidth: number,
-): ShapeConfig => {
+): Konva.ShapeConfig => {
   if (bgColors.length <= 1 || currentGradientSettings[0] === 'none') {
     // eslint-disable-next-line prefer-destructuring
     return {

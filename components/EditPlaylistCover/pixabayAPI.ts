@@ -39,5 +39,5 @@ export const searchPixabay = async ({ q, page = 1, limit = 20 }: {
   q: string; page?: number; limit?: number;
 }): Promise<PixabayResponse> => {
   const response = await fetch(`https://pixabay.com/api/?key=${PIXABAY_API_KEY}&q=${encodeURI(q)}&page=${page}&per_page=${limit}`);
-  return await response.json();
+  return response.json();
 };

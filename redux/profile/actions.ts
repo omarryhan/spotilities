@@ -15,6 +15,6 @@ void,
       state.user.token.expiresAt,
       state.user.tokenStatus.errorMessage,
     );
-    return await spotifyApi.getMe();
+    return spotifyApi.getMe();
   },
 );

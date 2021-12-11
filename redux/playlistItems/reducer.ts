@@ -15,7 +15,7 @@ export const InitialState: InitialStateInterface = {
 
 export const replaceTrackWithTrackId = (
   playlistItems: SpotifyApi.PlaylistTrackObject[],
-): {[key: string]: PlaylistItem} => {
+): { [key: string]: PlaylistItem } => {
   const retval: AllPlaylistItems = {};
   playlistItems.forEach((playlistItem) => {
     retval[playlistItem.track.id] = {

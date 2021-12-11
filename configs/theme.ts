@@ -1,4 +1,4 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createTheme } from '@material-ui/core/styles';
 import { DefaultTheme } from 'styled-components';
 
 export const colors = {
@@ -76,7 +76,7 @@ export const styledComponentsTheme: DefaultTheme = {
   breakpoints,
 };
 
-export const materialUITheme = createMuiTheme({
+export const materialUITheme = createTheme({
   palette: {
     // type: 'dark',
     primary: {

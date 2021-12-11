@@ -2,7 +2,7 @@ import React from 'react';
 import { NextPage } from 'next';
 import Router from 'next/router';
 
-const Page: NextPage<{}> = () => {
+const Page: NextPage = () => {
   React.useEffect(() => {
     Router.push('/top/tracks/onemonth');
   }, []);

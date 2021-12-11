@@ -1,9 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import Konva from 'konva';
-import { Box } from 'konva/types/shapes/Transformer';
-import { ImageConfig } from 'konva/types/shapes/Image';
-import { Layer } from 'konva/types/Layer';
 import { Image, Transformer } from 'react-konva';
 import useImage from 'use-image';
 
@@ -12,11 +9,11 @@ import { styledComponentsTheme } from '../../configs/theme';
 export interface CanvasImage {
   src: string;
   id: string;
-  props: ImageConfig;
+  props: Konva.ImageConfig;
 }
 
 interface Props {
-  konvaProps: ImageConfig;
+  konvaProps: Konva.ImageConfig;
   src: string;
   isSelected: boolean;
   onSelect: () => void;
@@ -44,11 +41,11 @@ const Component: React.FC<Props> = ({
       (transformerRef.current as Konva.Transformer).nodes([
         imageRef.current as Konva.Image,
       ]);
-      ((transformerRef.current as Konva.Transformer).getLayer() as Layer).batchDraw();
+      ((transformerRef.current as Konva.Transformer).getLayer() as Konva.Layer).batchDraw();
     }
   }, [isSelected]);
 
-  const [image, loadingStatus] = useImage(src, 'Anonymous');
+  const [image, loadingStatus] = useImage(src, 'anonymous');
 
   // When first adding the image to the canvas
   // the image should be 75% the width of the canvas
@@ -134,7 +131,7 @@ const Component: React.FC<Props> = ({
           anchorFill={styledComponentsTheme.colors.green.primary}
           borderStroke={styledComponentsTheme.colors.gray.darkest}
           ref={transformerRef}
-          boundBoxFunc={(oldBox, newBox): Box => {
+          boundBoxFunc={(oldBox, newBox) => {
             // limit resize
             if (newBox.width < 5 || newBox.height < 5) {
               return oldBox;

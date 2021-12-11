@@ -14,7 +14,7 @@ import { CombinedStateType } from '../../redux/types';
 // I don't think there's a way around that
 // When this app routes to this page, it should shallow(ly) update the URL to include
 // the playlist_id.
-const Page: NextPage<{}> = () => {
+const Page: NextPage = () => {
   let playlistId = '';
   if (typeof window !== 'undefined' && window.location.href.split('/').length === 6) {
     // eslint-disable-next-line prefer-destructuring
