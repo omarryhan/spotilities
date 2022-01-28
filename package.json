@@ -41,7 +41,7 @@
     "lodash.shuffle": "^4.2.0",
     "lodash.trim": "^4.5.1",
     "lodash.uniq": "^4.5.0",
-    "next": "^12.0.7",
+    "next": "^12.0.9",
     "next-pwa": "^5.4.4",
     "next-transpile-modules": "^9.0.0",
     "react": "17.0.2",
