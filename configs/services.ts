@@ -16,6 +16,8 @@ export const SPOTIFY_SCOPES_NEEDED = [
   'user-top-read',
   'user-modify-playback-state',
   'ugc-image-upload',
+  'playlist-modify-private',
+  'playlist-modify-public',
 ];
 
 export const PIXABAY_API_KEY = '19282764-5a7fd7d7303dd935152fbae08';
